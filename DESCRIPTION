@@ -16,3 +16,5 @@ Imports:
     purrr,
     stringr,
     tidyr
+URL: https://github.com/nicolasville/ggacm
+BugReports: https://github.com/nicolasville/ggacm/issues
