@@ -1,0 +1,18 @@
+Package: ggacm
+Type: Package
+Title: Exporter Et Visualiser Une ACM
+Version: 0.1.0
+Author: Nicolas Ville
+Maintainer: Nicolas Ville <nicolas.ville@gmail.com>
+Description: Une description vreeeeeeumant.
+Encoding: UTF-8
+LazyData: true
+License: GPL (>= 3)
+RoxygenNote: 7.3.2
+Imports: 
+    dplyr,
+    FactoMineR,
+    ggplot2,
+    purrr,
+    stringr,
+    tidyr
