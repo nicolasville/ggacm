@@ -28,7 +28,7 @@ get_variables <- function(resultat_acm, data_acm) {
   # deux petites fonctions qui servent à uniformiser les noms et les modalités
   extraire_modalite <- function(x) {
     x |>
-      str_replace("\\.", "_") |> str_extract("_([^_]+)$", group = 1)
+      str_replace("\\.NA", "_NA") |> str_extract("_([^_]+)$", group = 1)
   }
   extraire_variable <- function(x) {
     x |>
