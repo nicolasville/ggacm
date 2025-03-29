@@ -1,4 +1,4 @@
-#' Obtenir un résultat tidy d'une ACM
+#' Obtenir les résultats d'une ACM pour chaque modalités.
 #'
 #' @param resultat_acm résultat sortie de factominer::MCA
 #' @param data_acm le tableau de donnée d'origine

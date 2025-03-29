@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_variables.R
 \name{get_variables}
 \alias{get_variables}
-\title{Obtenir un résultat tidy d'une ACM}
+\title{Obtenir les résultats d'une ACM pour chaque modalités.}
 \usage{
 get_variables(resultat_acm, data_acm)
 }
@@ -15,7 +15,7 @@ get_variables(resultat_acm, data_acm)
 un tableau avec pour chaque modalité les coordonnées, les contributions, les cos2 et les vtest pour les 5 premières dimensions
 }
 \description{
-Obtenir un résultat tidy d'une ACM
+Obtenir les résultats d'une ACM pour chaque modalités.
 }
 \examples{
 # une liste d'exemple
