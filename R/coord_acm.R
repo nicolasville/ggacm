@@ -27,7 +27,6 @@ coord_acm <- function(...) {
       xintercept = 0,
       colour = "darkgrey",
       linetype = "longdash"
-    ),
-    theme_bw()
+    )
   )
 }
