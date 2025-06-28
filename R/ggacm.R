@@ -8,7 +8,6 @@
 #' @returns un graphique ggplot
 #' @export
 #' @import ggplot2
-#'
 #' @examples
 #' # un exemple pas piqué des annetons
 ggacm <- function(data,

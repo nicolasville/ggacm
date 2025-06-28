@@ -13,6 +13,7 @@ Imports:
     dplyr,
     FactoMineR,
     ggplot2,
+    gt,
     gtsummary,
     purrr,
     scales,
