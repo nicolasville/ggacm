@@ -2,20 +2,21 @@
 % Please edit documentation in R/tableau_classe.R
 \name{caracteriser_classe}
 \alias{caracteriser_classe}
-\title{Title}
+\title{Caractériser les classes}
 \usage{
 caracteriser_classe(resultat_classification, numero_de_la_classe)
 }
 \arguments{
 \item{resultat_classification}{Un résultat de classification réalisé avec `FactoMineR::HCPC()`}
 
-\item{numero_de_la_classe}{Le numéro de la classe que l'on souhaite caractériser}
+\item{numero_de_la_classe}{Le numéro de la classe que l'on souhaite caractériser.}
 }
 \value{
 Un tableau de présentation de la classe. Il s'agit d'un objet gt.
 }
 \description{
-Title
+La fonction présenter ici permet d'obtenir plus d'information sur une classification ascendante hiérarchique.
+Elle produit des tableaux qui reprennent pour une classe donnée, les caractéristiques typiques et atypiques dans la classe.
 }
 \examples{
 #

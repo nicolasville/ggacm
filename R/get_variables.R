@@ -10,7 +10,10 @@
 #'
 #' @examples
 #' # une liste d'exemple
-get_variables <- function(resultat_acm, data_acm) {
+extraire_modalites <- function(resultat_acm) {
+
+  data_acm <- supprimer_var_(resultat_acm$call$X)
+
   resultats_actives <- resultat_acm$var |> get_res(data_acm, active = TRUE)
   resultats_sup <- resultat_acm$quali.sup |> get_res(data_acm, active = FALSE)
   resultats_complet <- bind_rows(resultats_actives, resultats_sup)

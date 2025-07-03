@@ -1,8 +1,10 @@
-# fonction pour créer faire le tableau des classes
-#' Title
+#' Caractériser les classes
+#'
+#' La fonction présenter ici permet d'obtenir plus d'information sur une classification ascendante hiérarchique.
+#' Elle produit des tableaux qui reprennent pour une classe donnée, les caractéristiques typiques et atypiques dans la classe.
 #'
 #' @param resultat_classification Un résultat de classification réalisé avec `FactoMineR::HCPC()`
-#' @param numero_de_la_classe Le numéro de la classe que l'on souhaite caractériser
+#' @param numero_de_la_classe Le numéro de la classe que l'on souhaite caractériser.
 #'
 #' @returns Un tableau de présentation de la classe. Il s'agit d'un objet gt.
 #' @export

@@ -3,7 +3,6 @@
 #' @param data_acm le data.frame à qui a été donné à manger à Factominer
 #'
 #' @returns un tableau qui renvoie pour chaque modalité le nombre d'individu concerné (n) ainsi que leur pourcentage
-#' @export
 #'
 #' @examples
 #' # une liste d'exemple

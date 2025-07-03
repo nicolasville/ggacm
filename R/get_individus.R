@@ -13,11 +13,18 @@
 #'
 #' @examples
 #' # un exemple pas piqué des annetons
-get_individus <- function(resultat_acm, data_acm, nom_variable_individu) {
+extraire_individus <- function(resultat_acm, data_acm, nom_variable_individu) {
   if (!is.character(nom_variable_individu)) {
     stop("L'argument nom_variable_individu doit être un chaîne de caractère.")
   }
-  resultats_complet <- get_variables(resultat_acm, data_acm)
+
+  # on sors pour commence le data.frame d'entrée original
+  data_acm <- supprimer_var_(resultat_acm$call$X)
+
+  # on extrait ensuite les résultats pour chaque modalité
+  resultats_complet <- extraire_modalites(resultat_acm)
+
+
   output <- resultats_complet |>
     filter(variables == nom_variable_individu) |>
     rename(!!nom_variable_individu := modalites) |>

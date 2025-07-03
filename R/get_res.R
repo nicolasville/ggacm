@@ -5,7 +5,6 @@
 #' @param active TRUE ou FALSE. TRUE pour extraire les variables actives. FALSE pour extraire les variables supplémentaires
 #'
 #' @returns pour chaque modalité les coordonnées, les contributions, les vtest et les cosinus carrés pour les 5 premiers axes.
-#' @export
 #'
 #' @import dplyr
 #' @import stringr
@@ -77,3 +76,5 @@ get_res <-
       ) # conserver et réorganiser les variables pertinentes axe par axe
     output
   }
+
+
