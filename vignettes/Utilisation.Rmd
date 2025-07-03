@@ -1,0 +1,58 @@
+---
+title: "Utilisation"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Utilisation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ggacm)
+```
+
+Cette vignette de présentation montre comment utiliser le package.
+
+Pour cela, je me base sur un jeu de donnée d'exemple tiré de mon mémoire de M2 sur les créateurs de contenus politiques.
+
+```{r}
+createurs_de_contenus_pol |> dplyr::ungroup()
+```
+
+On commence par réaliser l'ACM.
+
+```{r}
+resultat_acm <- createurs_de_contenus_pol |> 
+  FactoMineR::MCA(
+    quali.sup = c("titre", "personne"),
+    graph = FALSE)
+```
+
+Cet objet resultat_acm contient maintenant l'entièreté du résultat de l'analyse qu'il va falloire extraire.
+
+On peut commencer par extraire la variance :
+
+```{r}
+# get_variance(resultat_acm)
+```
+
+Pour extraire les résultats de l'ACM, on peut employer : extraire_modalites pour avoir les résultats par modalités et extraire_individus pour avoir les résultats pour chaque individu.
+
+```{r}
+extraire_modalites(resultat_acm)
+```
+
+Pour extraire les résultats pour chaque individu, il est nécessaire de donner à R le nom de la colonne qui identifie ces individus.
+
+```{r}
+extraire_individus(resultat_acm, nom_variable_individu = "personne")
+```
+
+Une fois ces résultats obtenus, il est possible de les représenter graphiquement ...

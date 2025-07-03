@@ -18,8 +18,13 @@ Imports:
     purrr,
     scales,
     stringr,
+    tibble,
     tidyr
 URL: https://github.com/nicolasville/ggacm
 BugReports: https://github.com/nicolasville/ggacm/issues
 Depends: 
     R (>= 3.5)
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

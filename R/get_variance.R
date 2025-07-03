@@ -5,7 +5,7 @@
 #'
 #' @returns un tableau (data.frame) qui documente la variance des 5 premiers axes.
 #' @export
-#'
+#' @importFrom tibble rownames_to_column
 #' @examples
 #' # une liste d'exemple
 get_variance <- function(resultat_acm){
