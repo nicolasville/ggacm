@@ -19,5 +19,5 @@ Cette fonction permet de "fixer" les coordonnées d'une représentation. Par dé
 Vous n'avez pas besoin d'utiliser cette fonction si vous avez recours à [ggacm()] qui fait déjà cela sous le capot sans que vous ayez besoin d'y toucher. Cette fonction est cependant là dans le cas où vous souhaitiez créer des graphiques avancés sans utiliser [ggacm()].
 }
 \examples{
-# une série d'exemple
+# une série d'exemples
 }
