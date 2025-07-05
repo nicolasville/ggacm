@@ -15,8 +15,8 @@ supprimer_var_ <- function(df) {
     .y = noms_colonnes,
     function(.x, .y) {
       sub(
-        paste0("^", .y, "_"),
-        "",
+        paste0("^", .y, "_"), # prendre "variable_"
+        "", # le supprimer
         .x
       )
     }

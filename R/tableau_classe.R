@@ -69,7 +69,7 @@ caracteriser_classe <- function(resultat_classification, numero_de_la_classe) {
         " %)"
       ),
       p.value = scales::label_pvalue(decimal.mark = ",")(p.value),
-      v.test = v.test,
+      v.test = round(v.test, digits = 2),
       .keep = "none"
     ) |>
     # Les colonnes importantes d'abord__________________________________
