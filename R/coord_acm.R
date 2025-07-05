@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @examples
-#' # une série d'exemple
+#' # une série d'exemples
 coord_acm <- function(...) {
   list(
     coord_fixed(
