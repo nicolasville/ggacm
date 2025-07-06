@@ -32,7 +32,7 @@ caracteriser_axe <- function(resultat_acm, axe, seuil = 0) {
   )
 
   # enfin du formattage
-  tableau_sortie |>
+  tableau_sortie <- tableau_sortie |>
     # colonne Modalités aligné à gauche
     gtsummary::modify_column_alignment(
       columns = Modalité,
@@ -45,8 +45,19 @@ caracteriser_axe <- function(resultat_acm, axe, seuil = 0) {
     gtsummary::modify_footnote_header(
       footnote = "Moyenne des coordonnées des individus partageant la modalité",
       columns = Coordonnée
-    ) |>
+    )
+
+  # inclure une note de bas de tableau si ce dernier est filtré
+  if(seuil > 0) {
+    tableau_sortie <- tableau_sortie |>
+      gtsummary::modify_footnote_header(
+        footnote = paste0("Seules les modalités dont la contribution est supérieure à ", seuil, " % sont représentées."),
+        columns = Modalité
+    )
+  }
+
     # column header bold
+  tableau_sortie |>
     gtsummary::as_gt() |>
     gt::tab_style(
       style = gt::cell_text(weight = "bold"),

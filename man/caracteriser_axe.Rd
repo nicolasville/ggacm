@@ -5,14 +5,14 @@
 \title{Caractériser ses axe
 La fonction suivante permet de sortir un tableau résumant pour un axe les modalités les plus contribuantes à sa construction.}
 \usage{
-caracteriser_axe(resultat_modalites, axe, seuil = 0)
+caracteriser_axe(resultat_acm, axe, seuil = 0)
 }
 \arguments{
-\item{resultat_modalites}{Tableau de donnée reprennant l'extraction des résultats d'une ACM par modalité}
-
 \item{axe}{Numéro de l'axe à décrire. (1, 2, 3, ...)}
 
 \item{seuil}{Seuil de la contribution à l'axe en dessous duquel les modalités ne seront pas prises en compte. Vaut 0 par défaut, mais il peut être utile de l'augmenter si l'on a beaucoup de modalité et que l'on ne souhaite pas qu'elles apparaissent toutes dans le tableau.}
+
+\item{resultat_modalites}{Tableau de donnée reprennant l'extraction des résultats d'une ACM par modalité}
 }
 \value{
 Un tableau de donnée prêt à être publié. Il s'agit d'une objet venant du package gt.

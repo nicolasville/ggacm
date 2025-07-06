@@ -2,6 +2,7 @@
 
 export(caracteriser_axe)
 export(caracteriser_classe)
+export(contribution_moyenne_theorique)
 export(coord_acm)
 export(extraire_individus)
 export(extraire_modalites)
