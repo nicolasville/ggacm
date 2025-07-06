@@ -61,7 +61,8 @@ extraire_modalites <- function(resultat_acm) {
       pourcentage = if_else(is.na(pourcentage.x), pourcentage.y, pourcentage.x),
       .keep = "unused",
       .before = starts_with("dim")
-    )
+    ) |>
+    tibble::as_tibble()
 
   return(resultats_complet)
 }

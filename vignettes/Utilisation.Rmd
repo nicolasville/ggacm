@@ -23,30 +23,66 @@ Cette vignette de présentation montre comment utiliser le package.
 Pour cela, je me base sur un jeu de donnée d'exemple tiré de mon mémoire de M2 sur les créateurs de contenus politiques.
 
 ```{r}
-createurs_de_contenus_pol |> dplyr::ungroup()
+createurs_de_contenus_pol 
 ```
 
-On commence par réaliser l'ACM.
+On commence par réaliser l'ACM. Pour cela, on a recours à la fonction `MCA()` du package `FactoMineR`. L'argument `quali.sup` nous permet de préciser quelles sont les variables supplémentaires : autrement dit, les variables qui ne joueront pas dans la construction des axes. Ici, j'y mets la variable `titre`, parce qu'elle ne veut rien dire statistiquement, elle permet juste de savoir qui sont les individus. J'y rajoute la variable `orientation`. Une fois que vous lancez le code, il s'exécute et sors déjà les premiers graphiques de l'ACM.
 
 ```{r}
 resultat_acm <- createurs_de_contenus_pol |> 
   FactoMineR::MCA(
-    quali.sup = c("titre", "personne"),
-    graph = FALSE)
+    quali.sup = c("titre", 
+                  "personne",
+                  "orientation")
+  )
 ```
 
-Cet objet resultat_acm contient maintenant l'entièreté du résultat de l'analyse qu'il va falloire extraire.
+Sur ces premiers graphiques, vérifiez que le nuage d'individu est bien équilibré et ne se résume pas à une seule droite. Si c'est le cas, il faut soit recoder votre base, soit penser à mettre les variables qui posent problèmes en variable supplémentaires.
 
-On peut commencer par extraire la variance :
+Les résultats de cette opération sont stocké dans un objet (que j'ai ici appelé `resultat_acm`). Il contient tous les résultats de l'ACM. Mon package propose une manière de sortir ces résultats afin qu'il soit prêt à être publié. La plupart des fonctions présentés par la suite prendront comme premier argument cet objet contenant les résultats pour extraire ceux que vous souhaitez affichez.
+
+Vous pouvez explorer les résultats de l'ACM avec la fonction du package `explor` : `explor()` .
+
+```{r eval=FALSE}
+explor::explor(resultat_acm)
+```
+
+Si l'ACM vous convient, passez à la suite, sinon répétez les étapes décrites plus haut jusqu'à ce que le résultat de l'ACM soit satisfaisant pour vous.
+
+## Les axes
+
+La première chose que l'on souhaite en général savoir avec une ACM, c'est le taux de variance capturé par les axes. Une idée assez répandu voudrait qu'ils mesurent "l'information capturée" par chaque axe.
+
+Pour afficher un tableau récapitulatif vous pouvez utiliser la fonction `extraire_variance()` sur l'objet dans lequel vous stockez les résultat de l'ACM :
 
 ```{r}
-# get_variance(resultat_acm)
+extraire_variance(resultat_acm)
+```
+
+[insérer un commentaire des résultats + la fonction pour obtenir la variance modifié]
+
+Une fois que cela est fait, on veut souvent chercher à décrire les axes.
+
+```{r}
+caracteriser_axe(resultat_acm, axe = 1)
+```
+
+Le tableau affiché peut-être un peu long en fonction du nombre de modalité que vous avez. Il faut donc souvent le filtrer pour n'afficher que les modalités qui ont une contribution supérieure à un certain seuil. Pour être plus synthétique par exemple, il est possible de produire un tableau qui ne reprend que les modalités dont la contribution à l'axe est supérieur à 3 %. Il faut alors modifier le paramètre `seuil` de la fonction :
+
+```{r}
+caracteriser_axe(resultat_acm, axe = 1, seuil = 3)
+```
+
+Pour caractériser l'axe 2, on peut copier et coller le même code en changeant simplement le numéro de l'axe que l'on souhaite décrire :
+
+```{r}
+caracteriser_axe(resultat_acm, axe = 2, seuil = 3)
 ```
 
 Pour extraire les résultats de l'ACM, on peut employer : extraire_modalites pour avoir les résultats par modalités et extraire_individus pour avoir les résultats pour chaque individu.
 
 ```{r}
-extraire_modalites(resultat_acm)
+extraire_modalites(resultat_acm) 
 ```
 
 Pour extraire les résultats pour chaque individu, il est nécessaire de donner à R le nom de la colonne qui identifie ces individus.

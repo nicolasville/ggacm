@@ -11,10 +11,12 @@
 #' @export
 #'
 #' @examples #
-caracteriser_axe <- function(resultat_modalites, axe, seuil = 0) {
+caracteriser_axe <- function(resultat_acm, axe, seuil = 0) {
 
   # check ---------------------
   if (!is.numeric(axe)) stop("L'argument axe est manquant/mal renseigné. Veuillez choisir l'axe à décrire en renseignant par exemple `axe = 1` si vous voulez décrire le premier axe.")
+
+  resultat_modalites <- extraire_modalites(resultat_acm = resultat_acm)
 
   # on sort les tableaux pour l'axe en question
   carac_axe <- tableau_axe(resultat_modalites = resultat_modalites, axe = axe, seuil = seuil)

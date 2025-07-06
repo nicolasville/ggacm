@@ -32,7 +32,8 @@ extraire_individus <- function(resultat_acm, data_acm, nom_variable_individu) {
     # comme nom_variable_individus
     left_join(data_acm) |>
     rename(modalites = nom_variable_individu) |>
-    relocate(type, variables, n, pourcentage, ends_with("contrib") ,.after = everything())
+    relocate(type, variables, n, pourcentage, ends_with("contrib") ,.after = everything()) |>
+    tibble::as_tibble()
 
   return(output)
 }

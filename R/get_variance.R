@@ -18,7 +18,7 @@ extraire_variance <- function(resultat_acm){
     select(-rowname) %>%# on enlève cette colonne dont on n'a plus besoin
     mutate(
       Axes = forcats::fct_relevel(Axes, paste("Axe", 1:10)),
-      `Valeurs propres` = eigenvalue,
+      `Valeurs propres` = eigenvalue |> round(digits = 2),
       `% de variance` = `percentage of variance` |> en_pourcentage(),
       `% cumulé de variance` = `cumulative percentage of variance` |> en_pourcentage(),
       .keep = "unused"
