@@ -13,6 +13,7 @@ mise_en_place_ACM <- function(...){
         scipen = 999,# pas d'écriture scientifique
         OutDec = ",",
         ...) # marque des décimale : , et pas .
+
   message("Les options générales de la session R ont été modifié. Les nombres décimaux s'afficheront avec une virgule et uniquement 3 chiffres après la virgule. L'écriture scientifque a été désactivée.\n")
 
   gtsummary::theme_gtsummary_language(
