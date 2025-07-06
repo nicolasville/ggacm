@@ -3,7 +3,7 @@ pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   Utilisation: Utilisation.html
-last_built: 2025-07-05T18:02Z
+last_built: 2025-07-06T13:39Z
 urls:
   reference: https://nicolasville.github.io/ggacm/reference
   article: https://nicolasville.github.io/ggacm/articles
