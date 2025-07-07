@@ -23,4 +23,6 @@ Cette fonction permet de réaliser une ACM en se reposant sur le package FactoMi
 }
 \examples{
 createurs_de_contenus_pol |> ACM(variables_supplementaires = c(titre, personne))
+
+
 }

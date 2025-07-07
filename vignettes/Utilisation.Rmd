@@ -70,13 +70,13 @@ caracteriser_axe(resultat_acm, axe = 1)
 Le tableau affiché peut-être un peu long en fonction du nombre de modalité que vous avez. Il faut donc souvent le filtrer pour n'afficher que les modalités qui ont une contribution supérieure à un certain seuil. Pour être plus synthétique par exemple, il est possible de produire un tableau qui ne reprend que les modalités dont la contribution à l'axe est supérieur à 3 %. Il faut alors modifier le paramètre `seuil` de la fonction :
 
 ```{r}
-caracteriser_axe(resultat_acm, axe = 1, seuil = 3)
+caracteriser_axe(resultat_acm, axe = 1, contribution_minimum = 3)
 ```
 
 Pour caractériser l'axe 2, on peut copier et coller le même code en changeant simplement le numéro de l'axe que l'on souhaite décrire :
 
 ```{r}
-caracteriser_axe(resultat_acm, axe = 2, seuil = 3)
+caracteriser_axe(resultat_acm, axe = 2, contribution_minimum = 3)
 ```
 
 Pour extraire les résultats de l'ACM, on peut employer : extraire_modalites pour avoir les résultats par modalités et extraire_individus pour avoir les résultats pour chaque individu.
