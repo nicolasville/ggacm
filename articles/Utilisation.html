@@ -68,9 +68,36 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nicolasville/ggacm" class="external-link">ggacm</a></span><span class="op">)</span></span></code></pre></div>
 <p>Cette vignette de présentation montre comment utiliser le
 package.</p>
-<p>Pour cela, je me base sur un jeu de donnée d’exemple tiré de mon
-mémoire de M2 sur les créateurs de contenus politiques.</p>
+<p>Avant toute chose, il faut configurer la session R. En effet,
+certains choix qui sont fait dans les options de R n’arrange pas
+beaucoup les chercheurs en sciences sociales. la fonction
+mise_en_place() permet de bien configurer R :</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/mise_en_place_ACM.html">mise_en_place_ACM</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ── <span style="font-weight: bold;">Les options générales de la session R ont été modifié.</span> ──</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Les nombres décimaux s'afficheront avec une virgule.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Ils n'afficheront que 3 chiffres après la virgule.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> L'écriture scientifique a été désactivé.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ── <span style="font-weight: bold;">Le thème des tableaux produit par </span><span style="color: #0000BB; font-weight: bold;">gtsummary</span><span style="font-weight: bold;"> a été modifié.</span> ──</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Ils s'afficheront en français.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> En utilisant une virgule pour les nombres décimaux.</span></span></code></pre></div>
+<p>Une fois que cela est fait, on peut continuer. Commencez par charger
+vos données dans R. Pour plus d’information sur comment faire, n’hésitez
+pas à consulter des guides.</p>
+<p>Une fois que vos données sont chargées, avant tout ACM vous allez
+pouvoir les inspectez. Pour les besoins de la démonstration je prendrais
+en exemple un jeu de données que j’ai créé pour mon mémoire de M2 sur
+les créateurs de contenus politiques. Il est inclus avec le package et
+est stocké dans un objet qui s’appelle
+<code>createurs_de_contenus_pol</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">createurs_de_contenus_pol</span> </span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 56 × 24</span></span></span>
 <span><span class="co">#&gt;    personne  titre orientation orientation2 debut visage_decouvert abonnes genre</span></span>
@@ -90,22 +117,843 @@ mémoire de M2 sur les créateurs de contenus politiques.</p>
 <span><span class="co">#&gt; <span style="color: #949494;">#   livre &lt;fct&gt;, podcast &lt;fct&gt;, twitter &lt;fct&gt;, facebook &lt;fct&gt;, instagram &lt;fct&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   tiktok &lt;fct&gt;, discord &lt;fct&gt;, twitch &lt;fct&gt;, site_perso &lt;fct&gt;, CNC &lt;fct&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   soutenir &lt;fct&gt;, partenariat_entreprise &lt;fct&gt;, autres_services &lt;fct&gt;</span></span></span></code></pre></div>
-<p>On commence par réaliser l’ACM. Pour cela, on a recours à la fonction
-<code>MCA()</code> du package <code>FactoMineR</code>. L’argument
-<code>quali.sup</code> nous permet de préciser quelles sont les
-variables supplémentaires : autrement dit, les variables qui ne joueront
-pas dans la construction des axes. Ici, j’y mets la variable
-<code>titre</code>, parce qu’elle ne veut rien dire statistiquement,
-elle permet juste de savoir qui sont les individus. J’y rajoute la
-variable <code>orientation</code>. Une fois que vous lancez le code, il
-s’exécute et sors déjà les premiers graphiques de l’ACM.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">resultat_acm</span> <span class="op">&lt;-</span> <span class="va">createurs_de_contenus_pol</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">FactoMineR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/FactoMineR/man/MCA.html" class="external-link">MCA</a></span><span class="op">(</span></span>
-<span>    quali.sup <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"titre"</span>, </span>
-<span>                  <span class="st">"personne"</span>,</span>
-<span>                  <span class="st">"orientation"</span><span class="op">)</span></span>
+<p>Ce jeu de données se composent de plusieurs colonnes :</p>
+<p>…</p>
+<p>Avant de procéder à l’ACM, il est vraiment utile de sortir un tri à
+plat de toute sa base de donnée. Pour cela, on peut utiliser la fonction
+<code>tbl_summary()</code> du package <code>gtsummary</code>. N’oubliez
+pas de retirer les variables qui ne se prêterait pas un tri à plat (dans
+mon cas la variable personne et titre). Vous pouvez retirez des
+variables en modifiant le paramètre <code>include</code> comme je le
+fais plus bas.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">createurs_de_contenus_pol</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html" class="external-link">tbl_summary</a></span><span class="op">(</span></span>
+<span>    include <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="va">personne</span>, <span class="op">-</span><span class="va">titre</span><span class="op">)</span></span>
+<span>    <span class="co"># je retire la variable personne et la variable titre du tableau</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
+<div id="mwlefoodfi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mwlefoodfi table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#mwlefoodfi thead, #mwlefoodfi tbody, #mwlefoodfi tfoot, #mwlefoodfi tr, #mwlefoodfi td, #mwlefoodfi th {
+  border-style: none;
+}
+
+#mwlefoodfi p {
+  margin: 0;
+  padding: 0;
+}
+
+#mwlefoodfi .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#mwlefoodfi .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mwlefoodfi .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mwlefoodfi .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mwlefoodfi .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mwlefoodfi .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mwlefoodfi .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mwlefoodfi .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mwlefoodfi .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#mwlefoodfi .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#mwlefoodfi .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mwlefoodfi .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mwlefoodfi .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mwlefoodfi .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mwlefoodfi .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mwlefoodfi .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#mwlefoodfi .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#mwlefoodfi .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#mwlefoodfi .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mwlefoodfi .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#mwlefoodfi .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mwlefoodfi .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#mwlefoodfi .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mwlefoodfi .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mwlefoodfi .gt_left {
+  text-align: left;
+}
+
+#mwlefoodfi .gt_center {
+  text-align: center;
+}
+
+#mwlefoodfi .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mwlefoodfi .gt_font_normal {
+  font-weight: normal;
+}
+
+#mwlefoodfi .gt_font_bold {
+  font-weight: bold;
+}
+
+#mwlefoodfi .gt_font_italic {
+  font-style: italic;
+}
+
+#mwlefoodfi .gt_super {
+  font-size: 65%;
+}
+
+#mwlefoodfi .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#mwlefoodfi .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#mwlefoodfi .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#mwlefoodfi .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#mwlefoodfi .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#mwlefoodfi .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#mwlefoodfi .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#mwlefoodfi .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#mwlefoodfi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Caractéristique</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="stat_0">
+<span class="gt_from_md"><strong>N = 56</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr>
+<td headers="label" class="gt_row gt_left">orientation</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Ne revendique pas d'appartenance</td>
+<td headers="stat_0" class="gt_row gt_center">14 (25%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    De gauche</td>
+<td headers="stat_0" class="gt_row gt_center">29 (52%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    De droite</td>
+<td headers="stat_0" class="gt_row gt_center">11 (20%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Écologiste</td>
+<td headers="stat_0" class="gt_row gt_center">2 (3,6%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">orientation2</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Divers</td>
+<td headers="stat_0" class="gt_row gt_center">9 (16%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Progressiste</td>
+<td headers="stat_0" class="gt_row gt_center">29 (52%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Conservateur</td>
+<td headers="stat_0" class="gt_row gt_center">18 (32%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">debut</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    2000</td>
+<td headers="stat_0" class="gt_row gt_center">0 (0%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    2014 et avant</td>
+<td headers="stat_0" class="gt_row gt_center">10 (18%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    2015 - 2019</td>
+<td headers="stat_0" class="gt_row gt_center">29 (52%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    2020 et après</td>
+<td headers="stat_0" class="gt_row gt_center">17 (30%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">visage_decouvert</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Montre son visage</td>
+<td headers="stat_0" class="gt_row gt_center">52 (93%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Ne montre pas son visage</td>
+<td headers="stat_0" class="gt_row gt_center">4 (7,1%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">abonnes</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    50k abonnés ou moins</td>
+<td headers="stat_0" class="gt_row gt_center">15 (27%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Entre 50k et 200k abonnés</td>
+<td headers="stat_0" class="gt_row gt_center">13 (23%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Entre 200k et 1 million d'abonnés</td>
+<td headers="stat_0" class="gt_row gt_center">23 (41%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Plus d'un million d'abonnés</td>
+<td headers="stat_0" class="gt_row gt_center">5 (8,9%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">genre</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Femme</td>
+<td headers="stat_0" class="gt_row gt_center">8 (14%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Homme</td>
+<td headers="stat_0" class="gt_row gt_center">48 (86%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">age</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    25 à 29 ans</td>
+<td headers="stat_0" class="gt_row gt_center">7 (13%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    30 à 34 ans</td>
+<td headers="stat_0" class="gt_row gt_center">18 (32%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    35 à 39 ans</td>
+<td headers="stat_0" class="gt_row gt_center">15 (27%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    40 à 44 ans</td>
+<td headers="stat_0" class="gt_row gt_center">6 (11%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    45 ans et plus</td>
+<td headers="stat_0" class="gt_row gt_center">10 (18%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">streamer_plein_temps</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Principalement streameur</td>
+<td headers="stat_0" class="gt_row gt_center">16 (29%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Principalement youtuber</td>
+<td headers="stat_0" class="gt_row gt_center">40 (71%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">collectif</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Chaîne individuelle</td>
+<td headers="stat_0" class="gt_row gt_center">39 (70%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Chaîne collective</td>
+<td headers="stat_0" class="gt_row gt_center">17 (30%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">livre</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Pas de publication de livre</td>
+<td headers="stat_0" class="gt_row gt_center">38 (68%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Publication de livre</td>
+<td headers="stat_0" class="gt_row gt_center">18 (32%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">podcast</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Podcasts</td>
+<td headers="stat_0" class="gt_row gt_center">35 (63%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Pas de podcasts</td>
+<td headers="stat_0" class="gt_row gt_center">21 (38%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">twitter</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Compte Twitter</td>
+<td headers="stat_0" class="gt_row gt_center">50 (89%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Pas de compte Twitter</td>
+<td headers="stat_0" class="gt_row gt_center">6 (11%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">facebook</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Pas de compte Facebook</td>
+<td headers="stat_0" class="gt_row gt_center">29 (52%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Compte Facebook</td>
+<td headers="stat_0" class="gt_row gt_center">27 (48%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">instagram</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Compte Instagram</td>
+<td headers="stat_0" class="gt_row gt_center">47 (84%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Pas de compte Instagram</td>
+<td headers="stat_0" class="gt_row gt_center">9 (16%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">tiktok</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Compte Tik Tok</td>
+<td headers="stat_0" class="gt_row gt_center">25 (45%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Pas de compte Tik Tok</td>
+<td headers="stat_0" class="gt_row gt_center">31 (55%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">discord</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Serveur Discord</td>
+<td headers="stat_0" class="gt_row gt_center">10 (18%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Pas de serveur Discord</td>
+<td headers="stat_0" class="gt_row gt_center">46 (82%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">twitch</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Compte Twitch</td>
+<td headers="stat_0" class="gt_row gt_center">34 (61%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Pas de compte Twitch</td>
+<td headers="stat_0" class="gt_row gt_center">22 (39%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">site_perso</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Pas de site personnel</td>
+<td headers="stat_0" class="gt_row gt_center">31 (55%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Site personnel</td>
+<td headers="stat_0" class="gt_row gt_center">25 (45%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">CNC</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Pas de subvention du CNC</td>
+<td headers="stat_0" class="gt_row gt_center">42 (75%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Subvention du CNC</td>
+<td headers="stat_0" class="gt_row gt_center">14 (25%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">soutenir</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Ne demande pas de financement à l'audience</td>
+<td headers="stat_0" class="gt_row gt_center">13 (23%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Demande de financement à l'audience</td>
+<td headers="stat_0" class="gt_row gt_center">43 (77%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">partenariat_entreprise</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Sponsorisé.e par des entreprises</td>
+<td headers="stat_0" class="gt_row gt_center">15 (27%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Pas de sponsors d'entrerpises</td>
+<td headers="stat_0" class="gt_row gt_center">41 (73%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">autres_services</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Vend ses produits</td>
+<td headers="stat_0" class="gt_row gt_center">15 (27%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Ne vend pas de produits</td>
+<td headers="stat_0" class="gt_row gt_center">41 (73%)</td>
+</tr>
+</tbody>
+<tfoot class="gt_footnotes"><tr>
+<td class="gt_footnote" colspan="2">
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">n (%)</span>
+</td>
+    </tr></tfoot>
+</table>
+</div>
+<p>Vérifiez bien toutes vos variables et vos modalités. Si une modalité
+concerne moins de 10 % de votre population, cela peut causé des
+problèmes pour la suite. Il faudra alors sûrement la recoder/la passée
+en variable supplémentaire. Dans mon cas par exemple : ma base ne compte
+que 2 écologiste, ce qui est trop peu. Je peux donc soit recoder la
+variable <code>orientation</code> (comme je l’ai fait avec
+<code>orientation2</code>), soit la mettre en variable supplémentaire
+lorsque je réaliserai l’ACM (c’est ce que je vais faire).</p>
+<p>Pour réaliser l’ACM, utilisez la fonction… <code><a href="../reference/ACM.html">ACM()</a></code><a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;La fonction &lt;code&gt;&lt;a href="../reference/ACM.html"&gt;ACM()&lt;/a&gt;&lt;/code&gt; va exécuter sous le capot
+la fonction &lt;code&gt;&lt;a href="https://rdrr.io/pkg/FactoMineR/man/MCA.html" class="external-link"&gt;FactoMineR::MCA()&lt;/a&gt;&lt;/code&gt; du package
+&lt;code&gt;FactoMineR&lt;/code&gt; qui va réaliser l’ACM. Si vous préféré vous
+pouvez utiliser cette dernière à la place, le résultat sera le même.&lt;/p&gt;'><sup>1</sup></a>. Vous
+pouvez ensuite renseigner les variables à l’aide de l’argument
+<code>variables_supplementaires</code>. Mettez-y les variables que vous
+ne souhaitez pas voir participer à la construction des axes. Mettez-y
+également les variables qui servent à identifier chacun de vos individus
+(par exemple une variable <code>nom_prenom</code> ou dans mon cas, la
+variable <code>personne</code> et <code>titre</code>).</p>
+<p>Dans tbl_summary() vous vouliez inclure toutes les colonnes
+<em>sauf</em> les colonnes titre et personne. Ici, ce sont ces colonnes
+que vous sélectionnez comme variable supplémentaire, on ne met donc pas
+de moins devant leur nom :</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resultat_acm</span> <span class="op">&lt;-</span> <span class="va">createurs_de_contenus_pol</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/ACM.html">ACM</a></span><span class="op">(</span></span>
+<span>    variables_supplementaires <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">titre</span>, </span>
+<span>                                  <span class="va">personne</span>, </span>
+<span>                                  <span class="va">orientation</span>,</span>
+<span>                                  <span class="va">orientation2</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ── <span style="font-weight: bold;">Variables actives</span> ──</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; L'ACM a été réalisé sur ces variables actives : `debut`, `visage_decouvert`,</span></span>
+<span><span class="co">#&gt; `abonnes`, `genre`, `age`, `streamer_plein_temps`, `collectif`, `livre`,</span></span>
+<span><span class="co">#&gt; `podcast`, `twitter`, `facebook`, `instagram`, `tiktok`, `discord`, `twitch`,</span></span>
+<span><span class="co">#&gt; `site_perso`, `CNC`, `soutenir`, `partenariat_entreprise`, and</span></span>
+<span><span class="co">#&gt; `autres_services`.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ── <span style="font-weight: bold;">Variables supplémentaires</span> ──</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Les variables supplémentaires sont les suivantes : `titre`, `personne`,</span></span>
+<span><span class="co">#&gt; `orientation`, and `orientation2`.</span></span></code></pre></div>
+<p>Vous pouvez explorer les résultats de l’ACM avec la fonction du
+package <code>explor</code> : <code>explor()</code> .</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">explor</span><span class="fu">::</span><span class="fu">explor</span><span class="op">(</span><span class="va">resultat_acm</span><span class="op">)</span></span></code></pre></div>
+<p>Si l’ACM vous convient, passez à la suite, sinon répétez les étapes
+décrites plus haut jusqu’à ce que le résultat de l’ACM soit satisfaisant
+pour vous.</p>
 <p>Sur ces premiers graphiques, vérifiez que le nuage d’individu est
 bien équilibré et ne se résume pas à une seule droite. Si c’est le cas,
 il faut soit recoder votre base, soit penser à mettre les variables qui
@@ -116,13 +964,6 @@ l’ACM. Mon package propose une manière de sortir ces résultats afin
 qu’il soit prêt à être publié. La plupart des fonctions présentés par la
 suite prendront comme premier argument cet objet contenant les résultats
 pour extraire ceux que vous souhaitez affichez.</p>
-<p>Vous pouvez explorer les résultats de l’ACM avec la fonction du
-package <code>explor</code> : <code>explor()</code> .</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">explor</span><span class="fu">::</span><span class="fu">explor</span><span class="op">(</span><span class="va">resultat_acm</span><span class="op">)</span></span></code></pre></div>
-<p>Si l’ACM vous convient, passez à la suite, sinon répétez les étapes
-décrites plus haut jusqu’à ce que le résultat de l’ACM soit satisfaisant
-pour vous.</p>
 <div class="section level2">
 <h2 id="les-axes">Les axes<a class="anchor" aria-label="anchor" href="#les-axes"></a>
 </h2>
@@ -132,25 +973,37 @@ voudrait qu’ils mesurent “l’information capturée” par chaque axe.</p>
 <p>Pour afficher un tableau récapitulatif vous pouvez utiliser la
 fonction <code><a href="../reference/extraire_variance.html">extraire_variance()</a></code> sur l’objet dans lequel vous
 stockez les résultat de l’ACM :</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/extraire_variance.html">extraire_variance</a></span><span class="op">(</span><span class="va">resultat_acm</span><span class="op">)</span></span>
 <span><span class="co">#&gt;      Axes Valeurs propres % de variance % cumulé de variance</span></span>
-<span><span class="co">#&gt; 1   Axe 1            0.18        13.7 %               13.7 %</span></span>
-<span><span class="co">#&gt; 2   Axe 2            0.12           9 %               22.6 %</span></span>
-<span><span class="co">#&gt; 3   Axe 3            0.11         8.6 %               31.2 %</span></span>
-<span><span class="co">#&gt; 4   Axe 4            0.10         7.3 %               38.6 %</span></span>
-<span><span class="co">#&gt; 5   Axe 5            0.09         6.4 %                 45 %</span></span>
-<span><span class="co">#&gt; 6   Axe 6            0.08         6.3 %               51.3 %</span></span>
-<span><span class="co">#&gt; 7   Axe 7            0.07         5.2 %               56.5 %</span></span>
-<span><span class="co">#&gt; 8   Axe 8            0.06         4.7 %               61.2 %</span></span>
-<span><span class="co">#&gt; 9   Axe 9            0.06         4.5 %               65.7 %</span></span>
-<span><span class="co">#&gt; 10 Axe 10            0.05         4.1 %               69.8 %</span></span></code></pre></div>
+<span><span class="co">#&gt; 1   Axe 1            0,16        12,5 %               12,5 %</span></span>
+<span><span class="co">#&gt; 2   Axe 2            0,12         9,5 %               21,9 %</span></span>
+<span><span class="co">#&gt; 3   Axe 3            0,12         9,2 %               31,1 %</span></span>
+<span><span class="co">#&gt; 4   Axe 4            0,09         7,2 %               38,4 %</span></span>
+<span><span class="co">#&gt; 5   Axe 5            0,09         6,8 %               45,2 %</span></span>
+<span><span class="co">#&gt; 6   Axe 6            0,08         6,5 %               51,7 %</span></span>
+<span><span class="co">#&gt; 7   Axe 7            0,07         5,2 %               56,9 %</span></span>
+<span><span class="co">#&gt; 8   Axe 8            0,06         4,9 %               61,8 %</span></span>
+<span><span class="co">#&gt; 9   Axe 9            0,06         4,7 %               66,4 %</span></span>
+<span><span class="co">#&gt; 10 Axe 10            0,06         4,4 %               70,8 %</span></span></code></pre></div>
 <p>[insérer un commentaire des résultats + la fonction pour obtenir la
 variance modifié]</p>
 <p>Une fois que cela est fait, on veut souvent chercher à décrire les
-axes.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/caracteriser_axe.html">caracteriser_axe</a></span><span class="op">(</span><span class="va">resultat_acm</span>, axe <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+axes. Pour cela, utilisez la fonction <code><a href="../reference/caracteriser_axe.html">caracteriser_axe()</a></code>.
+Précisez le numéro de l’axe que vous voulez caractérisé avec l’argument
+<code>axe</code>.</p>
+<p>Par défaut, vous ne souhaiterez peut-être pas afficher toutes les
+modalités dans ce tableau (surtout si vous en avez beaucoup). L’argument
+<code>contribution_minimum</code> permet de préciser un seuil de
+contribution minimum pour filtrer les modalités. Par défaut, il se règle
+sur la contribution théorique moyenne, c’est-à-dire la contribution de
+chaque variable si elles contribuaient chacunes également à la
+construction des axes.</p>
+<p>Ainsi quand on lance la fonction sans préciser l’argument
+<code>contribution_minimum</code> :</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resultat_acm</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/caracteriser_axe.html">caracteriser_axe</a></span><span class="op">(</span>axe <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Vous n'axez pas indiqué de contribution minimum pour afficher les résultats</span></span>
 <span><span class="co">#&gt; Seules les modalités dont la contribution est supérieur à la moyenne théorique</span></span>
 <span><span class="co">#&gt; seront affichées.</span></span>
@@ -163,24 +1016,24 @@ axes.</p>
 <span><span class="co">#&gt; ── Contribution moyenne théorique </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Si toutes les modalités actives contribuaient également à la construction</span></span>
-<span><span class="co">#&gt; d'un axe, chacune aurait une contribution de 2.04 %.</span></span></code></pre></div>
-<div id="lefoodfiee" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lefoodfiee table {
+<span><span class="co">#&gt; d'un axe, chacune aurait une contribution de 2,17 %.</span></span></code></pre></div>
+<div id="yorehalspk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#yorehalspk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lefoodfiee thead, #lefoodfiee tbody, #lefoodfiee tfoot, #lefoodfiee tr, #lefoodfiee td, #lefoodfiee th {
+#yorehalspk thead, #yorehalspk tbody, #yorehalspk tfoot, #yorehalspk tr, #yorehalspk td, #yorehalspk th {
   border-style: none;
 }
 
-#lefoodfiee p {
+#yorehalspk p {
   margin: 0;
   padding: 0;
 }
 
-#lefoodfiee .gt_table {
+#yorehalspk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -206,12 +1059,12 @@ axes.</p>
   border-left-color: #D3D3D3;
 }
 
-#lefoodfiee .gt_caption {
+#yorehalspk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lefoodfiee .gt_title {
+#yorehalspk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -223,7 +1076,7 @@ axes.</p>
   border-bottom-width: 0;
 }
 
-#lefoodfiee .gt_subtitle {
+#yorehalspk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -235,7 +1088,7 @@ axes.</p>
   border-top-width: 0;
 }
 
-#lefoodfiee .gt_heading {
+#yorehalspk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -247,13 +1100,13 @@ axes.</p>
   border-right-color: #D3D3D3;
 }
 
-#lefoodfiee .gt_bottom_border {
+#yorehalspk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lefoodfiee .gt_col_headings {
+#yorehalspk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -268,7 +1121,7 @@ axes.</p>
   border-right-color: #D3D3D3;
 }
 
-#lefoodfiee .gt_col_heading {
+#yorehalspk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -288,7 +1141,7 @@ axes.</p>
   overflow-x: hidden;
 }
 
-#lefoodfiee .gt_column_spanner_outer {
+#yorehalspk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -300,15 +1153,15 @@ axes.</p>
   padding-right: 4px;
 }
 
-#lefoodfiee .gt_column_spanner_outer:first-child {
+#yorehalspk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lefoodfiee .gt_column_spanner_outer:last-child {
+#yorehalspk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lefoodfiee .gt_column_spanner {
+#yorehalspk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -320,11 +1173,11 @@ axes.</p>
   width: 100%;
 }
 
-#lefoodfiee .gt_spanner_row {
+#yorehalspk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lefoodfiee .gt_group_heading {
+#yorehalspk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -350,7 +1203,7 @@ axes.</p>
   text-align: left;
 }
 
-#lefoodfiee .gt_empty_group_heading {
+#yorehalspk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -365,15 +1218,15 @@ axes.</p>
   vertical-align: middle;
 }
 
-#lefoodfiee .gt_from_md > :first-child {
+#yorehalspk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lefoodfiee .gt_from_md > :last-child {
+#yorehalspk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lefoodfiee .gt_row {
+#yorehalspk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -392,7 +1245,7 @@ axes.</p>
   overflow-x: hidden;
 }
 
-#lefoodfiee .gt_stub {
+#yorehalspk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -405,7 +1258,7 @@ axes.</p>
   padding-right: 5px;
 }
 
-#lefoodfiee .gt_stub_row_group {
+#yorehalspk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -419,15 +1272,15 @@ axes.</p>
   vertical-align: top;
 }
 
-#lefoodfiee .gt_row_group_first td {
+#yorehalspk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lefoodfiee .gt_row_group_first th {
+#yorehalspk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lefoodfiee .gt_summary_row {
+#yorehalspk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -437,16 +1290,16 @@ axes.</p>
   padding-right: 5px;
 }
 
-#lefoodfiee .gt_first_summary_row {
+#yorehalspk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lefoodfiee .gt_first_summary_row.thick {
+#yorehalspk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lefoodfiee .gt_last_summary_row {
+#yorehalspk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -456,7 +1309,7 @@ axes.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#lefoodfiee .gt_grand_summary_row {
+#yorehalspk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -466,7 +1319,7 @@ axes.</p>
   padding-right: 5px;
 }
 
-#lefoodfiee .gt_first_grand_summary_row {
+#yorehalspk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -476,7 +1329,7 @@ axes.</p>
   border-top-color: #D3D3D3;
 }
 
-#lefoodfiee .gt_last_grand_summary_row_top {
+#yorehalspk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -486,11 +1339,11 @@ axes.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#lefoodfiee .gt_striped {
+#yorehalspk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lefoodfiee .gt_table_body {
+#yorehalspk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -499,7 +1352,7 @@ axes.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#lefoodfiee .gt_footnotes {
+#yorehalspk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -513,7 +1366,7 @@ axes.</p>
   border-right-color: #D3D3D3;
 }
 
-#lefoodfiee .gt_footnote {
+#yorehalspk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -522,7 +1375,7 @@ axes.</p>
   padding-right: 5px;
 }
 
-#lefoodfiee .gt_sourcenotes {
+#yorehalspk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -536,7 +1389,7 @@ axes.</p>
   border-right-color: #D3D3D3;
 }
 
-#lefoodfiee .gt_sourcenote {
+#yorehalspk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -544,72 +1397,72 @@ axes.</p>
   padding-right: 5px;
 }
 
-#lefoodfiee .gt_left {
+#yorehalspk .gt_left {
   text-align: left;
 }
 
-#lefoodfiee .gt_center {
+#yorehalspk .gt_center {
   text-align: center;
 }
 
-#lefoodfiee .gt_right {
+#yorehalspk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lefoodfiee .gt_font_normal {
+#yorehalspk .gt_font_normal {
   font-weight: normal;
 }
 
-#lefoodfiee .gt_font_bold {
+#yorehalspk .gt_font_bold {
   font-weight: bold;
 }
 
-#lefoodfiee .gt_font_italic {
+#yorehalspk .gt_font_italic {
   font-style: italic;
 }
 
-#lefoodfiee .gt_super {
+#yorehalspk .gt_super {
   font-size: 65%;
 }
 
-#lefoodfiee .gt_footnote_marks {
+#yorehalspk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lefoodfiee .gt_asterisk {
+#yorehalspk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lefoodfiee .gt_indent_1 {
+#yorehalspk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lefoodfiee .gt_indent_2 {
+#yorehalspk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lefoodfiee .gt_indent_3 {
+#yorehalspk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lefoodfiee .gt_indent_4 {
+#yorehalspk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lefoodfiee .gt_indent_5 {
+#yorehalspk .gt_indent_5 {
   text-indent: 25px;
 }
 
-#lefoodfiee .katex-display {
+#yorehalspk .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#lefoodfiee div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#yorehalspk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -632,148 +1485,164 @@ axes.</p>
     </tr>
 <tr class="gt_row_group_first">
 <td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Vend ses produits</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">8.8 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">1.12</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.46</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">5.04</td>
+<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">9,2 %</td>
+<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">1,06</td>
+<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0,41</td>
+<td headers="Coordonnées positives  V-test" class="gt_row gt_right">4,75</td>
 <td headers="Coordonnées positives  Effectif" class="gt_row gt_right">15 (27 %)</td>
 </tr>
 <tr>
 <td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Sponsorisé.e par des entreprises</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">7.3 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">1.02</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.38</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">4.58</td>
+<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">8 %</td>
+<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0,98</td>
+<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0,35</td>
+<td headers="Coordonnées positives  V-test" class="gt_row gt_right">4,41</td>
 <td headers="Coordonnées positives  Effectif" class="gt_row gt_right">15 (27 %)</td>
 </tr>
 <tr>
-<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Conservateur</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">6.4 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.87</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.36</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">4.46</td>
-<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">18 (32 %)</td>
-</tr>
-<tr>
 <td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Site personnel</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">3.7 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.57</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.26</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">3.77</td>
+<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">4,7 %</td>
+<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0,59</td>
+<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0,28</td>
+<td headers="Coordonnées positives  V-test" class="gt_row gt_right">3,91</td>
 <td headers="Coordonnées positives  Effectif" class="gt_row gt_right">25 (45 %)</td>
 </tr>
 <tr>
-<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Pas de compte Twitch</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">2.9 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.53</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.18</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">3.16</td>
-<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">22 (39 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Divers</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">2.6 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.79</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.12</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">2.57</td>
-<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">9 (16 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Ne demande pas de financement à l'audience</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">2.6 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.65</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.13</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">2.67</td>
-<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">13 (23 %)</td>
-</tr>
-<tr>
 <td headers="Coordonnées positives  Modalité" class="gt_row gt_left">2014 et avant</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">2.6 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.75</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.12</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">2.58</td>
+<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">3,7 %</td>
+<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0,82</td>
+<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0,15</td>
+<td headers="Coordonnées positives  V-test" class="gt_row gt_right">2,84</td>
 <td headers="Coordonnées positives  Effectif" class="gt_row gt_right">10 (18 %)</td>
 </tr>
 <tr>
 <td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Plus d'un million d'abonnés</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">2.5 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">1.04</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.11</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">2.42</td>
+<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">3,4 %</td>
+<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">1,11</td>
+<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0,12</td>
+<td headers="Coordonnées positives  V-test" class="gt_row gt_right">2,57</td>
 <td headers="Coordonnées positives  Effectif" class="gt_row gt_right">5 (9 %)</td>
 </tr>
 <tr>
+<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Pas de compte Twitch</td>
+<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">3,4 %</td>
+<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0,53</td>
+<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0,18</td>
+<td headers="Coordonnées positives  V-test" class="gt_row gt_right">3,15</td>
+<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">22 (39 %)</td>
+</tr>
+<tr>
+<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Compte Facebook</td>
+<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">3,1 %</td>
+<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0,46</td>
+<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0,20</td>
+<td headers="Coordonnées positives  V-test" class="gt_row gt_right">3,29</td>
+<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">27 (48 %)</td>
+</tr>
+<tr>
+<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Principalement youtuber</td>
+<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">3 %</td>
+<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0,37</td>
+<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0,35</td>
+<td headers="Coordonnées positives  V-test" class="gt_row gt_right">4,36</td>
+<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">40 (71 %)</td>
+</tr>
+<tr>
+<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Ne demande pas de financement à l'audience</td>
+<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">2,9 %</td>
+<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0,64</td>
+<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0,12</td>
+<td headers="Coordonnées positives  V-test" class="gt_row gt_right">2,60</td>
+<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">13 (23 %)</td>
+</tr>
+<tr>
 <td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Pas de podcasts</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">2.3 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.49</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.14</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">2.81</td>
+<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">2,6 %</td>
+<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0,48</td>
+<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0,14</td>
+<td headers="Coordonnées positives  V-test" class="gt_row gt_right">2,73</td>
 <td headers="Coordonnées positives  Effectif" class="gt_row gt_right">21 (38 %)</td>
 </tr>
 <tr class="gt_group_heading_row">
 <th colspan="6" class="gt_group_heading" style="font-weight: bold;" scope="colgroup" id="Coordonnées négatives">Coordonnées négatives</th>
     </tr>
 <tr class="gt_row_group_first">
-<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Progressiste</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">8.4 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.79</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.67</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-6.06</td>
-<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">29 (52 %)</td>
-</tr>
-<tr>
 <td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">50k abonnés ou moins</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">5.8 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.91</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.30</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-4.09</td>
+<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">8,6 %</td>
+<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-1,02</td>
+<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0,38</td>
+<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-4,57</td>
 <td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">15 (27 %)</td>
 </tr>
 <tr>
 <td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Principalement streameur</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">4.9 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.81</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.26</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-3.81</td>
+<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">7,6 %</td>
+<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0,93</td>
+<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0,35</td>
+<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-4,36</td>
 <td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">16 (29 %)</td>
 </tr>
 <tr>
 <td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Subvention du CNC</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">4.6 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.84</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.23</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-3.59</td>
+<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">3,8 %</td>
+<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0,71</td>
+<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0,17</td>
+<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-3,02</td>
 <td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">14 (25 %)</td>
 </tr>
 <tr>
-<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Ne vend pas de produits</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">3.2 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.41</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.46</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-5.04</td>
-<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">41 (73 %)</td>
-</tr>
-<tr>
 <td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Pas de site personnel</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">3 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.46</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.26</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-3.77</td>
+<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">3,8 %</td>
+<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0,47</td>
+<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0,28</td>
+<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-3,91</td>
 <td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">31 (55 %)</td>
 </tr>
 <tr>
-<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Pas de sponsors d'entrerpises</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">2.7 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.37</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.38</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-4.58</td>
+<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Ne vend pas de produits</td>
+<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">3,4 %</td>
+<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0,39</td>
+<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0,41</td>
+<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-4,75</td>
 <td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">41 (73 %)</td>
+</tr>
+<tr>
+<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Pas de compte Facebook</td>
+<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">2,9 %</td>
+<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0,43</td>
+<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0,20</td>
+<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-3,29</td>
+<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">29 (52 %)</td>
+</tr>
+<tr>
+<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Pas de sponsors d'entrerpises</td>
+<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">2,9 %</td>
+<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0,36</td>
+<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0,35</td>
+<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-4,41</td>
+<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">41 (73 %)</td>
+</tr>
+<tr>
+<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">2020 et après</td>
+<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">2,4 %</td>
+<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0,51</td>
+<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0,11</td>
+<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-2,50</td>
+<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">17 (30 %)</td>
+</tr>
+<tr>
+<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Compte Twitch</td>
+<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">2,2 %</td>
+<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0,34</td>
+<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0,18</td>
+<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-3,15</td>
+<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">34 (61 %)</td>
 </tr>
 </tbody>
 <tfoot class="gt_footnotes">
 <tr>
 <td class="gt_footnote" colspan="6">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">Seules les modalités actives dont la contribution est supérieure à 2.04 % sont représentées.</span>
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">Seules les modalités actives dont la contribution est supérieure à 2,17 % sont représentées.</span>
 </td>
     </tr>
 <tr>
@@ -784,32 +1653,27 @@ axes.</p>
 </tfoot>
 </table>
 </div>
-<p>Le tableau affiché peut-être un peu long en fonction du nombre de
-modalité que vous avez. Il faut donc souvent le filtrer pour n’afficher
-que les modalités qui ont une contribution supérieure à un certain
-seuil. Pour être plus synthétique par exemple, il est possible de
-produire un tableau qui ne reprend que les modalités dont la
-contribution à l’axe est supérieur à 3 %. Il faut alors modifier le
-paramètre <code>seuil</code> de la fonction :</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/caracteriser_axe.html">caracteriser_axe</a></span><span class="op">(</span><span class="va">resultat_acm</span>, axe <span class="op">=</span> <span class="fl">1</span>, contribution_minimum <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<div id="haaglvijbf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#haaglvijbf table {
+<p>Si cela ne vous convient et que vous préféreriez un tableau plus
+synthétique ou plus exhaustif, vous pouvez changer ce seuil :</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/caracteriser_axe.html">caracteriser_axe</a></span><span class="op">(</span><span class="va">resultat_acm</span>, axe <span class="op">=</span> <span class="fl">1</span>, contribution_minimum <span class="op">=</span> <span class="fl">4.5</span><span class="op">)</span></span></code></pre></div>
+<div id="jlmpgudacg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jlmpgudacg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#haaglvijbf thead, #haaglvijbf tbody, #haaglvijbf tfoot, #haaglvijbf tr, #haaglvijbf td, #haaglvijbf th {
+#jlmpgudacg thead, #jlmpgudacg tbody, #jlmpgudacg tfoot, #jlmpgudacg tr, #jlmpgudacg td, #jlmpgudacg th {
   border-style: none;
 }
 
-#haaglvijbf p {
+#jlmpgudacg p {
   margin: 0;
   padding: 0;
 }
 
-#haaglvijbf .gt_table {
+#jlmpgudacg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -835,12 +1699,12 @@ paramètre <code>seuil</code> de la fonction :</p>
   border-left-color: #D3D3D3;
 }
 
-#haaglvijbf .gt_caption {
+#jlmpgudacg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#haaglvijbf .gt_title {
+#jlmpgudacg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -852,7 +1716,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   border-bottom-width: 0;
 }
 
-#haaglvijbf .gt_subtitle {
+#jlmpgudacg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -864,7 +1728,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   border-top-width: 0;
 }
 
-#haaglvijbf .gt_heading {
+#jlmpgudacg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -876,13 +1740,13 @@ paramètre <code>seuil</code> de la fonction :</p>
   border-right-color: #D3D3D3;
 }
 
-#haaglvijbf .gt_bottom_border {
+#jlmpgudacg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#haaglvijbf .gt_col_headings {
+#jlmpgudacg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -897,7 +1761,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   border-right-color: #D3D3D3;
 }
 
-#haaglvijbf .gt_col_heading {
+#jlmpgudacg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -917,7 +1781,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   overflow-x: hidden;
 }
 
-#haaglvijbf .gt_column_spanner_outer {
+#jlmpgudacg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -929,15 +1793,15 @@ paramètre <code>seuil</code> de la fonction :</p>
   padding-right: 4px;
 }
 
-#haaglvijbf .gt_column_spanner_outer:first-child {
+#jlmpgudacg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#haaglvijbf .gt_column_spanner_outer:last-child {
+#jlmpgudacg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#haaglvijbf .gt_column_spanner {
+#jlmpgudacg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -949,11 +1813,11 @@ paramètre <code>seuil</code> de la fonction :</p>
   width: 100%;
 }
 
-#haaglvijbf .gt_spanner_row {
+#jlmpgudacg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#haaglvijbf .gt_group_heading {
+#jlmpgudacg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -979,7 +1843,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   text-align: left;
 }
 
-#haaglvijbf .gt_empty_group_heading {
+#jlmpgudacg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -994,15 +1858,15 @@ paramètre <code>seuil</code> de la fonction :</p>
   vertical-align: middle;
 }
 
-#haaglvijbf .gt_from_md > :first-child {
+#jlmpgudacg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#haaglvijbf .gt_from_md > :last-child {
+#jlmpgudacg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#haaglvijbf .gt_row {
+#jlmpgudacg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1021,7 +1885,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   overflow-x: hidden;
 }
 
-#haaglvijbf .gt_stub {
+#jlmpgudacg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1034,7 +1898,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   padding-right: 5px;
 }
 
-#haaglvijbf .gt_stub_row_group {
+#jlmpgudacg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1048,15 +1912,15 @@ paramètre <code>seuil</code> de la fonction :</p>
   vertical-align: top;
 }
 
-#haaglvijbf .gt_row_group_first td {
+#jlmpgudacg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#haaglvijbf .gt_row_group_first th {
+#jlmpgudacg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#haaglvijbf .gt_summary_row {
+#jlmpgudacg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1066,16 +1930,16 @@ paramètre <code>seuil</code> de la fonction :</p>
   padding-right: 5px;
 }
 
-#haaglvijbf .gt_first_summary_row {
+#jlmpgudacg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#haaglvijbf .gt_first_summary_row.thick {
+#jlmpgudacg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#haaglvijbf .gt_last_summary_row {
+#jlmpgudacg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1085,7 +1949,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   border-bottom-color: #D3D3D3;
 }
 
-#haaglvijbf .gt_grand_summary_row {
+#jlmpgudacg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1095,7 +1959,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   padding-right: 5px;
 }
 
-#haaglvijbf .gt_first_grand_summary_row {
+#jlmpgudacg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1105,7 +1969,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   border-top-color: #D3D3D3;
 }
 
-#haaglvijbf .gt_last_grand_summary_row_top {
+#jlmpgudacg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1115,11 +1979,11 @@ paramètre <code>seuil</code> de la fonction :</p>
   border-bottom-color: #D3D3D3;
 }
 
-#haaglvijbf .gt_striped {
+#jlmpgudacg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#haaglvijbf .gt_table_body {
+#jlmpgudacg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1128,7 +1992,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   border-bottom-color: #D3D3D3;
 }
 
-#haaglvijbf .gt_footnotes {
+#jlmpgudacg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1142,7 +2006,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   border-right-color: #D3D3D3;
 }
 
-#haaglvijbf .gt_footnote {
+#jlmpgudacg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1151,7 +2015,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   padding-right: 5px;
 }
 
-#haaglvijbf .gt_sourcenotes {
+#jlmpgudacg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1165,7 +2029,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   border-right-color: #D3D3D3;
 }
 
-#haaglvijbf .gt_sourcenote {
+#jlmpgudacg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1173,72 +2037,72 @@ paramètre <code>seuil</code> de la fonction :</p>
   padding-right: 5px;
 }
 
-#haaglvijbf .gt_left {
+#jlmpgudacg .gt_left {
   text-align: left;
 }
 
-#haaglvijbf .gt_center {
+#jlmpgudacg .gt_center {
   text-align: center;
 }
 
-#haaglvijbf .gt_right {
+#jlmpgudacg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#haaglvijbf .gt_font_normal {
+#jlmpgudacg .gt_font_normal {
   font-weight: normal;
 }
 
-#haaglvijbf .gt_font_bold {
+#jlmpgudacg .gt_font_bold {
   font-weight: bold;
 }
 
-#haaglvijbf .gt_font_italic {
+#jlmpgudacg .gt_font_italic {
   font-style: italic;
 }
 
-#haaglvijbf .gt_super {
+#jlmpgudacg .gt_super {
   font-size: 65%;
 }
 
-#haaglvijbf .gt_footnote_marks {
+#jlmpgudacg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#haaglvijbf .gt_asterisk {
+#jlmpgudacg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#haaglvijbf .gt_indent_1 {
+#jlmpgudacg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#haaglvijbf .gt_indent_2 {
+#jlmpgudacg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#haaglvijbf .gt_indent_3 {
+#jlmpgudacg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#haaglvijbf .gt_indent_4 {
+#jlmpgudacg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#haaglvijbf .gt_indent_5 {
+#jlmpgudacg .gt_indent_5 {
   text-indent: 25px;
 }
 
-#haaglvijbf .katex-display {
+#jlmpgudacg .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#haaglvijbf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jlmpgudacg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1261,92 +2125,52 @@ paramètre <code>seuil</code> de la fonction :</p>
     </tr>
 <tr class="gt_row_group_first">
 <td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Vend ses produits</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">8.8 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">1.12</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.46</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">5.04</td>
+<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">9,2 %</td>
+<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">1,06</td>
+<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0,41</td>
+<td headers="Coordonnées positives  V-test" class="gt_row gt_right">4,75</td>
 <td headers="Coordonnées positives  Effectif" class="gt_row gt_right">15 (27 %)</td>
 </tr>
 <tr>
 <td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Sponsorisé.e par des entreprises</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">7.3 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">1.02</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.38</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">4.58</td>
+<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">8 %</td>
+<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0,98</td>
+<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0,35</td>
+<td headers="Coordonnées positives  V-test" class="gt_row gt_right">4,41</td>
 <td headers="Coordonnées positives  Effectif" class="gt_row gt_right">15 (27 %)</td>
 </tr>
 <tr>
-<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Conservateur</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">6.4 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.87</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.36</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">4.46</td>
-<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">18 (32 %)</td>
-</tr>
-<tr>
 <td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Site personnel</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">3.7 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.57</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.26</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">3.77</td>
+<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">4,7 %</td>
+<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0,59</td>
+<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0,28</td>
+<td headers="Coordonnées positives  V-test" class="gt_row gt_right">3,91</td>
 <td headers="Coordonnées positives  Effectif" class="gt_row gt_right">25 (45 %)</td>
 </tr>
 <tr class="gt_group_heading_row">
 <th colspan="6" class="gt_group_heading" style="font-weight: bold;" scope="colgroup" id="Coordonnées négatives">Coordonnées négatives</th>
     </tr>
 <tr class="gt_row_group_first">
-<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Progressiste</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">8.4 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.79</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.67</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-6.06</td>
-<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">29 (52 %)</td>
-</tr>
-<tr>
 <td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">50k abonnés ou moins</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">5.8 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.91</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.30</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-4.09</td>
+<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">8,6 %</td>
+<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-1,02</td>
+<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0,38</td>
+<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-4,57</td>
 <td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">15 (27 %)</td>
 </tr>
 <tr>
 <td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Principalement streameur</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">4.9 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.81</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.26</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-3.81</td>
+<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">7,6 %</td>
+<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0,93</td>
+<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0,35</td>
+<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-4,36</td>
 <td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">16 (29 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Subvention du CNC</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">4.6 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.84</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.23</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-3.59</td>
-<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">14 (25 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Ne vend pas de produits</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">3.2 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.41</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.46</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-5.04</td>
-<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">41 (73 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Pas de site personnel</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">3 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.46</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.26</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-3.77</td>
-<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">31 (55 %)</td>
 </tr>
 </tbody>
 <tfoot class="gt_footnotes">
 <tr>
 <td class="gt_footnote" colspan="6">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">Seules les modalités actives dont la contribution est supérieure à 3 % sont représentées.</span>
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">Seules les modalités actives dont la contribution est supérieure à 4,5 % sont représentées.</span>
 </td>
     </tr>
 <tr>
@@ -1359,25 +2183,25 @@ paramètre <code>seuil</code> de la fonction :</p>
 </div>
 <p>Pour caractériser l’axe 2, on peut copier et coller le même code en
 changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/caracteriser_axe.html">caracteriser_axe</a></span><span class="op">(</span><span class="va">resultat_acm</span>, axe <span class="op">=</span> <span class="fl">2</span>, contribution_minimum <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<div id="byesrejlds" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#byesrejlds table {
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/caracteriser_axe.html">caracteriser_axe</a></span><span class="op">(</span><span class="va">resultat_acm</span>, axe <span class="op">=</span> <span class="fl">2</span>, contribution_minimum <span class="op">=</span> <span class="fl">4.5</span><span class="op">)</span></span></code></pre></div>
+<div id="apwoktayyj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#apwoktayyj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#byesrejlds thead, #byesrejlds tbody, #byesrejlds tfoot, #byesrejlds tr, #byesrejlds td, #byesrejlds th {
+#apwoktayyj thead, #apwoktayyj tbody, #apwoktayyj tfoot, #apwoktayyj tr, #apwoktayyj td, #apwoktayyj th {
   border-style: none;
 }
 
-#byesrejlds p {
+#apwoktayyj p {
   margin: 0;
   padding: 0;
 }
 
-#byesrejlds .gt_table {
+#apwoktayyj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1403,12 +2227,12 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   border-left-color: #D3D3D3;
 }
 
-#byesrejlds .gt_caption {
+#apwoktayyj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#byesrejlds .gt_title {
+#apwoktayyj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1420,7 +2244,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   border-bottom-width: 0;
 }
 
-#byesrejlds .gt_subtitle {
+#apwoktayyj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1432,7 +2256,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   border-top-width: 0;
 }
 
-#byesrejlds .gt_heading {
+#apwoktayyj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1444,13 +2268,13 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   border-right-color: #D3D3D3;
 }
 
-#byesrejlds .gt_bottom_border {
+#apwoktayyj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#byesrejlds .gt_col_headings {
+#apwoktayyj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1465,7 +2289,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   border-right-color: #D3D3D3;
 }
 
-#byesrejlds .gt_col_heading {
+#apwoktayyj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1485,7 +2309,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   overflow-x: hidden;
 }
 
-#byesrejlds .gt_column_spanner_outer {
+#apwoktayyj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1497,15 +2321,15 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   padding-right: 4px;
 }
 
-#byesrejlds .gt_column_spanner_outer:first-child {
+#apwoktayyj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#byesrejlds .gt_column_spanner_outer:last-child {
+#apwoktayyj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#byesrejlds .gt_column_spanner {
+#apwoktayyj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1517,11 +2341,11 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   width: 100%;
 }
 
-#byesrejlds .gt_spanner_row {
+#apwoktayyj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#byesrejlds .gt_group_heading {
+#apwoktayyj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1547,7 +2371,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   text-align: left;
 }
 
-#byesrejlds .gt_empty_group_heading {
+#apwoktayyj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1562,15 +2386,15 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   vertical-align: middle;
 }
 
-#byesrejlds .gt_from_md > :first-child {
+#apwoktayyj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#byesrejlds .gt_from_md > :last-child {
+#apwoktayyj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#byesrejlds .gt_row {
+#apwoktayyj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1589,7 +2413,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   overflow-x: hidden;
 }
 
-#byesrejlds .gt_stub {
+#apwoktayyj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1602,7 +2426,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   padding-right: 5px;
 }
 
-#byesrejlds .gt_stub_row_group {
+#apwoktayyj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1616,15 +2440,15 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   vertical-align: top;
 }
 
-#byesrejlds .gt_row_group_first td {
+#apwoktayyj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#byesrejlds .gt_row_group_first th {
+#apwoktayyj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#byesrejlds .gt_summary_row {
+#apwoktayyj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1634,16 +2458,16 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   padding-right: 5px;
 }
 
-#byesrejlds .gt_first_summary_row {
+#apwoktayyj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#byesrejlds .gt_first_summary_row.thick {
+#apwoktayyj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#byesrejlds .gt_last_summary_row {
+#apwoktayyj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1653,7 +2477,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   border-bottom-color: #D3D3D3;
 }
 
-#byesrejlds .gt_grand_summary_row {
+#apwoktayyj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1663,7 +2487,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   padding-right: 5px;
 }
 
-#byesrejlds .gt_first_grand_summary_row {
+#apwoktayyj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1673,7 +2497,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   border-top-color: #D3D3D3;
 }
 
-#byesrejlds .gt_last_grand_summary_row_top {
+#apwoktayyj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1683,11 +2507,11 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   border-bottom-color: #D3D3D3;
 }
 
-#byesrejlds .gt_striped {
+#apwoktayyj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#byesrejlds .gt_table_body {
+#apwoktayyj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1696,7 +2520,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   border-bottom-color: #D3D3D3;
 }
 
-#byesrejlds .gt_footnotes {
+#apwoktayyj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1710,7 +2534,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   border-right-color: #D3D3D3;
 }
 
-#byesrejlds .gt_footnote {
+#apwoktayyj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1719,7 +2543,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   padding-right: 5px;
 }
 
-#byesrejlds .gt_sourcenotes {
+#apwoktayyj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1733,7 +2557,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   border-right-color: #D3D3D3;
 }
 
-#byesrejlds .gt_sourcenote {
+#apwoktayyj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1741,72 +2565,72 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   padding-right: 5px;
 }
 
-#byesrejlds .gt_left {
+#apwoktayyj .gt_left {
   text-align: left;
 }
 
-#byesrejlds .gt_center {
+#apwoktayyj .gt_center {
   text-align: center;
 }
 
-#byesrejlds .gt_right {
+#apwoktayyj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#byesrejlds .gt_font_normal {
+#apwoktayyj .gt_font_normal {
   font-weight: normal;
 }
 
-#byesrejlds .gt_font_bold {
+#apwoktayyj .gt_font_bold {
   font-weight: bold;
 }
 
-#byesrejlds .gt_font_italic {
+#apwoktayyj .gt_font_italic {
   font-style: italic;
 }
 
-#byesrejlds .gt_super {
+#apwoktayyj .gt_super {
   font-size: 65%;
 }
 
-#byesrejlds .gt_footnote_marks {
+#apwoktayyj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#byesrejlds .gt_asterisk {
+#apwoktayyj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#byesrejlds .gt_indent_1 {
+#apwoktayyj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#byesrejlds .gt_indent_2 {
+#apwoktayyj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#byesrejlds .gt_indent_3 {
+#apwoktayyj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#byesrejlds .gt_indent_4 {
+#apwoktayyj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#byesrejlds .gt_indent_5 {
+#apwoktayyj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#byesrejlds .katex-display {
+#apwoktayyj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#byesrejlds div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#apwoktayyj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1829,108 +2653,84 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
     </tr>
 <tr class="gt_row_group_first">
 <td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Chaîne collective</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">12.2 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">1.00</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.44</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">4.91</td>
+<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">10,7 %</td>
+<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0,93</td>
+<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0,38</td>
+<td headers="Coordonnées positives  V-test" class="gt_row gt_right">4,56</td>
 <td headers="Coordonnées positives  Effectif" class="gt_row gt_right">17 (30 %)</td>
 </tr>
 <tr>
 <td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Ne montre pas son visage</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">11.5 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">2.01</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.31</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">4.13</td>
+<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">10 %</td>
+<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">1,85</td>
+<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0,26</td>
+<td headers="Coordonnées positives  V-test" class="gt_row gt_right">3,81</td>
 <td headers="Coordonnées positives  Effectif" class="gt_row gt_right">4 (7 %)</td>
 </tr>
 <tr>
-<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Compte Facebook</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">5.9 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.56</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.29</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">3.97</td>
-<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">27 (48 %)</td>
-</tr>
-<tr>
 <td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Subvention du CNC</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">5.8 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.76</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.19</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">3.27</td>
+<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">6,4 %</td>
+<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0,80</td>
+<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0,21</td>
+<td headers="Coordonnées positives  V-test" class="gt_row gt_right">3,41</td>
 <td headers="Coordonnées positives  Effectif" class="gt_row gt_right">14 (25 %)</td>
 </tr>
 <tr>
-<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">2014 et avant</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">3.7 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.72</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.11</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">2.50</td>
-<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">10 (18 %)</td>
+<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Compte Facebook</td>
+<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">5,9 %</td>
+<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0,55</td>
+<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0,28</td>
+<td headers="Coordonnées positives  V-test" class="gt_row gt_right">3,94</td>
+<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">27 (48 %)</td>
 </tr>
 <tr>
 <td headers="Coordonnées positives  Modalité" class="gt_row gt_left">40 à 44 ans</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">3.7 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.93</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.10</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">2.38</td>
+<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">5,1 %</td>
+<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">1,08</td>
+<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0,14</td>
+<td headers="Coordonnées positives  V-test" class="gt_row gt_right">2,79</td>
 <td headers="Coordonnées positives  Effectif" class="gt_row gt_right">6 (11 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Serveur Discord</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">3.4 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.69</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.10</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">2.40</td>
-<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">10 (18 %)</td>
 </tr>
 <tr class="gt_group_heading_row">
 <th colspan="6" class="gt_group_heading" style="font-weight: bold;" scope="colgroup" id="Coordonnées négatives">Coordonnées négatives</th>
     </tr>
 <tr class="gt_row_group_first">
-<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">50k abonnés ou moins</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">6 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.75</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.21</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-3.37</td>
+<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Vend ses produits</td>
+<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">6,1 %</td>
+<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0,75</td>
+<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0,21</td>
+<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-3,36</td>
 <td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">15 (27 %)</td>
 </tr>
 <tr>
 <td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Pas de compte Facebook</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">5.5 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.52</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.29</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-3.97</td>
+<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">5,5 %</td>
+<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0,51</td>
+<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0,28</td>
+<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-3,94</td>
 <td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">29 (52 %)</td>
 </tr>
 <tr>
 <td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Chaîne individuelle</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">5.3 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.44</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.44</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-4.91</td>
+<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">4,7 %</td>
+<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0,41</td>
+<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0,38</td>
+<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-4,56</td>
 <td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">39 (70 %)</td>
 </tr>
 <tr>
 <td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Femme</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">4.8 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.92</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.14</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-2.79</td>
+<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">4,6 %</td>
+<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0,89</td>
+<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0,13</td>
+<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-2,71</td>
 <td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">8 (14 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Vend ses produits</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">4.4 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.64</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.15</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-2.88</td>
-<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">15 (27 %)</td>
 </tr>
 </tbody>
 <tfoot class="gt_footnotes">
 <tr>
 <td class="gt_footnote" colspan="6">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">Seules les modalités actives dont la contribution est supérieure à 3 % sont représentées.</span>
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">Seules les modalités actives dont la contribution est supérieure à 4,5 % sont représentées.</span>
 </td>
     </tr>
 <tr>
@@ -1941,58 +2741,183 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
 </tfoot>
 </table>
 </div>
-<p>Pour extraire les résultats de l’ACM, on peut employer :
-extraire_modalites pour avoir les résultats par modalités et
-extraire_individus pour avoir les résultats pour chaque individu.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/extraire_modalites.html">extraire_modalites</a></span><span class="op">(</span><span class="va">resultat_acm</span><span class="op">)</span> </span>
+</div>
+<div class="section level2">
+<h2 id="visualiser-les-résultats">Visualiser les résultats<a class="anchor" aria-label="anchor" href="#visualiser-les-r%C3%A9sultats"></a>
+</h2>
+<p>Pour visualiser les résultats. Le plus simple restera toujours de
+faire appel à explor::explor(). Les résultats ne sont cependant pas très
+joli à mon goût. La section suivante s’adresse donc à</p>
+<ul>
+<li><p>Ceux qui souhaite avoir des visualisations de leur données plus
+esthétiques.</p></li>
+<li><p>Les utilisateurs avancés et moins avancés qui veulent avoir un
+plus grand contrôle sur les visualisations.</p></li>
+</ul>
+<p>Toutes ces visualisations se basent sur le package ggplot. Jusqu’à
+maintenant on utilisait directement les résultats de l’ACM pour sortir
+nos tableaux. Ici, il va falloir les transformer un petit peu. Nous
+allons donc créer deux objets, un premier objet resultat_individus qui
+contiendra les coordonnées des individus ainsi que nos données initales
+et un deuxième objet (que je nomme ici resultat_modalites) qui
+répertorie les résultats par modalité. Pour extraire ces résultats du
+résultat de l’ACM, on aura recours à la fonction
+<code><a href="../reference/extraire_individus.html">extraire_individus()</a></code> et
+<code><a href="../reference/extraire_modalites.html">extraire_modalites()</a></code>.</p>
+<p>Pour extraire_modalites il suffit de faire passer le resultat de
+l’ACM à la fonction :</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resultat_modalites</span> <span class="op">&lt;-</span> <span class="va">resultat_acm</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/extraire_modalites.html">extraire_modalites</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">resultat_modalites</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 189 × 21</span></span></span>
 <span><span class="co">#&gt;    type    variables modalites     n pourcentage dim1_coord dim1_cos2 dim1_vtest</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> variab… orientat… Divers        9        16.1       0.79      0.12       2.57</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> variab… orientat… Progress…    29        51.8      -<span style="color: #BB0000;">0.79</span>      0.67      -<span style="color: #BB0000;">6.06</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> variab… orientat… Conserva…    18        32.1       0.87      0.36       4.46</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> variab… debut     2014 et …    10        17.9       0.75      0.12       2.58</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> variab… debut     2015 - 2…    29        51.8      -<span style="color: #BB0000;">0.01</span>      0         -<span style="color: #BB0000;">0.05</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> variab… debut     2020 et …    17        30.4      -<span style="color: #BB0000;">0.43</span>      0.08      -<span style="color: #BB0000;">2.09</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> variab… visage_d… Montre s…    52        92.9       0.02      0          0.46</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> variab… visage_d… Ne montr…     4         7.1      -<span style="color: #BB0000;">0.22</span>      0         -<span style="color: #BB0000;">0.46</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> variab… abonnes   50k abon…    15        26.8      -<span style="color: #BB0000;">0.91</span>      0.3       -<span style="color: #BB0000;">4.09</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> variab… abonnes   Entre 50…    13        23.2       0.09      0          0.37</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> variab… debut     2014 et …    10        17.9       0.82      0.15       2.84</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> variab… debut     2015 - 2…    29        51.8       0.02      0          0.12</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> variab… debut     2020 et …    17        30.4      -<span style="color: #BB0000;">0.51</span>      0.11      -<span style="color: #BB0000;">2.5</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> variab… visage_d… Montre s…    52        92.9       0         0         -<span style="color: #BB0000;">0.05</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> variab… visage_d… Ne montr…     4         7.1       0.03      0          0.05</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> variab… abonnes   50k abon…    15        26.8      -<span style="color: #BB0000;">1.02</span>      0.38      -<span style="color: #BB0000;">4.57</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> variab… abonnes   Entre 50…    13        23.2       0.09      0          0.37</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> variab… abonnes   Entre 20…    23        41.1       0.37      0.1        2.31</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> variab… abonnes   Plus d'u…     5         8.9       1.11      0.12       2.57</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> variab… genre     Femme         8        14.3      -<span style="color: #BB0000;">0.6</span>       0.06      -<span style="color: #BB0000;">1.81</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 179 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 13 more variables: dim1_contrib &lt;dbl&gt;, dim2_coord &lt;dbl&gt;, dim2_cos2 &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   dim2_vtest &lt;dbl&gt;, dim2_contrib &lt;dbl&gt;, dim3_coord &lt;dbl&gt;, dim3_cos2 &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   dim3_vtest &lt;dbl&gt;, dim3_contrib &lt;dbl&gt;, dim4_coord &lt;dbl&gt;, dim4_cos2 &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   dim4_vtest &lt;dbl&gt;, dim4_contrib &lt;dbl&gt;</span></span></span></code></pre></div>
-<p>Pour extraire les résultats pour chaque individu, il est nécessaire
-de donner à R le nom de la colonne qui identifie ces individus.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/extraire_individus.html">extraire_individus</a></span><span class="op">(</span><span class="va">resultat_acm</span>, nom_variable_individu <span class="op">=</span> <span class="st">"personne"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Joining with `by = join_by(personne)`</span></span>
+<p>On obtient alors un tableau qui reprend pour chaque modalité et
+chaque axe leur coordonnée, leur cos², leur vtest et leur
+contribution.</p>
+<p>Pour <code>extraire_individu()</code> il faut préciser le nom d’une
+de vos variables qui permettent d’identifier chaque individus. Dans mon
+cas par exemple, ma base de donnée recense des chaînes YouTube et
+Twitch, chaque individu a un <code>titre</code> de chaîne unique. Ce
+sera donc <code>titre</code> :</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resultat_individus</span> <span class="op">&lt;-</span> <span class="va">resultat_acm</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/extraire_individus.html">extraire_individus</a></span><span class="op">(</span>nom_variable_individu <span class="op">=</span> <span class="st">"titre"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Joining with `by = join_by(titre)`</span></span>
+<span><span class="va">resultat_individus</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 68 × 44</span></span></span>
 <span><span class="co">#&gt;    modalites     dim1_coord dim1_cos2 dim1_vtest dim2_coord dim2_cos2 dim2_vtest</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Alexandre          -<span style="color: #BB0000;">0.82</span>      0.01      -<span style="color: #BB0000;">0.82</span>      -<span style="color: #BB0000;">1.55</span>      0.04      -<span style="color: #BB0000;">1.55</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Alexis Bellas       0.34      0          0.34       0.1       0          0.1 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Anaïs Garest…      -<span style="color: #BB0000;">1.4</span>       0.04      -<span style="color: #BB0000;">1.4</span>       -<span style="color: #BB0000;">0.62</span>      0.01      -<span style="color: #BB0000;">0.62</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Anne-Thaïs d…       1.23      0.03       1.23      -<span style="color: #BB0000;">1.55</span>      0.04      -<span style="color: #BB0000;">1.55</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Antoine Goya       -<span style="color: #BB0000;">0.41</span>      0         -<span style="color: #BB0000;">0.41</span>      -<span style="color: #BB0000;">0.7</span>       0.01      -<span style="color: #BB0000;">0.7</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Arnaud Ganti…      -<span style="color: #BB0000;">1.38</span>      0.03      -<span style="color: #BB0000;">1.38</span>       0.44      0          0.44</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Aymric Dlavo       -<span style="color: #BB0000;">0.14</span>      0         -<span style="color: #BB0000;">0.14</span>       0.4       0          0.4 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Baptiste Pen…      -<span style="color: #BB0000;">0.55</span>      0.01      -<span style="color: #BB0000;">0.55</span>       1.39      0.04       1.39</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Benjamin Pat…       0.03      0          0.03       1.43      0.04       1.43</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Bertrand Pil…       0.95      0.02       0.95       2.06      0.08       2.06</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Antoine Goya       -<span style="color: #BB0000;">0.28</span>      0         -<span style="color: #BB0000;">0.28</span>      -<span style="color: #BB0000;">0.81</span>      0.01      -<span style="color: #BB0000;">0.81</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Christopher …       1.03      0.02       1.03      -<span style="color: #BB0000;">0.25</span>      0         -<span style="color: #BB0000;">0.25</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Clément Vikt…       0.15      0          0.15       0.86      0.01       0.86</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Glupatate          -<span style="color: #BB0000;">0.32</span>      0         -<span style="color: #BB0000;">0.32</span>       1.16      0.02       1.16</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Jean Massiet       -<span style="color: #BB0000;">1.26</span>      0.03      -<span style="color: #BB0000;">1.26</span>       1.39      0.04       1.39</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Moufette           -<span style="color: #BB0000;">1.76</span>      0.06      -<span style="color: #BB0000;">1.76</span>      -<span style="color: #BB0000;">1.16</span>      0.02      -<span style="color: #BB0000;">1.16</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Pascal Bonif…       1.4       0.04       1.4       -<span style="color: #BB0000;">0.05</span>      0         -<span style="color: #BB0000;">0.05</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Samuel Etien…      -<span style="color: #BB0000;">0.2</span>       0         -<span style="color: #BB0000;">0.2</span>        0.11      0          0.11</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Stéphane Edo…       1.86      0.06       1.86      -<span style="color: #BB0000;">0.09</span>      0         -<span style="color: #BB0000;">0.09</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Victor Ferry        1.21      0.03       1.21      -<span style="color: #BB0000;">1.35</span>      0.03      -<span style="color: #BB0000;">1.35</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 58 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 37 more variables: dim3_coord &lt;dbl&gt;, dim3_cos2 &lt;dbl&gt;, dim3_vtest &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   dim4_coord &lt;dbl&gt;, dim4_cos2 &lt;dbl&gt;, dim4_vtest &lt;dbl&gt;, titre &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   dim4_coord &lt;dbl&gt;, dim4_cos2 &lt;dbl&gt;, dim4_vtest &lt;dbl&gt;, personne &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   orientation &lt;chr&gt;, orientation2 &lt;chr&gt;, debut &lt;chr&gt;, visage_decouvert &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   abonnes &lt;chr&gt;, genre &lt;chr&gt;, age &lt;chr&gt;, streamer_plein_temps &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   collectif &lt;chr&gt;, livre &lt;chr&gt;, podcast &lt;chr&gt;, twitter &lt;chr&gt;, facebook &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   instagram &lt;chr&gt;, tiktok &lt;chr&gt;, discord &lt;chr&gt;, twitch &lt;chr&gt;, …</span></span></span></code></pre></div>
-<p>Une fois ces résultats obtenus, il est possible de les représenter
-graphiquement …</p>
+<p>On retrouve donc le tableau de données que l’on a donné à manger à la
+fonction ACM() qui a été augmenté de nouvelles colonnes avec notamment
+les coordonnées des individus.</p>
+<div class="section level3">
+<h3 id="le-nuage-dindividu">Le nuage d’individu<a class="anchor" aria-label="anchor" href="#le-nuage-dindividu"></a>
+</h3>
+<p>Pour faire apparaître le nuage d’individu. Il suffit maintenant
+d’utiliser les fonctions de ggplot, avec quelques subtilités cependant.
+Pour ceux qui ne souhaitent pas s’embarrasser des subtilités<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;ggacm est un raccourci pour
+&lt;code&gt;ggplot(aes(x = dim1_coord, y = dim2_coord)&lt;/code&gt; qui en plus de
+cela fixe les coordonnées et rajoute un cadran. Pour plus de détails,
+voir &lt;code&gt;?ggacm()&lt;/code&gt;.&lt;/p&gt;"><sup>2</sup></a>, utilisez
+juste <code><a href="../reference/ggacm.html">ggacm()</a></code> à la place vous gagnerez du temps.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="va">resultat_individus</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/ggacm.html">ggacm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Utilisation_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
+<p>Il est possible d’améliorer ce graphique de plusieurs manières.
+Premièrement en modifiant le thème de ggplot, pour qu’il soit plus joli.
+Le thème <code><a href="../reference/theme_acm.html">theme_acm()</a></code> qui vient avec le package illustre mes
+préférences personnelles.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resultat_individus</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/ggacm.html">ggacm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/theme_acm.html">theme_acm</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Utilisation_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
+<p>Pour éviter de toujours taper <code>+ theme_acm()</code>, je vous
+conseille d’en faire le theme par défaut de votre session R. Cela
+restera le thème par défaut jusqu’à ce que vous redémarriez R.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html" class="external-link">theme_set</a></span><span class="op">(</span><span class="fu"><a href="../reference/theme_acm.html">theme_acm</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>Ensuite, il est possible de nommer les axes. Pour cela, la fonction
+<code><a href="../reference/nommer_axes.html">nommer_axes()</a></code> permet de définir des noms d’axes appropriés.
+Il suffit de la rajouter au graphique. Elle prend comme premier argument
+le resultat entier de l’ACM. Si on ne précise rien, les axes sont juste
+modifié de la manière suivante</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resultat_individus</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/ggacm.html">ggacm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="../reference/nommer_axes.html">nommer_axes</a></span><span class="op">(</span><span class="va">resultat_acm</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Utilisation_files/figure-html/unnamed-chunk-16-1.png" width="700"></p>
+<p>Vous pouvez précisez au bout des flèches pour aider à
+l’interprétation du graphique. Pour cela, n’hésitez pas à vous aider des
+tableaux que vous avez sortis avec caracteriser_axe(). Les modalités au
+coordonnées négatives pour l’axe 1 sont à gauche, et celles qui sont
+positives à droite. Pour l’axe 2, les coordonnées négatives sont en bas
+et les coordonnées positives en haut. Dans mon cas, on peut donner les
+interprétations suivantes :</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resultat_individus</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/ggacm.html">ggacm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="../reference/nommer_axes.html">nommer_axes</a></span><span class="op">(</span><span class="va">resultat_acm</span>,</span>
+<span>              a_gauche <span class="op">=</span> <span class="st">"Streameurs"</span>,</span>
+<span>              a_droite <span class="op">=</span> <span class="st">"Vidéastes entrepreneurs"</span>,</span>
+<span>              en_bas <span class="op">=</span> <span class="st">"Chaine individuelle"</span>,</span>
+<span>              en_haut <span class="op">=</span> <span class="st">"Chaine collective"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Utilisation_files/figure-html/unnamed-chunk-17-1.png" width="700"></p>
+<p>Ca fait beaucoup de choses à taper à chaque fois… n’hésitez donc pas
+à stocker ces axes dans un objet pour y avoir recours plus facilement
+:</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">axes</span> <span class="op">&lt;-</span> <span class="va">resultat_acm</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/nommer_axes.html">nommer_axes</a></span><span class="op">(</span></span>
+<span>    a_gauche <span class="op">=</span> <span class="st">"Streameurs"</span>,</span>
+<span>    a_droite <span class="op">=</span> <span class="st">"Vidéastes entrepreneurs"</span>,</span>
+<span>    en_bas <span class="op">=</span> <span class="st">"Chaine individuelle"</span>,</span>
+<span>    en_haut <span class="op">=</span> <span class="st">"Chaine collective"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p>Vous pouvez maintenant ressortir le graphique :</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resultat_individus</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/ggacm.html">ggacm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="va">axes</span></span></code></pre></div>
+<p><img src="Utilisation_files/figure-html/unnamed-chunk-19-1.png" width="700"></p>
+<p>Enfin, peut-être souhaiteriez vous ajouter un titre ou une
+description ? Dans ce cas-là, utilisez la fonction <code><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs()</a></code>
+de ggplot.</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resultat_individus</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/ggacm.html">ggacm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="va">axes</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Ceci est un titre"</span>,</span>
+<span>    caption <span class="op">=</span> <span class="st">"Ceci est une description"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p><img src="Utilisation_files/figure-html/unnamed-chunk-20-1.png" width="700"></p>
 </div>
-  </main>
+</div>
+
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
