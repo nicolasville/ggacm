@@ -4,12 +4,10 @@
 \alias{extraire_individus}
 \title{Obtenir les résultats pour chaque individus}
 \usage{
-extraire_individus(resultat_acm, data_acm, nom_variable_individu)
+extraire_individus(resultat_acm, nom_variable_individu)
 }
 \arguments{
 \item{resultat_acm}{resultat acm}
-
-\item{data_acm}{donnée acm}
 
 \item{nom_variable_individu}{une chaîne de caractère (qui s'écrit donc entre guillemets anglais "") qui donne le nom de la variable du tableau qui identifie les individus.}
 }

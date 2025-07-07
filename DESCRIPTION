@@ -21,7 +21,8 @@ Imports:
     scales,
     stringr,
     tibble,
-    tidyr
+    tidyr,
+    tidyselect
 URL: https://github.com/nicolasville/ggacm, https://nicolasville.github.io/ggacm/
 BugReports: https://github.com/nicolasville/ggacm/issues
 Depends: 
