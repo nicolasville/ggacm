@@ -44,5 +44,6 @@ ACM <- function(donnees, variables_supplementaires, graph = FALSE,...) {
 
   FactoMineR::MCA(donnees,
                   quali.sup = variables_supplementaires.chr,
+                  graph = graph,
                   ...)
 }

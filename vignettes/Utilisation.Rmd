@@ -20,26 +20,51 @@ library(ggacm)
 
 Cette vignette de présentation montre comment utiliser le package.
 
-Pour cela, je me base sur un jeu de donnée d'exemple tiré de mon mémoire de M2 sur les créateurs de contenus politiques.
+Avant toute chose, il faut configurer la session R. En effet, certains choix qui sont fait dans les options de R n'arrange pas beaucoup les chercheurs en sciences sociales. la fonction mise_en_place() permet de bien configurer R :
+
+```{r}
+mise_en_place_ACM()
+```
+
+Une fois que cela est fait, on peut continuer. Commencez par charger vos données dans R. Pour plus d'information sur comment faire, n'hésitez pas à consulter des guides.
+
+Une fois que vos données sont chargées, avant tout ACM vous allez pouvoir les inspectez. Pour les besoins de la démonstration je prendrais en exemple un jeu de données que j'ai créé pour mon mémoire de M2 sur les créateurs de contenus politiques. Il est inclus avec le package et est stocké dans un objet qui s'appelle `createurs_de_contenus_pol`.
 
 ```{r}
 createurs_de_contenus_pol 
 ```
 
-On commence par réaliser l'ACM. Pour cela, on a recours à la fonction `MCA()` du package `FactoMineR`. L'argument `quali.sup` nous permet de préciser quelles sont les variables supplémentaires : autrement dit, les variables qui ne joueront pas dans la construction des axes. Ici, j'y mets la variable `titre`, parce qu'elle ne veut rien dire statistiquement, elle permet juste de savoir qui sont les individus. J'y rajoute la variable `orientation`. Une fois que vous lancez le code, il s'exécute et sors déjà les premiers graphiques de l'ACM.
+Ce jeu de données se composent de plusieurs colonnes :
+
+...
+
+Avant de procéder à l'ACM, il est vraiment utile de sortir un tri à plat de toute sa base de donnée. Pour cela, on peut utiliser la fonction `tbl_summary()` du package `gtsummary`. N'oubliez pas de retirer les variables qui ne se prêterait pas un tri à plat (dans mon cas la variable personne et titre). Vous pouvez retirez des variables en modifiant le paramètre `include` comme je le fais plus bas.
 
 ```{r}
-resultat_acm <- createurs_de_contenus_pol |> 
-  FactoMineR::MCA(
-    quali.sup = c("titre", 
-                  "personne",
-                  "orientation")
+createurs_de_contenus_pol |> 
+  gtsummary::tbl_summary(
+    include = c(-personne, -titre)
+    # je retire la variable personne et la variable titre du tableau
   )
 ```
 
-Sur ces premiers graphiques, vérifiez que le nuage d'individu est bien équilibré et ne se résume pas à une seule droite. Si c'est le cas, il faut soit recoder votre base, soit penser à mettre les variables qui posent problèmes en variable supplémentaires.
+Vérifiez bien toutes vos variables et vos modalités. Si une modalité concerne moins de 10 % de votre population, cela peut causé des problèmes pour la suite. Il faudra alors sûrement la recoder/la passée en variable supplémentaire. Dans mon cas par exemple : ma base ne compte que 2 écologiste, ce qui est trop peu. Je peux donc soit recoder la variable `orientation` (comme je l'ai fait avec `orientation2`), soit la mettre en variable supplémentaire lorsque je réaliserai l'ACM (c'est ce que je vais faire).
 
-Les résultats de cette opération sont stocké dans un objet (que j'ai ici appelé `resultat_acm`). Il contient tous les résultats de l'ACM. Mon package propose une manière de sortir ces résultats afin qu'il soit prêt à être publié. La plupart des fonctions présentés par la suite prendront comme premier argument cet objet contenant les résultats pour extraire ceux que vous souhaitez affichez.
+Pour réaliser l'ACM, utilisez la fonction... `ACM()`[^1]. Vous pouvez ensuite renseigner les variables à l'aide de l'argument `variables_supplementaires`. Mettez-y les variables que vous ne souhaitez pas voir participer à la construction des axes. Mettez-y également les variables qui servent à identifier chacun de vos individus (par exemple une variable `nom_prenom` ou dans mon cas, la variable `personne` et `titre`).
+
+[^1]: La fonction `ACM()` va exécuter sous le capot la fonction `FactoMineR::MCA()` du package `FactoMineR` qui va réaliser l'ACM. Si vous préféré vous pouvez utiliser cette dernière à la place, le résultat sera le même.
+
+Dans tbl_summary() vous vouliez inclure toutes les colonnes *sauf* les colonnes titre et personne. Ici, ce sont ces colonnes que vous sélectionnez comme variable supplémentaire, on ne met donc pas de moins devant leur nom :
+
+```{r}
+resultat_acm <- createurs_de_contenus_pol |> 
+  ACM(
+    variables_supplementaires = c(titre, 
+                                  personne, 
+                                  orientation,
+                                  orientation2)
+  )
+```
 
 Vous pouvez explorer les résultats de l'ACM avec la fonction du package `explor` : `explor()` .
 
@@ -48,6 +73,10 @@ explor::explor(resultat_acm)
 ```
 
 Si l'ACM vous convient, passez à la suite, sinon répétez les étapes décrites plus haut jusqu'à ce que le résultat de l'ACM soit satisfaisant pour vous.
+
+Sur ces premiers graphiques, vérifiez que le nuage d'individu est bien équilibré et ne se résume pas à une seule droite. Si c'est le cas, il faut soit recoder votre base, soit penser à mettre les variables qui posent problèmes en variable supplémentaires.
+
+Les résultats de cette opération sont stocké dans un objet (que j'ai ici appelé `resultat_acm`). Il contient tous les résultats de l'ACM. Mon package propose une manière de sortir ces résultats afin qu'il soit prêt à être publié. La plupart des fonctions présentés par la suite prendront comme premier argument cet objet contenant les résultats pour extraire ceux que vous souhaitez affichez.
 
 ## Les axes
 
@@ -61,34 +90,138 @@ extraire_variance(resultat_acm)
 
 [insérer un commentaire des résultats + la fonction pour obtenir la variance modifié]
 
-Une fois que cela est fait, on veut souvent chercher à décrire les axes.
+Une fois que cela est fait, on veut souvent chercher à décrire les axes. Pour cela, utilisez la fonction `caracteriser_axe()`. Précisez le numéro de l'axe que vous voulez caractérisé avec l'argument `axe`.
+
+Par défaut, vous ne souhaiterez peut-être pas afficher toutes les modalités dans ce tableau (surtout si vous en avez beaucoup). L'argument `contribution_minimum` permet de préciser un seuil de contribution minimum pour filtrer les modalités. Par défaut, il se règle sur la contribution théorique moyenne, c'est-à-dire la contribution de chaque variable si elles contribuaient chacunes également à la construction des axes.
+
+Ainsi quand on lance la fonction sans préciser l'argument `contribution_minimum` :
 
 ```{r}
-caracteriser_axe(resultat_acm, axe = 1)
+resultat_acm |> 
+  caracteriser_axe(axe = 1)
 ```
 
-Le tableau affiché peut-être un peu long en fonction du nombre de modalité que vous avez. Il faut donc souvent le filtrer pour n'afficher que les modalités qui ont une contribution supérieure à un certain seuil. Pour être plus synthétique par exemple, il est possible de produire un tableau qui ne reprend que les modalités dont la contribution à l'axe est supérieur à 3 %. Il faut alors modifier le paramètre `seuil` de la fonction :
+Si cela ne vous convient et que vous préféreriez un tableau plus synthétique ou plus exhaustif, vous pouvez changer ce seuil :
 
 ```{r}
-caracteriser_axe(resultat_acm, axe = 1, contribution_minimum = 3)
+caracteriser_axe(resultat_acm, axe = 1, contribution_minimum = 4.5)
 ```
 
 Pour caractériser l'axe 2, on peut copier et coller le même code en changeant simplement le numéro de l'axe que l'on souhaite décrire :
 
 ```{r}
-caracteriser_axe(resultat_acm, axe = 2, contribution_minimum = 3)
+caracteriser_axe(resultat_acm, axe = 2, contribution_minimum = 4.5)
 ```
 
-Pour extraire les résultats de l'ACM, on peut employer : extraire_modalites pour avoir les résultats par modalités et extraire_individus pour avoir les résultats pour chaque individu.
+## Visualiser les résultats 
+
+Pour visualiser les résultats. Le plus simple restera toujours de faire appel à explor::explor(). Les résultats ne sont cependant pas très joli à mon goût. La section suivante s'adresse donc à
+
+-   Ceux qui souhaite avoir des visualisations de leur données plus esthétiques.
+
+-   Les utilisateurs avancés et moins avancés qui veulent avoir un plus grand contrôle sur les visualisations.
+
+Toutes ces visualisations se basent sur le package ggplot. Jusqu'à maintenant on utilisait directement les résultats de l'ACM pour sortir nos tableaux. Ici, il va falloir les transformer un petit peu. Nous allons donc créer deux objets, un premier objet resultat_individus qui contiendra les coordonnées des individus ainsi que nos données initales et un deuxième objet (que je nomme ici resultat_modalites) qui répertorie les résultats par modalité. Pour extraire ces résultats du résultat de l'ACM, on aura recours à la fonction `extraire_individus()` et `extraire_modalites()`.
+
+Pour extraire_modalites il suffit de faire passer le resultat de l'ACM à la fonction :
 
 ```{r}
-extraire_modalites(resultat_acm) 
+resultat_modalites <- resultat_acm |> extraire_modalites()
+resultat_modalites
 ```
 
-Pour extraire les résultats pour chaque individu, il est nécessaire de donner à R le nom de la colonne qui identifie ces individus.
+On obtient alors un tableau qui reprend pour chaque modalité et chaque axe leur coordonnée, leur cos², leur vtest et leur contribution.
+
+Pour `extraire_individu()` il faut préciser le nom d'une de vos variables qui permettent d'identifier chaque individus. Dans mon cas par exemple, ma base de donnée recense des chaînes YouTube et Twitch, chaque individu a un `titre` de chaîne unique. Ce sera donc `titre` :
 
 ```{r}
-extraire_individus(resultat_acm, nom_variable_individu = "personne")
+resultat_individus <- resultat_acm |> 
+  extraire_individus(nom_variable_individu = "titre")
+resultat_individus
 ```
 
-Une fois ces résultats obtenus, il est possible de les représenter graphiquement ...
+On retrouve donc le tableau de données que l'on a donné à manger à la fonction ACM() qui a été augmenté de nouvelles colonnes avec notamment les coordonnées des individus.
+
+### Le nuage d'individu
+
+Pour faire apparaître le nuage d'individu. Il suffit maintenant d'utiliser les fonctions de ggplot, avec quelques subtilités cependant. Pour ceux qui ne souhaitent pas s’embarrasser des subtilités[^2], utilisez juste `ggacm()` à la place vous gagnerez du temps.
+
+[^2]: ggacm est un raccourci pour `ggplot(aes(x = dim1_coord, y = dim2_coord)` qui en plus de cela fixe les coordonnées et rajoute un cadran. Pour plus de détails, voir `?ggacm()`.
+
+```{r}
+library(ggplot2)
+resultat_individus |> 
+  ggacm() + 
+  geom_point()
+```
+
+Il est possible d'améliorer ce graphique de plusieurs manières. Premièrement en modifiant le thème de ggplot, pour qu'il soit plus joli. Le thème `theme_acm()` qui vient avec le package illustre mes préférences personnelles.
+
+```{r}
+resultat_individus |> 
+  ggacm() + 
+  geom_point() +
+  theme_acm()
+```
+
+Pour éviter de toujours taper `+ theme_acm()`, je vous conseille d'en faire le theme par défaut de votre session R. Cela restera le thème par défaut jusqu'à ce que vous redémarriez R.
+
+```{r}
+theme_set(theme_acm())
+```
+
+Ensuite, il est possible de nommer les axes. Pour cela, la fonction `nommer_axes()` permet de définir des noms d'axes appropriés. Il suffit de la rajouter au graphique. Elle prend comme premier argument le resultat entier de l'ACM. Si on ne précise rien, les axes sont juste modifié de la manière suivante
+
+```{r}
+resultat_individus |> 
+  ggacm() + 
+  geom_point() + 
+  nommer_axes(resultat_acm)
+```
+
+Vous pouvez précisez au bout des flèches pour aider à l'interprétation du graphique. Pour cela, n'hésitez pas à vous aider des tableaux que vous avez sortis avec caracteriser_axe(). Les modalités au coordonnées négatives pour l'axe 1 sont à gauche, et celles qui sont positives à droite. Pour l'axe 2, les coordonnées négatives sont en bas et les coordonnées positives en haut. Dans mon cas, on peut donner les interprétations suivantes :
+
+```{r}
+resultat_individus |> 
+  ggacm() + 
+  geom_point() + 
+  nommer_axes(resultat_acm,
+              a_gauche = "Streameurs",
+              a_droite = "Vidéastes entrepreneurs",
+              en_bas = "Chaine individuelle",
+              en_haut = "Chaine collective")
+```
+
+Ca fait beaucoup de choses à taper à chaque fois... n'hésitez donc pas à stocker ces axes dans un objet pour y avoir recours plus facilement :
+
+```{r}
+axes <- resultat_acm |> 
+  nommer_axes(
+    a_gauche = "Streameurs",
+    a_droite = "Vidéastes entrepreneurs",
+    en_bas = "Chaine individuelle",
+    en_haut = "Chaine collective"
+  )
+```
+
+Vous pouvez maintenant ressortir le graphique :
+
+```{r}
+resultat_individus |> 
+  ggacm() + 
+  geom_point() + 
+  axes
+```
+
+Enfin, peut-être souhaiteriez vous ajouter un titre ou une description ? Dans ce cas-là, utilisez la fonction `labs()` de ggplot.
+
+```{r}
+resultat_individus |> 
+  ggacm() + 
+  geom_point() + 
+  axes +
+  labs(
+    title = "Ceci est un titre",
+    caption = "Ceci est une description"
+  )
+```
