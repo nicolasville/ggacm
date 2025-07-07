@@ -14,11 +14,25 @@ mise_en_place_ACM <- function(...){
         OutDec = ",",
         ...) # marque des décimale : , et pas .
 
-  message("Les options générales de la session R ont été modifié. Les nombres décimaux s'afficheront avec une virgule et uniquement 3 chiffres après la virgule. L'écriture scientifque a été désactivée.\n")
+
+  cli::cli_h2("Les options générales de la session R ont été modifié.")
+
+  cli::cli_inform(c(
+    "v" = "Les nombres décimaux s'afficheront avec une virgule.",
+    "v" = "Ils n'afficheront que 3 chiffres après la virgule.",
+    "v" = "L'écriture scientifique a été désactivé."
+    ))
+
+  cli::cli_h2("Le thème des tableaux produit par {.pkg gtsummary} a été modifié.")
 
   gtsummary::theme_gtsummary_language(
     language = "fr",
     decimal.mark = ",",
+  ) |> suppressMessages()
+
+  cli::cli_inform(c(
+    "v" = "Ils s'afficheront en français.",
+    "v" = "En utilisant une virgule pour les nombres décimaux."
   )
-  message("Le thème des objets gtsummary a été modifié. Ils seront en français et afficheront les nombres décimaux avec une virgule ")
+  )
   }

@@ -16,6 +16,15 @@
 #' # une super exemple
 caracteriser_classe <- function(resultat_classification, numero_de_la_classe) {
 
+  if (missing(numero_de_la_classe)) {
+    cli::cli_abort(c(
+      "x" = "L'argument {.arg numero_de_la_classe} n'a pas été fourni à la fonction.",
+      "i" = "L'avez-vous oublié ?",
+      ">" = "Incluez le numéro de la classe que vous voulez caractériser :",
+      " " = "Par exemple : {.code numero_de_la_classe = 2}"
+    ))
+  }
+
   # 1 On extrait le résultat de la classification :
   caracterisation_classe.df <- resultat_classification$desc.var$category |>
     pluck(numero_de_la_classe)

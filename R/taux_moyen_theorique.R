@@ -9,7 +9,8 @@
 #' @export
 #'
 #' @examples
-#' resultat_acm <- createurs_de_contenus_pol |> FactoMineR::MCA(quali.sup = c("titre", "personne", "orientation"))
+#' resultat_acm <- createurs_de_contenus_pol |>
+#'   FactoMineR::MCA(quali.sup = c("titre", "personne", "orientation"))
 #'
 #' contribution_moyenne_theorique(resultat_acm)
 #'
@@ -23,8 +24,10 @@ contribution_moyenne_theorique <- function(resultat_acm) {
     filter(type == "variable active") |>
     nrow()
 
-  message(paste0("Si toutes les modalités actives contribuait de manière équivalente à la construction d'un axe, chacune aurait une contribution de ", round(100 / nb_modalites_actives, digits = 1), " %. \n"))
+  cont_moy_theo <- 100 / nb_modalites_actives
 
-  100 / nb_modalites_actives
+  cli::cli_alert_info("Si toutes les modalités actives contribuaient également à la construction d'un axe, chacune aurait une contribution de {round(cont_moy_theo, digits = 2)} %.", wrap = TRUE)
+
+  cont_moy_theo
 
 }

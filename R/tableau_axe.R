@@ -11,15 +11,39 @@
 #' @export
 #'
 #' @examples #
-caracteriser_axe <- function(resultat_acm, axe, seuil = 0) {
+caracteriser_axe <- function(resultat_acm, axe, contribution_minimum) {
 
-  # check ---------------------
-  if (!is.numeric(axe)) stop("L'argument axe est manquant/mal renseigné. Veuillez choisir l'axe à décrire en renseignant par exemple `axe = 1` si vous voulez décrire le premier axe.")
+  if (missing(axe)) {
+    cli::cli_abort(c(
+      "x" = "L'argument {.arg axe} n'a pas été fourni à la fonction.",
+      "i" = "L'avez-vous oublié ?",
+      ">" = "Incluez le numéro de l'axe que vous voulez caractériser :",
+      " " = "Par exemple : {.code axe = 2}"
+    ))
+  }
+
+  if (!is.numeric(axe)) {
+    cli::cli_abort(c(
+      "L'argument {.arg axe} doit être un numéro",
+      ">" = "`axe = 1` ou `axe = 2` ou encore `axe = 3`, etc."))
+  }
+
+  if (missing(contribution_minimum)) {
+    cli::cli_inform(c(
+      "Vous n'axez pas indiqué de contribution minimum pour afficher les résultats",
+      "Seules les modalités dont la contribution est supérieur à la moyenne théorique seront affichées.",
+      "i" = "Si vous souhaitez modifier cela, vous pouvez changer l'argument contribution_minimum",
+      ">" = "{.code contribution_minimum = 0} si vous souhaitez afficher toutes les modalités par exemple"
+    ))
+
+    cli::cli_h3("Contribution moyenne théorique")
+    contribution_minimum <- contribution_moyenne_theorique(resultat_acm)
+  }
 
   resultat_modalites <- extraire_modalites(resultat_acm = resultat_acm)
 
   # on sort les tableaux pour l'axe en question
-  carac_axe <- tableau_axe(resultat_modalites = resultat_modalites, axe = axe, seuil = seuil)
+  carac_axe <- tableau_axe(resultat_modalites = resultat_modalites, axe = axe, seuil = contribution_minimum)
 
   # on sépare en deux tableau (un pour les coordonnées positives, l'autre pour les négatives)
   carac_axe_coord_positive <- carac_axe |> filter(Coordonnée > 0) |> as_gtsummary()
@@ -48,10 +72,10 @@ caracteriser_axe <- function(resultat_acm, axe, seuil = 0) {
     )
 
   # inclure une note de bas de tableau si ce dernier est filtré
-  if(seuil > 0) {
+  if(contribution_minimum > 0) {
     tableau_sortie <- tableau_sortie |>
       gtsummary::modify_footnote_header(
-        footnote = paste0("Seules les modalités dont la contribution est supérieure à ", seuil, " % sont représentées."),
+        footnote = paste0("Seules les modalités actives dont la contribution est supérieure à ", contribution_minimum |> round(digits = 2), " % sont représentées."),
         columns = Modalité
     )
   }
@@ -72,7 +96,7 @@ caracteriser_axe <- function(resultat_acm, axe, seuil = 0) {
 
 
 # Puis une fonction pour extraire le tableau de données.
-tableau_axe <- function(resultat_modalites, axe, seuil = 0) {
+tableau_axe <- function(resultat_modalites, axe, seuil) {
 
   # obtenir la chaine de caractère du nom de l'axe  (dim1/dim2 ou dim3 par ex)
   dim.chr <- paste0("dim", axe)
