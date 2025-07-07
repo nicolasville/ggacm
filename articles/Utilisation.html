@@ -150,7 +150,20 @@ variance modifié]</p>
 <p>Une fois que cela est fait, on veut souvent chercher à décrire les
 axes.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/caracteriser_axe.html">caracteriser_axe</a></span><span class="op">(</span><span class="va">resultat_acm</span>, axe <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/caracteriser_axe.html">caracteriser_axe</a></span><span class="op">(</span><span class="va">resultat_acm</span>, axe <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Vous n'axez pas indiqué de contribution minimum pour afficher les résultats</span></span>
+<span><span class="co">#&gt; Seules les modalités dont la contribution est supérieur à la moyenne théorique</span></span>
+<span><span class="co">#&gt; seront affichées.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Si vous souhaitez modifier cela, vous pouvez changer l'argument</span></span>
+<span><span class="co">#&gt;   contribution_minimum</span></span>
+<span><span class="co">#&gt; → `contribution_minimum = 0` si vous souhaitez afficher toutes les modalités</span></span>
+<span><span class="co">#&gt;   par exemple</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ── Contribution moyenne théorique </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Si toutes les modalités actives contribuaient également à la construction</span></span>
+<span><span class="co">#&gt; d'un axe, chacune aurait une contribution de 2.04 %.</span></span></code></pre></div>
 <div id="lefoodfiee" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#lefoodfiee table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -602,10 +615,12 @@ axes.</p>
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Modalité"><span class="gt_from_md">Modalité</span></th>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Modalité">
+<span class="gt_from_md">Modalité</span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Contribution"><span class="gt_from_md">Contribution</span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Coordonnée">
-<span class="gt_from_md">Coordonnée</span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+<span class="gt_from_md">Coordonnée</span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>2</sup></span>
 </th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Cos²"><span class="gt_from_md">Cos²</span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="V-test"><span class="gt_from_md">V-test</span></th>
@@ -695,134 +710,6 @@ axes.</p>
 <td headers="Coordonnées positives  V-test" class="gt_row gt_right">2.81</td>
 <td headers="Coordonnées positives  Effectif" class="gt_row gt_right">21 (38 %)</td>
 </tr>
-<tr>
-<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Principalement youtuber</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">2 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.33</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.26</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">3.81</td>
-<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">40 (71 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">45 ans et plus</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">1.9 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.64</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.09</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">2.21</td>
-<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">10 (18 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Compte Facebook</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">1.9 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.39</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.14</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">2.77</td>
-<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">27 (48 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Pas de subvention du CNC</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">1.5 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.28</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.23</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">3.59</td>
-<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">42 (75 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Publication de livre</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">1.2 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.38</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.07</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">1.94</td>
-<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">18 (32 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Entre 200k et 1 million d'abonnés</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">1.1 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.32</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.07</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">1.96</td>
-<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">23 (41 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Compte Tik Tok</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">1 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.29</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.07</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">1.96</td>
-<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">25 (45 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">25 à 29 ans</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">0.5 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.37</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.02</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">1.05</td>
-<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">7 (12 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Homme</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">0.2 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.10</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.06</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">1.77</td>
-<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">48 (86 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Compte Twitter</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">0.2 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.09</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.07</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">1.99</td>
-<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">50 (89 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Chaîne individuelle</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">0.1 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.07</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.01</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">0.76</td>
-<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">39 (70 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Compte Instagram</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">0.1 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.05</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.01</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">0.89</td>
-<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">47 (84 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Entre 50k et 200k abonnés</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">0 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.09</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.00</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">0.37</td>
-<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">13 (23 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">40 à 44 ans</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">0 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.12</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.00</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">0.31</td>
-<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">6 (11 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Pas de serveur Discord</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">0 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.03</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.01</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">0.55</td>
-<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">46 (82 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées positives  Modalité" class="gt_row gt_left">Montre son visage</td>
-<td headers="Coordonnées positives  Contribution" class="gt_row gt_right">0 %</td>
-<td headers="Coordonnées positives  Coordonnée" class="gt_row gt_right">0.02</td>
-<td headers="Coordonnées positives  Cos²" class="gt_row gt_right">0.00</td>
-<td headers="Coordonnées positives  V-test" class="gt_row gt_right">0.46</td>
-<td headers="Coordonnées positives  Effectif" class="gt_row gt_right">52 (93 %)</td>
-</tr>
 <tr class="gt_group_heading_row">
 <th colspan="6" class="gt_group_heading" style="font-weight: bold;" scope="colgroup" id="Coordonnées négatives">Coordonnées négatives</th>
     </tr>
@@ -882,132 +769,19 @@ axes.</p>
 <td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-4.58</td>
 <td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">41 (73 %)</td>
 </tr>
-<tr>
-<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Compte Twitch</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">1.9 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.34</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.18</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-3.16</td>
-<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">34 (61 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Pas de compte Facebook</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">1.8 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.36</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.14</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-2.77</td>
-<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">29 (52 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Pas de compte Twitter</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">1.7 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.78</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.07</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-1.99</td>
-<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">6 (11 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">2020 et après</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">1.4 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.43</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.08</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-2.09</td>
-<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">17 (30 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Podcasts</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">1.4 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.29</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.14</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-2.81</td>
-<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">35 (62 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Femme</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">1.3 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.59</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.06</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-1.77</td>
-<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">8 (14 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">30 à 34 ans</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">1.1 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.37</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.06</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-1.87</td>
-<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">18 (32 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Pas de compte Tik Tok</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">0.8 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.24</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.07</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-1.96</td>
-<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">31 (55 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Demande de financement à l'audience</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">0.8 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.20</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.13</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-2.67</td>
-<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">43 (77 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Pas de publication de livre</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">0.6 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.18</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.07</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-1.94</td>
-<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">38 (68 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Pas de compte Instagram</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">0.3 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.27</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.01</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-0.89</td>
-<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">9 (16 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">35 à 39 ans</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">0.3 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.21</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.02</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-0.93</td>
-<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">15 (27 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Chaîne collective</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">0.2 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.15</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.01</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-0.76</td>
-<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">17 (30 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Serveur Discord</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">0.1 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.16</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.01</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-0.55</td>
-<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">10 (18 %)</td>
-</tr>
-<tr>
-<td headers="Coordonnées négatives  Modalité" class="gt_row gt_left">Ne montre pas son visage</td>
-<td headers="Coordonnées négatives  Contribution" class="gt_row gt_right">0.1 %</td>
-<td headers="Coordonnées négatives  Coordonnée" class="gt_row gt_right">-0.22</td>
-<td headers="Coordonnées négatives  Cos²" class="gt_row gt_right">0.00</td>
-<td headers="Coordonnées négatives  V-test" class="gt_row gt_right">-0.46</td>
-<td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">4 (7 %)</td>
-</tr>
 </tbody>
-<tfoot class="gt_footnotes"><tr>
+<tfoot class="gt_footnotes">
+<tr>
 <td class="gt_footnote" colspan="6">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">Moyenne des coordonnées des individus partageant la modalité</span>
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">Seules les modalités actives dont la contribution est supérieure à 2.04 % sont représentées.</span>
 </td>
-    </tr></tfoot>
+    </tr>
+<tr>
+<td class="gt_footnote" colspan="6">
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>2</sup></span> <span class="gt_from_md">Moyenne des coordonnées des individus partageant la modalité</span>
+</td>
+    </tr>
+</tfoot>
 </table>
 </div>
 <p>Le tableau affiché peut-être un peu long en fonction du nombre de
@@ -1018,24 +792,24 @@ produire un tableau qui ne reprend que les modalités dont la
 contribution à l’axe est supérieur à 3 %. Il faut alors modifier le
 paramètre <code>seuil</code> de la fonction :</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/caracteriser_axe.html">caracteriser_axe</a></span><span class="op">(</span><span class="va">resultat_acm</span>, axe <span class="op">=</span> <span class="fl">1</span>, seuil <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<div id="gfvsybhaag" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gfvsybhaag table {
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/caracteriser_axe.html">caracteriser_axe</a></span><span class="op">(</span><span class="va">resultat_acm</span>, axe <span class="op">=</span> <span class="fl">1</span>, contribution_minimum <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<div id="haaglvijbf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#haaglvijbf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gfvsybhaag thead, #gfvsybhaag tbody, #gfvsybhaag tfoot, #gfvsybhaag tr, #gfvsybhaag td, #gfvsybhaag th {
+#haaglvijbf thead, #haaglvijbf tbody, #haaglvijbf tfoot, #haaglvijbf tr, #haaglvijbf td, #haaglvijbf th {
   border-style: none;
 }
 
-#gfvsybhaag p {
+#haaglvijbf p {
   margin: 0;
   padding: 0;
 }
 
-#gfvsybhaag .gt_table {
+#haaglvijbf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1061,12 +835,12 @@ paramètre <code>seuil</code> de la fonction :</p>
   border-left-color: #D3D3D3;
 }
 
-#gfvsybhaag .gt_caption {
+#haaglvijbf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gfvsybhaag .gt_title {
+#haaglvijbf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1078,7 +852,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   border-bottom-width: 0;
 }
 
-#gfvsybhaag .gt_subtitle {
+#haaglvijbf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1090,7 +864,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   border-top-width: 0;
 }
 
-#gfvsybhaag .gt_heading {
+#haaglvijbf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1102,13 +876,13 @@ paramètre <code>seuil</code> de la fonction :</p>
   border-right-color: #D3D3D3;
 }
 
-#gfvsybhaag .gt_bottom_border {
+#haaglvijbf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gfvsybhaag .gt_col_headings {
+#haaglvijbf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1123,7 +897,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   border-right-color: #D3D3D3;
 }
 
-#gfvsybhaag .gt_col_heading {
+#haaglvijbf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1143,7 +917,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   overflow-x: hidden;
 }
 
-#gfvsybhaag .gt_column_spanner_outer {
+#haaglvijbf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1155,15 +929,15 @@ paramètre <code>seuil</code> de la fonction :</p>
   padding-right: 4px;
 }
 
-#gfvsybhaag .gt_column_spanner_outer:first-child {
+#haaglvijbf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gfvsybhaag .gt_column_spanner_outer:last-child {
+#haaglvijbf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gfvsybhaag .gt_column_spanner {
+#haaglvijbf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1175,11 +949,11 @@ paramètre <code>seuil</code> de la fonction :</p>
   width: 100%;
 }
 
-#gfvsybhaag .gt_spanner_row {
+#haaglvijbf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gfvsybhaag .gt_group_heading {
+#haaglvijbf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1205,7 +979,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   text-align: left;
 }
 
-#gfvsybhaag .gt_empty_group_heading {
+#haaglvijbf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1220,15 +994,15 @@ paramètre <code>seuil</code> de la fonction :</p>
   vertical-align: middle;
 }
 
-#gfvsybhaag .gt_from_md > :first-child {
+#haaglvijbf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gfvsybhaag .gt_from_md > :last-child {
+#haaglvijbf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gfvsybhaag .gt_row {
+#haaglvijbf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1247,7 +1021,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   overflow-x: hidden;
 }
 
-#gfvsybhaag .gt_stub {
+#haaglvijbf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1260,7 +1034,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   padding-right: 5px;
 }
 
-#gfvsybhaag .gt_stub_row_group {
+#haaglvijbf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1274,15 +1048,15 @@ paramètre <code>seuil</code> de la fonction :</p>
   vertical-align: top;
 }
 
-#gfvsybhaag .gt_row_group_first td {
+#haaglvijbf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gfvsybhaag .gt_row_group_first th {
+#haaglvijbf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gfvsybhaag .gt_summary_row {
+#haaglvijbf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1292,16 +1066,16 @@ paramètre <code>seuil</code> de la fonction :</p>
   padding-right: 5px;
 }
 
-#gfvsybhaag .gt_first_summary_row {
+#haaglvijbf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gfvsybhaag .gt_first_summary_row.thick {
+#haaglvijbf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gfvsybhaag .gt_last_summary_row {
+#haaglvijbf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1311,7 +1085,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   border-bottom-color: #D3D3D3;
 }
 
-#gfvsybhaag .gt_grand_summary_row {
+#haaglvijbf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1321,7 +1095,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   padding-right: 5px;
 }
 
-#gfvsybhaag .gt_first_grand_summary_row {
+#haaglvijbf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1331,7 +1105,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   border-top-color: #D3D3D3;
 }
 
-#gfvsybhaag .gt_last_grand_summary_row_top {
+#haaglvijbf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1341,11 +1115,11 @@ paramètre <code>seuil</code> de la fonction :</p>
   border-bottom-color: #D3D3D3;
 }
 
-#gfvsybhaag .gt_striped {
+#haaglvijbf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gfvsybhaag .gt_table_body {
+#haaglvijbf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1354,7 +1128,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   border-bottom-color: #D3D3D3;
 }
 
-#gfvsybhaag .gt_footnotes {
+#haaglvijbf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1368,7 +1142,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   border-right-color: #D3D3D3;
 }
 
-#gfvsybhaag .gt_footnote {
+#haaglvijbf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1377,7 +1151,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   padding-right: 5px;
 }
 
-#gfvsybhaag .gt_sourcenotes {
+#haaglvijbf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1391,7 +1165,7 @@ paramètre <code>seuil</code> de la fonction :</p>
   border-right-color: #D3D3D3;
 }
 
-#gfvsybhaag .gt_sourcenote {
+#haaglvijbf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1399,81 +1173,83 @@ paramètre <code>seuil</code> de la fonction :</p>
   padding-right: 5px;
 }
 
-#gfvsybhaag .gt_left {
+#haaglvijbf .gt_left {
   text-align: left;
 }
 
-#gfvsybhaag .gt_center {
+#haaglvijbf .gt_center {
   text-align: center;
 }
 
-#gfvsybhaag .gt_right {
+#haaglvijbf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gfvsybhaag .gt_font_normal {
+#haaglvijbf .gt_font_normal {
   font-weight: normal;
 }
 
-#gfvsybhaag .gt_font_bold {
+#haaglvijbf .gt_font_bold {
   font-weight: bold;
 }
 
-#gfvsybhaag .gt_font_italic {
+#haaglvijbf .gt_font_italic {
   font-style: italic;
 }
 
-#gfvsybhaag .gt_super {
+#haaglvijbf .gt_super {
   font-size: 65%;
 }
 
-#gfvsybhaag .gt_footnote_marks {
+#haaglvijbf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gfvsybhaag .gt_asterisk {
+#haaglvijbf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gfvsybhaag .gt_indent_1 {
+#haaglvijbf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gfvsybhaag .gt_indent_2 {
+#haaglvijbf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gfvsybhaag .gt_indent_3 {
+#haaglvijbf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gfvsybhaag .gt_indent_4 {
+#haaglvijbf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gfvsybhaag .gt_indent_5 {
+#haaglvijbf .gt_indent_5 {
   text-indent: 25px;
 }
 
-#gfvsybhaag .katex-display {
+#haaglvijbf .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#gfvsybhaag div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#haaglvijbf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Modalité"><span class="gt_from_md">Modalité</span></th>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Modalité">
+<span class="gt_from_md">Modalité</span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Contribution"><span class="gt_from_md">Contribution</span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Coordonnée">
-<span class="gt_from_md">Coordonnée</span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+<span class="gt_from_md">Coordonnée</span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>2</sup></span>
 </th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Cos²"><span class="gt_from_md">Cos²</span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="V-test"><span class="gt_from_md">V-test</span></th>
@@ -1567,34 +1343,41 @@ paramètre <code>seuil</code> de la fonction :</p>
 <td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">31 (55 %)</td>
 </tr>
 </tbody>
-<tfoot class="gt_footnotes"><tr>
+<tfoot class="gt_footnotes">
+<tr>
 <td class="gt_footnote" colspan="6">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">Moyenne des coordonnées des individus partageant la modalité</span>
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">Seules les modalités actives dont la contribution est supérieure à 3 % sont représentées.</span>
 </td>
-    </tr></tfoot>
+    </tr>
+<tr>
+<td class="gt_footnote" colspan="6">
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>2</sup></span> <span class="gt_from_md">Moyenne des coordonnées des individus partageant la modalité</span>
+</td>
+    </tr>
+</tfoot>
 </table>
 </div>
 <p>Pour caractériser l’axe 2, on peut copier et coller le même code en
 changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/caracteriser_axe.html">caracteriser_axe</a></span><span class="op">(</span><span class="va">resultat_acm</span>, axe <span class="op">=</span> <span class="fl">2</span>, seuil <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<div id="kjhvqltorl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kjhvqltorl table {
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/caracteriser_axe.html">caracteriser_axe</a></span><span class="op">(</span><span class="va">resultat_acm</span>, axe <span class="op">=</span> <span class="fl">2</span>, contribution_minimum <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<div id="byesrejlds" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#byesrejlds table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kjhvqltorl thead, #kjhvqltorl tbody, #kjhvqltorl tfoot, #kjhvqltorl tr, #kjhvqltorl td, #kjhvqltorl th {
+#byesrejlds thead, #byesrejlds tbody, #byesrejlds tfoot, #byesrejlds tr, #byesrejlds td, #byesrejlds th {
   border-style: none;
 }
 
-#kjhvqltorl p {
+#byesrejlds p {
   margin: 0;
   padding: 0;
 }
 
-#kjhvqltorl .gt_table {
+#byesrejlds .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1620,12 +1403,12 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   border-left-color: #D3D3D3;
 }
 
-#kjhvqltorl .gt_caption {
+#byesrejlds .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kjhvqltorl .gt_title {
+#byesrejlds .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1637,7 +1420,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   border-bottom-width: 0;
 }
 
-#kjhvqltorl .gt_subtitle {
+#byesrejlds .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1649,7 +1432,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   border-top-width: 0;
 }
 
-#kjhvqltorl .gt_heading {
+#byesrejlds .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1661,13 +1444,13 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   border-right-color: #D3D3D3;
 }
 
-#kjhvqltorl .gt_bottom_border {
+#byesrejlds .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kjhvqltorl .gt_col_headings {
+#byesrejlds .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1682,7 +1465,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   border-right-color: #D3D3D3;
 }
 
-#kjhvqltorl .gt_col_heading {
+#byesrejlds .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1702,7 +1485,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   overflow-x: hidden;
 }
 
-#kjhvqltorl .gt_column_spanner_outer {
+#byesrejlds .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1714,15 +1497,15 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   padding-right: 4px;
 }
 
-#kjhvqltorl .gt_column_spanner_outer:first-child {
+#byesrejlds .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kjhvqltorl .gt_column_spanner_outer:last-child {
+#byesrejlds .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kjhvqltorl .gt_column_spanner {
+#byesrejlds .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1734,11 +1517,11 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   width: 100%;
 }
 
-#kjhvqltorl .gt_spanner_row {
+#byesrejlds .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kjhvqltorl .gt_group_heading {
+#byesrejlds .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1764,7 +1547,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   text-align: left;
 }
 
-#kjhvqltorl .gt_empty_group_heading {
+#byesrejlds .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1779,15 +1562,15 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   vertical-align: middle;
 }
 
-#kjhvqltorl .gt_from_md > :first-child {
+#byesrejlds .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kjhvqltorl .gt_from_md > :last-child {
+#byesrejlds .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kjhvqltorl .gt_row {
+#byesrejlds .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1806,7 +1589,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   overflow-x: hidden;
 }
 
-#kjhvqltorl .gt_stub {
+#byesrejlds .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1819,7 +1602,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   padding-right: 5px;
 }
 
-#kjhvqltorl .gt_stub_row_group {
+#byesrejlds .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1833,15 +1616,15 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   vertical-align: top;
 }
 
-#kjhvqltorl .gt_row_group_first td {
+#byesrejlds .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kjhvqltorl .gt_row_group_first th {
+#byesrejlds .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kjhvqltorl .gt_summary_row {
+#byesrejlds .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1851,16 +1634,16 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   padding-right: 5px;
 }
 
-#kjhvqltorl .gt_first_summary_row {
+#byesrejlds .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kjhvqltorl .gt_first_summary_row.thick {
+#byesrejlds .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kjhvqltorl .gt_last_summary_row {
+#byesrejlds .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1870,7 +1653,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   border-bottom-color: #D3D3D3;
 }
 
-#kjhvqltorl .gt_grand_summary_row {
+#byesrejlds .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1880,7 +1663,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   padding-right: 5px;
 }
 
-#kjhvqltorl .gt_first_grand_summary_row {
+#byesrejlds .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1890,7 +1673,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   border-top-color: #D3D3D3;
 }
 
-#kjhvqltorl .gt_last_grand_summary_row_top {
+#byesrejlds .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1900,11 +1683,11 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   border-bottom-color: #D3D3D3;
 }
 
-#kjhvqltorl .gt_striped {
+#byesrejlds .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kjhvqltorl .gt_table_body {
+#byesrejlds .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1913,7 +1696,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   border-bottom-color: #D3D3D3;
 }
 
-#kjhvqltorl .gt_footnotes {
+#byesrejlds .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1927,7 +1710,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   border-right-color: #D3D3D3;
 }
 
-#kjhvqltorl .gt_footnote {
+#byesrejlds .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1936,7 +1719,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   padding-right: 5px;
 }
 
-#kjhvqltorl .gt_sourcenotes {
+#byesrejlds .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1950,7 +1733,7 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   border-right-color: #D3D3D3;
 }
 
-#kjhvqltorl .gt_sourcenote {
+#byesrejlds .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1958,81 +1741,83 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
   padding-right: 5px;
 }
 
-#kjhvqltorl .gt_left {
+#byesrejlds .gt_left {
   text-align: left;
 }
 
-#kjhvqltorl .gt_center {
+#byesrejlds .gt_center {
   text-align: center;
 }
 
-#kjhvqltorl .gt_right {
+#byesrejlds .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kjhvqltorl .gt_font_normal {
+#byesrejlds .gt_font_normal {
   font-weight: normal;
 }
 
-#kjhvqltorl .gt_font_bold {
+#byesrejlds .gt_font_bold {
   font-weight: bold;
 }
 
-#kjhvqltorl .gt_font_italic {
+#byesrejlds .gt_font_italic {
   font-style: italic;
 }
 
-#kjhvqltorl .gt_super {
+#byesrejlds .gt_super {
   font-size: 65%;
 }
 
-#kjhvqltorl .gt_footnote_marks {
+#byesrejlds .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kjhvqltorl .gt_asterisk {
+#byesrejlds .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kjhvqltorl .gt_indent_1 {
+#byesrejlds .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kjhvqltorl .gt_indent_2 {
+#byesrejlds .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kjhvqltorl .gt_indent_3 {
+#byesrejlds .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kjhvqltorl .gt_indent_4 {
+#byesrejlds .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kjhvqltorl .gt_indent_5 {
+#byesrejlds .gt_indent_5 {
   text-indent: 25px;
 }
 
-#kjhvqltorl .katex-display {
+#byesrejlds .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#kjhvqltorl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#byesrejlds div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Modalité"><span class="gt_from_md">Modalité</span></th>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Modalité">
+<span class="gt_from_md">Modalité</span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Contribution"><span class="gt_from_md">Contribution</span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Coordonnée">
-<span class="gt_from_md">Coordonnée</span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+<span class="gt_from_md">Coordonnée</span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>2</sup></span>
 </th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Cos²"><span class="gt_from_md">Cos²</span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="V-test"><span class="gt_from_md">V-test</span></th>
@@ -2142,11 +1927,18 @@ changeant simplement le numéro de l’axe que l’on souhaite décrire :</p>
 <td headers="Coordonnées négatives  Effectif" class="gt_row gt_right">15 (27 %)</td>
 </tr>
 </tbody>
-<tfoot class="gt_footnotes"><tr>
+<tfoot class="gt_footnotes">
+<tr>
 <td class="gt_footnote" colspan="6">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">Moyenne des coordonnées des individus partageant la modalité</span>
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">Seules les modalités actives dont la contribution est supérieure à 3 % sont représentées.</span>
 </td>
-    </tr></tfoot>
+    </tr>
+<tr>
+<td class="gt_footnote" colspan="6">
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>2</sup></span> <span class="gt_from_md">Moyenne des coordonnées des individus partageant la modalité</span>
+</td>
+    </tr>
+</tfoot>
 </table>
 </div>
 <p>Pour extraire les résultats de l’ACM, on peut employer :
