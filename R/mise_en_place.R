@@ -15,21 +15,19 @@ mise_en_place_ACM <- function(...){
         ...) # marque des décimale : , et pas .
 
 
-  cli::cli_h2("Les options générales de la session R ont été modifié.")
-
+  cli::cli_h3("Les options générales de la session R ont été modifié.")
   cli::cli_inform(c(
     "v" = "Les nombres décimaux s'afficheront avec une virgule.",
     "v" = "Ils n'afficheront que 3 chiffres après la virgule.",
     "v" = "L'écriture scientifique a été désactivé."
     ))
 
-  cli::cli_h2("Le thème des tableaux produit par {.pkg gtsummary} a été modifié.")
-
   gtsummary::theme_gtsummary_language(
     language = "fr",
     decimal.mark = ",",
   ) |> suppressMessages()
 
+  cli::cli_h3("Le thème des tableaux produit par {.pkg gtsummary} a été modifié.")
   cli::cli_inform(c(
     "v" = "Ils s'afficheront en français.",
     "v" = "En utilisant une virgule pour les nombres décimaux."

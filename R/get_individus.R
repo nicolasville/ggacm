@@ -12,7 +12,7 @@
 #'
 #' @examples
 #' # un exemple pas piqué des annetons
-extraire_individus <- function(resultat_acm, nom_variable_individu) {
+extraire_individus2 <- function(resultat_acm, nom_variable_individu) {
 
   if (missing(nom_variable_individu)) {
     cli::cli_abort(c(
@@ -48,4 +48,55 @@ extraire_individus <- function(resultat_acm, nom_variable_individu) {
     tibble::as_tibble()
 
   return(output)
+}
+
+extraire_individus <- function(resultat_acm) {
+
+  if (inherits(resultat_acm, "data.frame")) {
+
+    cli::cli_abort(c(
+      "x" = "{.arg resultat_acm} doit être un résultat de {.fun FactoMineR::MCA} ou {.fun ACM}, et non pas un tableau de donnée (data.frame)"
+    ))
+
+  }
+
+  # On vient chercher le tableau dde donnée originel
+  data_acm <- resultat_acm$call$X  |> supprimer_var_()
+
+  # puis on numérote les lignes dans une colonne id.
+  data_acm <- data_acm |> as_tibble(rownames = "id")
+
+  # fonction pour transformer les Dim 1 et autres joyeseté en noms de colonnes valides
+  nettoyage <- function(x, quoi) {
+
+    x |>
+      as_tibble() |>
+      rename_all(stringr::str_to_lower) %>%
+      rename_all(~ stringr::str_replace(., " ", "")) %>%
+      rename_all(~ stringr::str_c(., quoi, sep = "_"))
+
+  }
+
+  # ensuite on va chercher les coordonnées des individus
+  # as_tibble(rownames = "id") fonctionne de la même manière que row_id_to_column
+  coordonnees <- resultat_acm$ind$coord|>
+    nettoyage(quoi = "coord") |>
+    as_tibble(rownames = "id")
+
+  contribution <- resultat_acm$ind$contrib|>
+    nettoyage(quoi = "contrib") |>
+    as_tibble(rownames = "id")
+
+  cos2 <- resultat_acm$ind$cos2 |>
+    nettoyage(quoi = "cos2") |>
+    as_tibble(rownames = "id")
+
+  # puis on combine les tableaux
+  data_acm |>
+    left_join(coordonnees, by = "id") |>
+    left_join(contribution, by = "id") |>
+    left_join(cos2, by = "id") |>
+    select(-id) |>
+    relocate(dim1_coord, dim2_coord)
+
 }

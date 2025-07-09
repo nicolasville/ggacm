@@ -31,12 +31,12 @@ ACM <- function(donnees, variables_supplementaires, graph = FALSE,...) {
 
     variables_actives.chr <- donnees[, !names(donnees) %in% variables_supplementaires.chr] |> names()
 
-    cli::cli_h2("Variables actives")
+    cli::cli_h3("Variables actives")
     cli::cli_inform(
       "L'ACM a été réalisé sur ces variables actives : {.var {variables_actives.chr}}."
       )
 
-    cli::cli_h2("Variables supplémentaires")
+    cli::cli_h3("Variables supplémentaires")
     cli::cli_inform(
       "Les variables supplémentaires sont les suivantes : {.var {variables_supplementaires.chr}}."
       )
