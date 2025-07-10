@@ -18,7 +18,8 @@
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/Utilisation.html">Utilisation</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/classification.html">classification</a></li>
+    <li><a class="dropdown-item" href="../articles/Utilisation.html">Utilisation</a></li>
   </ul></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -54,11 +55,16 @@
 
 
 <dt id="arg-variables-supplementaires">variables_supplementaires<a class="anchor" aria-label="anchor" href="#arg-variables-supplementaires"></a></dt>
-<dd><p>La liste des variables supplémentaires. Si vous voulez sélectionner plusieurs variables, vous pouvez les combinez par avec <code>c(variable1, variable2)</code>. Pour plus de détails sur les manières de sélectionner des colonnes dans cet argument, voir <a href="https://tidyselect.r-lib.org/reference/tidyselect-package.html" class="external-link">tidyselect::tidyselect-package</a>.</p></dd>
+<dd><p>&lt;<code>tidy-select</code>&gt;
+La liste des variables supplémentaires. Si vous voulez sélectionner
+plusieurs variables, vous pouvez les combinez par avec <code>c(variable1, variable2)</code>.
+Pour plus de détails sur les manières de sélectionner des colonnes dans
+cet argument, voir <code><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">dplyr::select()</a></code>.</p></dd>
 
 
 <dt id="arg-graph">graph<a class="anchor" aria-label="anchor" href="#arg-graph"></a></dt>
-<dd><p>Afficher les graphes de la</p></dd>
+<dd><p>Faut-il afficher les graphiques produit par <code>FactoMineR:MCA()</code> ?
+par défaut sur <code>FALSE</code>.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -67,12 +73,13 @@
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>Un résultat d'ACM.</p>
+    <p>Le résultat d'une ACM.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">createurs_de_contenus_pol</span> <span class="op">|&gt;</span> <span class="fu">ACM</span><span class="op">(</span>variables_supplementaires <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">titre</span>, <span class="va">personne</span><span class="op">)</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">resultat</span> <span class="op">&lt;-</span> <span class="va">createurs_de_contenus_pol</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">ACM</span><span class="op">(</span>variables_supplementaires <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">titre</span>, <span class="va">personne</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── Variables actives </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> L'ACM a été réalisé sur ces variables actives : `orientation`, `orientation2`,</span>
@@ -83,29 +90,6 @@
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── Variables supplémentaires </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Les variables supplémentaires sont les suivantes : `titre` and `personne`.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> **Results of the Multiple Correspondence Analysis (MCA)**</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The analysis was performed on 56 individuals, described by 24 variables</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> *The results are available in the following objects:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    name                description                                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  "$eig"              "eigenvalues"                                        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  "$var"              "results for the variables"                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  "$var$coord"        "coord. of the categories"                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  "$var$cos2"         "cos2 for the categories"                            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  "$var$contrib"      "contributions of the categories"                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  "$var$v.test"       "v-test for the categories"                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  "$var$eta2"         "coord. of variables"                                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  "$ind"              "results for the individuals"                        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  "$ind$coord"        "coord. for the individuals"                         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 "$ind$cos2"         "cos2 for the individuals"                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11 "$ind$contrib"      "contributions of the individuals"                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12 "$quali.sup"        "results for the supplementary categorical variables"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13 "$quali.sup$coord"  "coord. for the supplementary categories"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14 "$quali.sup$cos2"   "cos2 for the supplementary categories"              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15 "$quali.sup$v.test" "v-test for the supplementary categories"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16 "$call"             "intermediate results"                               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17 "$call$marge.col"   "weights of columns"                                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18 "$call$marge.li"    "weights of rows"                                    </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

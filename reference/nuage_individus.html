@@ -18,7 +18,8 @@
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/Utilisation.html">Utilisation</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/classification.html">classification</a></li>
+    <li><a class="dropdown-item" href="../articles/Utilisation.html">Utilisation</a></li>
   </ul></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -64,7 +65,27 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">#</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># on commence par créer un résultat d'ACM :</span></span></span>
+<span class="r-in"><span><span class="va">resultat</span> <span class="op">&lt;-</span> <span class="va">createurs_de_contenus_pol</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="ACM.html">ACM</a></span><span class="op">(</span>variables_supplementaires <span class="op">=</span> <span class="va">personne</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Variables actives </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> L'ACM a été réalisé sur ces variables actives : `titre`, `orientation`,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> `orientation2`, `debut`, `visage_decouvert`, `abonnes`, `genre`, `age`,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> `streamer_plein_temps`, `collectif`, `livre`, `podcast`, `twitter`, `facebook`,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> `instagram`, `tiktok`, `discord`, `twitch`, …, `partenariat_entreprise`, and</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> `autres_services`.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Variables supplémentaires </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Les variables supplémentaires sont les suivantes : `personne`.</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># puis on peut sortir le graphique</span></span></span>
+<span class="r-in"><span><span class="va">resultat</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">nuage_individus</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="theme_acm.html">theme_acm</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="nuage_individus-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
