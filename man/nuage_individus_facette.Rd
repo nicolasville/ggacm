@@ -15,12 +15,12 @@ nuage_individus_facette(
 }
 \arguments{
 \item{resultat_individus}{Un tableau de donnée avec les coordonnées des individus
- qui a été produit par extraire_individus().
+qui a été produit par extraire_individus().
 La fonction prend également en charge un résultat d'ACM directement si besoin.}
 
 \item{variables_a_representer}{La liste des variables à représenter :
-on si on souhaite sélectionner le `genre`, la `classe` et le `niveau_de_revenu`
-on peut par exemple écire `c(genre, classe, niveau_de_revenu)`}
+on si on souhaite sélectionner le \code{genre}, la \code{classe} et le \code{niveau_de_revenu}
+on peut par exemple écire \code{c(genre, classe, niveau_de_revenu)}}
 
 \item{forme}{Quelles formes pour les individus qui partagent une même modalité ?
 Par défaut un triangle. Doit-être un nombre, voir la documentation de ggplot

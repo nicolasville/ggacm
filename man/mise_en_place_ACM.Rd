@@ -7,7 +7,7 @@
 mise_en_place_ACM(...)
 }
 \arguments{
-\item{...}{Il est possible de faire passer d'autres arguments à [base::options()].}
+\item{...}{Il est possible de faire passer d'autres arguments à \code{\link[base:options]{base::options()}}.}
 }
 \value{
 Une liste d'option

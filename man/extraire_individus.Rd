@@ -11,10 +11,10 @@ extraire_individus(resultat_acm)
 }
 \value{
 Le tableau de données surlequel vous avez réalisé l'ACM auquel a été
- ajouté pour chaque individus : leur coordonnées sur chaque axe (stockés dans des
- colonnes `dim1_coord`, `dim2_coord`, `dim3_coord`, etc), leur contribution à
- la construction des axes (colonnes `dim1_contrib`, `dim2_contrib`,...) et
- enfin leur cosinus carré (colonnes `dim1_cos2`,...)
+ajouté pour chaque individus : leur coordonnées sur chaque axe (stockés dans des
+colonnes \code{dim1_coord}, \code{dim2_coord}, \code{dim3_coord}, etc), leur contribution à
+la construction des axes (colonnes \code{dim1_contrib}, \code{dim2_contrib},...) et
+enfin leur cosinus carré (colonnes \code{dim1_cos2},...)
 }
 \description{
 Cette fonction permet quadd on lui donne le résultat d'une ACM de sortir un

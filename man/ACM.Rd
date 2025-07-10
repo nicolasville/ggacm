@@ -9,17 +9,17 @@ ACM(donnees, variables_supplementaires, graph = FALSE, ...)
 \arguments{
 \item{donnees}{Les données de l'ACM}
 
-\item{variables_supplementaires}{La liste des variables supplémentaires. Si vous voulez sélectionner plusieurs variables, vous pouvez les combinez par avec `c(variable1, variable2)`. Pour plus de détails sur les manières de sélectionner des colonnes dans cet argument, voir [tidyselect::tidyselect-package].}
+\item{variables_supplementaires}{La liste des variables supplémentaires. Si vous voulez sélectionner plusieurs variables, vous pouvez les combinez par avec \code{c(variable1, variable2)}. Pour plus de détails sur les manières de sélectionner des colonnes dans cet argument, voir \link[tidyselect:tidyselect-package]{tidyselect::tidyselect-package}.}
 
 \item{graph}{Afficher les graphes de la}
 
-\item{...}{Arguments supplémentaires qui seront passé à [FactoMineR::MCA].}
+\item{...}{Arguments supplémentaires qui seront passé à \link[FactoMineR:MCA]{FactoMineR::MCA}.}
 }
 \value{
 Un résultat d'ACM.
 }
 \description{
-Cette fonction permet de réaliser une ACM en se reposant sur le package FactoMineR. Elle sera sûrement plus simple à utiliser que [FactoMineR::MCA()].
+Cette fonction permet de réaliser une ACM en se reposant sur le package FactoMineR. Elle sera sûrement plus simple à utiliser que \code{\link[FactoMineR:MCA]{FactoMineR::MCA()}}.
 }
 \examples{
 createurs_de_contenus_pol |> ACM(variables_supplementaires = c(titre, personne))

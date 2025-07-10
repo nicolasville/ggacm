@@ -7,7 +7,7 @@
 caracteriser_classe(resultat_classification, numero_de_la_classe)
 }
 \arguments{
-\item{resultat_classification}{Un résultat de classification réalisé avec `FactoMineR::HCPC()`}
+\item{resultat_classification}{Un résultat de classification réalisé avec \code{FactoMineR::HCPC()}}
 
 \item{numero_de_la_classe}{Le numéro de la classe que l'on souhaite caractériser.}
 }

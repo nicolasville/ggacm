@@ -24,7 +24,7 @@ nommer_axes(
 \item{a_droite}{idem mais a droite}
 }
 \value{
-une couche ggplot à ajouter. Sous le capot cette fonction fait génère des annotations pour graphique ggplot avec [ggplot2::labs()]
+une couche ggplot à ajouter. Sous le capot cette fonction fait génère des annotations pour graphique ggplot avec \code{\link[ggplot2:labs]{ggplot2::labs()}}
 }
 \description{
 Lorsque l'on représente une ACM, il est courant de vouloir donner un nom aux axes, ou au moins les pôles de chacun de ces axes. Cette fonction permet de générer les labels pour chaque axe à utiliser lorsqu'on génère des graphiques axec ggplot

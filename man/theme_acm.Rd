@@ -7,7 +7,7 @@
 theme_acm(...)
 }
 \arguments{
-\item{...}{Si vous voulez customiser le thème plus en profondeur, il est possible de rajouter des éléments qui seront passé à [ggplot2::theme()]}
+\item{...}{Si vous voulez customiser le thème plus en profondeur, il est possible de rajouter des éléments qui seront passé à \code{\link[ggplot2:theme]{ggplot2::theme()}}}
 }
 \value{
 Un thème ggplot
