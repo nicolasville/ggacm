@@ -75,16 +75,13 @@ mise_en_place() permet de bien configurer R :</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/mise_en_place_ACM.html">mise_en_place_ACM</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── <span style="font-weight: bold;">Les options générales de la session R ont été modifié.</span> ──</span></span>
-<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ── Les options générales de la session R ont été modifié.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Les nombres décimaux s'afficheront avec une virgule.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Ils n'afficheront que 3 chiffres après la virgule.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> L'écriture scientifique a été désactivé.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── <span style="font-weight: bold;">Le thème des tableaux produit par </span><span style="color: #0000BB; font-weight: bold;">gtsummary</span><span style="font-weight: bold;"> a été modifié.</span> ──</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ── Le thème des tableaux produit par <span style="color: #0000BB;">gtsummary</span> a été modifié. </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Ils s'afficheront en français.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> En utilisant une virgule pour les nombres décimaux.</span></span></code></pre></div>
@@ -932,8 +929,7 @@ de moins devant leur nom :</p>
 <span>                                  <span class="va">orientation2</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── <span style="font-weight: bold;">Variables actives</span> ──</span></span>
-<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ── Variables actives</span></span>
 <span><span class="co">#&gt; L'ACM a été réalisé sur ces variables actives : `debut`, `visage_decouvert`,</span></span>
 <span><span class="co">#&gt; `abonnes`, `genre`, `age`, `streamer_plein_temps`, `collectif`, `livre`,</span></span>
 <span><span class="co">#&gt; `podcast`, `twitter`, `facebook`, `instagram`, `tiktok`, `discord`, `twitch`,</span></span>
@@ -941,9 +937,7 @@ de moins devant leur nom :</p>
 <span><span class="co">#&gt; `autres_services`.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── <span style="font-weight: bold;">Variables supplémentaires</span> ──</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ── Variables supplémentaires </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Les variables supplémentaires sont les suivantes : `titre`, `personne`,</span></span>
 <span><span class="co">#&gt; `orientation`, and `orientation2`.</span></span></code></pre></div>
@@ -2790,36 +2784,31 @@ l’ACM à la fonction :</p>
 <p>On obtient alors un tableau qui reprend pour chaque modalité et
 chaque axe leur coordonnée, leur cos², leur vtest et leur
 contribution.</p>
-<p>Pour <code>extraire_individu()</code> il faut préciser le nom d’une
-de vos variables qui permettent d’identifier chaque individus. Dans mon
-cas par exemple, ma base de donnée recense des chaînes YouTube et
-Twitch, chaque individu a un <code>titre</code> de chaîne unique. Ce
-sera donc <code>titre</code> :</p>
+<p>Pour <code>extraire_individu()</code> on peut procéder de la même
+manière:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">resultat_individus</span> <span class="op">&lt;-</span> <span class="va">resultat_acm</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="../reference/extraire_individus.html">extraire_individus</a></span><span class="op">(</span>nom_variable_individu <span class="op">=</span> <span class="st">"titre"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Joining with `by = join_by(titre)`</span></span>
+<code class="sourceCode R"><span><span class="va">resultat_individus</span> <span class="op">&lt;-</span> <span class="va">resultat_acm</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/extraire_individus.html">extraire_individus</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">resultat_individus</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 68 × 44</span></span></span>
-<span><span class="co">#&gt;    modalites     dim1_coord dim1_cos2 dim1_vtest dim2_coord dim2_cos2 dim2_vtest</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Antoine Goya       -<span style="color: #BB0000;">0.28</span>      0         -<span style="color: #BB0000;">0.28</span>      -<span style="color: #BB0000;">0.81</span>      0.01      -<span style="color: #BB0000;">0.81</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Christopher …       1.03      0.02       1.03      -<span style="color: #BB0000;">0.25</span>      0         -<span style="color: #BB0000;">0.25</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Clément Vikt…       0.15      0          0.15       0.86      0.01       0.86</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Glupatate          -<span style="color: #BB0000;">0.32</span>      0         -<span style="color: #BB0000;">0.32</span>       1.16      0.02       1.16</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Jean Massiet       -<span style="color: #BB0000;">1.26</span>      0.03      -<span style="color: #BB0000;">1.26</span>       1.39      0.04       1.39</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Moufette           -<span style="color: #BB0000;">1.76</span>      0.06      -<span style="color: #BB0000;">1.76</span>      -<span style="color: #BB0000;">1.16</span>      0.02      -<span style="color: #BB0000;">1.16</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Pascal Bonif…       1.4       0.04       1.4       -<span style="color: #BB0000;">0.05</span>      0         -<span style="color: #BB0000;">0.05</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Samuel Etien…      -<span style="color: #BB0000;">0.2</span>       0         -<span style="color: #BB0000;">0.2</span>        0.11      0          0.11</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Stéphane Edo…       1.86      0.06       1.86      -<span style="color: #BB0000;">0.09</span>      0         -<span style="color: #BB0000;">0.09</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Victor Ferry        1.21      0.03       1.21      -<span style="color: #BB0000;">1.35</span>      0.03      -<span style="color: #BB0000;">1.35</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 58 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 37 more variables: dim3_coord &lt;dbl&gt;, dim3_cos2 &lt;dbl&gt;, dim3_vtest &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   dim4_coord &lt;dbl&gt;, dim4_cos2 &lt;dbl&gt;, dim4_vtest &lt;dbl&gt;, personne &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   orientation &lt;chr&gt;, orientation2 &lt;chr&gt;, debut &lt;chr&gt;, visage_decouvert &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   abonnes &lt;chr&gt;, genre &lt;chr&gt;, age &lt;chr&gt;, streamer_plein_temps &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   collectif &lt;chr&gt;, livre &lt;chr&gt;, podcast &lt;chr&gt;, twitter &lt;chr&gt;, facebook &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   instagram &lt;chr&gt;, tiktok &lt;chr&gt;, discord &lt;chr&gt;, twitch &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 56 × 39</span></span></span>
+<span><span class="co">#&gt;    dim1_coord dim2_coord personne           titre orientation orientation2 debut</span></span>
+<span><span class="co">#&gt;         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>    -<span style="color: #BB0000;">0.111</span>     -<span style="color: #BB0000;">0.283</span>  Antoine Goya       Anto… De gauche   Progressiste 2015…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>    -<span style="color: #BB0000;">0.199</span>     -<span style="color: #BB0000;">0.077</span><span style="color: #BB0000; text-decoration: underline;">5</span> Salomé Saqué       BLAS… De gauche   Progressiste 2020…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     0.168      0.536  Benjamin Patinaud  Bolc… De gauche   Progressiste 2014…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     0.055<span style="text-decoration: underline;">1</span>     0.082<span style="text-decoration: underline;">7</span> Aymric Dlavo       Cana… De gauche   Progressiste 2015…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>    -<span style="color: #BB0000;">0.510</span>     -<span style="color: #BB0000;">0.192</span>  Cassandre Begous   Cass… De gauche   Progressiste 2020…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     0.211      0.355  Pierre-Yves Rouge… Cerc… De droite   Conservateur 2015…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     0.416     -<span style="color: #BB0000;">0.089</span><span style="color: #BB0000; text-decoration: underline;">2</span> Christopher Lannes Chri… De droite   Conservateur 2014…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     0.061<span style="text-decoration: underline;">6</span>     0.300  Clément Viktorovi… Clém… De gauche   Progressiste 2020…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>    -<span style="color: #BB0000;">0.478</span>      0.432  Charlélie Jutan    DANY… De gauche   Progressiste 2020…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>     0.069<span style="text-decoration: underline;">2</span>     0.768  Julien Goetz       Data… De gauche   Progressiste 2014…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 46 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 32 more variables: visage_decouvert &lt;chr&gt;, abonnes &lt;chr&gt;, genre &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   age &lt;chr&gt;, streamer_plein_temps &lt;chr&gt;, collectif &lt;chr&gt;, livre &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   podcast &lt;chr&gt;, twitter &lt;chr&gt;, facebook &lt;chr&gt;, instagram &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   tiktok &lt;chr&gt;, discord &lt;chr&gt;, twitch &lt;chr&gt;, site_perso &lt;chr&gt;, CNC &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   soutenir &lt;chr&gt;, partenariat_entreprise &lt;chr&gt;, autres_services &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   dim3_coord &lt;dbl&gt;, dim4_coord &lt;dbl&gt;, dim5_coord &lt;dbl&gt;, dim1_contrib &lt;dbl&gt;, …</span></span></span></code></pre></div>
 <p>On retrouve donc le tableau de données que l’on a donné à manger à la
 fonction ACM() qui a été augmenté de nouvelles colonnes avec notamment
 les coordonnées des individus.</p>
