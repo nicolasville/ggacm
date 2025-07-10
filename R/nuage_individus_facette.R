@@ -29,7 +29,9 @@
 #' res.ind <- res.ACM |> extraire_individus()
 #'
 #' res.ind |>
-#' nuage_individus_facette(variables_a_representer = c(CNC, partenariat_entreprise))
+#'   nuage_individus_facette(
+#'     variables_a_representer = c(CNC, partenariat_entreprise)
+#'    )
 nuage_individus_facette <- function(resultat_individus,
                            variables_a_representer,
                            forme = 17,

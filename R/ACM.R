@@ -3,15 +3,21 @@
 #' Cette fonction permet de réaliser une ACM en se reposant sur le package FactoMineR. Elle sera sûrement plus simple à utiliser que [FactoMineR::MCA()].
 #'
 #' @param donnees Les données de l'ACM
-#' @param variables_supplementaires La liste des variables supplémentaires. Si vous voulez sélectionner plusieurs variables, vous pouvez les combinez par avec `c(variable1, variable2)`. Pour plus de détails sur les manières de sélectionner des colonnes dans cet argument, voir [tidyselect::tidyselect-package].
-#' @param graph Afficher les graphes de la
+#' @param variables_supplementaires <[`tidy-select`][dplyr_tidy_select]>
+#'  La liste des variables supplémentaires. Si vous voulez sélectionner
+#'  plusieurs variables, vous pouvez les combinez par avec `c(variable1, variable2)`.
+#'  Pour plus de détails sur les manières de sélectionner des colonnes dans
+#'  cet argument, voir [dplyr::select()].
+#' @param graph Faut-il afficher les graphiques produit par [FactoMineR:MCA()] ?
+#'  par défaut sur `FALSE`.
 #' @param ... Arguments supplémentaires qui seront passé à [FactoMineR::MCA].
 #'
-#' @returns Un résultat d'ACM.
+#' @returns Le résultat d'une ACM.
 #' @export
 #'
 #' @examples
-#' createurs_de_contenus_pol |> ACM(variables_supplementaires = c(titre, personne))
+#' resultat <- createurs_de_contenus_pol |>
+#'   ACM(variables_supplementaires = c(titre, personne))
 #'
 #'
 ACM <- function(donnees, variables_supplementaires, graph = FALSE,...) {

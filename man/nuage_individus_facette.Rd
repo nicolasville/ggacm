@@ -49,5 +49,7 @@ res.ACM <- createurs_de_contenus_pol |> ACM()
 res.ind <- res.ACM |> extraire_individus()
 
 res.ind |>
-nuage_individus_facette(variables_a_representer = c(CNC, partenariat_entreprise))
+  nuage_individus_facette(
+    variables_a_representer = c(CNC, partenariat_entreprise)
+   )
 }

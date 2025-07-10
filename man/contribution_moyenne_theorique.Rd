@@ -7,13 +7,14 @@
 contribution_moyenne_theorique(resultat_acm)
 }
 \arguments{
-\item{resultat_acm}{Le résultat d'une ACM}
+\item{resultat_acm}{Le résultat d'une ACM.}
 }
 \value{
-un nombre entre 100 et 0
+Un nombre entre 0 et 100 qui indique le pourcentage de contribution
+moyenne théorique.
 }
 \description{
-Certains manuels recommandent de calculer la contribution moyenne théorique pour s'en servir comme seuil afin de déterminer quelles sont les variables à prendre en compte dans l'analyse. Cette fonction permet de calculer cette contribution moyenne théorique : elle fait 100 \% divisé par le nombre de modalité active.
+Certains manuels recommandent de calculer la contribution moyenne théorique pour s'en servir comme seuil afin de déterminer quelles sont les variables à prendre en compte dans l'analyse. Cette fonction permet de calculer cette contribution moyenne théorique : elle divise 100 \% par le nombre de modalité active.
 }
 \examples{
 resultat_acm <- createurs_de_contenus_pol |>

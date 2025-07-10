@@ -18,5 +18,14 @@ un objet ggplot
 On veut souvent visualiser rapidement un nuage d'individus sans trop y passer du temps. Cette fonction est un raccourci à cela, elle permet de faire
 }
 \examples{
-#
+
+# on commence par créer un résultat d'ACM :
+resultat <- createurs_de_contenus_pol |>
+  ACM(variables_supplementaires = personne)
+
+# puis on peut sortir le graphique
+resultat |>
+  nuage_individus() +
+  theme_acm()
+
 }

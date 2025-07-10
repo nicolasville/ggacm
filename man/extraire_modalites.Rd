@@ -7,16 +7,43 @@
 extraire_modalites(resultat_acm)
 }
 \arguments{
-\item{resultat_acm}{résultat sortie de factominer::MCA}
+\item{resultat_acm}{Une résultat d'ACM sortie de \code{\link[FactoMineR:MCA]{FactoMineR::MCA()}} ou \code{\link[=ACM]{ACM()}}.}
 
 \item{data_acm}{le tableau de donnée d'origine}
 }
 \value{
-un tableau avec pour chaque modalité les coordonnées, les contributions, les cos2 et les vtest pour les 5 premières dimensions
+Un tableau avec pour chaque modalité les coordonnées,
+les contributions, les cos2 et les vtest pour les 5 premières dimensions.
+
+Dans le détail, le tableau
+comporte les variables :
+\itemize{
+\item \code{type} : variables actives ou supplémentaires ?
+\item \code{variable} : Le nom de la variable.
+\item \code{modalites} : la modalité en question.
+\item \code{n} : Le nombre d'individus au sein du tableau de données qui partagent
+cette modalité.
+\item \code{pourcentage} : Par des individus au sein du tableau de données qui partagent
+cette modalité
+\item \code{dim1_coord}, \code{dim2_coord}, ... : Coordonnée de la modalité sur l'axe 1, 2, ...
+\item \code{dim1_contrib}, \code{dim2_contrib},... : Contribution de chaque modalité à la
+contruction des axes sur l'axe 1, 2, ...
+\item \code{dim1_cos2}, \code{dim2_cos2}, ... : Cosinus carré des modalités sur l'axe 1, 2,...
+\item \code{dim1_vtest}, \code{dim2_vtest}, ... : Vtest des coordonnées de la modalité sur
+l'axe 1, 2,...
+}
 }
 \description{
-Obtenir les résultats d'une ACM pour chaque modalités.
+Cette fonction permet de renvoyer un
 }
 \examples{
-# une liste d'exemple
+# on commence par créer un résultat d'ACM :
+resultat <- createurs_de_contenus_pol |>
+  ACM(variables_supplementaires = personne)
+
+# Puis on peut en extraire le tableau descriptif de chaque modalité :
+resultat |> extraire_modalites()
+
+
+
 }

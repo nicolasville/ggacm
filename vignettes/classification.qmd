@@ -1,0 +1,47 @@
+---
+title: "classification"
+vignette: >
+  %\VignetteIndexEntry{classification}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: '#>'
+---
+
+```{r}
+#| label: setup
+library(ggacm)
+```
+
+Cette page servira à mettre en oeuvre une classification ascendante hiérarchique sur les résultats de votre ACM.
+
+Pour créer la classification, utiliser la fonction `FactoMineR:HCPC()` sur les résultats de votre ACM. Le paramètre `nb.clust` détermine le nombre de classe que vous souhaitez garder. Dans cette exemple, je vais en garder 3. Si vous souhaitez que R choisisse automatiquement le nombre de classe, indiquez -1.
+
+```{r}
+# on commence par créer son acm en précisant les variables 
+# supplémentaires
+resultat_acm <- createurs_de_contenus_pol |> 
+  ACM(variables_supplementaires = c(titre, personne, orientation))
+
+# puis on peut faire la classification
+resultat_classification <- resultat_acm |> 
+  FactoMineR::HCPC(nb.clust = 3)
+```
+
+## Décrire les classes
+
+Pour décrire les classes, on peut produire un tableau récapitulatif en utilisant la fonction `caracteriser_classe()`. L'argument `numero_de_la_classe` indique la classe que vous voulez décrire.
+
+```{r}
+resultat_classification |> 
+  caracteriser_classe(numero_de_la_classe = 1)
+```
+
+Vous pouvez répéter cela avec les autres classes.
+
+```{r}
+resultat_classification |> 
+  caracteriser_classe(numero_de_la_classe = 2)
+```

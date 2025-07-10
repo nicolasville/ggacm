@@ -8,7 +8,17 @@
 #' @returns un objet ggplot
 #' @export
 #'
-#' @examples #
+#' @examples
+#'
+#' # on commence par créer un résultat d'ACM :
+#' resultat <- createurs_de_contenus_pol |>
+#'   ACM(variables_supplementaires = personne)
+#'
+#' # puis on peut sortir le graphique
+#' resultat |>
+#'   nuage_individus() +
+#'   theme_acm()
+#'
 nuage_individus <- function(resultat_acm, couleur) {
   resultat_individus <- extraire_individus(resultat_acm)
 

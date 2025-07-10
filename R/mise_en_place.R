@@ -1,13 +1,37 @@
 #' Mettre en place une session R adapté
 #'
-#' R affiche par défaut beaucoup trop de chiffres après la virgule (qui est d'ailleurs un point en général) et tend à utiliser l'écriture scientifique... ce qui n'arrange pas vraiment les chercheurs en sciences sociales... Cette fonction permet de modifier ces options d'un seul coup. Un nombre qui s'affichait comme 0.456789 s'affichera alors comme 0,457.
+#' R affiche par défaut beaucoup trop de chiffres après la virgule
+#' (qui est d'ailleurs un point en général) et tend à utiliser l'écriture
+#' scientifique... ce qui n'arrange pas vraiment les chercheurs en sciences
+#' sociales... Cette fonction permet de modifier ces options d'un seul coup.
+#' Un nombre qui s'affichait comme 0.456789 s'affichera alors comme 0,457.
+#'
+#' Concrètement cette fonction modifie les options de la session R et les options
+#' des objets du package gtsummary en ayant recours à [gtsummary::theme_gtsummary_language()].
 #'
 #' @param ... Il est possible de faire passer d'autres arguments à [base::options()].
 #'
 #' @returns Une liste d'option
 #' @export
 #'
-#' @examples #
+#' @examples
+#'
+#' # ne fait pas parti  de l'exemple
+#' old <- options()
+#'
+#' # Exemple : ------------------------
+#'
+#' # Avant :
+#' c(0.123456, 10e20)
+#'
+#' mise_en_place_ACM()
+#'
+#' # Après :
+#' c(0.123456, 10e20)
+#'
+#' # Fin de l'exemple -----------------
+#' options(old)
+#'
 mise_en_place_ACM <- function(...){
   options(digits = 3, # arrondir deux chiffres après la virgule
         scipen = 999,# pas d'écriture scientifique

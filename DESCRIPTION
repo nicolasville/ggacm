@@ -30,5 +30,6 @@ Depends:
     R (>= 3.5)
 Suggests: 
     knitr,
+    quarto,
     rmarkdown
-VignetteBuilder: knitr
+VignetteBuilder: knitr, quarto
