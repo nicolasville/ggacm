@@ -4,19 +4,27 @@
 \alias{extraire_individus}
 \title{Obtenir les résultats pour chaque individus}
 \usage{
-extraire_individus(resultat_acm, nom_variable_individu)
+extraire_individus(resultat_acm)
 }
 \arguments{
 \item{resultat_acm}{resultat acm}
-
-\item{nom_variable_individu}{une chaîne de caractère (qui s'écrit donc entre guillemets anglais "") qui donne le nom de la variable du tableau qui identifie les individus.}
 }
 \value{
-un tableau data.frame au format tidy, prêt à être utilisé pour ggplot
+Le tableau de données surlequel vous avez réalisé l'ACM auquel a été
+ ajouté pour chaque individus : leur coordonnées sur chaque axe (stockés dans des
+ colonnes `dim1_coord`, `dim2_coord`, `dim3_coord`, etc), leur contribution à
+ la construction des axes (colonnes `dim1_contrib`, `dim2_contrib`,...) et
+ enfin leur cosinus carré (colonnes `dim1_cos2`,...)
 }
 \description{
-Obtenir les résultats pour chaque individus
+Cette fonction permet quadd on lui donne le résultat d'une ACM de sortir un
+tableau qui reprend le tableau de donnée initial en ajoutant pour chaque
+individus leur coordonnées.
 }
 \examples{
-# un exemple pas piqué des annetons
+resultat_acm <- createurs_de_contenus_pol |> ACM()
+
+resultat_individus <- resultat_acm |> extraire_individus()
+
+resultat_individus
 }

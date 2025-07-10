@@ -132,11 +132,10 @@ resultat_modalites
 
 On obtient alors un tableau qui reprend pour chaque modalité et chaque axe leur coordonnée, leur cos², leur vtest et leur contribution.
 
-Pour `extraire_individu()` il faut préciser le nom d'une de vos variables qui permettent d'identifier chaque individus. Dans mon cas par exemple, ma base de donnée recense des chaînes YouTube et Twitch, chaque individu a un `titre` de chaîne unique. Ce sera donc `titre` :
+Pour `extraire_individu()` on peut procéder de la même manière:
 
 ```{r}
-resultat_individus <- resultat_acm |> 
-  extraire_individus(nom_variable_individu = "titre")
+resultat_individus <- resultat_acm |> extraire_individus()
 resultat_individus
 ```
 
