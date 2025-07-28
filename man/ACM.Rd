@@ -15,7 +15,7 @@ plusieurs variables, vous pouvez les combinez par avec \code{c(variable1, variab
 Pour plus de détails sur les manières de sélectionner des colonnes dans
 cet argument, voir \code{\link[dplyr:select]{dplyr::select()}}.}
 
-\item{graph}{Faut-il afficher les graphiques produit par \code{\link[=FactoMineR:MCA]{FactoMineR:MCA()}} ?
+\item{graph}{Faut-il afficher les graphiques produit par \code{\link[FactoMineR:MCA]{FactoMineR::MCA()}} ?
 par défaut sur \code{FALSE}.}
 
 \item{...}{Arguments supplémentaires qui seront passé à \link[FactoMineR:MCA]{FactoMineR::MCA}.}

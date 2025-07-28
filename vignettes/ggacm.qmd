@@ -1,0 +1,121 @@
+---
+title: "ggacm"
+vignette: >
+  %\VignetteIndexEntry{ggacm}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: '#>'
+---
+
+```{r}
+#| label: setup
+library(ggacm)
+```
+
+Cette page propose de vous montrer très rapidement comment utiliser le pacage tout en vous orientant vers les pages correspondantes.
+
+Si vous êtes chercheurs en sciences sociales, je vous recommande grandement d'utiliser ce package au sein d'un document *Quarto* pour permettre de générer un document qui compilera tous vos résultats. Ce type de document permet de faire apparaître du code et son résultat côte-côte, il vous évitera de devoir faire copier-coller et générera à chaque fois que vous le lancerez vos tableaux. Pour vous familiarisez rapidement avec ce type de document vous pouvez consulter [cette page](https://benegarbi.github.io/PremiersPasAvec_quarto.html) de E. Morand et B. Garnier.
+
+Concrètement vous allez commencez par charger le package ainsi que les packages du `tidyverse` et ceux de `gtsummary` qui seront particulièrement utiles pour la suite :
+
+```{r}
+library(ggacm)
+library(tidyverse)
+library(gtsummary)
+```
+
+Ensuite on mets à jour certaines options pour que les tableaux en sorties nous conviennent avec `mise_en_place()` :
+
+```{r}
+mise_en_place_ACM()
+```
+
+Puis vous chargerez vos données dans un objet avec un code qui ressemble à cela :
+
+```{r}
+#| eval: false
+#| echo: true
+createurs_de_contenus_pol <- read_csv2("createurs_de_contenus_politiques.csv")
+```
+
+Pour plus de détails sur la marche à suivre et comment trouver comment importer vos données, je vous renvoie vers la page dédié du [guide](https://juba.github.io/tidyverse/07-import.html) de Julien Barnier.
+
+Sur cette page, j'utilise la base de données utilisées dans mon mémoire qui vient avec le package et qui se nomme `createurs_de_contenus_pol`, pour une description des variables, vous pouvez taper `?createurs_de_contenus_pol` dans la console.
+
+```{r}
+createurs_de_contenus_pol
+```
+
+Une fois que cela est fait, je peux réaliser l'ACM en précisant les variables supplémentaires.
+
+```{r}
+resultat_acm <- createurs_de_contenus_pol |> 
+  ACM(variables_supplementaires = c(titre, 
+                                    personne, 
+                                    orientation,
+                                    orientation2,
+                                    debut,
+                                    twitter,
+                                    genre, 
+                                    age,
+                                    visage_decouvert))
+```
+
+Une fois que cela est fait, on peut extraire un premier nuage de points pour s'assurer qu'il a une forme adaptée
+
+```{r}
+nuage_individus(resultat_acm)
+```
+
+On peut ensuite consulter la variance capturée de chaque axe :
+
+```{r}
+extraire_variance(resultat_acm)
+```
+
+Puis caractériser chaque axes. Pour l'axe 1 par exemple :
+
+```{r}
+resultat_acm |> 
+  caracteriser_axe(axe = 1, contribution_minimum = 4)
+```
+
+Et pour l'axe 2 :
+
+```{r}
+resultat_acm |> 
+  caracteriser_axe(axe = 2, contribution_minimum = 4)
+```
+
+Le premier axe semble séparer les créateurs qui se financent de manière entrepreneuriale et qui produisent sur YouTube et de l'autre les streameurs qui se reposent sur des subventions publiques (et les dons de la communauté qui ne sont pas codé dans cette base). Le deuxième axe lui semble, concerner une opposition entre des petites chaînes individuelles et des chaînes collectives un peu plus grosses.
+
+On peut donc reproduire le nuage des individus :
+
+```{r}
+#| fig-asp: 1
+
+label_axes <- nommer_axes(
+    resultat_acm,
+    a_gauche = "Streameur/fin. public",
+    a_droite = "YouTubeur/fin. entrepreneurial",
+    en_haut = "Petites chaînes individuelles",
+    en_bas = "Chaînes collectives"
+  )
+
+theme_set(theme_acm())
+
+
+nuage_individus(resultat_acm) + 
+  label_axes
+```
+
+On peut vérifier qu'on trouve les streameurs à gauche et les youtubeurs à droite en colorant ce graphique :
+
+```{r}
+#| fig-asp: 1
+nuage_individus(resultat_acm, couleur = streamer_plein_temps) + 
+  label_axes
+```

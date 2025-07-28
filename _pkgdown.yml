@@ -1,4 +1,81 @@
 url: https://nicolasville.github.io/ggacm/
 template:
   bootstrap: 5
+  bootswatch: litera
+lang: fr
+reference:
+- title: Avant de commencer l'analyse
+  contents:
+  - mise_en_place_ACM
 
+- title: ACM
+- subtitle: Réaliser l'ACM
+  desc: >
+    Fonction permettant de réaliser l'ACM en elle même.
+  contents:
+  - ACM
+
+
+- subtitle: Produire les tableaux récapitulatifs de l'ACM
+  desc: >
+    Ces fonctions opèrent sur un résultat produit par ACM() ou
+    FactoMineR::MCA() pour afficher les résultats dans des tableaux synthétiques
+    prêt à être inclus dans votre document de rédaction.
+  contents:
+  - extraire_variance
+  - caracteriser_axe
+  - contribution_moyenne_theorique
+
+- subtitle: Récupérer les résultats complets
+  desc: >
+    Ces deux fonctions permettent de récupérer à partir d'un résultat produit
+    par ACM() ou FactoMineR::MCA() les coordonnées des modalités et des
+    individus. En plus des coordonnées d'autres informations sont inclus
+    comme les cosinus carrés ou encore les contributions.
+  contents:
+  - extraire_individus
+  - extraire_modalites
+
+- title: Visualiser les résultats d'une ACM
+  desc: >
+    Ces fonctions permettent de visualiser rapidement les résultats d'une ACM
+    avec un graphique en utilisant ggplot.
+
+- subtitle: Pour commencer
+  desc: >
+    Pour ceux qui veulent rapidement produire des graphiques sans devoir y
+    passer trop de temps, des fonctions faciles d'utilisations sont disponibles.
+  contents:
+  - nuage_individus
+  - nuage_individus_facette
+
+- subtitle: Pour des graphiques un peu plus complexes
+  desc: >
+    Pour ceux qui veulent produire des graphiques personnalisés eux-mêmes.
+  contents:
+  - ggacm
+  - coord_acm
+
+- subtitle: Pour formatter les graphiques
+  desc: >
+    Ces fonctions permettent de modifier des aspects esthétiques des graphiques.
+  contents:
+  - nommer_axes
+  - theme_acm
+
+- title: Classification ascendante hiérarchique
+  desc: >
+    Ces fonctions permettent de produire des tableaux présentant les résultats
+    d'une classification ascendante hiérarchique produite avec
+    FactoMineR::HCPC().
+  contents:
+  - caracteriser_classe
+  - extraire_classes
+
+- title: Divers
+  contents:
+  - get_frequence
+  - get_res
+  - supprimer_var_
+  - tableau_classe
+  - check_chr_scalar

@@ -19,6 +19,7 @@ Imports:
     gt,
     gtsummary,
     purrr,
+    rlang,
     scales,
     stringr,
     tibble,

@@ -28,7 +28,7 @@ des objets du package gtsummary en ayant recours à \code{\link[gtsummary:theme_
 # ne fait pas parti  de l'exemple
 old <- options()
 
-# Exemple :
+# Exemple : ------------------------
 
 # Avant :
 c(0.123456, 10e20)
@@ -38,7 +38,7 @@ mise_en_place_ACM()
 # Après :
 c(0.123456, 10e20)
 
-# Fin de l'exemple
+# Fin de l'exemple -----------------
 options(old)
 
 }

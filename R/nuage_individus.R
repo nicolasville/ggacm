@@ -19,8 +19,12 @@
 #'   nuage_individus() +
 #'   theme_acm()
 #'
-nuage_individus <- function(resultat_acm, couleur) {
-  resultat_individus <- extraire_individus(resultat_acm)
+nuage_individus <- function(resultat_individus, couleur) {
+
+
+  if (inherits(resultat_individus, "MCA")) {
+  resultat_individus <- extraire_individus(resultat_individus)
+  }
 
   output <- resultat_individus |>
     ggacm() +

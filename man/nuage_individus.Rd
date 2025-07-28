@@ -4,12 +4,12 @@
 \alias{nuage_individus}
 \title{Visualiser rapidement le nuage d'individus}
 \usage{
-nuage_individus(resultat_acm, couleur)
+nuage_individus(resultat_individus, couleur)
 }
 \arguments{
-\item{resultat_acm}{Le résultat d'une acm}
-
 \item{couleur}{on peut optionnellement coloré le nuage d'individus en fonction d'une variable.}
+
+\item{resultat_acm}{Le résultat d'une acm}
 }
 \value{
 un objet ggplot

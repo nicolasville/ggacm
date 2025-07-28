@@ -13,7 +13,7 @@ nommer_axes(
 )
 }
 \arguments{
-\item{resultat_acm}{le résultat d'une ACM sortie de MCA()}
+\item{resultat_acm}{le résultat d'une ACM sortie de \code{\link[=MCA]{MCA()}}}
 
 \item{en_haut}{à quoi correspond le haut du graphique ? entre guillemet.}
 

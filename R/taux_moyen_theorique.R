@@ -18,6 +18,9 @@
 #'
 contribution_moyenne_theorique <- function(resultat_acm) {
 
+  # Checks
+  check_resultat_acm(resultat_acm)
+
   # on sort les résultats des modalités
   resultat_modalites <- extraire_modalites(resultat_acm = resultat_acm)
 

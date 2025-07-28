@@ -25,13 +25,7 @@
 #' resultat_individus
 extraire_individus <- function(resultat_acm) {
 
-  if (inherits(resultat_acm, "data.frame")) {
-
-    cli::cli_abort(c(
-      "x" = "{.arg resultat_acm} doit être un résultat de {.fun FactoMineR::MCA} ou {.fun ACM}, et non pas un tableau de donnée (data.frame)"
-    ))
-
-  }
+  check_resultat_acm(resultat_acm)
 
   # On vient chercher le tableau dde donnée originel
   data_acm <- resultat_acm$call$X  |> supprimer_var_()

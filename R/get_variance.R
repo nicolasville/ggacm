@@ -10,6 +10,11 @@
 #' @examples
 #' # une liste d'exemple
 extraire_variance <- function(resultat_acm){
+
+  # Checks
+  nom_resultat_acm <- deparse(substitute(resultat_acm))
+  check_resultat_acm(resultat_acm, nom_resultat_acm)
+
   resultat_acm$eig  |>
     as.data.frame() %>%
     tibble::rownames_to_column() %>% # récupérer les noms de lignes (dim 1, dim 2, etc) dans une colonne distincte
@@ -25,3 +30,4 @@ extraire_variance <- function(resultat_acm){
     ) |>
     relocate(Axes) # replace Axes au début du tableau
 }
+

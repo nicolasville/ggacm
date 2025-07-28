@@ -224,3 +224,5 @@ resultat_individus |>
     caption = "Ceci est une description"
   )
 ```
+
+Si vous souhaitez aller plus loin. Vous pouvez par exemple consulter la vignette dédié à la classification ascendante hiérarchie : `vignette("classification")`.

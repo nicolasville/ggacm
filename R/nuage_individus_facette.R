@@ -82,12 +82,12 @@ nuage_individus_facette <- function(resultat_individus,
       color = "darkgrey",
       show.legend = FALSE
     ) +
-    geom_point(
+    ggplot2::geom_point(
       color = couleur,
       shape = forme,
       taille = 2
     ) +
-    facet_wrap(
+    ggplot2::facet_wrap(
       ~ modalites,
       labeller = labeller(modalites = label_wrap_gen(width = longueur_max_labels)),
       ...

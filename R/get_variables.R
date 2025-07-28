@@ -41,6 +41,9 @@
 #'
 extraire_modalites <- function(resultat_acm) {
 
+  # Checks
+  check_resultat_acm(resultat_acm)
+
   data_acm <- supprimer_var_(resultat_acm$call$X)
 
   resultats_actives <- resultat_acm$var |> get_res(data_acm, active = TRUE)

@@ -2,7 +2,7 @@
 #'
 #' Lorsque l'on représente une ACM, il est courant de vouloir donner un nom aux axes, ou au moins les pôles de chacun de ces axes. Cette fonction permet de générer les labels pour chaque axe à utiliser lorsqu'on génère des graphiques axec ggplot
 #'
-#' @param resultat_acm le résultat d'une ACM sortie de MCA()
+#' @param resultat_acm le résultat d'une ACM sortie de [MCA()]
 #' @param en_haut à quoi correspond le haut du graphique ? entre guillemet.
 #' @param en_bas idem mais en bas
 #' @param a_gauche idem mais à gauche
@@ -17,6 +17,11 @@ nommer_axes <- function(resultat_acm,
                         en_bas = "",
                         a_gauche = "",
                         a_droite = ""){
+
+
+  # Checks
+  check_resultat_acm(resultat_acm)
+  check_chr_scalar(en_haut)
 
   var1 <- extraire_variance(resultat_acm)[1, 3]
   var2 <- extraire_variance(resultat_acm)[2, 3]
