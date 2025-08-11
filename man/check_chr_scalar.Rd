@@ -34,16 +34,3 @@ Rien du tout, mais un message d'erreur si ça foire
 \description{
 Vérifer ce que l'utilisateurs donne
 }
-\examples{
-
-# Tests
-bidule <- function(a) {
-  a |> check_inherits("data.frame", message2 = c("i" = "Avez vous pensé à laver ? "))
-}
-
-bidule("pates")
-
-
-
-
-}

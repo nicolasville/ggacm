@@ -8,9 +8,9 @@ La fonction suivante permet de sortir un tableau résumant pour un axe les modal
 caracteriser_axe(resultat_acm, axe, contribution_minimum)
 }
 \arguments{
-\item{resultat_acm}{Un résultat d'ACM de \code{\link[FactoMineR:MCA]{FactoMineR::MCA()}} ou \code{\link[=ACM]{ACM()}}.}
-
 \item{axe}{Numéro de l'axe à décrire. (1, 2, 3, ...)}
+
+\item{resultat_modalites}{Tableau de donnée reprennant l'extraction des résultats d'une ACM par modalité}
 
 \item{seuil}{Seuil de la contribution à l'axe en dessous duquel les modalités ne seront pas prises en compte. Vaut 0 par défaut, mais il peut être utile de l'augmenter si l'on a beaucoup de modalité et que l'on ne souhaite pas qu'elles apparaissent toutes dans le tableau.}
 }
