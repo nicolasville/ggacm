@@ -16,13 +16,6 @@
 #'
 #' @examples
 #'
-#' # Tests
-#' bidule <- function(a) {
-#'   a |> check_inherits("data.frame", message2 = c("i" = "Avez vous pensé à laver ? "))
-#' }
-#'
-#' bidule("pates")
-#'
 #'
 #'
 #'
