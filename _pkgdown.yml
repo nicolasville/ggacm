@@ -1,7 +1,6 @@
-url: https://nicolasville.github.io/ggacm/
+url: ~
 template:
   bootstrap: 5
-  bootswatch: litera
 lang: fr
 reference:
 - title: Avant de commencer l'analyse
