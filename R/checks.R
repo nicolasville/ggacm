@@ -16,7 +16,7 @@
 #'
 #' @examples
 #'
-#'
+#'#
 #'
 #'
 check_chr_scalar <- function(

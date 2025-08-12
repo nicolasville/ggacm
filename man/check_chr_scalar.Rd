@@ -34,3 +34,9 @@ Rien du tout, mais un message d'erreur si ça foire
 \description{
 Vérifer ce que l'utilisateurs donne
 }
+\examples{
+
+#
+
+
+}
