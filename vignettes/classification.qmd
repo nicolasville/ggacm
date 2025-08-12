@@ -17,7 +17,7 @@ library(ggacm)
 
 Cette page servira à mettre en oeuvre une classification ascendante hiérarchique sur les résultats de votre ACM.
 
-Pour créer la classification, utiliser la fonction `FactoMineR:HCPC()` sur les résultats de votre ACM. Le paramètre `nb.clust` détermine le nombre de classe que vous souhaitez garder. Dans cette exemple, je vais en garder 3. Si vous souhaitez que R choisisse automatiquement le nombre de classe, indiquez -1.
+Pour créer la classification, utilisez la fonction `FactoMineR:HCPC()` sur les résultats de votre ACM. Le paramètre `nb.clust` détermine le nombre de classe que vous souhaitez garder. Dans cette exemple, je vais en garder 3. Si vous souhaitez que R choisisse automatiquement le nombre de classe, indiquez -1.
 
 ```{r}
 # on commence par créer son acm en précisant les variables 
