@@ -31,7 +31,7 @@ caracteriser_classe <- function(resultat_classification, numero_de_la_classe) {
 
   # 2 On nettoie le nom des modalités (qui s'affichent comme VARIABLE=Modalité)
   caracterisation_classe.df <- caracterisation_classe.df |>
-    as_tibble(x, rownames = "modalites") |>
+    as_tibble(rownames = "modalites") |>
     mutate(
       modalites = str_remove(modalites, ".+=")
     )
