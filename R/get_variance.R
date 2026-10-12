@@ -2,6 +2,7 @@
 #' Décrire la variance des capturer par chaque axe
 #'
 #' @param resultat_acm un résultat d'ACM qui sort de factominer::MCA()
+#' @param maximum Nombre maximum de dimension à afficher. Par défaut 10.
 #'
 #' @returns un tableau (data.frame) qui documente la variance des 5 premiers axes.
 #' @export
@@ -9,11 +10,13 @@
 #' @importFrom forcats fct_relevel
 #' @examples
 #' # une liste d'exemple
-extraire_variance <- function(resultat_acm){
+extraire_variance <- function(resultat_acm, maximum = 10){
 
   # Checks
   nom_resultat_acm <- deparse(substitute(resultat_acm))
   check_resultat_acm(resultat_acm, nom_resultat_acm)
+
+  nb_dimension <- max(maximum, nrow(resultat_acm$eig))
 
   resultat_acm$eig  |>
     as.data.frame() %>%
@@ -22,7 +25,7 @@ extraire_variance <- function(resultat_acm){
     mutate(Axes = str_replace_all(rowname, "dim", "Axe")) %>% # créer une nouvelle variable à partir de rowname, qui prend les valeurs "Axe 1, Axe 2, etc" au lieu de "dim 1, dim 2, etc."
     select(-rowname) %>%# on enlève cette colonne dont on n'a plus besoin
     mutate(
-      Axes = forcats::fct_relevel(Axes, paste("Axe", 1:10)),
+      Axes = forcats::fct_relevel(Axes, paste("Axe", 1:nrow(acm2$eig))),
       `Valeurs propres` = eigenvalue |> round(digits = 2),
       `% de variance` = `percentage of variance` |> en_pourcentage(),
       `% cumulé de variance` = `cumulative percentage of variance` |> en_pourcentage(),
