@@ -84,8 +84,7 @@ nuage_individus_facette <- function(resultat_individus,
     ) +
     ggplot2::geom_point(
       color = couleur,
-      shape = forme,
-      taille = 2
+      shape = forme
     ) +
     ggplot2::facet_wrap(
       ~ modalites,

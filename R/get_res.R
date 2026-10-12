@@ -22,7 +22,6 @@ get_res <-
     # une fonction pour faire en masse ce qu'on va faire pour coord, contrib cos2 et vtest :
     matrice_a_df <- function(resultat_acm_varSqqchse, quoi){
       resultat_acm_varSqqchse |> # prend la matrice
-        round(digits = 2) |> # arrondi tout à 0.01
         as.data.frame() |> # la transforme en df
         rename_all(tolower) %>% # met tout en minuscule
         rename_all(~ str_replace(., " ", "")) %>% # supprime les espaces des noms de colonnes
