@@ -25,6 +25,8 @@ caracteriser_classe <- function(resultat_classification, numero_de_la_classe) {
     ))
   }
 
+  check_inherits(resultat_classification, "HCPC") # à modifier pour autre chose plus tard
+
   # 1 On extrait le résultat de la classification :
   caracterisation_classe.df <- resultat_classification$desc.var$category |>
     pluck(numero_de_la_classe)
