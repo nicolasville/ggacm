@@ -71,11 +71,3 @@ reference:
   - caracteriser_classe
   - extraire_classes
 
-- title: Divers
-  contents:
-  - get_frequence
-  - get_res_act
-  - get_res_sup
-  - supprimer_var_
-  - tableau_classe
-  - check_chr_scalar
