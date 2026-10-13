@@ -1,3 +1,13 @@
+#' Tableau classe
+#'
+#' @param classification
+#' @param numero_axe
+#'
+#' @returns
+#'
+#' @keywords internal
+#'
+#' @examples
 print_classe_axe <- function(classification,
                              numero_axe){
 

@@ -10,6 +10,8 @@
 #' @import tidyr
 #' @import purrr
 #'
+#' @keywords internal
+#'
 #' @examples
 #' # une liste d'exemple
 get_res_act <-

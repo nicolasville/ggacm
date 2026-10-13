@@ -6,6 +6,7 @@
 #'
 #' @returns Le data.frame nettoyé
 #' @importFrom purrr map2
+#' @keywords internal
 #' @examples #
 supprimer_var_ <- function(df) {
   noms_colonnes <- names(df)

@@ -13,7 +13,7 @@
 #'  utilisé.
 #'
 #' @returns Rien du tout, mais un message d'erreur si ça foire
-#'
+#' @keywords internal
 #' @examples
 #'
 #'#
