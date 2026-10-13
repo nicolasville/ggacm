@@ -1,0 +1,101 @@
+# Package index
+
+## Avant de commencer l’analyse
+
+- [`mise_en_place_ACM()`](https://nicolasville.github.io/ggacm/reference/mise_en_place_ACM.md)
+  : Mettre en place une session R adapté
+
+## ACM
+
+### Réaliser l’ACM
+
+Fonction permettant de réaliser l’ACM en elle même.
+
+- [`ACM()`](https://nicolasville.github.io/ggacm/reference/ACM.md) :
+  Réaliser une ACM
+
+### Produire les tableaux récapitulatifs de l’ACM
+
+Ces fonctions opèrent sur un résultat produit par ACM() ou
+FactoMineR::MCA() pour afficher les résultats dans des tableaux
+synthétiques prêt à être inclus dans votre document de rédaction.
+
+- [`extraire_variance()`](https://nicolasville.github.io/ggacm/reference/extraire_variance.md)
+  : Décrire la variance des capturer par chaque axe
+- [`caracteriser_axe()`](https://nicolasville.github.io/ggacm/reference/caracteriser_axe.md)
+  : Caractériser ses axe La fonction suivante permet de sortir un
+  tableau résumant pour un axe les modalités les plus contribuantes à sa
+  construction.
+- [`contribution_moyenne_theorique()`](https://nicolasville.github.io/ggacm/reference/contribution_moyenne_theorique.md)
+  : Calculer la contribution moyenne théorique
+
+### Récupérer les résultats complets
+
+Ces deux fonctions permettent de récupérer à partir d’un résultat
+produit par ACM() ou FactoMineR::MCA() les coordonnées des modalités et
+des individus. En plus des coordonnées d’autres informations sont inclus
+comme les cosinus carrés ou encore les contributions.
+
+- [`extraire_individus()`](https://nicolasville.github.io/ggacm/reference/extraire_individus.md)
+  : Obtenir les résultats pour chaque individus
+- [`extraire_modalites()`](https://nicolasville.github.io/ggacm/reference/extraire_modalites.md)
+  : Obtenir les résultats d'une ACM pour chaque modalités.
+
+## Visualiser les résultats d’une ACM
+
+Ces fonctions permettent de visualiser rapidement les résultats d’une
+ACM avec un graphique en utilisant ggplot.
+
+### Pour commencer
+
+Pour ceux qui veulent rapidement produire des graphiques sans devoir y
+passer trop de temps, des fonctions faciles d’utilisations sont
+disponibles.
+
+- [`nuage_individus()`](https://nicolasville.github.io/ggacm/reference/nuage_individus.md)
+  : Visualiser rapidement le nuage d'individus
+- [`nuage_individus_facette()`](https://nicolasville.github.io/ggacm/reference/nuage_individus_facette.md)
+  : Visualiser les positions des individus en fonction des modalités
+
+### Pour des graphiques un peu plus complexes
+
+Pour ceux qui veulent produire des graphiques personnalisés eux-mêmes.
+
+- [`ggacm()`](https://nicolasville.github.io/ggacm/reference/ggacm.md) :
+  Visualiser les résultats d'une ACM
+- [`coord_acm()`](https://nicolasville.github.io/ggacm/reference/coord_acm.md)
+  : Paramétrer les coordonnées de ggplot2 pour une ACM.
+
+### Pour formatter les graphiques
+
+Ces fonctions permettent de modifier des aspects esthétiques des
+graphiques.
+
+- [`nommer_axes()`](https://nicolasville.github.io/ggacm/reference/nommer_axes.md)
+  : Nommer les axes d'une représentation graphique d'ACM
+- [`theme_acm()`](https://nicolasville.github.io/ggacm/reference/theme_acm.md)
+  : Utiliser un thème adapté à l'analyse de correspondance multiple
+
+## Classification ascendante hiérarchique
+
+Ces fonctions permettent de produire des tableaux présentant les
+résultats d’une classification ascendante hiérarchique produite avec
+FactoMineR::HCPC().
+
+- [`caracteriser_classe()`](https://nicolasville.github.io/ggacm/reference/caracteriser_classe.md)
+  : Caractériser les classes
+- [`extraire_classes()`](https://nicolasville.github.io/ggacm/reference/extraire_classes.md)
+  : Extraire les résultats d'une classification ascendante hiérarchique
+
+## Autre
+
+- [`get_frequence()`](https://nicolasville.github.io/ggacm/reference/get_frequence.md)
+  : Obtenir la fréquence des modalités
+- [`get_res_act()`](https://nicolasville.github.io/ggacm/reference/get_res_act.md)
+  : Title
+- [`supprimer_var_()`](https://nicolasville.github.io/ggacm/reference/supprimer_var_.md)
+  : Supprimer le format variable_modalite
+- [`tableau_classe()`](https://nicolasville.github.io/ggacm/reference/tableau_classe.md)
+  : Caractériser une classification
+- [`check_chr_scalar()`](https://nicolasville.github.io/ggacm/reference/check_chr_scalar.md)
+  : Vérifer ce que l'utilisateurs donne
