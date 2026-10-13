@@ -23,7 +23,7 @@ Concrètement vous allez commencez par charger le package ainsi que les packages
 
 ```{r}
 library(ggacm)
-library(tidyverse)
+library(ggplot2)
 library(gtsummary)
 ```
 
@@ -38,7 +38,7 @@ Puis vous chargerez vos données dans un objet avec un code qui ressemble à cel
 ```{r}
 #| eval: false
 #| echo: true
-createurs_de_contenus_pol <- read_csv2("createurs_de_contenus_politiques.csv")
+createurs_de_contenus_pol <- readr::read_csv2("createurs_de_contenus_politiques.csv")
 ```
 
 Pour plus de détails sur la marche à suivre et comment trouver comment importer vos données, je vous renvoie vers la page dédié du [guide](https://juba.github.io/tidyverse/07-import.html) de Julien Barnier.

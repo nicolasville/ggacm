@@ -31,6 +31,7 @@ Depends:
 Suggests: 
     knitr,
     quarto,
-    rmarkdown
+    rmarkdown,
+    tidyverse
 VignetteBuilder: knitr, quarto
 Config/roxygen2/version: 8.0.0
