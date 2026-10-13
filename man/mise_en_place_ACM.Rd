@@ -21,7 +21,7 @@ Un nombre qui s'affichait comme 0.456789 s'affichera alors comme 0,457.
 }
 \details{
 Concrètement cette fonction modifie les options de la session R et les options
-des objets du package gtsummary en ayant recours à \code{\link[gtsummary:theme_gtsummary]{gtsummary::theme_gtsummary_language()}}.
+des objets du package gtsummary en ayant recours à \code{\link[gtsummary:theme_gtsummary_language]{gtsummary::theme_gtsummary_language()}}.
 }
 \examples{
 

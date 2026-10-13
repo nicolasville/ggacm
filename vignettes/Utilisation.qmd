@@ -3,7 +3,7 @@ title: "Utilisation"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Utilisation}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{quarto::html}
   %\VignetteEncoding{UTF-8}
 ---
 
@@ -68,7 +68,8 @@ resultat_acm <- createurs_de_contenus_pol |>
 
 Vous pouvez explorer les résultats de l'ACM avec la fonction du package `explor` : `explor()` .
 
-```{r eval=FALSE}
+```{r}
+#| eval: true
 explor::explor(resultat_acm)
 ```
 

@@ -9,7 +9,7 @@ ACM(donnees, variables_supplementaires, graph = FALSE, ...)
 \arguments{
 \item{donnees}{Les données de l'ACM}
 
-\item{variables_supplementaires}{<\code{\link[=dplyr_tidy_select]{tidy-select}}>
+\item{variables_supplementaires}{<\code{\link[dplyr:dplyr_tidy_select]{tidy-select}}>
 La liste des variables supplémentaires. Si vous voulez sélectionner
 plusieurs variables, vous pouvez les combinez par avec \code{c(variable1, variable2)}.
 Pour plus de détails sur les manières de sélectionner des colonnes dans

@@ -4,10 +4,12 @@
 \alias{extraire_variance}
 \title{Décrire la variance des capturer par chaque axe}
 \usage{
-extraire_variance(resultat_acm)
+extraire_variance(resultat_acm, maximum = 10)
 }
 \arguments{
 \item{resultat_acm}{un résultat d'ACM qui sort de factominer::MCA()}
+
+\item{maximum}{Nombre maximum de dimension à afficher. Par défaut 10.}
 }
 \value{
 un tableau (data.frame) qui documente la variance des 5 premiers axes.
