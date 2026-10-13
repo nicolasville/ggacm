@@ -1,4 +1,4 @@
-url: ~
+url: https://nicolasville.github.io/ggacm/
 template:
   bootstrap: 5
 lang: fr
@@ -71,3 +71,10 @@ reference:
   - caracteriser_classe
   - extraire_classes
 
+- title: Autre
+  contents:
+  - get_frequence
+  - get_res_act
+  - supprimer_var_
+  - tableau_classe
+  - check_chr_scalar
