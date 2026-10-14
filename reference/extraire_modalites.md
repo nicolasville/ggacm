@@ -78,7 +78,7 @@ resultat <- createurs_de_contenus_pol |>
 #> ── Variables supplémentaires : 1 
 #> ℹ 
 #> `personne`.
-#> [48ms]
+#> [49ms]
 #> 
 
 # Puis on peut en extraire le tableau descriptif de chaque modalité :

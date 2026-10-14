@@ -104,7 +104,7 @@ resultat_acm <- createurs_de_contenus_pol |>
                                     age,
                                     visage_decouvert))
 #> ℹ Réalisation de l'ACM avec `FactoMineR::MCA()`
-#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [45ms]
+#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [46ms]
 #> 
 #> ℹ
 #> • Sur 56 individus...
@@ -121,7 +121,7 @@ resultat_acm <- createurs_de_contenus_pol |>
 ── Variables supplémentaires : 9 
 #> ℹ 
 `titre`, `personne`, `orientation`, `orientation2`, `debut`, `twitter`,
-#> `genre`, `age`, and `visage_decouvert`.[50ms]
+#> `genre`, `age`, and `visage_decouvert`.[52ms]
 ```
 
 Une fois que cela est fait, on peut extraire un premier nuage de points

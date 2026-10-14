@@ -116,7 +116,7 @@ resultat_acm <- createurs_de_contenus_pol |>
                                   orientation2)
   )
 #> ℹ Réalisation de l'ACM avec `FactoMineR::MCA()`
-#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [43ms]
+#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [44ms]
 #> 
 #> ℹ
 #> • Sur 56 individus...
@@ -133,7 +133,7 @@ resultat_acm <- createurs_de_contenus_pol |>
 #> ℹ 
 ── Variables supplémentaires : 4 
 #> ℹ 
-`titre`, `personne`, `orientation`, and `orientation2`.[49ms]
+`titre`, `personne`, `orientation`, and `orientation2`.[50ms]
 ```
 
 Vous pouvez explorer les résultats de l’ACM avec la fonction du package

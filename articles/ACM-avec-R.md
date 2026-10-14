@@ -195,12 +195,12 @@ ggacm::extraire_variance(res_acm)
 #> 5 Axe 5            0,20        11,1 %                 62 %
 
 GDAtools::modif.rate(res_acm)$modif
-#>                                     mrate cum.mrate
-#> dim 1 98,32788883641167387850146042183042      98,3
-#> dim 2  1,57168870542175498350445650430629      99,9
-#> dim 3  0,09435296327622039180837987260020     100,0
-#> dim 4  0,00606949489036134361141794357764     100,0
-#> dim 5  0,00000000000000000000000000000757     100,0
+#>                                   mrate cum.mrate
+#> dim 1 98,327888836411702300210890825838      98,3
+#> dim 2  1,571688705421736997891457576770      99,9
+#> dim 3  0,094352963276206666676237944102     100,0
+#> dim 4  0,006069494890357363288402314794     100,0
+#> dim 5  0,000000000000000000000000000757     100,0
 ```
 
 ## Description des axes
@@ -355,7 +355,7 @@ Et pour les modalités :
 modalités <- res_acm |> extraire_modalites()
 
 modalités
-#> # A tibble: 17 × 21
+#> # A tibble: 16 × 21
 #>    type    variables modalites     n pourcentage dim1_coord dim1_cos2 dim1_vtest
 #>    <chr>   <chr>     <chr>     <int>       <dbl>      <dbl>     <dbl>      <dbl>
 #>  1 variab… cuisine   Ne fait …  1119        56      -0.291   0.108       -14.7  
@@ -372,9 +372,8 @@ modalités
 #> 12 variab… relig     NSP ou N…    40         2      -0.0723  0.000107     -0.462
 #> 13 variab… sport     Ne prati…  1277        63.9    -0.538   0.511       -32.0  
 #> 14 variab… sport     Pratique…   723        36.1     0.950   0.511        32.0  
-#> 15 variab… <NA>      <NA>         NA        NA       0.0147  0.000646    NaN    
-#> 16 variab… sexe      Homme       899        45       0.106   0.00917       4.28 
-#> 17 variab… sexe      Femme      1101        55      -0.0865  0.00917      -4.28 
+#> 15 variab… sexe      Homme       899        45       0.106   0.00917       4.28 
+#> 16 variab… sexe      Femme      1101        55      -0.0865  0.00917      -4.28 
 #> # ℹ 13 more variables: dim1_contrib <dbl>, dim2_coord <dbl>, dim2_cos2 <dbl>,
 #> #   dim2_vtest <dbl>, dim2_contrib <dbl>, dim3_coord <dbl>, dim3_cos2 <dbl>,
 #> #   dim3_vtest <dbl>, dim3_contrib <dbl>, dim4_coord <dbl>, dim4_cos2 <dbl>,
@@ -410,8 +409,6 @@ modalités |>
   ) +
   geom_point() + 
   geom_text_repel(aes(label = modalites))
-#> Warning: Removed 1 row containing missing values or values outside the scale range
-#> (`geom_text_repel()`).
 ```
 
 ![](ACM-avec-R_files/figure-html/unnamed-chunk-15-1.png)
@@ -428,8 +425,6 @@ modalités |>
   ggacm() +
   geom_point() +
   geom_text_repel(aes(label = modalites)) 
-#> Warning: Removed 1 row containing missing values or values outside the scale range
-#> (`geom_text_repel()`).
 ```
 
 ![](ACM-avec-R_files/figure-html/unnamed-chunk-16-1.png)
@@ -463,8 +458,6 @@ graph +
     title = "ACM des pratiques culturelles",
     caption = "Réalisé à partir de l'enquête Histoire de Vie 2003 de l'INSEE."
   )
-#> Warning: Removed 1 row containing missing values or values outside the scale range
-#> (`geom_text_repel()`).
 ```
 
 ![](ACM-avec-R_files/figure-html/unnamed-chunk-18-1.png)
@@ -484,8 +477,6 @@ axes <- nommer_axes(res_acm,
 
 
 graph + axes
-#> Warning: Removed 1 row containing missing values or values outside the scale range
-#> (`geom_text_repel()`).
 ```
 
 ![](ACM-avec-R_files/figure-html/unnamed-chunk-19-1.png)
@@ -499,8 +490,6 @@ ggplot2](https://ggplot2-book.org/themes.html#sec-themes).
 ``` r
 
 graph + theme_acm()
-#> Warning: Removed 1 row containing missing values or values outside the scale range
-#> (`geom_text_repel()`).
 ```
 
 ![](ACM-avec-R_files/figure-html/unnamed-chunk-20-1.png)
@@ -519,10 +508,6 @@ modalités |>
   geom_text_repel(aes(label = modalites)) +
   theme_acm() + 
   axes
-#> Warning: Removed 1 row containing missing values or values outside the scale range
-#> (`geom_point()`).
-#> Warning: Removed 1 row containing missing values or values outside the scale range
-#> (`geom_text_repel()`).
 ```
 
 ![](ACM-avec-R_files/figure-html/unnamed-chunk-21-1.png)
@@ -539,8 +524,6 @@ modalités |>
   geom_text_repel(aes(label = modalites)) +
   theme_acm() + 
   axes
-#> Warning: Removed 1 row containing missing values or values outside the scale range
-#> (`geom_text_repel()`).
 ```
 
 ![](ACM-avec-R_files/figure-html/unnamed-chunk-22-1.png)
@@ -598,8 +581,6 @@ modalités |>
   theme_acm() + 
   axes +
   couleurs
-#> Warning: Removed 1 row containing missing values or values outside the scale range
-#> (`geom_text_repel()`).
 ```
 
 ![](ACM-avec-R_files/figure-html/unnamed-chunk-24-1.png)
