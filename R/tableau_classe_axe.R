@@ -3,7 +3,7 @@
 #' @param classification x
 #' @param numero_axe x
 #'
-#' @returns
+#' @returns f
 #'
 #' @keywords internal
 #'
