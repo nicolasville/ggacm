@@ -3,13 +3,13 @@
 #' Cette fonction permet de faire apparaître plusieurs fois le nuage d'individu en colorant à chaque fois les individus qui partagent une même modalité.
 #'
 #' @param resultat_individus Un tableau de donnée avec les coordonnées des individus
-#'   qui a été produit par extraire_individus().
+#'   qui a été produit par [extraire_individus()].
 #'  La fonction prend également en charge un résultat d'ACM directement si besoin.
 #' @param variables_a_representer La liste des variables à représenter :
 #'  on si on souhaite sélectionner le `genre`, la `classe` et le `niveau_de_revenu`
 #'  on peut par exemple écire `c(genre, classe, niveau_de_revenu)`
 #' @param forme Quelles formes pour les individus qui partagent une même modalité ?
-#'  Par défaut un triangle. Doit-être un nombre, voir la documentation de ggplot
+#'  Par défaut un carré ("square"). Voir la [documentation de ggplot](https://ggplot2.tidyverse.org/articles/ggplot2-specs.html#point)
 #'  sur les "shapes" pour les possibilités.
 #' @param couleur Quelle couleur doit-être utilisée ?
 #'  doit-être une chaiîne de caractère qui encode la couleur comme "#e41ac" ou "yellow"
@@ -17,7 +17,7 @@
 #' @param longueur_max_labels Longeur maximum des labels de chaque facette.
 #'  Par défaut chaque label ira à la ligne au bout de 20 caractères.
 #' @param ... Arguments supplémentaires pour les utilisateurs avancés
-#'  qui seront passés à ggplot2::facet_wrap()
+#'  qui seront passés à [ggplot2::facet_wrap()]
 #'
 #' @returns Un objet ggplot2.
 #' @export
@@ -34,9 +34,10 @@
 #'    )
 nuage_individus_facette <- function(resultat_individus,
                            variables_a_representer,
-                           forme = 17,
+                           forme = "square",
                            couleur = "#e41a1c",
                            longueur_max_labels = 20,
+                           taille = 2
                            ...) {
 
   if(resultat_individus |> inherits("MCA")){
@@ -45,11 +46,13 @@ nuage_individus_facette <- function(resultat_individus,
 
   if(!all(c("dim1_coord", "dim2_coord") %in% names(resultat_individus))) {
     cli::cli_abort(c(
-      "x" = "Les colonnes {.var dim1_coord} et {.var dim2_coord} n'ont pas été trouvé dans le tableau.",
+      "x" = "Les colonnes {.var dim1_coord} et {.var dim2_coord} n'ont pas été trouvées dans le tableau.",
       "i" = "Les colonnes avec les coordonnées des individus doivent porter ces noms.",
       "i" = "Peut-être vous n'avez pas passé un tableau produit par {.fun extraire_individus} ?"
     ))
   }
+
+
 
 
   # 1. Capturer le nom des variables à représenter -------------------
@@ -60,6 +63,7 @@ nuage_individus_facette <- function(resultat_individus,
   variables <- tidyselect::eval_select(quosure, resultat_individus)
   variables <- names(variables)
 
+  if (length(variables) == 0) cli::cli_abort("Aucune variable sélectionnée.")
 
   # 2. Modifier le tableau de donnée pour la représentation ----------
 
@@ -84,7 +88,8 @@ nuage_individus_facette <- function(resultat_individus,
     ) +
     ggplot2::geom_point(
       color = couleur,
-      shape = forme
+      shape = forme,
+      size = taille
     ) +
     ggplot2::facet_wrap(
       ~ modalites,

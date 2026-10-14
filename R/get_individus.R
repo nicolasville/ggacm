@@ -31,7 +31,7 @@ extraire_individus <- function(resultat_acm) {
   data_acm <- resultat_acm$call$X  |> supprimer_var_()
 
   # puis on numérote les lignes dans une colonne id.
-  data_acm <- data_acm |> as_tibble(rownames = "id")
+  data_acm <- data_acm |> as_tibble(rownames = ".id")
 
   # fonction pour transformer les Dim 1 et autres joyeseté en noms de colonnes valides
   nettoyage <- function(x, quoi) {
@@ -48,22 +48,22 @@ extraire_individus <- function(resultat_acm) {
   # as_tibble(rownames = "id") fonctionne de la même manière que row_id_to_column
   coordonnees <- resultat_acm$ind$coord|>
     nettoyage(quoi = "coord") |>
-    as_tibble(rownames = "id")
+    as_tibble(rownames = ".id")
 
   contribution <- resultat_acm$ind$contrib|>
     nettoyage(quoi = "contrib") |>
-    as_tibble(rownames = "id")
+    as_tibble(rownames = ".id")
 
   cos2 <- resultat_acm$ind$cos2 |>
     nettoyage(quoi = "cos2") |>
-    as_tibble(rownames = "id")
+    as_tibble(rownames = ".id")
 
   # puis on combine les tableaux
   data_acm |>
-    left_join(coordonnees, by = "id") |>
-    left_join(contribution, by = "id") |>
-    left_join(cos2, by = "id") |>
-    select(-id) |>
+    left_join(coordonnees, by = ".id") |>
+    left_join(contribution, by = ".id") |>
+    left_join(cos2, by = ".id") |>
+    select(-.id) |>
     relocate(dim1_coord, dim2_coord)
 
 }
