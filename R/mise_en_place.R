@@ -40,7 +40,7 @@ mise_en_place_ACM <- function(...){
 
   cli::cli_h3("Les options générales de la session R ont été modifié.")
   cli::cli_inform(c(
-    "v" = "Les nombres décimaux s'afficheront avec une virgule.",
+    "v" = "Les nombres décimaux s'afficheront avec une virgule."
     ))
 
   gtsummary::theme_gtsummary_language(
