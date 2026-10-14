@@ -561,25 +561,21 @@ appel au nuage de **tous** les individus, on précise donc qu'on veut utiliser c
 On rajoute dessus une deuxième couche de carrés rouges, qui s'imprimera au dessus
 de la couche précédente uniquement pour les individus concernés. 
 
-Enfin, on demande à ggplot de refaire ce travail, pour chaque modalité sur un 
-graphique différent (`facet_wrap(~ modalite)`). L'argument `labeller` est ici pour faire sauter une ligne dans les labels au cas où le texte d'une modalité serait trop grand. 
-
-Pour que ce soit plus esthétiques, je rajoute ensuite les axes et le thème qu'
-on a vu plus haut. On pourrait également penser à rajouter un titre par exemple. 
+Quand on lance la fonction ggplot va refaire ce travail, pour chaque modalité sur un 
+graphique différent, avant de les "coller" ensemble.
 
 ```{r}
 #| fig-height: 7
 #| fig-width: 8
 
-individus_concernés |>
+individus_concernés |> 
     ggacm() +
     facet_wrap(
-      ~ modalite,
+      ~ modalite, # <-- = répéter pour chaque modalités
       labeller = labeller(modalites = label_wrap_gen(width = 20))
     )+
     geom_point(
-      data = individus,
-      aes(dim1_coord, dim2_coord),
+      data = individus, # <--- Important !
       color = "darkgrey",
       show.legend = FALSE
     ) +
