@@ -7,15 +7,16 @@
 nuage_individus_facette(
   resultat_individus,
   variables_a_representer,
-  forme = 17,
+  forme = "square",
   couleur = "#e41a1c",
   longueur_max_labels = 20,
+  taille = 2,
   ...
 )
 }
 \arguments{
 \item{resultat_individus}{Un tableau de donnée avec les coordonnées des individus
-qui a été produit par extraire_individus().
+qui a été produit par \code{\link[=extraire_individus]{extraire_individus()}}.
 La fonction prend également en charge un résultat d'ACM directement si besoin.}
 
 \item{variables_a_representer}{La liste des variables à représenter :
@@ -23,7 +24,7 @@ on si on souhaite sélectionner le \code{genre}, la \code{classe} et le \code{ni
 on peut par exemple écire \code{c(genre, classe, niveau_de_revenu)}}
 
 \item{forme}{Quelles formes pour les individus qui partagent une même modalité ?
-Par défaut un triangle. Doit-être un nombre, voir la documentation de ggplot
+Par défaut un carré ("square"). Voir la \href{https://ggplot2.tidyverse.org/articles/ggplot2-specs.html#point}{documentation de ggplot}
 sur les "shapes" pour les possibilités.}
 
 \item{couleur}{Quelle couleur doit-être utilisée ?
@@ -34,7 +35,7 @@ par exemple.}
 Par défaut chaque label ira à la ligne au bout de 20 caractères.}
 
 \item{...}{Arguments supplémentaires pour les utilisateurs avancés
-qui seront passés à ggplot2::facet_wrap()}
+qui seront passés à \code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()}}}
 }
 \value{
 Un objet ggplot2.

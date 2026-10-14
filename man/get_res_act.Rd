@@ -20,3 +20,4 @@ Title
 \examples{
 # une liste d'exemple
 }
+\keyword{internal}

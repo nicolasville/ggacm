@@ -18,3 +18,4 @@ FactoMineR renvoie parfois pour certaines colonnes un résultat avec des modalit
 \examples{
 #
 }
+\keyword{internal}

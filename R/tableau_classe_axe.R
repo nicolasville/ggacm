@@ -1,7 +1,7 @@
 #' Tableau classe
 #'
-#' @param classification
-#' @param numero_axe
+#' @param classification x
+#' @param numero_axe x
 #'
 #' @returns
 #'

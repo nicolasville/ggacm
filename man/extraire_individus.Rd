@@ -4,10 +4,12 @@
 \alias{extraire_individus}
 \title{Obtenir les résultats pour chaque individus}
 \usage{
-extraire_individus(resultat_acm)
+extraire_individus(resultat_acm, ordre = NULL)
 }
 \arguments{
 \item{resultat_acm}{resultat acm}
+
+\item{ordre}{ne pas toucher.}
 }
 \value{
 Le tableau de données surlequel vous avez réalisé l'ACM auquel a été
