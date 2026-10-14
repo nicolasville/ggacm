@@ -62,24 +62,13 @@ extraire_classes <- function(resultat_classification, ...){
 
   # fin tests ------------------------------
 
-  classif.df <- resultat_classification$data.clust |>
-    supprimer_var_() |>
-    tibble::as_tibble(rownames = "id") |>
-    select(id, clust)
-  # On pourrait s'arrêter là, mais on souhaite également avoir les dimensions
-  # et les contributions de l'ACM
 
-  data_acm <- resultat_classification$call$t$res |>
-    extraire_individus() |>
-    tibble::as_tibble(rownames = "id")
+  classif <- resultat_classification$data.clust
 
-  # on peut maintenant joindre les deux :
-  output <- data_acm |> left_join(classif.df)
-
-  # et enfin on renomme la colonne
-  output |>
-    rename(classe = clust) |>
-    select(-id) |>
+  resultat_classification |>
+    purrr::chuck("call", "t", "res") |>
+    extraire_individus(ordre = rownames(classif)) |>   # ordre d'origine
+    mutate(classe = classif$clust) |>
     relocate(classe, ...)
 
 }

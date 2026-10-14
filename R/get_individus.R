@@ -5,6 +5,7 @@
 #' individus leur coordonnées.
 #'
 #' @param resultat_acm resultat acm
+#' @param ordre ne pas toucher.
 #'
 #' @returns Le tableau de données surlequel vous avez réalisé l'ACM auquel a été
 #'  ajouté pour chaque individus : leur coordonnées sur chaque axe (stockés dans des
@@ -23,47 +24,37 @@
 #' resultat_individus <- resultat_acm |> extraire_individus()
 #'
 #' resultat_individus
-extraire_individus <- function(resultat_acm) {
+extraire_individus <- function(resultat_acm, ordre = NULL) {
 
   check_resultat_acm(resultat_acm)
 
   # On vient chercher le tableau dde donnée originel
-  data_acm <- resultat_acm$call$X  |> supprimer_var_()
+  data_acm <- resultat_acm$call$X  |>
+    supprimer_var_() |>
+    as_tibble()
 
-  # puis on numérote les lignes dans une colonne id.
-  data_acm <- data_acm |> as_tibble(rownames = ".id")
+  # Utilisé pour extraire_classe()
+  ids <- if (is.null(ordre)) rownames(data_acm) else ordre
 
   # fonction pour transformer les Dim 1 et autres joyeseté en noms de colonnes valides
   nettoyage <- function(x, quoi) {
+
+    x <- as.data.frame(x)[ids, , drop = FALSE] # met dans l'ordre
 
     x |>
       as_tibble() |>
       rename_all(stringr::str_to_lower) %>%
       rename_all(~ stringr::str_replace(., " ", "")) %>%
       rename_all(~ stringr::str_c(., quoi, sep = "_"))
-
   }
 
-  # ensuite on va chercher les coordonnées des individus
-  # as_tibble(rownames = "id") fonctionne de la même manière que row_id_to_column
-  coordonnees <- resultat_acm$ind$coord|>
-    nettoyage(quoi = "coord") |>
-    as_tibble(rownames = ".id")
-
-  contribution <- resultat_acm$ind$contrib|>
-    nettoyage(quoi = "contrib") |>
-    as_tibble(rownames = ".id")
-
-  cos2 <- resultat_acm$ind$cos2 |>
-    nettoyage(quoi = "cos2") |>
-    as_tibble(rownames = ".id")
-
-  # puis on combine les tableaux
-  data_acm |>
-    left_join(coordonnees, by = ".id") |>
-    left_join(contribution, by = ".id") |>
-    left_join(cos2, by = ".id") |>
-    select(-.id) |>
+  # assemblage du tableau final
+  dplyr::bind_cols(
+    data_acm,
+    nettoyage(resultat_acm$ind$coord,   "coord"),
+    nettoyage(resultat_acm$ind$contrib, "contrib"),
+    nettoyage(resultat_acm$ind$cos2,    "cos2")
+  ) |>
     relocate(dim1_coord, dim2_coord)
 
 }
