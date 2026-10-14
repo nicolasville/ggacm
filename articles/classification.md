@@ -20,7 +20,7 @@ de classe, indiquez -1.
 resultat_acm <- createurs_de_contenus_pol |> 
   ACM(variables_supplementaires = c(titre, personne, orientation))
 #> ℹ Réalisation de l'ACM avec `FactoMineR::MCA()`
-#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [69ms]
+#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [63ms]
 #> 
 #> ℹ
 #> • Sur 56 individus...
@@ -37,7 +37,7 @@ resultat_acm <- createurs_de_contenus_pol |>
 #> ℹ 
 ── Variables supplémentaires : 3 
 #> ℹ 
-`titre`, `personne`, and `orientation`.[78ms]
+`titre`, `personne`, and `orientation`.[67ms]
 
 # puis on peut faire la classification
 resultat_classification <- resultat_acm |> 

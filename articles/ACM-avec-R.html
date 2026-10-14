@@ -70,10 +70,10 @@
 
 
 
-    <p>Ceci est un document qui contient le code utilisé pour réalisé les ACM. Si ce n’est pas déjà fait, il va falloir installer les packages qui sont utilisés.</p>
-<p>La plupart du code que j’ai fait est mis dans un package sur github. Pour l’ installer, il suffit de faire <code>pak::pak("nicolasville/ggacm)</code> (à condition d’ avoir installé le package <code>pak</code> auparavant pour faire l’installation.)</p>
-<section class="level2"><h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
-</h2>
+    <p>Ceci est un document qui contient le code utilisé pour réaliser des sorties graphiques d’ACM. Pour les phases préalables, où il faut choisir les variables pertinente de l’analyse et essayer un grand nombre de combinaison de variable, on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’explorer rapidement les différentes analyses possibles à partir d’un même jeu de données. De manière similaire, <code>explor::explor()</code> fonctionne très bien pour rapidement explorer un résultat.</p>
+<p>Le code présenté ici et dans le packages interviennent en général à une phase ultérieure, où l’on cherche à manipuler le résultat de l’analyse pour produire des graphiques, des tableaux, etc.</p>
+<p>Si ce n’est pas déjà fait, il va falloir installer les packages qui sont utilisés, dont mon package. N’étant disponible que sur Github, la meilleure manière de l’installer est de faire <code>pak::pak("nicolasville/ggacm)</code> (ce qui nécessite l’installation du package <code>pak</code> auparavant avec <code>install.packages("pak")</code>).</p>
+<p>On commence par charger les packages qui vont être utilisé.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
@@ -101,9 +101,7 @@
 <span><span class="co">#&gt; ✔ Ils s'afficheront en français.</span></span>
 <span><span class="co">#&gt; ✔ En utilisant une virgule pour les nombres décimaux.</span></span></code></pre></div>
 </div>
-<p>Import</p>
-<p>Je commence par charger le résultat de l’ACM. Ici, je vais utiliser le jeu de donnée du package <code>questionr</code> qui correspond à un extrait de l’enquête <em>Histoire de Vie</em> de l’INSEE en 2003.</p>
-<p>Je ne prend que certaines colonnes qui sont relatives à l’ID de l’individu, et certaines pratiques.</p>
+<p>Le jeu de donnée du package <code>questionr</code> qui correspond à un extrait de l’enquête <em>Histoire de Vie</em> de l’INSEE en 2003 sera utilisé en exemple ici. Plus précisément seules certaines colonnes relatives à certaines pratiques sont gardées.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
@@ -135,29 +133,29 @@
 <span><span class="co">#&gt; 10    10 Homme Non     Non    Oui    Pratiquant occasionnel      Oui  </span></span>
 <span><span class="co">#&gt; # ℹ 1.990 more rows</span></span></code></pre></div>
 </div>
-<p>Pour faire un tableau résumé, on peut faire :</p>
+<p>Pour se donner une idée du jeu de donnée :</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hdv2003</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html" class="external-link">tbl_summary</a></span><span class="op">(</span>include <span class="op">=</span> <span class="op">-</span><span class="va">id</span><span class="op">)</span> <span class="co"># toutes les variables sauf l'identifiant</span></span></code></pre></div>
 <div class="cell-output-display">
-<div id="bcqnbmbndr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bcqnbmbndr table {
+<div id="wjxyrmhkcl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wjxyrmhkcl table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bcqnbmbndr thead, #bcqnbmbndr tbody, #bcqnbmbndr tfoot, #bcqnbmbndr tr, #bcqnbmbndr td, #bcqnbmbndr th {
+#wjxyrmhkcl thead, #wjxyrmhkcl tbody, #wjxyrmhkcl tfoot, #wjxyrmhkcl tr, #wjxyrmhkcl td, #wjxyrmhkcl th {
   border-style: none;
 }
 
-#bcqnbmbndr p {
+#wjxyrmhkcl p {
   margin: 0;
   padding: 0;
 }
 
-#bcqnbmbndr .gt_table {
+#wjxyrmhkcl .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -183,12 +181,12 @@
   border-left-color: #D3D3D3;
 }
 
-#bcqnbmbndr .gt_caption {
+#wjxyrmhkcl .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bcqnbmbndr .gt_title {
+#wjxyrmhkcl .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -200,7 +198,7 @@
   border-bottom-width: 0;
 }
 
-#bcqnbmbndr .gt_subtitle {
+#wjxyrmhkcl .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -212,7 +210,7 @@
   border-top-width: 0;
 }
 
-#bcqnbmbndr .gt_heading {
+#wjxyrmhkcl .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -224,13 +222,13 @@
   border-right-color: #D3D3D3;
 }
 
-#bcqnbmbndr .gt_bottom_border {
+#wjxyrmhkcl .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bcqnbmbndr .gt_col_headings {
+#wjxyrmhkcl .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -245,7 +243,7 @@
   border-right-color: #D3D3D3;
 }
 
-#bcqnbmbndr .gt_col_heading {
+#wjxyrmhkcl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -265,7 +263,7 @@
   overflow-x: hidden;
 }
 
-#bcqnbmbndr .gt_column_spanner_outer {
+#wjxyrmhkcl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -277,15 +275,15 @@
   padding-right: 4px;
 }
 
-#bcqnbmbndr .gt_column_spanner_outer:first-child {
+#wjxyrmhkcl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bcqnbmbndr .gt_column_spanner_outer:last-child {
+#wjxyrmhkcl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bcqnbmbndr .gt_column_spanner {
+#wjxyrmhkcl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -297,11 +295,11 @@
   width: 100%;
 }
 
-#bcqnbmbndr .gt_spanner_row {
+#wjxyrmhkcl .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bcqnbmbndr .gt_group_heading {
+#wjxyrmhkcl .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -327,7 +325,7 @@
   text-align: left;
 }
 
-#bcqnbmbndr .gt_empty_group_heading {
+#wjxyrmhkcl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -342,15 +340,15 @@
   vertical-align: middle;
 }
 
-#bcqnbmbndr .gt_from_md > :first-child {
+#wjxyrmhkcl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bcqnbmbndr .gt_from_md > :last-child {
+#wjxyrmhkcl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bcqnbmbndr .gt_row {
+#wjxyrmhkcl .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -369,7 +367,7 @@
   overflow-x: hidden;
 }
 
-#bcqnbmbndr .gt_stub {
+#wjxyrmhkcl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -382,7 +380,7 @@
   padding-right: 5px;
 }
 
-#bcqnbmbndr .gt_stub_row_group {
+#wjxyrmhkcl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -396,15 +394,15 @@
   vertical-align: top;
 }
 
-#bcqnbmbndr .gt_row_group_first td {
+#wjxyrmhkcl .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bcqnbmbndr .gt_row_group_first th {
+#wjxyrmhkcl .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bcqnbmbndr .gt_summary_row {
+#wjxyrmhkcl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -414,16 +412,16 @@
   padding-right: 5px;
 }
 
-#bcqnbmbndr .gt_first_summary_row {
+#wjxyrmhkcl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bcqnbmbndr .gt_first_summary_row.thick {
+#wjxyrmhkcl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bcqnbmbndr .gt_last_summary_row {
+#wjxyrmhkcl .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -433,7 +431,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#bcqnbmbndr .gt_grand_summary_row {
+#wjxyrmhkcl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -443,7 +441,7 @@
   padding-right: 5px;
 }
 
-#bcqnbmbndr .gt_first_grand_summary_row {
+#wjxyrmhkcl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -453,7 +451,7 @@
   border-top-color: #D3D3D3;
 }
 
-#bcqnbmbndr .gt_last_grand_summary_row_top {
+#wjxyrmhkcl .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -463,11 +461,11 @@
   border-bottom-color: #D3D3D3;
 }
 
-#bcqnbmbndr .gt_striped {
+#wjxyrmhkcl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bcqnbmbndr .gt_table_body {
+#wjxyrmhkcl .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -476,7 +474,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#bcqnbmbndr .gt_footnotes {
+#wjxyrmhkcl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -490,7 +488,7 @@
   border-right-color: #D3D3D3;
 }
 
-#bcqnbmbndr .gt_footnote {
+#wjxyrmhkcl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -499,7 +497,7 @@
   padding-right: 5px;
 }
 
-#bcqnbmbndr .gt_sourcenotes {
+#wjxyrmhkcl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -513,7 +511,7 @@
   border-right-color: #D3D3D3;
 }
 
-#bcqnbmbndr .gt_sourcenote {
+#wjxyrmhkcl .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -521,72 +519,72 @@
   padding-right: 5px;
 }
 
-#bcqnbmbndr .gt_left {
+#wjxyrmhkcl .gt_left {
   text-align: left;
 }
 
-#bcqnbmbndr .gt_center {
+#wjxyrmhkcl .gt_center {
   text-align: center;
 }
 
-#bcqnbmbndr .gt_right {
+#wjxyrmhkcl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bcqnbmbndr .gt_font_normal {
+#wjxyrmhkcl .gt_font_normal {
   font-weight: normal;
 }
 
-#bcqnbmbndr .gt_font_bold {
+#wjxyrmhkcl .gt_font_bold {
   font-weight: bold;
 }
 
-#bcqnbmbndr .gt_font_italic {
+#wjxyrmhkcl .gt_font_italic {
   font-style: italic;
 }
 
-#bcqnbmbndr .gt_super {
+#wjxyrmhkcl .gt_super {
   font-size: 65%;
 }
 
-#bcqnbmbndr .gt_footnote_marks {
+#wjxyrmhkcl .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bcqnbmbndr .gt_asterisk {
+#wjxyrmhkcl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bcqnbmbndr .gt_indent_1 {
+#wjxyrmhkcl .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bcqnbmbndr .gt_indent_2 {
+#wjxyrmhkcl .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bcqnbmbndr .gt_indent_3 {
+#wjxyrmhkcl .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bcqnbmbndr .gt_indent_4 {
+#wjxyrmhkcl .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bcqnbmbndr .gt_indent_5 {
+#wjxyrmhkcl .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bcqnbmbndr .katex-display {
+#wjxyrmhkcl .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bcqnbmbndr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wjxyrmhkcl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -699,7 +697,9 @@
 </div>
 </div>
 </div>
-<p>Comme ça fait pas mal de modalités oui/non, je les recode pour qu’elles soient toutes différentes et plus claires. (L’IA génère bien ces recodages en général)</p>
+<section class="level2"><h2 id="préparations">Préparations<a class="anchor" aria-label="anchor" href="#pr%C3%A9parations"></a>
+</h2>
+<p>Une partie des modalités sont identiques entre variable (“Oui”/“Non”). Pour rendre les sorties plus lisbiles, je les recode pour qu’elles soient toutes différentes et plus claires. (L’IA génère bien ces recodages en général)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hdv2003</span> <span class="op">&lt;-</span> <span class="va">hdv2003</span> <span class="op">|&gt;</span>   </span>
@@ -742,7 +742,7 @@
 <span><span class="co">#&gt; 10    10 Homme Ne fait pas de cuisine Ne bricole pas Va au cinéma    Prat… Prat…</span></span>
 <span><span class="co">#&gt; # ℹ 1.990 more rows</span></span></code></pre></div>
 </div>
-<p>Je sélectionne ensuite les variables pour l’ACM avec quelque chose de ce genre</p>
+<p>On sélectionne ensuite les variables supplémentaires…</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">variables_supplémentaires</span> <span class="op">&lt;-</span> <span class="va">hdv2003</span> <span class="op">|&gt;</span> <span class="co"># prend le jeu de donnée</span></span>
@@ -752,7 +752,7 @@
 <span><span class="va">variables_supplémentaires</span></span>
 <span><span class="co">#&gt; [1] "id"   "sexe"</span></span></code></pre></div>
 </div>
-<p>Et du coup on peut garder les variables actives dans un autre vecteur</p>
+<p>… et actives</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">variables_actives</span> <span class="op">&lt;-</span> <span class="va">hdv2003</span> <span class="op">|&gt;</span></span>
@@ -762,16 +762,14 @@
 <span><span class="va">variables_actives</span></span>
 <span><span class="co">#&gt; [1] "cuisine" "bricol"  "cinema"  "relig"   "sport"</span></span></code></pre></div>
 </div>
-<p>On peut maintenant faire l’ACM avec <code><a href="https://rdrr.io/pkg/FactoMineR/man/MCA.html" class="external-link">FactoMineR::MCA</a></code>, en précisant les variables supplémentaires :</p>
+<p>On peut maintenant faire l’ACM avec <code><a href="https://rdrr.io/pkg/FactoMineR/man/MCA.html" class="external-link">FactoMineR::MCA</a></code>, en précisant les variables supplémentaires dans l’argument <code>quali.sup</code>. On stocke le résultat dans l’objet <code>res_acm</code> pour y avoir accès pour plus tard.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res_acm</span> <span class="op">&lt;-</span> <span class="va">hdv2003</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">FactoMineR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/FactoMineR/man/MCA.html" class="external-link">MCA</a></span><span class="op">(</span>quali.sup <span class="op">=</span> <span class="va">variables_supplémentaires</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in sqrt(Nj * ((N - 1)/(N - Nj))): NaNs produced</span></span></code></pre></div>
 </div>
-<p>FactoMineR produit déjà des graphiques. L’analyse est donc faite. Tous les résultats sont stockés dans l’objet <code>res_acm</code> qui est une liste de résutlat.</p>
-<p>Le package étant un peu daté, la plupart des sorties sont moches. J’ai codé quelques fonctions pour sortir plus facilement les résultats et les mettre en graphiques que j’ai mis dans un package (<code>ggacm</code>).</p>
-<p>On peut maintenant décrire les axes. Pour les taux modifiés, j’utilise <code>modif.rate()</code> du package <code>GDAtools</code>.</p>
+<p>On peut maintenant décrire les axes. Les taux modifiés de Benzécri peuvent se calculer avec <code>modif.rate()</code> du package <code>GDAtools</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">ggacm</span><span class="fu">::</span><span class="fu"><a href="../reference/extraire_variance.html">extraire_variance</a></span><span class="op">(</span><span class="va">res_acm</span><span class="op">)</span></span>
@@ -784,10 +782,10 @@
 <span></span>
 <span><span class="fu">GDAtools</span><span class="fu">::</span><span class="fu"><a href="https://nicolas-robette.frama.io/GDAtools/reference/modif.rate.html" class="external-link">modif.rate</a></span><span class="op">(</span><span class="va">res_acm</span><span class="op">)</span><span class="op">$</span><span class="va">modif</span></span>
 <span><span class="co">#&gt;                                   mrate cum.mrate</span></span>
-<span><span class="co">#&gt; dim 1 98,327888836411702300210890825838      98,3</span></span>
-<span><span class="co">#&gt; dim 2  1,571688705421736997891457576770      99,9</span></span>
-<span><span class="co">#&gt; dim 3  0,094352963276206666676237944102     100,0</span></span>
-<span><span class="co">#&gt; dim 4  0,006069494890357363288402314794     100,0</span></span>
+<span><span class="co">#&gt; dim 1 98,327888836411730721920321229845      98,3</span></span>
+<span><span class="co">#&gt; dim 2  1,571688705421702803022299121949      99,9</span></span>
+<span><span class="co">#&gt; dim 3  0,094352963276213036580841730938     100,0</span></span>
+<span><span class="co">#&gt; dim 4  0,006069494890360339206525353006     100,0</span></span>
 <span><span class="co">#&gt; dim 5  0,000000000000000000000000000757     100,0</span></span></code></pre></div>
 </div>
 </section><section class="level2"><h2 id="description-des-axes">Description des axes<a class="anchor" aria-label="anchor" href="#description-des-axes"></a>
@@ -812,23 +810,23 @@
 <span><span class="co">#&gt; ℹ Si toutes les modalités actives contribuaient également à la construction</span></span>
 <span><span class="co">#&gt; d'un axe, chacune aurait une contribution de 7,14 %.</span></span></code></pre></div>
 <div class="cell-output-display">
-<div id="mlebdzvmkw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mlebdzvmkw table {
+<div id="hmmsabyhgd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hmmsabyhgd table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mlebdzvmkw thead, #mlebdzvmkw tbody, #mlebdzvmkw tfoot, #mlebdzvmkw tr, #mlebdzvmkw td, #mlebdzvmkw th {
+#hmmsabyhgd thead, #hmmsabyhgd tbody, #hmmsabyhgd tfoot, #hmmsabyhgd tr, #hmmsabyhgd td, #hmmsabyhgd th {
   border-style: none;
 }
 
-#mlebdzvmkw p {
+#hmmsabyhgd p {
   margin: 0;
   padding: 0;
 }
 
-#mlebdzvmkw .gt_table {
+#hmmsabyhgd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -854,12 +852,12 @@
   border-left-color: #D3D3D3;
 }
 
-#mlebdzvmkw .gt_caption {
+#hmmsabyhgd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mlebdzvmkw .gt_title {
+#hmmsabyhgd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -871,7 +869,7 @@
   border-bottom-width: 0;
 }
 
-#mlebdzvmkw .gt_subtitle {
+#hmmsabyhgd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -883,7 +881,7 @@
   border-top-width: 0;
 }
 
-#mlebdzvmkw .gt_heading {
+#hmmsabyhgd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -895,13 +893,13 @@
   border-right-color: #D3D3D3;
 }
 
-#mlebdzvmkw .gt_bottom_border {
+#hmmsabyhgd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mlebdzvmkw .gt_col_headings {
+#hmmsabyhgd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -916,7 +914,7 @@
   border-right-color: #D3D3D3;
 }
 
-#mlebdzvmkw .gt_col_heading {
+#hmmsabyhgd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -936,7 +934,7 @@
   overflow-x: hidden;
 }
 
-#mlebdzvmkw .gt_column_spanner_outer {
+#hmmsabyhgd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -948,15 +946,15 @@
   padding-right: 4px;
 }
 
-#mlebdzvmkw .gt_column_spanner_outer:first-child {
+#hmmsabyhgd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mlebdzvmkw .gt_column_spanner_outer:last-child {
+#hmmsabyhgd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mlebdzvmkw .gt_column_spanner {
+#hmmsabyhgd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -968,11 +966,11 @@
   width: 100%;
 }
 
-#mlebdzvmkw .gt_spanner_row {
+#hmmsabyhgd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mlebdzvmkw .gt_group_heading {
+#hmmsabyhgd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -998,7 +996,7 @@
   text-align: left;
 }
 
-#mlebdzvmkw .gt_empty_group_heading {
+#hmmsabyhgd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1013,15 +1011,15 @@
   vertical-align: middle;
 }
 
-#mlebdzvmkw .gt_from_md > :first-child {
+#hmmsabyhgd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mlebdzvmkw .gt_from_md > :last-child {
+#hmmsabyhgd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mlebdzvmkw .gt_row {
+#hmmsabyhgd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1040,7 +1038,7 @@
   overflow-x: hidden;
 }
 
-#mlebdzvmkw .gt_stub {
+#hmmsabyhgd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1053,7 +1051,7 @@
   padding-right: 5px;
 }
 
-#mlebdzvmkw .gt_stub_row_group {
+#hmmsabyhgd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1067,15 +1065,15 @@
   vertical-align: top;
 }
 
-#mlebdzvmkw .gt_row_group_first td {
+#hmmsabyhgd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mlebdzvmkw .gt_row_group_first th {
+#hmmsabyhgd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mlebdzvmkw .gt_summary_row {
+#hmmsabyhgd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1085,16 +1083,16 @@
   padding-right: 5px;
 }
 
-#mlebdzvmkw .gt_first_summary_row {
+#hmmsabyhgd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mlebdzvmkw .gt_first_summary_row.thick {
+#hmmsabyhgd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mlebdzvmkw .gt_last_summary_row {
+#hmmsabyhgd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1104,7 +1102,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#mlebdzvmkw .gt_grand_summary_row {
+#hmmsabyhgd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1114,7 +1112,7 @@
   padding-right: 5px;
 }
 
-#mlebdzvmkw .gt_first_grand_summary_row {
+#hmmsabyhgd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1124,7 +1122,7 @@
   border-top-color: #D3D3D3;
 }
 
-#mlebdzvmkw .gt_last_grand_summary_row_top {
+#hmmsabyhgd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1134,11 +1132,11 @@
   border-bottom-color: #D3D3D3;
 }
 
-#mlebdzvmkw .gt_striped {
+#hmmsabyhgd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mlebdzvmkw .gt_table_body {
+#hmmsabyhgd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1147,7 +1145,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#mlebdzvmkw .gt_footnotes {
+#hmmsabyhgd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1161,7 +1159,7 @@
   border-right-color: #D3D3D3;
 }
 
-#mlebdzvmkw .gt_footnote {
+#hmmsabyhgd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1170,7 +1168,7 @@
   padding-right: 5px;
 }
 
-#mlebdzvmkw .gt_sourcenotes {
+#hmmsabyhgd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1184,7 +1182,7 @@
   border-right-color: #D3D3D3;
 }
 
-#mlebdzvmkw .gt_sourcenote {
+#hmmsabyhgd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1192,72 +1190,72 @@
   padding-right: 5px;
 }
 
-#mlebdzvmkw .gt_left {
+#hmmsabyhgd .gt_left {
   text-align: left;
 }
 
-#mlebdzvmkw .gt_center {
+#hmmsabyhgd .gt_center {
   text-align: center;
 }
 
-#mlebdzvmkw .gt_right {
+#hmmsabyhgd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mlebdzvmkw .gt_font_normal {
+#hmmsabyhgd .gt_font_normal {
   font-weight: normal;
 }
 
-#mlebdzvmkw .gt_font_bold {
+#hmmsabyhgd .gt_font_bold {
   font-weight: bold;
 }
 
-#mlebdzvmkw .gt_font_italic {
+#hmmsabyhgd .gt_font_italic {
   font-style: italic;
 }
 
-#mlebdzvmkw .gt_super {
+#hmmsabyhgd .gt_super {
   font-size: 65%;
 }
 
-#mlebdzvmkw .gt_footnote_marks {
+#hmmsabyhgd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mlebdzvmkw .gt_asterisk {
+#hmmsabyhgd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mlebdzvmkw .gt_indent_1 {
+#hmmsabyhgd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mlebdzvmkw .gt_indent_2 {
+#hmmsabyhgd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mlebdzvmkw .gt_indent_3 {
+#hmmsabyhgd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mlebdzvmkw .gt_indent_4 {
+#hmmsabyhgd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mlebdzvmkw .gt_indent_5 {
+#hmmsabyhgd .gt_indent_5 {
   text-indent: 25px;
 }
 
-#mlebdzvmkw .katex-display {
+#hmmsabyhgd .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#mlebdzvmkw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#hmmsabyhgd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1353,23 +1351,23 @@
 <span><span class="co">#&gt; ℹ Si toutes les modalités actives contribuaient également à la construction</span></span>
 <span><span class="co">#&gt; d'un axe, chacune aurait une contribution de 7,14 %.</span></span></code></pre></div>
 <div class="cell-output-display">
-<div id="ozlhfsnbea" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ozlhfsnbea table {
+<div id="dglzfvggwq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dglzfvggwq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ozlhfsnbea thead, #ozlhfsnbea tbody, #ozlhfsnbea tfoot, #ozlhfsnbea tr, #ozlhfsnbea td, #ozlhfsnbea th {
+#dglzfvggwq thead, #dglzfvggwq tbody, #dglzfvggwq tfoot, #dglzfvggwq tr, #dglzfvggwq td, #dglzfvggwq th {
   border-style: none;
 }
 
-#ozlhfsnbea p {
+#dglzfvggwq p {
   margin: 0;
   padding: 0;
 }
 
-#ozlhfsnbea .gt_table {
+#dglzfvggwq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1395,12 +1393,12 @@
   border-left-color: #D3D3D3;
 }
 
-#ozlhfsnbea .gt_caption {
+#dglzfvggwq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ozlhfsnbea .gt_title {
+#dglzfvggwq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1412,7 +1410,7 @@
   border-bottom-width: 0;
 }
 
-#ozlhfsnbea .gt_subtitle {
+#dglzfvggwq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1424,7 +1422,7 @@
   border-top-width: 0;
 }
 
-#ozlhfsnbea .gt_heading {
+#dglzfvggwq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1436,13 +1434,13 @@
   border-right-color: #D3D3D3;
 }
 
-#ozlhfsnbea .gt_bottom_border {
+#dglzfvggwq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ozlhfsnbea .gt_col_headings {
+#dglzfvggwq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1457,7 +1455,7 @@
   border-right-color: #D3D3D3;
 }
 
-#ozlhfsnbea .gt_col_heading {
+#dglzfvggwq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1477,7 +1475,7 @@
   overflow-x: hidden;
 }
 
-#ozlhfsnbea .gt_column_spanner_outer {
+#dglzfvggwq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1489,15 +1487,15 @@
   padding-right: 4px;
 }
 
-#ozlhfsnbea .gt_column_spanner_outer:first-child {
+#dglzfvggwq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ozlhfsnbea .gt_column_spanner_outer:last-child {
+#dglzfvggwq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ozlhfsnbea .gt_column_spanner {
+#dglzfvggwq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1509,11 +1507,11 @@
   width: 100%;
 }
 
-#ozlhfsnbea .gt_spanner_row {
+#dglzfvggwq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ozlhfsnbea .gt_group_heading {
+#dglzfvggwq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1539,7 +1537,7 @@
   text-align: left;
 }
 
-#ozlhfsnbea .gt_empty_group_heading {
+#dglzfvggwq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1554,15 +1552,15 @@
   vertical-align: middle;
 }
 
-#ozlhfsnbea .gt_from_md > :first-child {
+#dglzfvggwq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ozlhfsnbea .gt_from_md > :last-child {
+#dglzfvggwq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ozlhfsnbea .gt_row {
+#dglzfvggwq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1581,7 +1579,7 @@
   overflow-x: hidden;
 }
 
-#ozlhfsnbea .gt_stub {
+#dglzfvggwq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1594,7 +1592,7 @@
   padding-right: 5px;
 }
 
-#ozlhfsnbea .gt_stub_row_group {
+#dglzfvggwq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1608,15 +1606,15 @@
   vertical-align: top;
 }
 
-#ozlhfsnbea .gt_row_group_first td {
+#dglzfvggwq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ozlhfsnbea .gt_row_group_first th {
+#dglzfvggwq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ozlhfsnbea .gt_summary_row {
+#dglzfvggwq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1626,16 +1624,16 @@
   padding-right: 5px;
 }
 
-#ozlhfsnbea .gt_first_summary_row {
+#dglzfvggwq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ozlhfsnbea .gt_first_summary_row.thick {
+#dglzfvggwq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ozlhfsnbea .gt_last_summary_row {
+#dglzfvggwq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1645,7 +1643,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#ozlhfsnbea .gt_grand_summary_row {
+#dglzfvggwq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1655,7 +1653,7 @@
   padding-right: 5px;
 }
 
-#ozlhfsnbea .gt_first_grand_summary_row {
+#dglzfvggwq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1665,7 +1663,7 @@
   border-top-color: #D3D3D3;
 }
 
-#ozlhfsnbea .gt_last_grand_summary_row_top {
+#dglzfvggwq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1675,11 +1673,11 @@
   border-bottom-color: #D3D3D3;
 }
 
-#ozlhfsnbea .gt_striped {
+#dglzfvggwq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ozlhfsnbea .gt_table_body {
+#dglzfvggwq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1688,7 +1686,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#ozlhfsnbea .gt_footnotes {
+#dglzfvggwq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1702,7 +1700,7 @@
   border-right-color: #D3D3D3;
 }
 
-#ozlhfsnbea .gt_footnote {
+#dglzfvggwq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1711,7 +1709,7 @@
   padding-right: 5px;
 }
 
-#ozlhfsnbea .gt_sourcenotes {
+#dglzfvggwq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1725,7 +1723,7 @@
   border-right-color: #D3D3D3;
 }
 
-#ozlhfsnbea .gt_sourcenote {
+#dglzfvggwq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1733,72 +1731,72 @@
   padding-right: 5px;
 }
 
-#ozlhfsnbea .gt_left {
+#dglzfvggwq .gt_left {
   text-align: left;
 }
 
-#ozlhfsnbea .gt_center {
+#dglzfvggwq .gt_center {
   text-align: center;
 }
 
-#ozlhfsnbea .gt_right {
+#dglzfvggwq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ozlhfsnbea .gt_font_normal {
+#dglzfvggwq .gt_font_normal {
   font-weight: normal;
 }
 
-#ozlhfsnbea .gt_font_bold {
+#dglzfvggwq .gt_font_bold {
   font-weight: bold;
 }
 
-#ozlhfsnbea .gt_font_italic {
+#dglzfvggwq .gt_font_italic {
   font-style: italic;
 }
 
-#ozlhfsnbea .gt_super {
+#dglzfvggwq .gt_super {
   font-size: 65%;
 }
 
-#ozlhfsnbea .gt_footnote_marks {
+#dglzfvggwq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ozlhfsnbea .gt_asterisk {
+#dglzfvggwq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ozlhfsnbea .gt_indent_1 {
+#dglzfvggwq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ozlhfsnbea .gt_indent_2 {
+#dglzfvggwq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ozlhfsnbea .gt_indent_3 {
+#dglzfvggwq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ozlhfsnbea .gt_indent_4 {
+#dglzfvggwq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ozlhfsnbea .gt_indent_5 {
+#dglzfvggwq .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ozlhfsnbea .katex-display {
+#dglzfvggwq .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ozlhfsnbea div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#dglzfvggwq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1865,23 +1863,23 @@
 <div class="sourceCode cell-code" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/caracteriser_axe.html">caracteriser_axe</a></span><span class="op">(</span><span class="va">res_acm</span>, <span class="fl">3</span>, contribution_minimum <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
-<div id="puwktlbace" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#puwktlbace table {
+<div id="nhoujghmoi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nhoujghmoi table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#puwktlbace thead, #puwktlbace tbody, #puwktlbace tfoot, #puwktlbace tr, #puwktlbace td, #puwktlbace th {
+#nhoujghmoi thead, #nhoujghmoi tbody, #nhoujghmoi tfoot, #nhoujghmoi tr, #nhoujghmoi td, #nhoujghmoi th {
   border-style: none;
 }
 
-#puwktlbace p {
+#nhoujghmoi p {
   margin: 0;
   padding: 0;
 }
 
-#puwktlbace .gt_table {
+#nhoujghmoi .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1907,12 +1905,12 @@
   border-left-color: #D3D3D3;
 }
 
-#puwktlbace .gt_caption {
+#nhoujghmoi .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#puwktlbace .gt_title {
+#nhoujghmoi .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1924,7 +1922,7 @@
   border-bottom-width: 0;
 }
 
-#puwktlbace .gt_subtitle {
+#nhoujghmoi .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1936,7 +1934,7 @@
   border-top-width: 0;
 }
 
-#puwktlbace .gt_heading {
+#nhoujghmoi .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1948,13 +1946,13 @@
   border-right-color: #D3D3D3;
 }
 
-#puwktlbace .gt_bottom_border {
+#nhoujghmoi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#puwktlbace .gt_col_headings {
+#nhoujghmoi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1969,7 +1967,7 @@
   border-right-color: #D3D3D3;
 }
 
-#puwktlbace .gt_col_heading {
+#nhoujghmoi .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1989,7 +1987,7 @@
   overflow-x: hidden;
 }
 
-#puwktlbace .gt_column_spanner_outer {
+#nhoujghmoi .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2001,15 +1999,15 @@
   padding-right: 4px;
 }
 
-#puwktlbace .gt_column_spanner_outer:first-child {
+#nhoujghmoi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#puwktlbace .gt_column_spanner_outer:last-child {
+#nhoujghmoi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#puwktlbace .gt_column_spanner {
+#nhoujghmoi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2021,11 +2019,11 @@
   width: 100%;
 }
 
-#puwktlbace .gt_spanner_row {
+#nhoujghmoi .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#puwktlbace .gt_group_heading {
+#nhoujghmoi .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2051,7 +2049,7 @@
   text-align: left;
 }
 
-#puwktlbace .gt_empty_group_heading {
+#nhoujghmoi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2066,15 +2064,15 @@
   vertical-align: middle;
 }
 
-#puwktlbace .gt_from_md > :first-child {
+#nhoujghmoi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#puwktlbace .gt_from_md > :last-child {
+#nhoujghmoi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#puwktlbace .gt_row {
+#nhoujghmoi .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2093,7 +2091,7 @@
   overflow-x: hidden;
 }
 
-#puwktlbace .gt_stub {
+#nhoujghmoi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2106,7 +2104,7 @@
   padding-right: 5px;
 }
 
-#puwktlbace .gt_stub_row_group {
+#nhoujghmoi .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2120,15 +2118,15 @@
   vertical-align: top;
 }
 
-#puwktlbace .gt_row_group_first td {
+#nhoujghmoi .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#puwktlbace .gt_row_group_first th {
+#nhoujghmoi .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#puwktlbace .gt_summary_row {
+#nhoujghmoi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2138,16 +2136,16 @@
   padding-right: 5px;
 }
 
-#puwktlbace .gt_first_summary_row {
+#nhoujghmoi .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#puwktlbace .gt_first_summary_row.thick {
+#nhoujghmoi .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#puwktlbace .gt_last_summary_row {
+#nhoujghmoi .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2157,7 +2155,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#puwktlbace .gt_grand_summary_row {
+#nhoujghmoi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2167,7 +2165,7 @@
   padding-right: 5px;
 }
 
-#puwktlbace .gt_first_grand_summary_row {
+#nhoujghmoi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2177,7 +2175,7 @@
   border-top-color: #D3D3D3;
 }
 
-#puwktlbace .gt_last_grand_summary_row_top {
+#nhoujghmoi .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2187,11 +2185,11 @@
   border-bottom-color: #D3D3D3;
 }
 
-#puwktlbace .gt_striped {
+#nhoujghmoi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#puwktlbace .gt_table_body {
+#nhoujghmoi .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2200,7 +2198,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#puwktlbace .gt_footnotes {
+#nhoujghmoi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2214,7 +2212,7 @@
   border-right-color: #D3D3D3;
 }
 
-#puwktlbace .gt_footnote {
+#nhoujghmoi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2223,7 +2221,7 @@
   padding-right: 5px;
 }
 
-#puwktlbace .gt_sourcenotes {
+#nhoujghmoi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2237,7 +2235,7 @@
   border-right-color: #D3D3D3;
 }
 
-#puwktlbace .gt_sourcenote {
+#nhoujghmoi .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2245,72 +2243,72 @@
   padding-right: 5px;
 }
 
-#puwktlbace .gt_left {
+#nhoujghmoi .gt_left {
   text-align: left;
 }
 
-#puwktlbace .gt_center {
+#nhoujghmoi .gt_center {
   text-align: center;
 }
 
-#puwktlbace .gt_right {
+#nhoujghmoi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#puwktlbace .gt_font_normal {
+#nhoujghmoi .gt_font_normal {
   font-weight: normal;
 }
 
-#puwktlbace .gt_font_bold {
+#nhoujghmoi .gt_font_bold {
   font-weight: bold;
 }
 
-#puwktlbace .gt_font_italic {
+#nhoujghmoi .gt_font_italic {
   font-style: italic;
 }
 
-#puwktlbace .gt_super {
+#nhoujghmoi .gt_super {
   font-size: 65%;
 }
 
-#puwktlbace .gt_footnote_marks {
+#nhoujghmoi .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#puwktlbace .gt_asterisk {
+#nhoujghmoi .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#puwktlbace .gt_indent_1 {
+#nhoujghmoi .gt_indent_1 {
   text-indent: 5px;
 }
 
-#puwktlbace .gt_indent_2 {
+#nhoujghmoi .gt_indent_2 {
   text-indent: 10px;
 }
 
-#puwktlbace .gt_indent_3 {
+#nhoujghmoi .gt_indent_3 {
   text-indent: 15px;
 }
 
-#puwktlbace .gt_indent_4 {
+#nhoujghmoi .gt_indent_4 {
   text-indent: 20px;
 }
 
-#puwktlbace .gt_indent_5 {
+#nhoujghmoi .gt_indent_5 {
   text-indent: 25px;
 }
 
-#puwktlbace .katex-display {
+#nhoujghmoi .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#puwktlbace div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#nhoujghmoi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2406,23 +2404,23 @@
 <span><span class="co">#&gt; ℹ Si toutes les modalités actives contribuaient également à la construction</span></span>
 <span><span class="co">#&gt; d'un axe, chacune aurait une contribution de 7,14 %.</span></span></code></pre></div>
 <div class="cell-output-display">
-<div id="asnqjfpvcq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#asnqjfpvcq table {
+<div id="qiwcudhycw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qiwcudhycw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#asnqjfpvcq thead, #asnqjfpvcq tbody, #asnqjfpvcq tfoot, #asnqjfpvcq tr, #asnqjfpvcq td, #asnqjfpvcq th {
+#qiwcudhycw thead, #qiwcudhycw tbody, #qiwcudhycw tfoot, #qiwcudhycw tr, #qiwcudhycw td, #qiwcudhycw th {
   border-style: none;
 }
 
-#asnqjfpvcq p {
+#qiwcudhycw p {
   margin: 0;
   padding: 0;
 }
 
-#asnqjfpvcq .gt_table {
+#qiwcudhycw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2448,12 +2446,12 @@
   border-left-color: #D3D3D3;
 }
 
-#asnqjfpvcq .gt_caption {
+#qiwcudhycw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#asnqjfpvcq .gt_title {
+#qiwcudhycw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2465,7 +2463,7 @@
   border-bottom-width: 0;
 }
 
-#asnqjfpvcq .gt_subtitle {
+#qiwcudhycw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2477,7 +2475,7 @@
   border-top-width: 0;
 }
 
-#asnqjfpvcq .gt_heading {
+#qiwcudhycw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2489,13 +2487,13 @@
   border-right-color: #D3D3D3;
 }
 
-#asnqjfpvcq .gt_bottom_border {
+#qiwcudhycw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#asnqjfpvcq .gt_col_headings {
+#qiwcudhycw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2510,7 +2508,7 @@
   border-right-color: #D3D3D3;
 }
 
-#asnqjfpvcq .gt_col_heading {
+#qiwcudhycw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2530,7 +2528,7 @@
   overflow-x: hidden;
 }
 
-#asnqjfpvcq .gt_column_spanner_outer {
+#qiwcudhycw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2542,15 +2540,15 @@
   padding-right: 4px;
 }
 
-#asnqjfpvcq .gt_column_spanner_outer:first-child {
+#qiwcudhycw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#asnqjfpvcq .gt_column_spanner_outer:last-child {
+#qiwcudhycw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#asnqjfpvcq .gt_column_spanner {
+#qiwcudhycw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2562,11 +2560,11 @@
   width: 100%;
 }
 
-#asnqjfpvcq .gt_spanner_row {
+#qiwcudhycw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#asnqjfpvcq .gt_group_heading {
+#qiwcudhycw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2592,7 +2590,7 @@
   text-align: left;
 }
 
-#asnqjfpvcq .gt_empty_group_heading {
+#qiwcudhycw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2607,15 +2605,15 @@
   vertical-align: middle;
 }
 
-#asnqjfpvcq .gt_from_md > :first-child {
+#qiwcudhycw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#asnqjfpvcq .gt_from_md > :last-child {
+#qiwcudhycw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#asnqjfpvcq .gt_row {
+#qiwcudhycw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2634,7 +2632,7 @@
   overflow-x: hidden;
 }
 
-#asnqjfpvcq .gt_stub {
+#qiwcudhycw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2647,7 +2645,7 @@
   padding-right: 5px;
 }
 
-#asnqjfpvcq .gt_stub_row_group {
+#qiwcudhycw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2661,15 +2659,15 @@
   vertical-align: top;
 }
 
-#asnqjfpvcq .gt_row_group_first td {
+#qiwcudhycw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#asnqjfpvcq .gt_row_group_first th {
+#qiwcudhycw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#asnqjfpvcq .gt_summary_row {
+#qiwcudhycw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2679,16 +2677,16 @@
   padding-right: 5px;
 }
 
-#asnqjfpvcq .gt_first_summary_row {
+#qiwcudhycw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#asnqjfpvcq .gt_first_summary_row.thick {
+#qiwcudhycw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#asnqjfpvcq .gt_last_summary_row {
+#qiwcudhycw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2698,7 +2696,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#asnqjfpvcq .gt_grand_summary_row {
+#qiwcudhycw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2708,7 +2706,7 @@
   padding-right: 5px;
 }
 
-#asnqjfpvcq .gt_first_grand_summary_row {
+#qiwcudhycw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2718,7 +2716,7 @@
   border-top-color: #D3D3D3;
 }
 
-#asnqjfpvcq .gt_last_grand_summary_row_top {
+#qiwcudhycw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2728,11 +2726,11 @@
   border-bottom-color: #D3D3D3;
 }
 
-#asnqjfpvcq .gt_striped {
+#qiwcudhycw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#asnqjfpvcq .gt_table_body {
+#qiwcudhycw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2741,7 +2739,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#asnqjfpvcq .gt_footnotes {
+#qiwcudhycw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2755,7 +2753,7 @@
   border-right-color: #D3D3D3;
 }
 
-#asnqjfpvcq .gt_footnote {
+#qiwcudhycw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2764,7 +2762,7 @@
   padding-right: 5px;
 }
 
-#asnqjfpvcq .gt_sourcenotes {
+#qiwcudhycw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2778,7 +2776,7 @@
   border-right-color: #D3D3D3;
 }
 
-#asnqjfpvcq .gt_sourcenote {
+#qiwcudhycw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2786,72 +2784,72 @@
   padding-right: 5px;
 }
 
-#asnqjfpvcq .gt_left {
+#qiwcudhycw .gt_left {
   text-align: left;
 }
 
-#asnqjfpvcq .gt_center {
+#qiwcudhycw .gt_center {
   text-align: center;
 }
 
-#asnqjfpvcq .gt_right {
+#qiwcudhycw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#asnqjfpvcq .gt_font_normal {
+#qiwcudhycw .gt_font_normal {
   font-weight: normal;
 }
 
-#asnqjfpvcq .gt_font_bold {
+#qiwcudhycw .gt_font_bold {
   font-weight: bold;
 }
 
-#asnqjfpvcq .gt_font_italic {
+#qiwcudhycw .gt_font_italic {
   font-style: italic;
 }
 
-#asnqjfpvcq .gt_super {
+#qiwcudhycw .gt_super {
   font-size: 65%;
 }
 
-#asnqjfpvcq .gt_footnote_marks {
+#qiwcudhycw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#asnqjfpvcq .gt_asterisk {
+#qiwcudhycw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#asnqjfpvcq .gt_indent_1 {
+#qiwcudhycw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#asnqjfpvcq .gt_indent_2 {
+#qiwcudhycw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#asnqjfpvcq .gt_indent_3 {
+#qiwcudhycw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#asnqjfpvcq .gt_indent_4 {
+#qiwcudhycw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#asnqjfpvcq .gt_indent_5 {
+#qiwcudhycw .gt_indent_5 {
   text-indent: 25px;
 }
 
-#asnqjfpvcq .katex-display {
+#qiwcudhycw .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#asnqjfpvcq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qiwcudhycw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2912,7 +2910,9 @@
 </div>
 </div>
 </div>
-<p>Pour la suite et pour faire les graphiques, il est intéressant de disposer des données “augmentées” des résultats de l’ACM. Autrement dit, un tableau avec les coordonnées, etc des individus et un autre tableau avec la même chose mais pour chaque modalité.</p>
+<p>Pour la suite et pour faire les graphiques, il est intéressant de disposer des données “augmentées” des résultats de l’ACM. L’analyse a produit pour chaque individus une série de coordonnées (sur l’axe 1, 2, 3…), de contributions ( à l’axe 1, 2, 3…), de distance en cos², etc. La fonction <code><a href="../reference/extraire_individus.html">extraire_individus()</a></code> extrait du résultat, notre tableau d’entrée auquel on a rajouté, pour chaque individus les données mentionnées.</p>
+<p>Les colonnes contenant les coordonnées sur l’axe 1 et 2 sont mises en début de tableau, parce que ce sont les plus utilisées. (Ce n’est que cosmétique, le reste des coordonnées, contributions, etc. reste accessible).</p>
+<p>On stocke ce tableau dans un objet <code>individus</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">individus</span> <span class="op">&lt;-</span> <span class="va">res_acm</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/extraire_individus.html">extraire_individus</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -2937,7 +2937,7 @@
 <span><span class="co">#&gt; #   dim4_contrib &lt;dbl&gt;, dim5_contrib &lt;dbl&gt;, dim1_cos2 &lt;dbl&gt;, dim2_cos2 &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   dim3_cos2 &lt;dbl&gt;, dim4_cos2 &lt;dbl&gt;, dim5_cos2 &lt;dbl&gt;</span></span></code></pre></div>
 </div>
-<p>Et pour les modalités :</p>
+<p>On peut faire de même pour les modalités en produisant un tableau récapitulatif des modalités avec <code><a href="../reference/extraire_modalites.html">extraire_modalites()</a></code>. Ce tableau inclut le type de variable (active ou supplémentaire), le nom de la variable, le nom de la modalité, son effectif en nombre et en pourcentage, ainsi que ses coordonnées sur les différents axes, sa contribution à chaque axe, etc.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">modalités</span> <span class="op">&lt;-</span> <span class="va">res_acm</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/extraire_modalites.html">extraire_modalites</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -2967,9 +2967,11 @@
 <span><span class="co">#&gt; #   dim3_vtest &lt;dbl&gt;, dim3_contrib &lt;dbl&gt;, dim4_coord &lt;dbl&gt;, dim4_cos2 &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   dim4_vtest &lt;dbl&gt;, dim4_contrib &lt;dbl&gt;</span></span></code></pre></div>
 </div>
+<p>Le grand intérêt de ces tableaux est d’être facilement utilisable par l’extension <code>ggplot2</code> qui permet de générer soi-même ses graphiques sur-mesure.</p>
 </section></section><section class="level2"><h2 id="graphique-des-modalités">Graphique des modalités<a class="anchor" aria-label="anchor" href="#graphique-des-modalit%C3%A9s"></a>
 </h2>
-<p>Pour faire le graphique j’utilise ggplot directement sur le tableau des modalités avec les variables dim1_coord et dim2_coord qui stockent les coordonnées des modalités. Ici, <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot()</a></code> initialise le graphique avec les coordonnées. <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point()</a></code> place les points et <code><a href="https://ggrepel.slowkow.com/reference/geom_text_repel.html" class="external-link">geom_text_repel()</a></code> met le texte. On utilise <code><a href="https://ggrepel.slowkow.com/reference/geom_text_repel.html" class="external-link">geom_text_repel()</a></code> et pas <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html" class="external-link">geom_text()</a></code> parce que <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html" class="external-link">geom_text()</a></code> mettrait le texte directement <em>sur</em> les points. L’argument <code>label</code>indique la colonne du tableau qui contient le texte à afficher.</p>
+<p>Pour faire le graphique on utilise <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot()</a></code> directement sur le tableau des modalités avec les variables <code>dim1_coord</code> et <code>dim2_coord</code> qui stockent les coordonnées des modalités.</p>
+<p>Ici, <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot()</a></code> initialise le graphique avec les coordonnées. <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point()</a></code> place les points et <code><a href="https://ggrepel.slowkow.com/reference/geom_text_repel.html" class="external-link">geom_text_repel()</a></code> met le texte. On utilise <code><a href="https://ggrepel.slowkow.com/reference/geom_text_repel.html" class="external-link">geom_text_repel()</a></code> et pas <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html" class="external-link">geom_text()</a></code> parce que <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html" class="external-link">geom_text()</a></code> mettrait le texte directement <strong>sur</strong> les points. L’argument <code>label</code>indique la colonne du tableau qui contient le texte à afficher.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">modalités</span> <span class="op">|&gt;</span> </span>
@@ -2987,11 +2989,12 @@
 </div>
 </div>
 </div>
-<p>Ca peut être assez long à taper donc j’ai fait une fonction <code><a href="../reference/ggacm.html">ggacm()</a></code> qui simplifie la production de graphiques, en plus de représenter les cadrans et de “fixer” les coordonnées (1cm vers la droite = 1cm vers le haut), ce qui n’est pas le cas de la représentation plus haut.</p>
+<p>Cela peut être assez long à taper à la longue. La fonction <code><a href="../reference/ggacm.html">ggacm()</a></code><br>
+simplifie la production de graphiques, en plus de représenter les cadrans et de rendre l’échelle de grandeur des abcsisses et des ordonnées identiques.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">modalités</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="../reference/ggacm.html">ggacm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/ggacm.html">ggacm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="co"># &lt;- Initialise le graphique d'un coup</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggrepel.slowkow.com/reference/geom_text_repel.html" class="external-link">geom_text_repel</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">modalites</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
 <div class="cell-output-display">
@@ -3001,24 +3004,34 @@
 </div>
 </div>
 </div>
-<p>Voici le graphique “brut”. Notez le <code>#| fig-height:</code> et <code>#| fig-height:</code> qui fixent les dimensions (en pouce) du graphique produit. En fonction des ACM, il faut essayer différentes valeurs pour voir ce qui fonctionne le mieux.</p>
-<p>Voilà pour le graphique des modalités. On peut maintenant rajouter un certain nombre de chose pour l’améliorer.</p>
-<p>Je vais le stocker dans un objet <code>graph</code> pour commencer et éviter de retaper toutes les commandes à chaque fois.</p>
+<p>Voici le graphique “brut”. Souvent, des modalités n’ont pas assez de place pour s’afficher, sont écrites trop grosses ou autres.</p>
+<p>Dans quarto, on peut préciser dans le bloc de code la taille du graphique qui sera produit avec <code>#| fig-height:</code> et <code>#| fig-height:</code> qui fixent les dimensions (en pouce). En fonction des ACM, il faut essayer différentes valeurs pour voir ce qui fonctionne le mieux. Les graphiques que vous voyez utilisent</p>
+<pre><code><span><span class="co">#| fig-height: 7</span></span>
+<span><span class="co">#| fig-width: 8</span></span>
+<span></span>
+<span><span class="va">Code_qui_génère_un_graphique</span></span></code></pre>
+<p>Jusqu’ici, toutes les variables ont été affiché sur les graphiques. Or, souvent, on fait la différence entre les variables supplémentaires et actives. Si on veut, on peut faire des graphiques différents. Par exemple, ici ne sont affichés que les variables actives (on filtre le tableau des modalités avant de l’injecter dans le graphique)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">graph</span> <span class="op">&lt;-</span> <span class="va">modalités</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode cell-code" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">modalités</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"variable active"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co"># &lt;- on ne garde que les variables actives</span></span>
 <span>  <span class="fu"><a href="../reference/ggacm.html">ggacm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggrepel.slowkow.com/reference/geom_text_repel.html" class="external-link">geom_text_repel</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">modalites</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-17-1.png" width="768"></p>
+</figure>
 </div>
-<p>Cet objet est un graphique et on peut lui ajouter des éléments avec <code>+</code> comme une légende ou un titre.</p>
+</div>
+</div>
+<p>On peut aussi donner une forme différente au variables active et supplémentaire. Ici, <code>aes(shape = type)</code> indique à ggplot de donner une forme différente aux points en fonction du <code>type</code> de la modalité (active ou supplémentaire). Pour plus de détails sur ce qu’il est possible de faire, voir la section du manuel de <a href="https://ggplot2-book.org/getting-started.html#sec-aesthetics" class="external-link">ggplot</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">graph</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
-<span>    title <span class="op">=</span> <span class="st">"ACM des pratiques culturelles"</span>,</span>
-<span>    caption <span class="op">=</span> <span class="st">"Réalisé à partir de l'enquête Histoire de Vie 2003 de l'INSEE."</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">modalités</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/ggacm.html">ggacm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="va">type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggrepel.slowkow.com/reference/geom_text_repel.html" class="external-link">geom_text_repel</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">modalites</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
 <div class="cell-output-display">
 <div>
 <figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-18-1.png" width="768"></p>
@@ -3026,9 +3039,36 @@
 </div>
 </div>
 </div>
-<p>On peut changer le nom des axes. J’ai fait une fonction <code><a href="../reference/nommer_axes.html">nommer_axes()</a></code> pour aider à générer le nom des axes. Ici, je les stocke dans une variable avant des les utiliser dans le graphique.</p>
+<section class="level3"><h3 id="décorer-ses-graphiques">Décorer ses graphiques<a class="anchor" aria-label="anchor" href="#d%C3%A9corer-ses-graphiques"></a>
+</h3>
+<p>Voilà pour le graphique des modalités. On peut maintenant rajouter un certain nombre de chose pour l’améliorer.</p>
+<p>Je vais le stocker dans un objet <code>graph</code> pour commencer et éviter de retaper toutes les commandes à chaque fois.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">graph</span> <span class="op">&lt;-</span> <span class="va">modalités</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/ggacm.html">ggacm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggrepel.slowkow.com/reference/geom_text_repel.html" class="external-link">geom_text_repel</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">modalites</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
+</div>
+<p>Cet objet est un graphique et on peut lui ajouter des éléments avec <code>+</code> comme une légende ou un titre avec la fonction <code><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs()</a></code>. Cette fonction permet également de renommer les axes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">graph</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"ACM des pratiques culturelles"</span>,</span>
+<span>    caption <span class="op">=</span> <span class="st">"Réalisé à partir de l'enquête Histoire de Vie 2003 de l'INSEE."</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"L'axe 1"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-20-1.png" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Le nom des axes est assez important dans les graphiques d’analyse des correspondances. On aura tendance à les réutiliser dans tous les graphiques. Pour plus d’ergonomie, il est possible de stocker les intitulés des axes dans un objet qu’on rajoutera systématiquement au graphique. La fonction <code><a href="../reference/nommer_axes.html">nommer_axes()</a></code> aide à générer ces intitulés.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">axes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nommer_axes.html">nommer_axes</a></span><span class="op">(</span><span class="va">res_acm</span>, </span>
 <span>                    a_gauche <span class="op">=</span> <span class="st">"Ne pratique pas"</span>,</span>
 <span>                    a_droite <span class="op">=</span> <span class="st">"Cumule de pratique"</span>, </span>
@@ -3039,41 +3079,45 @@
 <span><span class="va">graph</span> <span class="op">+</span> <span class="va">axes</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-19-1.png" width="672"></p>
+<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-21-1.png" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>On peut changer le thème esthétique du graphique. J’ai mis mes préférences dans la fonction <code><a href="../reference/theme_acm.html">theme_acm()</a></code> mais on peut en utiliser d’autres : voir sur le <a href="https://ggplot2-book.org/themes.html#sec-themes" class="external-link">site du package ggplot2</a>.</p>
+<p>On peut également changer le thème esthétique du graphique. J’ai mis mes préférences dans la fonction <code><a href="../reference/theme_acm.html">theme_acm()</a></code> mais on peut en utiliser d’autres : voir sur le <a href="https://ggplot2-book.org/themes.html#sec-themes" class="external-link">site du package ggplot2</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">graph</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_acm.html">theme_acm</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-20-1.png" width="672"></p>
+<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-22-1.png" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>On peut également rajouter d’autres “variables au graphique”. Pour cela, il faut revenir à l’expression de base. Dans l’exemple suivant je modifie la taille des points en fonction des effectifs en ajoutant <code>aes(size = n)</code> dans la fonction qui trace les points. <code>n</code> est le nom de la colonne du tableau de <code>modalités</code> qui contient les effectifs.:</p>
+</section><section class="level3"><h3 id="ajouter-dautres-variables">Ajouter d’autres variables<a class="anchor" aria-label="anchor" href="#ajouter-dautres-variables"></a>
+</h3>
+<p>On peut également rajouter d’autres “variables au graphique”. Pour cela, il faut revenir à l’expression de base. Dans l’exemple suivant je modifie la taille des points en fonction des effectifs en ajoutant <code>aes(size = n)</code> dans la fonction qui trace les points. <code>n</code> est le nom de la colonne du tableau de <code>modalités</code> qui contient les effectifs :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">modalités</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/ggacm.html">ggacm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>size <span class="op">=</span> <span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>size <span class="op">=</span> <span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="co"># &lt;------</span></span>
 <span>  <span class="fu"><a href="https://ggrepel.slowkow.com/reference/geom_text_repel.html" class="external-link">geom_text_repel</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">modalites</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_acm.html">theme_acm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="va">axes</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-21-1.png" width="768"></p>
+<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-23-1.png" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Si l’on souhaite rajouter la fameuse échelle de couleur, on peut le faire également.</p>
+</section><section class="level3"><h3 id="représenter-un-troisième-axe">Représenter un troisième axe<a class="anchor" aria-label="anchor" href="#repr%C3%A9senter-un-troisi%C3%A8me-axe"></a>
+</h3>
+<p>On peut de manière similaire ajouter à la représentation une échelle de couleur en fonction des coordonnées sur l’axe 3.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">modalités</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/ggacm.html">ggacm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">dim3_coord</span><span class="op">)</span><span class="op">+</span> </span>
@@ -3083,30 +3127,32 @@
 <span>  <span class="va">axes</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-22-1.png" width="768"></p>
+<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-24-1.png" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>L’échelle n’est pas très adapté aux coordonnées d’une ACM, et on doit donc la changer.</p>
-<p>Ici, je vais stocker dans un objet la liste des spécifications de cette échelle dans un objet que je vais appeler <code>couleurs</code>. L’argument <code>oob = scales::squish</code> permet de faire en sorte que les points qui ne sont pas dans les limites de l’échelle (à moins de -0,5 ou plus de 0,5) soient considérés pour la couleur comme comme étant égal à -0,5 et 0,5. Cela évite qu’ils finissent gris.</p>
+<p>L’échelle de couleur n’est pas très adapté aux coordonnées d’une ACM, on doit donc la changer pour une échelle divergente de couleur. Ce que l’on peut faire avec <code><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_color_gradient2()</a></code>.</p>
+<p>Ici, je vais stocker dans un objet la liste des spécifications de cette échelle dans un objet que je vais appeler <code>couleurs</code>.</p>
+<p>L’argument <code>oob = scales::squish</code> permet de faire en sorte que les points qui ne sont pas dans les limites de l’échelle (à moins de -0,5 ou plus de 0,5) soient considérés pour la couleur comme comme étant égal à -0,5 et 0,5. Cela évite qu’ils finissent gris. Pour plus de détails sur les couleurs dans <code>ggplot2</code>, voir <a href="https://ggplot2-book.org/scales-colour.html" class="external-link">la section dédiée</a> du manuel.</p>
 <p>La fonction <code><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs()</a></code> permet de rajouter un description de l’axe en couleur, qu’on pourra changer pour ajouter le taux de variance par exemple.</p>
-<p>Les spécifications de la fonction theme() servent à bien placer la légendes des couleurs sur le graphique (en bas du graphique, avec le titre centré, etc. )</p>
+<p>Les spécifications de la fonction <code><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme()</a></code> servent à bien placer la légendes des couleurs sur le graphique (en bas du graphique, avec le titre centré, etc. )</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">couleurs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_color_gradient2</a></span><span class="op">(</span></span>
-<span>    high <span class="op">=</span> <span class="st">"red"</span>, <span class="co"># couleur du premier bout</span></span>
-<span>    low <span class="op">=</span> <span class="st">"blue"</span>, <span class="co"># couleur du bout opposé</span></span>
-<span>    midpoint <span class="op">=</span> <span class="fl">0</span>, <span class="co"># milieu</span></span>
-<span>    mid <span class="op">=</span> <span class="st">"grey20"</span>, <span class="co"># couleur du milieu</span></span>
+<span>    high <span class="op">=</span> <span class="st">"red"</span>, <span class="co"># couleur des coordonnées positives</span></span>
+<span>    low <span class="op">=</span> <span class="st">"blue"</span>, <span class="co"># couleur des coordonnées négatives</span></span>
+<span>    midpoint <span class="op">=</span> <span class="fl">0</span>, <span class="co"># milieu de l'échelle</span></span>
+<span>    mid <span class="op">=</span> <span class="st">"grey20"</span>, <span class="co"># couleur au milieu (ici 0)</span></span>
 <span>    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span><span class="op">)</span>, <span class="co"># limites de l'échelle</span></span>
 <span>    oob <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/oob.html" class="external-link">squish</a></span> </span>
 <span>  <span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
-<span>    color <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html" class="external-link">str_glue</a></span><span class="op">(</span><span class="st">"... ← Axe 3 → ..."</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    color <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html" class="external-link">str_glue</a></span><span class="op">(</span><span class="st">"... ← Axe 3 → ..."</span><span class="op">)</span> <span class="co"># intitulé de l'axe 3</span></span>
+<span>    <span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span>,</span>
-<span>        legend.key.width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">2.75</span>,<span class="st">"cm"</span><span class="op">)</span>,</span>
+<span>        legend.key.width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">2</span>,<span class="st">"cm"</span><span class="op">)</span>,</span>
 <span>        legend.key.height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="st">"cm"</span><span class="op">)</span>,</span>
 <span>        legend.title.position <span class="op">=</span> <span class="st">"top"</span>,</span>
 <span>        legend.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
@@ -3115,7 +3161,7 @@
 </div>
 <p>On peut maintenant réessayer avec la couleur :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">modalités</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/ggacm.html">ggacm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">dim3_coord</span><span class="op">)</span><span class="op">+</span> </span>
@@ -3123,19 +3169,20 @@
 <span>  <span class="fu"><a href="https://ggrepel.slowkow.com/reference/geom_text_repel.html" class="external-link">geom_text_repel</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">modalites</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_acm.html">theme_acm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="va">axes</span> <span class="op">+</span></span>
-<span>  <span class="va">couleurs</span></span></code></pre></div>
+<span>  <span class="va">couleurs</span> <span class="co"># &lt;- les spécifications de l'échelle de couleur</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-24-1.png" width="768"></p>
+<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-26-1.png" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
-</section><section class="level2"><h2 id="graphique-des-individus">Graphique des individus<a class="anchor" aria-label="anchor" href="#graphique-des-individus"></a>
+</section></section><section class="level2"><h2 id="graphique-des-individus">Graphique des individus<a class="anchor" aria-label="anchor" href="#graphique-des-individus"></a>
 </h2>
-<p>Pour réaliser les graphiques des individus, la même logique s’applique mais sur le tableau des individus. On peut donc répéter le code plus haut, en prenant soin d’enlever <code>aes(label = modalites)</code>, puisqu’on ne veut plus afficher le texte contenu dans la colonne <code>modalites</code> du tableau (le tableau des indvividus ne possède pas une telle colonne !).</p>
+<p>Pour réaliser les graphiques des individus, la même logique s’applique : on initialise le graphique avec <code><a href="../reference/ggacm.html">ggacm()</a></code>, puis on ajoute, couche après couche, ce dont on a besoin. A cela près qu’on travaille non plus sur le tableau des <code>modalites</code>, mais celui des <code>individus</code>.</p>
+<p>On peut donc répéter le code plus haut. Au vu du nombre d’individus, il n’est pas utile d’afficher leurs identifiants. Toutefois, s’ils étaient moins nombreux on pourrait ajouter la même couche qu’on a utilisé pour le texte des modalités en changeant ne nom de la colonne pour le texte qu’on souhaite afficher. Par exemple si l’on voulait afficher l’identifiant des individus, on rajouterait : <code>geom_text_repel(aes(label = id))</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">individus</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/ggacm.html">ggacm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">dim3_coord</span><span class="op">)</span><span class="op">+</span> </span>
@@ -3145,14 +3192,15 @@
 <span>  <span class="va">couleurs</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-25-1.png" width="768"></p>
+<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-27-1.png" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Ici, on remarque que les points sont concentrés… à certains points, puisque l’ACM a été réalisée sur un petit nombre de variable. On peut résoudre cela en introduisant un peu de bruit artificiel dans les points. On remplace <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point()</a></code> par <code><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html" class="external-link">geom_jitter()</a></code> en précisant par exemple ici qu’on souhaite une variation de 0.1 unité dans les deux directions.</p>
+<p>Ici, on remarque qu’on a pas exactement les 2000 points promis par les individus les points sont concentrés… à certains points. L’ACM ayant été réalisée sur un petit nombre de variable, les individus qui ont répondu de manière identique au questionnaire sont placés au même endroit.</p>
+<p>Dans ces cas là, pour se rendre un peu mieux compte du nombre, on peut introduire un peu de bruit artificiel dans les points. On remplace <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point()</a></code> par <code><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html" class="external-link">geom_jitter()</a></code> en précisant par exemple ici qu’on souhaite une variation de 0.1 unité dans les deux directions. Les points seront alors placés aléatoirement dans un carré de 0.1 sur 0.1 autour de leurs coordonnées.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">individus</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/ggacm.html">ggacm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">dim3_coord</span><span class="op">)</span><span class="op">+</span> </span>
@@ -3162,32 +3210,33 @@
 <span>  <span class="va">couleurs</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-26-1.png" width="768"></p>
+<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-28-1.png" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>La couleur n’a cependant pas besoind d’être liée au troisième axe, elle peut très bien provenir d’une autre variables (active ou supplémentaire) :</p>
+<section class="level3"><h3 id="colorer-le-nuage-dindividus">Colorer le nuage d’individus<a class="anchor" aria-label="anchor" href="#colorer-le-nuage-dindividus"></a>
+</h3>
+<p>On a déjà vu comment colorer le nuage selon les coordonnées sur l’axe 3. Rien ne nous empêche cependant d’utiliser la couleur pour autre chose. Comme par exemple pour observer la répartition d’une variable dans le nuage des individus.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">individus</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/ggacm.html">ggacm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">sexe</span><span class="op">)</span><span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">sexe</span><span class="op">)</span> <span class="op">+</span> <span class="co"># &lt;------ </span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html" class="external-link">geom_jitter</a></span><span class="op">(</span>height <span class="op">=</span> <span class="fl">0.1</span>, width <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_acm.html">theme_acm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="va">axes</span> </span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-27-1.png" width="768"></p>
+<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-29-1.png" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Tout particulièrement, il peut être utile de faire une reproduction du nuage d’individus en coloriant à chaque fois les individus qui partagent une certaine modalitée.</p>
-<p>Sur ggplot, cette fonction s’appelle un wrap. La fonction est un peu compliquée. Il faut procéder en plusieurs étapes.</p>
+<p>Ce type de représentation peut-être automatisé et répéter sur un grand nombre de modalités avec la fonction <code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap()</a></code> de <code>ggplot2</code>. La fonction est un peu compliquée. Il faut procéder en plusieurs étapes.</p>
 <p>D’abord, il faut sélectionner les modalités que l’on souhaite afficher. Ici, je vais prendre les 5 modalités qui contribuent le plus à l’axe 1. On pourrait utiliser d’autres critères cela dit (liste personnalisée, toutes les modalités qui ont une contribution supérieur à un seuil, etc.)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">modalites_a_representer</span> <span class="op">&lt;-</span> <span class="va">modalités</span> <span class="op">|&gt;</span> <span class="co"># tableau des modalités</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">dim1_contrib</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span>  <span class="co"># trié de la contribution à l'axe 1 la plus grande</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co"># on garde les 5 premières lignes</span></span>
@@ -3200,7 +3249,7 @@
 </div>
 <p>Une fois cette liste prise on va créer un jeu de données qui recensera, pour chaque graphique, la liste des individus à mettre en valeur.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">individus_concernés</span> <span class="op">&lt;-</span> <span class="va">individus</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span></span>
 <span>    cols <span class="op">=</span> <span class="op">!</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"dim"</span><span class="op">)</span>,</span>
@@ -3213,32 +3262,36 @@
 <span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="va">individus_concernés</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">dim1_coord</span>, <span class="va">dim2_coord</span>, <span class="va">variable</span>, <span class="va">modalite</span><span class="op">)</span> </span>
-<span><span class="co">#&gt; # A tibble: 4.853 × 4</span></span>
-<span><span class="co">#&gt;    dim1_coord dim2_coord variable modalite                </span></span>
-<span><span class="co">#&gt;         &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;    &lt;fct&gt;                   </span></span>
-<span><span class="co">#&gt;  1   -0.308       0.152  cinema   Ne va pas au cinéma     </span></span>
-<span><span class="co">#&gt;  2   -0.308       0.152  sport    Ne pratique pas de sport</span></span>
-<span><span class="co">#&gt;  3    0.526      -0.576  cinema   Va au cinéma            </span></span>
-<span><span class="co">#&gt;  4    0.526      -0.576  sport    Pratique un sport       </span></span>
-<span><span class="co">#&gt;  5   -0.00599    -0.446  cinema   Ne va pas au cinéma     </span></span>
-<span><span class="co">#&gt;  6   -0.00599    -0.446  sport    Pratique un sport       </span></span>
-<span><span class="co">#&gt;  7    1.06        0.0914 bricol   Bricole                 </span></span>
-<span><span class="co">#&gt;  8    1.06        0.0914 cinema   Va au cinéma            </span></span>
-<span><span class="co">#&gt;  9    1.06        0.0914 sport    Pratique un sport       </span></span>
-<span><span class="co">#&gt; 10   -0.932      -0.348  cinema   Ne va pas au cinéma     </span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">modalite</span>, <span class="va">dim1_coord</span>, <span class="va">dim2_coord</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; # A tibble: 4.853 × 3</span></span>
+<span><span class="co">#&gt;    modalite                 dim1_coord dim2_coord</span></span>
+<span><span class="co">#&gt;    &lt;fct&gt;                         &lt;dbl&gt;      &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 Ne va pas au cinéma        -0.308       0.152 </span></span>
+<span><span class="co">#&gt;  2 Ne pratique pas de sport   -0.308       0.152 </span></span>
+<span><span class="co">#&gt;  3 Va au cinéma                0.526      -0.576 </span></span>
+<span><span class="co">#&gt;  4 Pratique un sport           0.526      -0.576 </span></span>
+<span><span class="co">#&gt;  5 Ne va pas au cinéma        -0.00599    -0.446 </span></span>
+<span><span class="co">#&gt;  6 Pratique un sport          -0.00599    -0.446 </span></span>
+<span><span class="co">#&gt;  7 Bricole                     1.06        0.0914</span></span>
+<span><span class="co">#&gt;  8 Va au cinéma                1.06        0.0914</span></span>
+<span><span class="co">#&gt;  9 Pratique un sport           1.06        0.0914</span></span>
+<span><span class="co">#&gt; 10 Ne va pas au cinéma        -0.932      -0.348 </span></span>
 <span><span class="co">#&gt; # ℹ 4.843 more rows</span></span></code></pre></div>
 </div>
-<p>Ce tableau recense pour chaque modalité, les individus concernés.</p>
-<p>On peut ensuite construire le graphique couche par couche à partir de notre nouveau tableau.</p>
-<p>On commence par une première couche de points (geom_point()) qui reproduit le nuage d’individus en gris pour se repérer à chaque fois. Cette couche fait appel au nuage de <strong>tous</strong> les individus, on précise donc qu’on veut utiliser ce tableau (et pas celui des <code>individus_concernés</code>comme ce sera le cas dans le reste du graphique) avec <code>data = individus</code>.</p>
-<p>On rajoute dessus une deuxième couche de points rouges, qui s’imprimera au dessus de la couche précédente uniquement sur les individus concernés.</p>
+<p>Ce tableau recense pour chaque modalité, toutes les coordonnées des individus concernés.</p>
+<p>On peut ensuite construire le graphique couche par couche à partir de notre nouveau tableau. On l’initialise comme d’habitude avec <code><a href="../reference/ggacm.html">ggacm()</a></code>. Puis, on indique à ggplot qu’on souhaitera produire un graphique différent pour chaque modalités avec <code>facet_wrap(~ modalite)</code>. L’argument <code>labeller</code> est ici pour faire sauter une ligne dans les labels au cas où le texte d’une modalité serait trop grand.</p>
+<p>On peut ensuite commencer à construire le graphique qui sera répété. On commence par une première couche de points (<code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point()</a></code>) qui reproduit le nuage d’individus en gris pour se repérer. Cette couche fait appel au nuage de <strong>tous</strong> les individus, on précise donc qu’on veut utiliser ce tableau (et pas celui des <code>individus_concernés</code>comme ce sera le cas dans le reste du graphique) avec <code>data = individus</code>.</p>
+<p>On rajoute dessus une deuxième couche de carrés rouges, qui s’imprimera au dessus de la couche précédente uniquement pour les individus concernés.</p>
 <p>Enfin, on demande à ggplot de refaire ce travail, pour chaque modalité sur un graphique différent (<code>facet_wrap(~ modalite)</code>). L’argument <code>labeller</code> est ici pour faire sauter une ligne dans les labels au cas où le texte d’une modalité serait trop grand.</p>
 <p>Pour que ce soit plus esthétiques, je rajoute ensuite les axes et le thème qu’ on a vu plus haut. On pourrait également penser à rajouter un titre par exemple.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">individus_concernés</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="../reference/ggacm.html">ggacm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span></span>
+<span>      <span class="op">~</span> <span class="va">modalite</span>,</span>
+<span>      labeller <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labeller.html" class="external-link">labeller</a></span><span class="op">(</span>modalites <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labellers.html" class="external-link">label_wrap_gen</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="op">)</span><span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span></span>
 <span>      data <span class="op">=</span> <span class="va">individus</span>,</span>
 <span>      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">dim1_coord</span>, <span class="va">dim2_coord</span><span class="op">)</span>,</span>
@@ -3247,44 +3300,41 @@
 <span>    <span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span></span>
 <span>      color <span class="op">=</span> <span class="st">"red"</span>,</span>
-<span>      shape <span class="op">=</span> <span class="st">"square"</span></span>
-<span>    <span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span></span>
-<span>      <span class="op">~</span> <span class="va">modalite</span>,</span>
-<span>      labeller <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labeller.html" class="external-link">labeller</a></span><span class="op">(</span>modalites <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labellers.html" class="external-link">label_wrap_gen</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span>
+<span>      shape <span class="op">=</span> <span class="st">"square"</span>, </span>
+<span>      size <span class="op">=</span> <span class="fl">2</span> <span class="co"># pour qu'ils recouvrent complètmeent les points gris. </span></span>
 <span>    <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_acm.html">theme_acm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="va">axes</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-30-1.png" width="768"></p>
+<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-32-1.png" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
-</section><section class="level2"><h2 id="classification">Classification<a class="anchor" aria-label="anchor" href="#classification"></a>
+<p>Pour plus de détails sur <code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap()</a></code>, voir la section dédiée du [manuel](https://ggplot2-book.org/facet.html#sec-facet-wrap.</p>
+</section></section><section class="level2"><h2 id="classification">Classification<a class="anchor" aria-label="anchor" href="#classification"></a>
 </h2>
-<p>On peut gérer avec un processus similaire les classifications. On commence par réaliser la classification :</p>
+<p>On peut gérer avec un processus similaire les classifications. On commence par réaliser la classification et la stocker dans un objet dédiée : <code>res_cah</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res_cah</span> <span class="op">&lt;-</span> <span class="va">res_acm</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">FactoMineR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/FactoMineR/man/HCPC.html" class="external-link">HCPC</a></span><span class="op">(</span>nb.clust <span class="op">=</span> <span class="fl">3</span>, graph <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 </div>
-<p>On peut extraire le dendrogramme</p>
+<p>Pour obtenir le dendrogramme :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res_cah</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span>choice <span class="op">=</span> <span class="st">"tree"</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-32-1.png" width="672"></p>
+<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-34-1.png" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Pour réaliser les graphiques, on peut tout à fait utiliser ceux de FactoMineR.</p>
-<p>On commence par extraire les résultats de la CAH de <code>res_cah</code>. L’idée est de rajouter une colonne à <code>individus</code> qui codera la classe à laquelle ils ont été affectés.</p>
+<p>De manière similaire à avant, on commence par extraire les résultats de la CAH de <code>res_cah</code>. La fonction <code><a href="../reference/extraire_classes.html">extraire_classes()</a></code> renvoie notre tableau de données initiale auquel a été rajouté une colonne <code>classe</code> contenant la classe attributé par l’algorithme à cet individus.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">individus_classés</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/extraire_classes.html">extraire_classes</a></span><span class="op">(</span><span class="va">res_cah</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">individus_classés</span></span>
@@ -3307,39 +3357,60 @@
 <span><span class="co">#&gt; #   dim4_contrib &lt;dbl&gt;, dim5_contrib &lt;dbl&gt;, dim1_cos2 &lt;dbl&gt;, dim2_cos2 &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   dim3_cos2 &lt;dbl&gt;, dim4_cos2 &lt;dbl&gt;, dim5_cos2 &lt;dbl&gt;</span></span></code></pre></div>
 </div>
-<p>Pour faire le graphique des individus selon la classe, on peut tout simplement reprendre le code du nuage des individus en précisant qu’il faudra colorer les couches selon la classe et que les points doivent prendre une forme différente en fonction de la classe également.</p>
+<p>Pour faire le graphique des individus selon la classe, on peut tout simplement reprendre le code du nuage des individus en précisant qu’il faudra donner une couleur selon la variable qui code la classe.</p>
+<p>La palette par défaut de ggplot n’est pas très lisible, contrairement à la palette Dark2 de Color Brewer.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">individus_classés</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/ggacm.html">ggacm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">classe</span><span class="op">)</span><span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">classe</span><span class="op">)</span> <span class="op">+</span> <span class="co"># &lt;------</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="va">classe</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="va">axes</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="external-link">scale_color_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span> <span class="op">+</span> <span class="co"># (change la palette de couleur) </span></span>
 <span>  <span class="fu"><a href="../reference/theme_acm.html">theme_acm</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-34-1.png" width="768"></p>
+<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-36-1.png" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>On pourra revenir à ce graphique une fois qu’on aura caractérisé les classes pour leur donner un nom par exemple. Dans ce cas là, on recode la colonne <code>classe</code> du tableau <code>individus_classés</code>.</p>
+<p>On pourra revenir à ce graphique une fois qu’on aura caractérisé les classes pour leur donner un nom par exemple. Dans ce cas là, on recode la colonne <code>classe</code> du tableau <code>individus_classés</code> en utilisant la fonction <code><a href="https://forcats.tidyverse.org/reference/fct_recode.html" class="external-link">fct_recode()</a></code> de <code>forcats</code>. La classe 1 est recodée en <code>[Nom de classe]</code>, idem pour la 2 et la 3…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">individus_classés</span><span class="op">&lt;-</span> <span class="va">individus_classés</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>    classe <span class="op">=</span> <span class="va">classe</span> <span class="op">|&gt;</span></span>
 <span>      <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_recode.html" class="external-link">fct_recode</a></span><span class="op">(</span></span>
-<span>        <span class="st">"Nom de classe"</span> <span class="op">=</span> <span class="st">"1"</span>,</span>
-<span>        <span class="st">"Autre nom de classe"</span> <span class="op">=</span> <span class="st">"2"</span>,</span>
-<span>        <span class="st">"Les autres"</span> <span class="op">=</span> <span class="st">"3"</span></span>
+<span>        <span class="st">"[Nom de classe]"</span> <span class="op">=</span> <span class="st">"1"</span>,</span>
+<span>        <span class="st">"[Autre nom de classe]"</span> <span class="op">=</span> <span class="st">"2"</span>,</span>
+<span>        <span class="st">"[Les autres]"</span> <span class="op">=</span> <span class="st">"3"</span></span>
 <span>    <span class="op">)</span> </span>
-<span>  <span class="op">)</span></span></code></pre></div>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">individus_classés</span></span>
+<span><span class="co">#&gt; # A tibble: 2.000 × 23</span></span>
+<span><span class="co">#&gt;    classe    dim1_coord dim2_coord id    sexe  cuisine bricol cinema relig sport</span></span>
+<span><span class="co">#&gt;    &lt;fct&gt;          &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;</span></span>
+<span><span class="co">#&gt;  1 [Autre n…   -0.308       0.152  5     Femme Ne fai… Ne br… Ne va… Prat… Ne p…</span></span>
+<span><span class="co">#&gt;  2 [Autre n…    0.526      -0.576  24    Femme Ne fai… Ne br… Ne va… Prat… Ne p…</span></span>
+<span><span class="co">#&gt;  3 [Autre n…   -0.00599    -0.446  39    Femme Ne fai… Ne br… Ne va… Prat… Ne p…</span></span>
+<span><span class="co">#&gt;  4 [Autre n…    1.06        0.0914 45    Femme Ne fai… Ne br… Ne va… Prat… Ne p…</span></span>
+<span><span class="co">#&gt;  5 [Autre n…   -0.932      -0.348  53    Homme Ne fai… Ne br… Ne va… Prat… Ne p…</span></span>
+<span><span class="co">#&gt;  6 [Autre n…    0.526      -0.576  78    Femme Ne fai… Ne br… Ne va… Prat… Ne p…</span></span>
+<span><span class="co">#&gt;  7 [Autre n…   -0.389       0.178  83    Femme Ne fai… Ne br… Ne va… Prat… Ne p…</span></span>
+<span><span class="co">#&gt;  8 [Autre n…    0.0619      0.239  159   Homme Ne fai… Ne br… Ne va… Prat… Ne p…</span></span>
+<span><span class="co">#&gt;  9 [Autre n…   -0.0985     -0.507  246   Homme Ne fai… Ne br… Ne va… Prat… Ne p…</span></span>
+<span><span class="co">#&gt; 10 [Autre n…    0.312       0.213  266   Femme Ne fai… Ne br… Ne va… Prat… Ne p…</span></span>
+<span><span class="co">#&gt; # ℹ 1.990 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 13 more variables: dim3_coord &lt;dbl&gt;, dim4_coord &lt;dbl&gt;, dim5_coord &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   dim1_contrib &lt;dbl&gt;, dim2_contrib &lt;dbl&gt;, dim3_contrib &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   dim4_contrib &lt;dbl&gt;, dim5_contrib &lt;dbl&gt;, dim1_cos2 &lt;dbl&gt;, dim2_cos2 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   dim3_cos2 &lt;dbl&gt;, dim4_cos2 &lt;dbl&gt;, dim5_cos2 &lt;dbl&gt;</span></span></code></pre></div>
 </div>
-<p>Et on peut refaire ensuite le graphique en affichant le nom des classes :</p>
+<p>On peut ensuite refaire ensuite le graphique en affichant le nom des classes :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">individus_classés</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/ggacm.html">ggacm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">classe</span><span class="op">)</span><span class="op">+</span> </span>
@@ -3349,14 +3420,16 @@
 <span>  <span class="fu"><a href="../reference/theme_acm.html">theme_acm</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-36-1.png" width="672"></p>
+<figure><p><img src="ACM-avec-R_files/figure-html/unnamed-chunk-38-1.png" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>On peut produire des tableaux de résumé pour chaque classe (qui reviennent sur la position moyenne de leurs individus sur les différents axes).</p>
+<section class="level3"><h3 id="tableau-de-description">Tableau de description<a class="anchor" aria-label="anchor" href="#tableau-de-description"></a>
+</h3>
+<p>Les tableaux de description de positions des membres des classes sur les différents axes peuvent être accessible comme ceci :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res_cah</span><span class="op">$</span><span class="va">desc.axes</span><span class="op">$</span><span class="va">quanti</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $`1`</span></span>
@@ -3388,27 +3461,28 @@
 <span><span class="co">#&gt; Dim 2 -11,96            -0,56            0           0,30       0,46       0 93</span></span>
 <span><span class="co">#&gt; Dim 5 -20,67            -0,94            0           0,00       0,45       0 93</span></span></code></pre></div>
 </div>
+<p>On peut ensuite, pour chaque classe, décrire finement la composition de celle-ci ainsi que sa place dans la population globale :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/caracteriser_classe.html">caracteriser_classe</a></span><span class="op">(</span><span class="va">res_cah</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
-<div id="fywabnwvva" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fywabnwvva table {
+<div id="tagtpgobnd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tagtpgobnd table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fywabnwvva thead, #fywabnwvva tbody, #fywabnwvva tfoot, #fywabnwvva tr, #fywabnwvva td, #fywabnwvva th {
+#tagtpgobnd thead, #tagtpgobnd tbody, #tagtpgobnd tfoot, #tagtpgobnd tr, #tagtpgobnd td, #tagtpgobnd th {
   border-style: none;
 }
 
-#fywabnwvva p {
+#tagtpgobnd p {
   margin: 0;
   padding: 0;
 }
 
-#fywabnwvva .gt_table {
+#tagtpgobnd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3434,12 +3508,12 @@
   border-left-color: #D3D3D3;
 }
 
-#fywabnwvva .gt_caption {
+#tagtpgobnd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fywabnwvva .gt_title {
+#tagtpgobnd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3451,7 +3525,7 @@
   border-bottom-width: 0;
 }
 
-#fywabnwvva .gt_subtitle {
+#tagtpgobnd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3463,7 +3537,7 @@
   border-top-width: 0;
 }
 
-#fywabnwvva .gt_heading {
+#tagtpgobnd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3475,13 +3549,13 @@
   border-right-color: #D3D3D3;
 }
 
-#fywabnwvva .gt_bottom_border {
+#tagtpgobnd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fywabnwvva .gt_col_headings {
+#tagtpgobnd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3496,7 +3570,7 @@
   border-right-color: #D3D3D3;
 }
 
-#fywabnwvva .gt_col_heading {
+#tagtpgobnd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3516,7 +3590,7 @@
   overflow-x: hidden;
 }
 
-#fywabnwvva .gt_column_spanner_outer {
+#tagtpgobnd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3528,15 +3602,15 @@
   padding-right: 4px;
 }
 
-#fywabnwvva .gt_column_spanner_outer:first-child {
+#tagtpgobnd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fywabnwvva .gt_column_spanner_outer:last-child {
+#tagtpgobnd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fywabnwvva .gt_column_spanner {
+#tagtpgobnd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3548,11 +3622,11 @@
   width: 100%;
 }
 
-#fywabnwvva .gt_spanner_row {
+#tagtpgobnd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fywabnwvva .gt_group_heading {
+#tagtpgobnd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3578,7 +3652,7 @@
   text-align: left;
 }
 
-#fywabnwvva .gt_empty_group_heading {
+#tagtpgobnd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3593,15 +3667,15 @@
   vertical-align: middle;
 }
 
-#fywabnwvva .gt_from_md > :first-child {
+#tagtpgobnd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fywabnwvva .gt_from_md > :last-child {
+#tagtpgobnd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fywabnwvva .gt_row {
+#tagtpgobnd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3620,7 +3694,7 @@
   overflow-x: hidden;
 }
 
-#fywabnwvva .gt_stub {
+#tagtpgobnd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3633,7 +3707,7 @@
   padding-right: 5px;
 }
 
-#fywabnwvva .gt_stub_row_group {
+#tagtpgobnd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3647,15 +3721,15 @@
   vertical-align: top;
 }
 
-#fywabnwvva .gt_row_group_first td {
+#tagtpgobnd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fywabnwvva .gt_row_group_first th {
+#tagtpgobnd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fywabnwvva .gt_summary_row {
+#tagtpgobnd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3665,16 +3739,16 @@
   padding-right: 5px;
 }
 
-#fywabnwvva .gt_first_summary_row {
+#tagtpgobnd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fywabnwvva .gt_first_summary_row.thick {
+#tagtpgobnd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fywabnwvva .gt_last_summary_row {
+#tagtpgobnd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3684,7 +3758,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#fywabnwvva .gt_grand_summary_row {
+#tagtpgobnd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3694,7 +3768,7 @@
   padding-right: 5px;
 }
 
-#fywabnwvva .gt_first_grand_summary_row {
+#tagtpgobnd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3704,7 +3778,7 @@
   border-top-color: #D3D3D3;
 }
 
-#fywabnwvva .gt_last_grand_summary_row_top {
+#tagtpgobnd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3714,11 +3788,11 @@
   border-bottom-color: #D3D3D3;
 }
 
-#fywabnwvva .gt_striped {
+#tagtpgobnd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fywabnwvva .gt_table_body {
+#tagtpgobnd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3727,7 +3801,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#fywabnwvva .gt_footnotes {
+#tagtpgobnd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3741,7 +3815,7 @@
   border-right-color: #D3D3D3;
 }
 
-#fywabnwvva .gt_footnote {
+#tagtpgobnd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3750,7 +3824,7 @@
   padding-right: 5px;
 }
 
-#fywabnwvva .gt_sourcenotes {
+#tagtpgobnd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3764,7 +3838,7 @@
   border-right-color: #D3D3D3;
 }
 
-#fywabnwvva .gt_sourcenote {
+#tagtpgobnd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3772,72 +3846,72 @@
   padding-right: 5px;
 }
 
-#fywabnwvva .gt_left {
+#tagtpgobnd .gt_left {
   text-align: left;
 }
 
-#fywabnwvva .gt_center {
+#tagtpgobnd .gt_center {
   text-align: center;
 }
 
-#fywabnwvva .gt_right {
+#tagtpgobnd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fywabnwvva .gt_font_normal {
+#tagtpgobnd .gt_font_normal {
   font-weight: normal;
 }
 
-#fywabnwvva .gt_font_bold {
+#tagtpgobnd .gt_font_bold {
   font-weight: bold;
 }
 
-#fywabnwvva .gt_font_italic {
+#tagtpgobnd .gt_font_italic {
   font-style: italic;
 }
 
-#fywabnwvva .gt_super {
+#tagtpgobnd .gt_super {
   font-size: 65%;
 }
 
-#fywabnwvva .gt_footnote_marks {
+#tagtpgobnd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fywabnwvva .gt_asterisk {
+#tagtpgobnd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fywabnwvva .gt_indent_1 {
+#tagtpgobnd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fywabnwvva .gt_indent_2 {
+#tagtpgobnd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fywabnwvva .gt_indent_3 {
+#tagtpgobnd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fywabnwvva .gt_indent_4 {
+#tagtpgobnd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fywabnwvva .gt_indent_5 {
+#tagtpgobnd .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fywabnwvva .katex-display {
+#tagtpgobnd .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fywabnwvva div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#tagtpgobnd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3931,26 +4005,26 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
 </table>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/caracteriser_classe.html">caracteriser_classe</a></span><span class="op">(</span><span class="va">res_cah</span>, <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
-<div id="penhvdgvdw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#penhvdgvdw table {
+<div id="orfscirmii" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#orfscirmii table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#penhvdgvdw thead, #penhvdgvdw tbody, #penhvdgvdw tfoot, #penhvdgvdw tr, #penhvdgvdw td, #penhvdgvdw th {
+#orfscirmii thead, #orfscirmii tbody, #orfscirmii tfoot, #orfscirmii tr, #orfscirmii td, #orfscirmii th {
   border-style: none;
 }
 
-#penhvdgvdw p {
+#orfscirmii p {
   margin: 0;
   padding: 0;
 }
 
-#penhvdgvdw .gt_table {
+#orfscirmii .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3976,12 +4050,12 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-left-color: #D3D3D3;
 }
 
-#penhvdgvdw .gt_caption {
+#orfscirmii .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#penhvdgvdw .gt_title {
+#orfscirmii .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3993,7 +4067,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-bottom-width: 0;
 }
 
-#penhvdgvdw .gt_subtitle {
+#orfscirmii .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4005,7 +4079,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-top-width: 0;
 }
 
-#penhvdgvdw .gt_heading {
+#orfscirmii .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4017,13 +4091,13 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-right-color: #D3D3D3;
 }
 
-#penhvdgvdw .gt_bottom_border {
+#orfscirmii .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#penhvdgvdw .gt_col_headings {
+#orfscirmii .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4038,7 +4112,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-right-color: #D3D3D3;
 }
 
-#penhvdgvdw .gt_col_heading {
+#orfscirmii .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4058,7 +4132,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   overflow-x: hidden;
 }
 
-#penhvdgvdw .gt_column_spanner_outer {
+#orfscirmii .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4070,15 +4144,15 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   padding-right: 4px;
 }
 
-#penhvdgvdw .gt_column_spanner_outer:first-child {
+#orfscirmii .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#penhvdgvdw .gt_column_spanner_outer:last-child {
+#orfscirmii .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#penhvdgvdw .gt_column_spanner {
+#orfscirmii .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4090,11 +4164,11 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   width: 100%;
 }
 
-#penhvdgvdw .gt_spanner_row {
+#orfscirmii .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#penhvdgvdw .gt_group_heading {
+#orfscirmii .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4120,7 +4194,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   text-align: left;
 }
 
-#penhvdgvdw .gt_empty_group_heading {
+#orfscirmii .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4135,15 +4209,15 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   vertical-align: middle;
 }
 
-#penhvdgvdw .gt_from_md > :first-child {
+#orfscirmii .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#penhvdgvdw .gt_from_md > :last-child {
+#orfscirmii .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#penhvdgvdw .gt_row {
+#orfscirmii .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4162,7 +4236,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   overflow-x: hidden;
 }
 
-#penhvdgvdw .gt_stub {
+#orfscirmii .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4175,7 +4249,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   padding-right: 5px;
 }
 
-#penhvdgvdw .gt_stub_row_group {
+#orfscirmii .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4189,15 +4263,15 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   vertical-align: top;
 }
 
-#penhvdgvdw .gt_row_group_first td {
+#orfscirmii .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#penhvdgvdw .gt_row_group_first th {
+#orfscirmii .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#penhvdgvdw .gt_summary_row {
+#orfscirmii .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4207,16 +4281,16 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   padding-right: 5px;
 }
 
-#penhvdgvdw .gt_first_summary_row {
+#orfscirmii .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#penhvdgvdw .gt_first_summary_row.thick {
+#orfscirmii .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#penhvdgvdw .gt_last_summary_row {
+#orfscirmii .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4226,7 +4300,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-bottom-color: #D3D3D3;
 }
 
-#penhvdgvdw .gt_grand_summary_row {
+#orfscirmii .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4236,7 +4310,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   padding-right: 5px;
 }
 
-#penhvdgvdw .gt_first_grand_summary_row {
+#orfscirmii .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4246,7 +4320,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-top-color: #D3D3D3;
 }
 
-#penhvdgvdw .gt_last_grand_summary_row_top {
+#orfscirmii .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4256,11 +4330,11 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-bottom-color: #D3D3D3;
 }
 
-#penhvdgvdw .gt_striped {
+#orfscirmii .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#penhvdgvdw .gt_table_body {
+#orfscirmii .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4269,7 +4343,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-bottom-color: #D3D3D3;
 }
 
-#penhvdgvdw .gt_footnotes {
+#orfscirmii .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4283,7 +4357,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-right-color: #D3D3D3;
 }
 
-#penhvdgvdw .gt_footnote {
+#orfscirmii .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4292,7 +4366,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   padding-right: 5px;
 }
 
-#penhvdgvdw .gt_sourcenotes {
+#orfscirmii .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4306,7 +4380,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-right-color: #D3D3D3;
 }
 
-#penhvdgvdw .gt_sourcenote {
+#orfscirmii .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4314,72 +4388,72 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   padding-right: 5px;
 }
 
-#penhvdgvdw .gt_left {
+#orfscirmii .gt_left {
   text-align: left;
 }
 
-#penhvdgvdw .gt_center {
+#orfscirmii .gt_center {
   text-align: center;
 }
 
-#penhvdgvdw .gt_right {
+#orfscirmii .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#penhvdgvdw .gt_font_normal {
+#orfscirmii .gt_font_normal {
   font-weight: normal;
 }
 
-#penhvdgvdw .gt_font_bold {
+#orfscirmii .gt_font_bold {
   font-weight: bold;
 }
 
-#penhvdgvdw .gt_font_italic {
+#orfscirmii .gt_font_italic {
   font-style: italic;
 }
 
-#penhvdgvdw .gt_super {
+#orfscirmii .gt_super {
   font-size: 65%;
 }
 
-#penhvdgvdw .gt_footnote_marks {
+#orfscirmii .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#penhvdgvdw .gt_asterisk {
+#orfscirmii .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#penhvdgvdw .gt_indent_1 {
+#orfscirmii .gt_indent_1 {
   text-indent: 5px;
 }
 
-#penhvdgvdw .gt_indent_2 {
+#orfscirmii .gt_indent_2 {
   text-indent: 10px;
 }
 
-#penhvdgvdw .gt_indent_3 {
+#orfscirmii .gt_indent_3 {
   text-indent: 15px;
 }
 
-#penhvdgvdw .gt_indent_4 {
+#orfscirmii .gt_indent_4 {
   text-indent: 20px;
 }
 
-#penhvdgvdw .gt_indent_5 {
+#orfscirmii .gt_indent_5 {
   text-indent: 25px;
 }
 
-#penhvdgvdw .katex-display {
+#orfscirmii .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#penhvdgvdw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#orfscirmii div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4497,26 +4571,26 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
 </table>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/caracteriser_classe.html">caracteriser_classe</a></span><span class="op">(</span><span class="va">res_cah</span>, <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
-<div id="riofxoimsy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#riofxoimsy table {
+<div id="uirrjehktm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#uirrjehktm table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#riofxoimsy thead, #riofxoimsy tbody, #riofxoimsy tfoot, #riofxoimsy tr, #riofxoimsy td, #riofxoimsy th {
+#uirrjehktm thead, #uirrjehktm tbody, #uirrjehktm tfoot, #uirrjehktm tr, #uirrjehktm td, #uirrjehktm th {
   border-style: none;
 }
 
-#riofxoimsy p {
+#uirrjehktm p {
   margin: 0;
   padding: 0;
 }
 
-#riofxoimsy .gt_table {
+#uirrjehktm .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4542,12 +4616,12 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-left-color: #D3D3D3;
 }
 
-#riofxoimsy .gt_caption {
+#uirrjehktm .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#riofxoimsy .gt_title {
+#uirrjehktm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4559,7 +4633,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-bottom-width: 0;
 }
 
-#riofxoimsy .gt_subtitle {
+#uirrjehktm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4571,7 +4645,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-top-width: 0;
 }
 
-#riofxoimsy .gt_heading {
+#uirrjehktm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4583,13 +4657,13 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-right-color: #D3D3D3;
 }
 
-#riofxoimsy .gt_bottom_border {
+#uirrjehktm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#riofxoimsy .gt_col_headings {
+#uirrjehktm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4604,7 +4678,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-right-color: #D3D3D3;
 }
 
-#riofxoimsy .gt_col_heading {
+#uirrjehktm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4624,7 +4698,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   overflow-x: hidden;
 }
 
-#riofxoimsy .gt_column_spanner_outer {
+#uirrjehktm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4636,15 +4710,15 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   padding-right: 4px;
 }
 
-#riofxoimsy .gt_column_spanner_outer:first-child {
+#uirrjehktm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#riofxoimsy .gt_column_spanner_outer:last-child {
+#uirrjehktm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#riofxoimsy .gt_column_spanner {
+#uirrjehktm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4656,11 +4730,11 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   width: 100%;
 }
 
-#riofxoimsy .gt_spanner_row {
+#uirrjehktm .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#riofxoimsy .gt_group_heading {
+#uirrjehktm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4686,7 +4760,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   text-align: left;
 }
 
-#riofxoimsy .gt_empty_group_heading {
+#uirrjehktm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4701,15 +4775,15 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   vertical-align: middle;
 }
 
-#riofxoimsy .gt_from_md > :first-child {
+#uirrjehktm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#riofxoimsy .gt_from_md > :last-child {
+#uirrjehktm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#riofxoimsy .gt_row {
+#uirrjehktm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4728,7 +4802,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   overflow-x: hidden;
 }
 
-#riofxoimsy .gt_stub {
+#uirrjehktm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4741,7 +4815,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   padding-right: 5px;
 }
 
-#riofxoimsy .gt_stub_row_group {
+#uirrjehktm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4755,15 +4829,15 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   vertical-align: top;
 }
 
-#riofxoimsy .gt_row_group_first td {
+#uirrjehktm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#riofxoimsy .gt_row_group_first th {
+#uirrjehktm .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#riofxoimsy .gt_summary_row {
+#uirrjehktm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4773,16 +4847,16 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   padding-right: 5px;
 }
 
-#riofxoimsy .gt_first_summary_row {
+#uirrjehktm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#riofxoimsy .gt_first_summary_row.thick {
+#uirrjehktm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#riofxoimsy .gt_last_summary_row {
+#uirrjehktm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4792,7 +4866,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-bottom-color: #D3D3D3;
 }
 
-#riofxoimsy .gt_grand_summary_row {
+#uirrjehktm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4802,7 +4876,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   padding-right: 5px;
 }
 
-#riofxoimsy .gt_first_grand_summary_row {
+#uirrjehktm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4812,7 +4886,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-top-color: #D3D3D3;
 }
 
-#riofxoimsy .gt_last_grand_summary_row_top {
+#uirrjehktm .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4822,11 +4896,11 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-bottom-color: #D3D3D3;
 }
 
-#riofxoimsy .gt_striped {
+#uirrjehktm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#riofxoimsy .gt_table_body {
+#uirrjehktm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4835,7 +4909,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-bottom-color: #D3D3D3;
 }
 
-#riofxoimsy .gt_footnotes {
+#uirrjehktm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4849,7 +4923,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-right-color: #D3D3D3;
 }
 
-#riofxoimsy .gt_footnote {
+#uirrjehktm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4858,7 +4932,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   padding-right: 5px;
 }
 
-#riofxoimsy .gt_sourcenotes {
+#uirrjehktm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4872,7 +4946,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-right-color: #D3D3D3;
 }
 
-#riofxoimsy .gt_sourcenote {
+#uirrjehktm .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4880,72 +4954,72 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   padding-right: 5px;
 }
 
-#riofxoimsy .gt_left {
+#uirrjehktm .gt_left {
   text-align: left;
 }
 
-#riofxoimsy .gt_center {
+#uirrjehktm .gt_center {
   text-align: center;
 }
 
-#riofxoimsy .gt_right {
+#uirrjehktm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#riofxoimsy .gt_font_normal {
+#uirrjehktm .gt_font_normal {
   font-weight: normal;
 }
 
-#riofxoimsy .gt_font_bold {
+#uirrjehktm .gt_font_bold {
   font-weight: bold;
 }
 
-#riofxoimsy .gt_font_italic {
+#uirrjehktm .gt_font_italic {
   font-style: italic;
 }
 
-#riofxoimsy .gt_super {
+#uirrjehktm .gt_super {
   font-size: 65%;
 }
 
-#riofxoimsy .gt_footnote_marks {
+#uirrjehktm .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#riofxoimsy .gt_asterisk {
+#uirrjehktm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#riofxoimsy .gt_indent_1 {
+#uirrjehktm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#riofxoimsy .gt_indent_2 {
+#uirrjehktm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#riofxoimsy .gt_indent_3 {
+#uirrjehktm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#riofxoimsy .gt_indent_4 {
+#uirrjehktm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#riofxoimsy .gt_indent_5 {
+#uirrjehktm .gt_indent_5 {
   text-indent: 25px;
 }
 
-#riofxoimsy .katex-display {
+#uirrjehktm .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#riofxoimsy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#uirrjehktm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -5072,7 +5146,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
 </div>
 </div>
 </div>
-</section><script id="quarto-html-after-body" type="application/javascript">
+</section></section><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);

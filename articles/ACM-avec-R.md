@@ -1,15 +1,25 @@
 # ACM avec R
 
-Ceci est un document qui contient le code utilisé pour réalisé les ACM.
+Ceci est un document qui contient le code utilisé pour réaliser des
+sorties graphiques d’ACM. Pour les phases préalables, où il faut choisir
+les variables pertinente de l’analyse et essayer un grand nombre de
+combinaison de variable, on aura plutôt recours à
+`Factoshiny::MCAshiny()` qui permet d’explorer rapidement les
+différentes analyses possibles à partir d’un même jeu de données. De
+manière similaire, `explor::explor()` fonctionne très bien pour
+rapidement explorer un résultat.
+
+Le code présenté ici et dans le packages interviennent en général à une
+phase ultérieure, où l’on cherche à manipuler le résultat de l’analyse
+pour produire des graphiques, des tableaux, etc.
+
 Si ce n’est pas déjà fait, il va falloir installer les packages qui sont
-utilisés.
+utilisés, dont mon package. N’étant disponible que sur Github, la
+meilleure manière de l’installer est de faire
+`pak::pak("nicolasville/ggacm)` (ce qui nécessite l’installation du
+package `pak` auparavant avec `install.packages("pak")`).
 
-La plupart du code que j’ai fait est mis dans un package sur github.
-Pour l’ installer, il suffit de faire `pak::pak("nicolasville/ggacm)` (à
-condition d’ avoir installé le package `pak` auparavant pour faire
-l’installation.)
-
-## Setup
+On commence par charger les packages qui vont être utilisé.
 
 ``` r
 
@@ -39,14 +49,10 @@ mise_en_place_ACM()
 #> ✔ En utilisant une virgule pour les nombres décimaux.
 ```
 
-Import
-
-Je commence par charger le résultat de l’ACM. Ici, je vais utiliser le
-jeu de donnée du package `questionr` qui correspond à un extrait de
-l’enquête *Histoire de Vie* de l’INSEE en 2003.
-
-Je ne prend que certaines colonnes qui sont relatives à l’ID de
-l’individu, et certaines pratiques.
+Le jeu de donnée du package `questionr` qui correspond à un extrait de
+l’enquête *Histoire de Vie* de l’INSEE en 2003 sera utilisé en exemple
+ici. Plus précisément seules certaines colonnes relatives à certaines
+pratiques sont gardées.
 
 ``` r
 
@@ -80,7 +86,7 @@ hdv2003
 #> # ℹ 1.990 more rows
 ```
 
-Pour faire un tableau résumé, on peut faire :
+Pour se donner une idée du jeu de donnée :
 
 ``` r
 
@@ -90,7 +96,10 @@ hdv2003 |>
 
 [TABLE]
 
-Comme ça fait pas mal de modalités oui/non, je les recode pour qu’elles
+## Préparations
+
+Une partie des modalités sont identiques entre variable (“Oui”/“Non”).
+Pour rendre les sorties plus lisbiles, je les recode pour qu’elles
 soient toutes différentes et plus claires. (L’IA génère bien ces
 recodages en général)
 
@@ -137,8 +146,7 @@ hdv2003
 #> # ℹ 1.990 more rows
 ```
 
-Je sélectionne ensuite les variables pour l’ACM avec quelque chose de ce
-genre
+On sélectionne ensuite les variables supplémentaires…
 
 ``` r
 
@@ -150,7 +158,7 @@ variables_supplémentaires
 #> [1] "id"   "sexe"
 ```
 
-Et du coup on peut garder les variables actives dans un autre vecteur
+… et actives
 
 ``` r
 
@@ -164,7 +172,9 @@ variables_actives
 
 On peut maintenant faire l’ACM avec
 [`FactoMineR::MCA`](https://rdrr.io/pkg/FactoMineR/man/MCA.html), en
-précisant les variables supplémentaires :
+précisant les variables supplémentaires dans l’argument `quali.sup`. On
+stocke le résultat dans l’objet `res_acm` pour y avoir accès pour plus
+tard.
 
 ``` r
 
@@ -173,16 +183,8 @@ res_acm <- hdv2003 |>
 #> Warning in sqrt(Nj * ((N - 1)/(N - Nj))): NaNs produced
 ```
 
-FactoMineR produit déjà des graphiques. L’analyse est donc faite. Tous
-les résultats sont stockés dans l’objet `res_acm` qui est une liste de
-résutlat.
-
-Le package étant un peu daté, la plupart des sorties sont moches. J’ai
-codé quelques fonctions pour sortir plus facilement les résultats et les
-mettre en graphiques que j’ai mis dans un package (`ggacm`).
-
-On peut maintenant décrire les axes. Pour les taux modifiés, j’utilise
-`modif.rate()` du package `GDAtools`.
+On peut maintenant décrire les axes. Les taux modifiés de Benzécri
+peuvent se calculer avec `modif.rate()` du package `GDAtools`.
 
 ``` r
 
@@ -196,10 +198,10 @@ ggacm::extraire_variance(res_acm)
 
 GDAtools::modif.rate(res_acm)$modif
 #>                                   mrate cum.mrate
-#> dim 1 98,327888836411702300210890825838      98,3
-#> dim 2  1,571688705421736997891457576770      99,9
-#> dim 3  0,094352963276206666676237944102     100,0
-#> dim 4  0,006069494890357363288402314794     100,0
+#> dim 1 98,327888836411730721920321229845      98,3
+#> dim 2  1,571688705421702803022299121949      99,9
+#> dim 3  0,094352963276213036580841730938     100,0
+#> dim 4  0,006069494890360339206525353006     100,0
 #> dim 5  0,000000000000000000000000000757     100,0
 ```
 
@@ -319,9 +321,20 @@ caracteriser_axe(res_acm, 4)
 | ² Moyenne des coordonnées des individus partageant la modalité |  |  |  |  |  |
 
 Pour la suite et pour faire les graphiques, il est intéressant de
-disposer des données “augmentées” des résultats de l’ACM. Autrement dit,
-un tableau avec les coordonnées, etc des individus et un autre tableau
-avec la même chose mais pour chaque modalité.
+disposer des données “augmentées” des résultats de l’ACM. L’analyse a
+produit pour chaque individus une série de coordonnées (sur l’axe 1, 2,
+3…), de contributions ( à l’axe 1, 2, 3…), de distance en cos², etc. La
+fonction
+[`extraire_individus()`](https://nicolasville.github.io/ggacm/reference/extraire_individus.md)
+extrait du résultat, notre tableau d’entrée auquel on a rajouté, pour
+chaque individus les données mentionnées.
+
+Les colonnes contenant les coordonnées sur l’axe 1 et 2 sont mises en
+début de tableau, parce que ce sont les plus utilisées. (Ce n’est que
+cosmétique, le reste des coordonnées, contributions, etc. reste
+accessible).
+
+On stocke ce tableau dans un objet `individus`.
 
 ``` r
 
@@ -348,7 +361,13 @@ individus
 #> #   dim3_cos2 <dbl>, dim4_cos2 <dbl>, dim5_cos2 <dbl>
 ```
 
-Et pour les modalités :
+On peut faire de même pour les modalités en produisant un tableau
+récapitulatif des modalités avec
+[`extraire_modalites()`](https://nicolasville.github.io/ggacm/reference/extraire_modalites.md).
+Ce tableau inclut le type de variable (active ou supplémentaire), le nom
+de la variable, le nom de la modalité, son effectif en nombre et en
+pourcentage, ainsi que ses coordonnées sur les différents axes, sa
+contribution à chaque axe, etc.
 
 ``` r
 
@@ -380,12 +399,18 @@ modalités
 #> #   dim4_vtest <dbl>, dim4_contrib <dbl>
 ```
 
+Le grand intérêt de ces tableaux est d’être facilement utilisable par
+l’extension `ggplot2` qui permet de générer soi-même ses graphiques
+sur-mesure.
+
 ## Graphique des modalités
 
-Pour faire le graphique j’utilise ggplot directement sur le tableau des
-modalités avec les variables dim1_coord et dim2_coord qui stockent les
-coordonnées des modalités. Ici,
+Pour faire le graphique on utilise
 [`ggplot()`](https://ggplot2.tidyverse.org/reference/ggplot.html)
+directement sur le tableau des modalités avec les variables `dim1_coord`
+et `dim2_coord` qui stockent les coordonnées des modalités.
+
+Ici, [`ggplot()`](https://ggplot2.tidyverse.org/reference/ggplot.html)
 initialise le graphique avec les coordonnées.
 [`geom_point()`](https://ggplot2.tidyverse.org/reference/geom_point.html)
 place les points et
@@ -396,7 +421,7 @@ et pas
 [`geom_text()`](https://ggplot2.tidyverse.org/reference/geom_text.html)
 parce que
 [`geom_text()`](https://ggplot2.tidyverse.org/reference/geom_text.html)
-mettrait le texte directement *sur* les points. L’argument
+mettrait le texte directement **sur** les points. L’argument
 `label`indique la colonne du tableau qui contient le texte à afficher.
 
 ``` r
@@ -413,26 +438,71 @@ modalités |>
 
 ![](ACM-avec-R_files/figure-html/unnamed-chunk-15-1.png)
 
-Ca peut être assez long à taper donc j’ai fait une fonction
-[`ggacm()`](https://nicolasville.github.io/ggacm/reference/ggacm.md) qui
+Cela peut être assez long à taper à la longue. La fonction
+[`ggacm()`](https://nicolasville.github.io/ggacm/reference/ggacm.md)  
 simplifie la production de graphiques, en plus de représenter les
-cadrans et de “fixer” les coordonnées (1cm vers la droite = 1cm vers le
-haut), ce qui n’est pas le cas de la représentation plus haut.
+cadrans et de rendre l’échelle de grandeur des abcsisses et des
+ordonnées identiques.
 
 ``` r
 
 modalités |> 
-  ggacm() +
+  ggacm() + # <- Initialise le graphique d'un coup
   geom_point() +
   geom_text_repel(aes(label = modalites)) 
 ```
 
 ![](ACM-avec-R_files/figure-html/unnamed-chunk-16-1.png)
 
-Voici le graphique “brut”. Notez le `#| fig-height:` et `#| fig-height:`
-qui fixent les dimensions (en pouce) du graphique produit. En fonction
-des ACM, il faut essayer différentes valeurs pour voir ce qui fonctionne
-le mieux.
+Voici le graphique “brut”. Souvent, des modalités n’ont pas assez de
+place pour s’afficher, sont écrites trop grosses ou autres.
+
+Dans quarto, on peut préciser dans le bloc de code la taille du
+graphique qui sera produit avec `#| fig-height:` et `#| fig-height:` qui
+fixent les dimensions (en pouce). En fonction des ACM, il faut essayer
+différentes valeurs pour voir ce qui fonctionne le mieux. Les graphiques
+que vous voyez utilisent
+
+    #| fig-height: 7
+    #| fig-width: 8
+
+    Code_qui_génère_un_graphique
+
+Jusqu’ici, toutes les variables ont été affiché sur les graphiques. Or,
+souvent, on fait la différence entre les variables supplémentaires et
+actives. Si on veut, on peut faire des graphiques différents. Par
+exemple, ici ne sont affichés que les variables actives (on filtre le
+tableau des modalités avant de l’injecter dans le graphique)
+
+``` r
+
+modalités |> 
+  filter(type == "variable active") |> # <- on ne garde que les variables actives
+  ggacm() +
+  geom_point() +
+  geom_text_repel(aes(label = modalites)) 
+```
+
+![](ACM-avec-R_files/figure-html/unnamed-chunk-17-1.png)
+
+On peut aussi donner une forme différente au variables active et
+supplémentaire. Ici, `aes(shape = type)` indique à ggplot de donner une
+forme différente aux points en fonction du `type` de la modalité (active
+ou supplémentaire). Pour plus de détails sur ce qu’il est possible de
+faire, voir la section du manuel de
+[ggplot](https://ggplot2-book.org/getting-started.html#sec-aesthetics).
+
+``` r
+
+modalités |> 
+  ggacm() +
+  geom_point(aes(shape = type)) +
+  geom_text_repel(aes(label = modalites)) 
+```
+
+![](ACM-avec-R_files/figure-html/unnamed-chunk-18-1.png)
+
+### Décorer ses graphiques
 
 Voilà pour le graphique des modalités. On peut maintenant rajouter un
 certain nombre de chose pour l’améliorer.
@@ -449,23 +519,29 @@ graph <- modalités |>
 ```
 
 Cet objet est un graphique et on peut lui ajouter des éléments avec `+`
-comme une légende ou un titre.
+comme une légende ou un titre avec la fonction
+[`labs()`](https://ggplot2.tidyverse.org/reference/labs.html). Cette
+fonction permet également de renommer les axes.
 
 ``` r
 
 graph + 
   labs(
     title = "ACM des pratiques culturelles",
-    caption = "Réalisé à partir de l'enquête Histoire de Vie 2003 de l'INSEE."
+    caption = "Réalisé à partir de l'enquête Histoire de Vie 2003 de l'INSEE.",
+    x = "L'axe 1"
   )
 ```
 
-![](ACM-avec-R_files/figure-html/unnamed-chunk-18-1.png)
+![](ACM-avec-R_files/figure-html/unnamed-chunk-20-1.png)
 
-On peut changer le nom des axes. J’ai fait une fonction
+Le nom des axes est assez important dans les graphiques d’analyse des
+correspondances. On aura tendance à les réutiliser dans tous les
+graphiques. Pour plus d’ergonomie, il est possible de stocker les
+intitulés des axes dans un objet qu’on rajoutera systématiquement au
+graphique. La fonction
 [`nommer_axes()`](https://nicolasville.github.io/ggacm/reference/nommer_axes.md)
-pour aider à générer le nom des axes. Ici, je les stocke dans une
-variable avant des les utiliser dans le graphique.
+aide à générer ces intitulés.
 
 ``` r
 
@@ -479,9 +555,9 @@ axes <- nommer_axes(res_acm,
 graph + axes
 ```
 
-![](ACM-avec-R_files/figure-html/unnamed-chunk-19-1.png)
+![](ACM-avec-R_files/figure-html/unnamed-chunk-21-1.png)
 
-On peut changer le thème esthétique du graphique. J’ai mis mes
+On peut également changer le thème esthétique du graphique. J’ai mis mes
 préférences dans la fonction
 [`theme_acm()`](https://nicolasville.github.io/ggacm/reference/theme_acm.md)
 mais on peut en utiliser d’autres : voir sur le [site du package
@@ -492,28 +568,32 @@ ggplot2](https://ggplot2-book.org/themes.html#sec-themes).
 graph + theme_acm()
 ```
 
-![](ACM-avec-R_files/figure-html/unnamed-chunk-20-1.png)
+![](ACM-avec-R_files/figure-html/unnamed-chunk-22-1.png)
+
+### Ajouter d’autres variables
 
 On peut également rajouter d’autres “variables au graphique”. Pour cela,
 il faut revenir à l’expression de base. Dans l’exemple suivant je
 modifie la taille des points en fonction des effectifs en ajoutant
 `aes(size = n)` dans la fonction qui trace les points. `n` est le nom de
-la colonne du tableau de `modalités` qui contient les effectifs.:
+la colonne du tableau de `modalités` qui contient les effectifs :
 
 ``` r
 
 modalités |> 
   ggacm() +
-  geom_point(aes(size = n)) +
+  geom_point(aes(size = n)) + # <------
   geom_text_repel(aes(label = modalites)) +
   theme_acm() + 
   axes
 ```
 
-![](ACM-avec-R_files/figure-html/unnamed-chunk-21-1.png)
+![](ACM-avec-R_files/figure-html/unnamed-chunk-23-1.png)
 
-Si l’on souhaite rajouter la fameuse échelle de couleur, on peut le
-faire également.
+### Représenter un troisième axe
+
+On peut de manière similaire ajouter à la représentation une échelle de
+couleur en fonction des coordonnées sur l’axe 3.
 
 ``` r
 
@@ -526,42 +606,49 @@ modalités |>
   axes
 ```
 
-![](ACM-avec-R_files/figure-html/unnamed-chunk-22-1.png)
+![](ACM-avec-R_files/figure-html/unnamed-chunk-24-1.png)
 
-L’échelle n’est pas très adapté aux coordonnées d’une ACM, et on doit
-donc la changer.
+L’échelle de couleur n’est pas très adapté aux coordonnées d’une ACM, on
+doit donc la changer pour une échelle divergente de couleur. Ce que l’on
+peut faire avec
+[`scale_color_gradient2()`](https://ggplot2.tidyverse.org/reference/scale_gradient.html).
 
 Ici, je vais stocker dans un objet la liste des spécifications de cette
-échelle dans un objet que je vais appeler `couleurs`. L’argument
-`oob = scales::squish` permet de faire en sorte que les points qui ne
-sont pas dans les limites de l’échelle (à moins de -0,5 ou plus de 0,5)
-soient considérés pour la couleur comme comme étant égal à -0,5 et 0,5.
-Cela évite qu’ils finissent gris.
+échelle dans un objet que je vais appeler `couleurs`.
+
+L’argument `oob = scales::squish` permet de faire en sorte que les
+points qui ne sont pas dans les limites de l’échelle (à moins de -0,5 ou
+plus de 0,5) soient considérés pour la couleur comme comme étant égal à
+-0,5 et 0,5. Cela évite qu’ils finissent gris. Pour plus de détails sur
+les couleurs dans `ggplot2`, voir [la section
+dédiée](https://ggplot2-book.org/scales-colour.html) du manuel.
 
 La fonction
 [`labs()`](https://ggplot2.tidyverse.org/reference/labs.html) permet de
 rajouter un description de l’axe en couleur, qu’on pourra changer pour
 ajouter le taux de variance par exemple.
 
-Les spécifications de la fonction theme() servent à bien placer la
-légendes des couleurs sur le graphique (en bas du graphique, avec le
-titre centré, etc. )
+Les spécifications de la fonction
+[`theme()`](https://ggplot2.tidyverse.org/reference/theme.html) servent
+à bien placer la légendes des couleurs sur le graphique (en bas du
+graphique, avec le titre centré, etc. )
 
 ``` r
 
 couleurs <- list(
   scale_color_gradient2(
-    high = "red", # couleur du premier bout
-    low = "blue", # couleur du bout opposé
-    midpoint = 0, # milieu
-    mid = "grey20", # couleur du milieu
+    high = "red", # couleur des coordonnées positives
+    low = "blue", # couleur des coordonnées négatives
+    midpoint = 0, # milieu de l'échelle
+    mid = "grey20", # couleur au milieu (ici 0)
     limits = c(-0.5, 0.5), # limites de l'échelle
     oob = scales::squish 
   ),
   labs(
-    color = str_glue("... ← Axe 3 → ...")),
+    color = str_glue("... ← Axe 3 → ...") # intitulé de l'axe 3
+    ),
   theme(legend.position = "bottom",
-        legend.key.width = unit(2.75,"cm"),
+        legend.key.width = unit(2,"cm"),
         legend.key.height = unit(0.2, "cm"),
         legend.title.position = "top",
         legend.title = element_text(hjust = 0.5),
@@ -580,18 +667,27 @@ modalités |>
   geom_text_repel(aes(label = modalites)) +
   theme_acm() + 
   axes +
-  couleurs
+  couleurs # <- les spécifications de l'échelle de couleur
 ```
 
-![](ACM-avec-R_files/figure-html/unnamed-chunk-24-1.png)
+![](ACM-avec-R_files/figure-html/unnamed-chunk-26-1.png)
 
 ## Graphique des individus
 
-Pour réaliser les graphiques des individus, la même logique s’applique
-mais sur le tableau des individus. On peut donc répéter le code plus
-haut, en prenant soin d’enlever `aes(label = modalites)`, puisqu’on ne
-veut plus afficher le texte contenu dans la colonne `modalites` du
-tableau (le tableau des indvividus ne possède pas une telle colonne !).
+Pour réaliser les graphiques des individus, la même logique s’applique :
+on initialise le graphique avec
+[`ggacm()`](https://nicolasville.github.io/ggacm/reference/ggacm.md),
+puis on ajoute, couche après couche, ce dont on a besoin. A cela près
+qu’on travaille non plus sur le tableau des `modalites`, mais celui des
+`individus`.
+
+On peut donc répéter le code plus haut. Au vu du nombre d’individus, il
+n’est pas utile d’afficher leurs identifiants. Toutefois, s’ils étaient
+moins nombreux on pourrait ajouter la même couche qu’on a utilisé pour
+le texte des modalités en changeant ne nom de la colonne pour le texte
+qu’on souhaite afficher. Par exemple si l’on voulait afficher
+l’identifiant des individus, on rajouterait :
+`geom_text_repel(aes(label = id))`.
 
 ``` r
 
@@ -604,17 +700,21 @@ individus |>
   couleurs
 ```
 
-![](ACM-avec-R_files/figure-html/unnamed-chunk-25-1.png)
+![](ACM-avec-R_files/figure-html/unnamed-chunk-27-1.png)
 
-Ici, on remarque que les points sont concentrés… à certains points,
-puisque l’ACM a été réalisée sur un petit nombre de variable. On peut
-résoudre cela en introduisant un peu de bruit artificiel dans les
-points. On remplace
+Ici, on remarque qu’on a pas exactement les 2000 points promis par les
+individus les points sont concentrés… à certains points. L’ACM ayant été
+réalisée sur un petit nombre de variable, les individus qui ont répondu
+de manière identique au questionnaire sont placés au même endroit.
+
+Dans ces cas là, pour se rendre un peu mieux compte du nombre, on peut
+introduire un peu de bruit artificiel dans les points. On remplace
 [`geom_point()`](https://ggplot2.tidyverse.org/reference/geom_point.html)
 par
 [`geom_jitter()`](https://ggplot2.tidyverse.org/reference/geom_jitter.html)
 en précisant par exemple ici qu’on souhaite une variation de 0.1 unité
-dans les deux directions.
+dans les deux directions. Les points seront alors placés aléatoirement
+dans un carré de 0.1 sur 0.1 autour de leurs coordonnées.
 
 ``` r
 
@@ -627,30 +727,32 @@ individus |>
   couleurs
 ```
 
-![](ACM-avec-R_files/figure-html/unnamed-chunk-26-1.png)
+![](ACM-avec-R_files/figure-html/unnamed-chunk-28-1.png)
 
-La couleur n’a cependant pas besoind d’être liée au troisième axe, elle
-peut très bien provenir d’une autre variables (active ou supplémentaire)
-:
+### Colorer le nuage d’individus
+
+On a déjà vu comment colorer le nuage selon les coordonnées sur l’axe 3.
+Rien ne nous empêche cependant d’utiliser la couleur pour autre chose.
+Comme par exemple pour observer la répartition d’une variable dans le
+nuage des individus.
 
 ``` r
 
 individus |> 
   ggacm() +
-  aes(color = sexe)+ 
+  aes(color = sexe) + # <------ 
   geom_jitter(height = 0.1, width = 0.1) +
   theme_acm() + 
   axes 
 ```
 
-![](ACM-avec-R_files/figure-html/unnamed-chunk-27-1.png)
+![](ACM-avec-R_files/figure-html/unnamed-chunk-29-1.png)
 
-Tout particulièrement, il peut être utile de faire une reproduction du
-nuage d’individus en coloriant à chaque fois les individus qui partagent
-une certaine modalitée.
-
-Sur ggplot, cette fonction s’appelle un wrap. La fonction est un peu
-compliquée. Il faut procéder en plusieurs étapes.
+Ce type de représentation peut-être automatisé et répéter sur un grand
+nombre de modalités avec la fonction
+[`facet_wrap()`](https://ggplot2.tidyverse.org/reference/facet_wrap.html)
+de `ggplot2`. La fonction est un peu compliquée. Il faut procéder en
+plusieurs étapes.
 
 D’abord, il faut sélectionner les modalités que l’on souhaite afficher.
 Ici, je vais prendre les 5 modalités qui contribuent le plus à l’axe 1.
@@ -688,37 +790,44 @@ individus_concernés <- individus |>
   )
 
 individus_concernés |> 
-  select(dim1_coord, dim2_coord, variable, modalite) 
-#> # A tibble: 4.853 × 4
-#>    dim1_coord dim2_coord variable modalite                
-#>         <dbl>      <dbl> <chr>    <fct>                   
-#>  1   -0.308       0.152  cinema   Ne va pas au cinéma     
-#>  2   -0.308       0.152  sport    Ne pratique pas de sport
-#>  3    0.526      -0.576  cinema   Va au cinéma            
-#>  4    0.526      -0.576  sport    Pratique un sport       
-#>  5   -0.00599    -0.446  cinema   Ne va pas au cinéma     
-#>  6   -0.00599    -0.446  sport    Pratique un sport       
-#>  7    1.06        0.0914 bricol   Bricole                 
-#>  8    1.06        0.0914 cinema   Va au cinéma            
-#>  9    1.06        0.0914 sport    Pratique un sport       
-#> 10   -0.932      -0.348  cinema   Ne va pas au cinéma     
+  select(modalite, dim1_coord, dim2_coord) 
+#> # A tibble: 4.853 × 3
+#>    modalite                 dim1_coord dim2_coord
+#>    <fct>                         <dbl>      <dbl>
+#>  1 Ne va pas au cinéma        -0.308       0.152 
+#>  2 Ne pratique pas de sport   -0.308       0.152 
+#>  3 Va au cinéma                0.526      -0.576 
+#>  4 Pratique un sport           0.526      -0.576 
+#>  5 Ne va pas au cinéma        -0.00599    -0.446 
+#>  6 Pratique un sport          -0.00599    -0.446 
+#>  7 Bricole                     1.06        0.0914
+#>  8 Va au cinéma                1.06        0.0914
+#>  9 Pratique un sport           1.06        0.0914
+#> 10 Ne va pas au cinéma        -0.932      -0.348 
 #> # ℹ 4.843 more rows
 ```
 
-Ce tableau recense pour chaque modalité, les individus concernés.
+Ce tableau recense pour chaque modalité, toutes les coordonnées des
+individus concernés.
 
 On peut ensuite construire le graphique couche par couche à partir de
-notre nouveau tableau.
+notre nouveau tableau. On l’initialise comme d’habitude avec
+[`ggacm()`](https://nicolasville.github.io/ggacm/reference/ggacm.md).
+Puis, on indique à ggplot qu’on souhaitera produire un graphique
+différent pour chaque modalités avec `facet_wrap(~ modalite)`.
+L’argument `labeller` est ici pour faire sauter une ligne dans les
+labels au cas où le texte d’une modalité serait trop grand.
 
-On commence par une première couche de points (geom_point()) qui
-reproduit le nuage d’individus en gris pour se repérer à chaque fois.
-Cette couche fait appel au nuage de **tous** les individus, on précise
-donc qu’on veut utiliser ce tableau (et pas celui des
-`individus_concernés`comme ce sera le cas dans le reste du graphique)
-avec `data = individus`.
+On peut ensuite commencer à construire le graphique qui sera répété. On
+commence par une première couche de points
+([`geom_point()`](https://ggplot2.tidyverse.org/reference/geom_point.html))
+qui reproduit le nuage d’individus en gris pour se repérer. Cette couche
+fait appel au nuage de **tous** les individus, on précise donc qu’on
+veut utiliser ce tableau (et pas celui des `individus_concernés`comme ce
+sera le cas dans le reste du graphique) avec `data = individus`.
 
-On rajoute dessus une deuxième couche de points rouges, qui s’imprimera
-au dessus de la couche précédente uniquement sur les individus
+On rajoute dessus une deuxième couche de carrés rouges, qui s’imprimera
+au dessus de la couche précédente uniquement pour les individus
 concernés.
 
 Enfin, on demande à ggplot de refaire ce travail, pour chaque modalité
@@ -734,6 +843,10 @@ titre par exemple.
 
 individus_concernés |>
     ggacm() +
+    facet_wrap(
+      ~ modalite,
+      labeller = labeller(modalites = label_wrap_gen(width = 20))
+    )+
     geom_point(
       data = individus,
       aes(dim1_coord, dim2_coord),
@@ -742,22 +855,25 @@ individus_concernés |>
     ) +
     geom_point(
       color = "red",
-      shape = "square"
-    ) +
-    facet_wrap(
-      ~ modalite,
-      labeller = labeller(modalites = label_wrap_gen(width = 20))
+      shape = "square", 
+      size = 2 # pour qu'ils recouvrent complètmeent les points gris. 
     ) +
   theme_acm() +
   axes
 ```
 
-![](ACM-avec-R_files/figure-html/unnamed-chunk-30-1.png)
+![](ACM-avec-R_files/figure-html/unnamed-chunk-32-1.png)
+
+Pour plus de détails sur
+[`facet_wrap()`](https://ggplot2.tidyverse.org/reference/facet_wrap.html),
+voir la section dédiée du
+\[manuel\](https://ggplot2-book.org/facet.html#sec-facet-wrap.
 
 ## Classification
 
 On peut gérer avec un processus similaire les classifications. On
-commence par réaliser la classification :
+commence par réaliser la classification et la stocker dans un objet
+dédiée : `res_cah`.
 
 ``` r
 
@@ -765,21 +881,21 @@ res_cah <- res_acm |>
   FactoMineR::HCPC(nb.clust = 3, graph = FALSE)
 ```
 
-On peut extraire le dendrogramme
+Pour obtenir le dendrogramme :
 
 ``` r
 
 res_cah |> plot(choice = "tree")
 ```
 
-![](ACM-avec-R_files/figure-html/unnamed-chunk-32-1.png)
+![](ACM-avec-R_files/figure-html/unnamed-chunk-34-1.png)
 
-Pour réaliser les graphiques, on peut tout à fait utiliser ceux de
-FactoMineR.
-
-On commence par extraire les résultats de la CAH de `res_cah`. L’idée
-est de rajouter une colonne à `individus` qui codera la classe à
-laquelle ils ont été affectés.
+De manière similaire à avant, on commence par extraire les résultats de
+la CAH de `res_cah`. La fonction
+[`extraire_classes()`](https://nicolasville.github.io/ggacm/reference/extraire_classes.md)
+renvoie notre tableau de données initiale auquel a été rajouté une
+colonne `classe` contenant la classe attributé par l’algorithme à cet
+individus.
 
 ``` r
 
@@ -808,47 +924,16 @@ individus_classés
 
 Pour faire le graphique des individus selon la classe, on peut tout
 simplement reprendre le code du nuage des individus en précisant qu’il
-faudra colorer les couches selon la classe et que les points doivent
-prendre une forme différente en fonction de la classe également.
+faudra donner une couleur selon la variable qui code la classe.
+
+La palette par défaut de ggplot n’est pas très lisible, contrairement à
+la palette Dark2 de Color Brewer.
 
 ``` r
 
 individus_classés |> 
   ggacm() +
-  aes(color = classe)+ 
-  geom_point(aes(shape = classe)) +
-  axes + 
-  scale_color_brewer(palette = "Dark2") + # (change la palette de couleur) 
-  theme_acm()
-```
-
-![](ACM-avec-R_files/figure-html/unnamed-chunk-34-1.png)
-
-On pourra revenir à ce graphique une fois qu’on aura caractérisé les
-classes pour leur donner un nom par exemple. Dans ce cas là, on recode
-la colonne `classe` du tableau `individus_classés`.
-
-``` r
-
-individus_classés<- individus_classés |> 
-  mutate(
-    classe = classe |>
-      fct_recode(
-        "Nom de classe" = "1",
-        "Autre nom de classe" = "2",
-        "Les autres" = "3"
-    ) 
-  )
-```
-
-Et on peut refaire ensuite le graphique en affichant le nom des classes
-:
-
-``` r
-
-individus_classés |> 
-  ggacm() +
-  aes(color = classe)+ 
+  aes(color = classe) + # <------
   geom_point(aes(shape = classe)) +
   axes + 
   scale_color_brewer(palette = "Dark2") + # (change la palette de couleur) 
@@ -857,9 +942,67 @@ individus_classés |>
 
 ![](ACM-avec-R_files/figure-html/unnamed-chunk-36-1.png)
 
-On peut produire des tableaux de résumé pour chaque classe (qui
-reviennent sur la position moyenne de leurs individus sur les différents
-axes).
+On pourra revenir à ce graphique une fois qu’on aura caractérisé les
+classes pour leur donner un nom par exemple. Dans ce cas là, on recode
+la colonne `classe` du tableau `individus_classés` en utilisant la
+fonction
+[`fct_recode()`](https://forcats.tidyverse.org/reference/fct_recode.html)
+de `forcats`. La classe 1 est recodée en `[Nom de classe]`, idem pour la
+2 et la 3…
+
+``` r
+
+individus_classés<- individus_classés |> 
+  mutate(
+    classe = classe |>
+      fct_recode(
+        "[Nom de classe]" = "1",
+        "[Autre nom de classe]" = "2",
+        "[Les autres]" = "3"
+    ) 
+  )
+
+individus_classés
+#> # A tibble: 2.000 × 23
+#>    classe    dim1_coord dim2_coord id    sexe  cuisine bricol cinema relig sport
+#>    <fct>          <dbl>      <dbl> <chr> <chr> <chr>   <chr>  <chr>  <chr> <chr>
+#>  1 [Autre n…   -0.308       0.152  5     Femme Ne fai… Ne br… Ne va… Prat… Ne p…
+#>  2 [Autre n…    0.526      -0.576  24    Femme Ne fai… Ne br… Ne va… Prat… Ne p…
+#>  3 [Autre n…   -0.00599    -0.446  39    Femme Ne fai… Ne br… Ne va… Prat… Ne p…
+#>  4 [Autre n…    1.06        0.0914 45    Femme Ne fai… Ne br… Ne va… Prat… Ne p…
+#>  5 [Autre n…   -0.932      -0.348  53    Homme Ne fai… Ne br… Ne va… Prat… Ne p…
+#>  6 [Autre n…    0.526      -0.576  78    Femme Ne fai… Ne br… Ne va… Prat… Ne p…
+#>  7 [Autre n…   -0.389       0.178  83    Femme Ne fai… Ne br… Ne va… Prat… Ne p…
+#>  8 [Autre n…    0.0619      0.239  159   Homme Ne fai… Ne br… Ne va… Prat… Ne p…
+#>  9 [Autre n…   -0.0985     -0.507  246   Homme Ne fai… Ne br… Ne va… Prat… Ne p…
+#> 10 [Autre n…    0.312       0.213  266   Femme Ne fai… Ne br… Ne va… Prat… Ne p…
+#> # ℹ 1.990 more rows
+#> # ℹ 13 more variables: dim3_coord <dbl>, dim4_coord <dbl>, dim5_coord <dbl>,
+#> #   dim1_contrib <dbl>, dim2_contrib <dbl>, dim3_contrib <dbl>,
+#> #   dim4_contrib <dbl>, dim5_contrib <dbl>, dim1_cos2 <dbl>, dim2_cos2 <dbl>,
+#> #   dim3_cos2 <dbl>, dim4_cos2 <dbl>, dim5_cos2 <dbl>
+```
+
+On peut ensuite refaire ensuite le graphique en affichant le nom des
+classes :
+
+``` r
+
+individus_classés |> 
+  ggacm() +
+  aes(color = classe)+ 
+  geom_point(aes(shape = classe)) +
+  axes + 
+  scale_color_brewer(palette = "Dark2") + # (change la palette de couleur) 
+  theme_acm()
+```
+
+![](ACM-avec-R_files/figure-html/unnamed-chunk-38-1.png)
+
+### Tableau de description
+
+Les tableaux de description de positions des membres des classes sur les
+différents axes peuvent être accessible comme ceci :
 
 ``` r
 
@@ -894,6 +1037,9 @@ res_cah$desc.axes$quanti |>
 #> Dim 2 -11,96            -0,56            0           0,30       0,46       0 93
 #> Dim 5 -20,67            -0,94            0           0,00       0,45       0 93
 ```
+
+On peut ensuite, pour chaque classe, décrire finement la composition de
+celle-ci ainsi que sa place dans la population globale :
 
 ``` r
 
