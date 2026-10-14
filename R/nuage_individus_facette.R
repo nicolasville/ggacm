@@ -37,7 +37,7 @@ nuage_individus_facette <- function(resultat_individus,
                            forme = "square",
                            couleur = "#e41a1c",
                            longueur_max_labels = 20,
-                           taille = 2
+                           taille = 2,
                            ...) {
 
   if(resultat_individus |> inherits("MCA")){
