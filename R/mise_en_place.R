@@ -2,9 +2,7 @@
 #'
 #' R affiche par défaut beaucoup trop de chiffres après la virgule
 #' (qui est d'ailleurs un point en général) et tend à utiliser l'écriture
-#' scientifique... ce qui n'arrange pas vraiment les chercheurs en sciences
-#' sociales... Cette fonction permet de modifier ces options d'un seul coup.
-#' Un nombre qui s'affichait comme 0.456789 s'affichera alors comme 0,457.
+#' scientifique. Cette fonction permet de modifier ces options d'un seul coup.
 #'
 #' Concrètement cette fonction modifie les options de la session R et les options
 #' des objets du package gtsummary en ayant recours à [gtsummary::theme_gtsummary_language()].
@@ -34,16 +32,15 @@
 #'
 mise_en_place_ACM <- function(...){
   options(digits = 3, # arrondir deux chiffres après la virgule
-        scipen = 999,# pas d'écriture scientifique
+        scipen = 10,# pas d'écriture scientifique
         OutDec = ",",
+        pillar.sigfig = 3,   # for tibbles
         ...) # marque des décimale : , et pas .
 
 
   cli::cli_h3("Les options générales de la session R ont été modifié.")
   cli::cli_inform(c(
     "v" = "Les nombres décimaux s'afficheront avec une virgule.",
-    "v" = "Ils n'afficheront que 3 chiffres après la virgule.",
-    "v" = "L'écriture scientifique a été désactivé."
     ))
 
   gtsummary::theme_gtsummary_language(
