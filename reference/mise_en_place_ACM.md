@@ -47,8 +47,6 @@ mise_en_place_ACM()
 #> 
 #> ── Les options générales de la session R ont été modifié. 
 #> ✔ Les nombres décimaux s'afficheront avec une virgule.
-#> ✔ Ils n'afficheront que 3 chiffres après la virgule.
-#> ✔ L'écriture scientifique a été désactivé.
 #> 
 #> ── Le thème des tableaux produit par gtsummary a été modifié. 
 #> ✔ Ils s'afficheront en français.
@@ -56,7 +54,7 @@ mise_en_place_ACM()
 
 # Après :
 c(0.123456, 10e20)
-#> [1]                      0,123 1000000000000000000000,000
+#> [1] 1,23e-01 1,00e+21
 
 # Fin de l'exemple -----------------
 options(old)

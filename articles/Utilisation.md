@@ -18,8 +18,6 @@ mise_en_place_ACM()
 #> 
 #> ── Les options générales de la session R ont été modifié.
 #> ✔ Les nombres décimaux s'afficheront avec une virgule.
-#> ✔ Ils n'afficheront que 3 chiffres après la virgule.
-#> ✔ L'écriture scientifique a été désactivé.
 #> 
 #> 
 #> ── Le thème des tableaux produit par gtsummary a été modifié. 
@@ -116,7 +114,7 @@ resultat_acm <- createurs_de_contenus_pol |>
                                   orientation2)
   )
 #> ℹ Réalisation de l'ACM avec `FactoMineR::MCA()`
-#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [39ms]
+#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [41ms]
 #> 
 #> ℹ
 #> • Sur 56 individus...
@@ -133,7 +131,7 @@ resultat_acm <- createurs_de_contenus_pol |>
 #> ℹ 
 ── Variables supplémentaires : 4 
 #> ℹ 
-`titre`, `personne`, `orientation`, and `orientation2`.[44ms]
+`titre`, `personne`, `orientation`, and `orientation2`.[48ms]
 ```
 
 Vous pouvez explorer les résultats de l’ACM avec la fonction du package

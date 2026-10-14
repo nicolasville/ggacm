@@ -38,8 +38,6 @@ mise_en_place_ACM()
 #> 
 #> ── Les options générales de la session R ont été modifié.
 #> ✔ Les nombres décimaux s'afficheront avec une virgule.
-#> ✔ Ils n'afficheront que 3 chiffres après la virgule.
-#> ✔ L'écriture scientifique a été désactivé.
 #> 
 #> 
 #> ── Le thème des tableaux produit par gtsummary a été modifié. 
@@ -104,7 +102,7 @@ resultat_acm <- createurs_de_contenus_pol |>
                                     age,
                                     visage_decouvert))
 #> ℹ Réalisation de l'ACM avec `FactoMineR::MCA()`
-#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [40ms]
+#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [43ms]
 #> 
 #> ℹ
 #> • Sur 56 individus...
@@ -121,7 +119,7 @@ resultat_acm <- createurs_de_contenus_pol |>
 ── Variables supplémentaires : 9 
 #> ℹ 
 `titre`, `personne`, `orientation`, `orientation2`, `debut`, `twitter`,
-#> `genre`, `age`, and `visage_decouvert`.[44ms]
+#> `genre`, `age`, and `visage_decouvert`.[47ms]
 ```
 
 Une fois que cela est fait, on peut extraire un premier nuage de points

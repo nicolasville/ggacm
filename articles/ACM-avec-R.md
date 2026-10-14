@@ -42,8 +42,6 @@ mise_en_place_ACM()
 #> 
 #> ── Les options générales de la session R ont été modifié. 
 #> ✔ Les nombres décimaux s'afficheront avec une virgule.
-#> ✔ Ils n'afficheront que 3 chiffres après la virgule.
-#> ✔ L'écriture scientifique a été désactivé.
 #> ── Le thème des tableaux produit par gtsummary a été modifié. 
 #> ✔ Ils s'afficheront en français.
 #> ✔ En utilisant une virgule pour les nombres décimaux.
@@ -197,12 +195,11 @@ ggacm::extraire_variance(res_acm)
 #> 5 Axe 5            0,20        11,1 %                 62 %
 
 GDAtools::modif.rate(res_acm)$modif
-#>                                   mrate cum.mrate
-#> dim 1 98,327888836411730721920321229845      98,3
-#> dim 2  1,571688705421702803022299121949      99,9
-#> dim 3  0,094352963276213036580841730938     100,0
-#> dim 4  0,006069494890360339206525353006     100,0
-#> dim 5  0,000000000000000000000000000757     100,0
+#>          mrate cum.mrate
+#> dim 1 98,32789      98,3
+#> dim 2  1,57169      99,9
+#> dim 3  0,09435     100,0
+#> dim 4  0,00607     100,0
 ```
 
 ## Description des axes
@@ -830,26 +827,19 @@ On rajoute dessus une deuxième couche de carrés rouges, qui s’imprimera
 au dessus de la couche précédente uniquement pour les individus
 concernés.
 
-Enfin, on demande à ggplot de refaire ce travail, pour chaque modalité
-sur un graphique différent (`facet_wrap(~ modalite)`). L’argument
-`labeller` est ici pour faire sauter une ligne dans les labels au cas où
-le texte d’une modalité serait trop grand.
-
-Pour que ce soit plus esthétiques, je rajoute ensuite les axes et le
-thème qu’ on a vu plus haut. On pourrait également penser à rajouter un
-titre par exemple.
+Quand on lance la fonction ggplot va refaire ce travail, pour chaque
+modalité sur un graphique différent, avant de les “coller” ensemble.
 
 ``` r
 
-individus_concernés |>
+individus_concernés |> 
     ggacm() +
     facet_wrap(
-      ~ modalite,
+      ~ modalite, # <-- = répéter pour chaque modalités
       labeller = labeller(modalites = label_wrap_gen(width = 20))
     )+
     geom_point(
-      data = individus,
-      aes(dim1_coord, dim2_coord),
+      data = individus, # <--- Important !
       color = "darkgrey",
       show.legend = FALSE
     ) +
