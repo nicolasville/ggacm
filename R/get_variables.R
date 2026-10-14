@@ -94,7 +94,9 @@ extraire_modalites <- function(resultat_acm) {
       .keep = "unused",
       .before = starts_with("dim")
     ) |>
-    tibble::as_tibble()
+    tibble::as_tibble() |>
+    # pour enlever les facteurs qui sont vides
+    dplyr::filter(!(is.na(variables) & is.na(n)))
 
   return(resultats_complet)
 }
