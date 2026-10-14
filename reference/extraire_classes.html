@@ -23,7 +23,8 @@ acollés à notre tableau d'origine."></head><body>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/classification.html">classification</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/ACM-avec-R.html">ACM avec R</a></li>
+    <li><a class="dropdown-item" href="../articles/classification.html">classification</a></li>
     <li><a class="dropdown-item" href="../articles/Utilisation.html">Utilisation</a></li>
   </ul></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -100,7 +101,7 @@ prêt à être utilisé par <code><a href="https://ggplot2.tidyverse.org/referen
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Toutes les variables sont actives</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Vous pouvez préciser des variables supplémentaires avec l'argument `variables</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   supplementaires`.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #B2B2B2;">[55ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #B2B2B2;">[53ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># 2. On fait la classification sur le résultat de l'ACM</span></span></span>
@@ -108,20 +109,19 @@ prêt à être utilisé par <code><a href="https://ggplot2.tidyverse.org/referen
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># 3. On peut extraire du résultat de la classification les classes.</span></span></span>
 <span class="r-in"><span><span class="va">resultat_classification</span> <span class="op">|&gt;</span> <span class="fu">extraire_classes</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Joining with `by = join_by(id)`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 56 × 40</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classe dim1_coord dim2_coord personne    titre orientation orientation2 debut</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1          -<span style="color: #BB0000;">0.750</span>     -<span style="color: #BB0000;">0.680</span> Moufette    Mouf… De gauche   Progressiste 2020…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 1          -<span style="color: #BB0000;">0.736</span>     -<span style="color: #BB0000;">0.346</span> Marine Pér… Mari… De gauche   Progressiste 2015…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 1          -<span style="color: #BB0000;">0.719</span>      0.340 Arnaud Gan… Stup… De gauche   Progressiste 2015…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 1          -<span style="color: #BB0000;">0.698</span>     -<span style="color: #BB0000;">0.299</span> Anaïs Gare… Modi… De gauche   Progressiste 2015…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 1          -<span style="color: #BB0000;">0.655</span>      0.297 Jean Massi… Jean… De gauche   Progressiste 2015…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2          -<span style="color: #BB0000;">0.640</span>     -<span style="color: #BB0000;">0.446</span> Mathieu Bu… math… De gauche   Progressiste 2020…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2          -<span style="color: #BB0000;">0.637</span>     -<span style="color: #BB0000;">0.341</span> Ribo        Ribo… De gauche   Progressiste 2020…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 1          -<span style="color: #BB0000;">0.610</span>      0.336 Seumboy Vr… Hist… De gauche   Progressiste 2020…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 1          -<span style="color: #BB0000;">0.602</span>      0.252 Charlélie … DANY… De gauche   Progressiste 2020…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 1          -<span style="color: #BB0000;">0.596</span>     -<span style="color: #BB0000;">0.363</span> Cassandre … Cass… De gauche   Progressiste 2020…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1          -<span style="color: #BB0000;">0.278</span>    -<span style="color: #BB0000;">0.200</span>  Moufette    Mouf… De gauche   Progressiste 2020…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 1          -<span style="color: #BB0000;">0.451</span>     0.270  Marine Pér… Mari… De gauche   Progressiste 2015…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 1          -<span style="color: #BB0000;">0.119</span>     0.466  Arnaud Gan… Stup… De gauche   Progressiste 2015…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 1          -<span style="color: #BB0000;">0.176</span>     0.275  Anaïs Gare… Modi… De gauche   Progressiste 2015…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 1          -<span style="color: #BB0000;">0.596</span>    -<span style="color: #BB0000;">0.363</span>  Jean Massi… Jean… De gauche   Progressiste 2015…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2           0.364     0.130  Mathieu Bu… math… De gauche   Progressiste 2020…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2           0.624    -<span style="color: #BB0000;">0.368</span>  Ribo        Ribo… De gauche   Progressiste 2020…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 1          -<span style="color: #BB0000;">0.129</span>     0.088<span style="text-decoration: underline;">0</span> Seumboy Vr… Hist… De gauche   Progressiste 2020…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 1          -<span style="color: #BB0000;">0.602</span>     0.252  Charlélie … DANY… De gauche   Progressiste 2020…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 1          -<span style="color: #BB0000;">0.252</span>     1.00   Cassandre … Cass… De gauche   Progressiste 2020…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 46 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 32 more variables: visage_decouvert &lt;chr&gt;, abonnes &lt;chr&gt;, genre &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   age &lt;chr&gt;, streamer_plein_temps &lt;chr&gt;, collectif &lt;chr&gt;, livre &lt;chr&gt;,</span></span>

@@ -37,7 +37,7 @@ resultat_acm <- createurs_de_contenus_pol |>
 #> ℹ 
 ── Variables supplémentaires : 3 
 #> ℹ 
-`titre`, `personne`, and `orientation`.[73ms]
+`titre`, `personne`, and `orientation`.[78ms]
 
 # puis on peut faire la classification
 resultat_classification <- resultat_acm |> 

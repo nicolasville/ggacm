@@ -133,7 +133,7 @@ resultat_acm <- createurs_de_contenus_pol |>
 #> ℹ 
 ── Variables supplémentaires : 4 
 #> ℹ 
-`titre`, `personne`, `orientation`, and `orientation2`.[48ms]
+`titre`, `personne`, `orientation`, and `orientation2`.[49ms]
 ```
 
 Vous pouvez explorer les résultats de l’ACM avec la fonction du package

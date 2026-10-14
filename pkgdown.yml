@@ -2,10 +2,11 @@ pandoc: 3.8.3
 pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
+  articles/ACM-avec-R: ACM-avec-R.html
   classification: classification.html
   ggacm: ggacm.html
   Utilisation: Utilisation.html
-last_built: 2026-10-13T12:56Z
+last_built: 2026-10-14T15:27Z
 urls:
   reference: https://nicolasville.github.io/ggacm/reference
   article: https://nicolasville.github.io/ggacm/articles

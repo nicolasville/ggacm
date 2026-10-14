@@ -19,7 +19,8 @@
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/classification.html">classification</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/ACM-avec-R.html">ACM avec R</a></li>
+    <li><a class="dropdown-item" href="../articles/classification.html">classification</a></li>
     <li><a class="dropdown-item" href="../articles/Utilisation.html">Utilisation</a></li>
   </ul></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -47,9 +48,10 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">nuage_individus_facette</span><span class="op">(</span></span>
 <span>  <span class="va">resultat_individus</span>,</span>
 <span>  <span class="va">variables_a_representer</span>,</span>
-<span>  forme <span class="op">=</span> <span class="fl">17</span>,</span>
+<span>  forme <span class="op">=</span> <span class="st">"square"</span>,</span>
 <span>  couleur <span class="op">=</span> <span class="st">"#e41a1c"</span>,</span>
 <span>  longueur_max_labels <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>  taille <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -60,7 +62,7 @@
 
 <dl><dt id="arg-resultat-individus">resultat_individus<a class="anchor" aria-label="anchor" href="#arg-resultat-individus"></a></dt>
 <dd><p>Un tableau de donnée avec les coordonnées des individus
-qui a été produit par extraire_individus().
+qui a été produit par <code><a href="extraire_individus.html">extraire_individus()</a></code>.
 La fonction prend également en charge un résultat d'ACM directement si besoin.</p></dd>
 
 
@@ -72,7 +74,7 @@ on peut par exemple écire <code>c(genre, classe, niveau_de_revenu)</code></p></
 
 <dt id="arg-forme">forme<a class="anchor" aria-label="anchor" href="#arg-forme"></a></dt>
 <dd><p>Quelles formes pour les individus qui partagent une même modalité ?
-Par défaut un triangle. Doit-être un nombre, voir la documentation de ggplot
+Par défaut un carré ("square"). Voir la <a href="https://ggplot2.tidyverse.org/articles/ggplot2-specs.html#point" class="external-link">documentation de ggplot</a>
 sur les "shapes" pour les possibilités.</p></dd>
 
 
@@ -89,7 +91,7 @@ Par défaut chaque label ira à la ligne au bout de 20 caractères.</p></dd>
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Arguments supplémentaires pour les utilisateurs avancés
-qui seront passés à ggplot2::facet_wrap()</p></dd>
+qui seront passés à <code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">ggplot2::facet_wrap()</a></code></p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -102,7 +104,7 @@ qui seront passés à ggplot2::facet_wrap()</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">res.ACM</span> <span class="op">&lt;-</span> <span class="va">createurs_de_contenus_pol</span> <span class="op">|&gt;</span> <span class="fu"><a href="ACM.html">ACM</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Réalisation de l'ACM avec `FactoMineR::MCA()`</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` <span style="color: #B2B2B2;">[29ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` <span style="color: #B2B2B2;">[30ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Sur 56 individus...</span>
@@ -112,7 +114,7 @@ qui seront passés à ggplot2::facet_wrap()</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Toutes les variables sont actives</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Vous pouvez préciser des variables supplémentaires avec l'argument `variables</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   supplementaires`.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #B2B2B2;">[53ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #B2B2B2;">[54ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">res.ind</span> <span class="op">&lt;-</span> <span class="va">res.ACM</span> <span class="op">|&gt;</span> <span class="fu"><a href="extraire_individus.html">extraire_individus</a></span><span class="op">(</span><span class="op">)</span></span></span>

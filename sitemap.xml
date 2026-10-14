@@ -1,6 +1,7 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://nicolasville.github.io/ggacm/404.html</loc></url>
 <url><loc>https://nicolasville.github.io/ggacm/LICENSE.html</loc></url>
+<url><loc>https://nicolasville.github.io/ggacm/articles/ACM-avec-R.html</loc></url>
 <url><loc>https://nicolasville.github.io/ggacm/articles/Utilisation.html</loc></url>
 <url><loc>https://nicolasville.github.io/ggacm/articles/classification.html</loc></url>
 <url><loc>https://nicolasville.github.io/ggacm/articles/ggacm.html</loc></url>
@@ -25,6 +26,7 @@
 <url><loc>https://nicolasville.github.io/ggacm/reference/nommer_axes.html</loc></url>
 <url><loc>https://nicolasville.github.io/ggacm/reference/nuage_individus.html</loc></url>
 <url><loc>https://nicolasville.github.io/ggacm/reference/nuage_individus_facette.html</loc></url>
+<url><loc>https://nicolasville.github.io/ggacm/reference/print_classe_axe.html</loc></url>
 <url><loc>https://nicolasville.github.io/ggacm/reference/supprimer_var_.html</loc></url>
 <url><loc>https://nicolasville.github.io/ggacm/reference/tableau_classe.html</loc></url>
 <url><loc>https://nicolasville.github.io/ggacm/reference/theme_acm.html</loc></url>

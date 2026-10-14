@@ -10,9 +10,10 @@ même modalité.
 nuage_individus_facette(
   resultat_individus,
   variables_a_representer,
-  forme = 17,
+  forme = "square",
   couleur = "#e41a1c",
   longueur_max_labels = 20,
+  taille = 2,
   ...
 )
 ```
@@ -22,8 +23,10 @@ nuage_individus_facette(
 - resultat_individus:
 
   Un tableau de donnée avec les coordonnées des individus qui a été
-  produit par extraire_individus(). La fonction prend également en
-  charge un résultat d'ACM directement si besoin.
+  produit par
+  [`extraire_individus()`](https://nicolasville.github.io/ggacm/reference/extraire_individus.md).
+  La fonction prend également en charge un résultat d'ACM directement si
+  besoin.
 
 - variables_a_representer:
 
@@ -34,8 +37,9 @@ nuage_individus_facette(
 - forme:
 
   Quelles formes pour les individus qui partagent une même modalité ?
-  Par défaut un triangle. Doit-être un nombre, voir la documentation de
-  ggplot sur les "shapes" pour les possibilités.
+  Par défaut un carré ("square"). Voir la [documentation de
+  ggplot](https://ggplot2.tidyverse.org/articles/ggplot2-specs.html#point)
+  sur les "shapes" pour les possibilités.
 
 - couleur:
 
@@ -50,7 +54,8 @@ nuage_individus_facette(
 - ...:
 
   Arguments supplémentaires pour les utilisateurs avancés qui seront
-  passés à ggplot2::facet_wrap()
+  passés à
+  [`ggplot2::facet_wrap()`](https://ggplot2.tidyverse.org/reference/facet_wrap.html)
 
 ## Value
 
@@ -62,7 +67,7 @@ Un objet ggplot2.
 
 res.ACM <- createurs_de_contenus_pol |> ACM()
 #> ℹ Réalisation de l'ACM avec `FactoMineR::MCA()`
-#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [29ms]
+#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [30ms]
 #> 
 #> ℹ 
 #> • Sur 56 individus...
@@ -72,7 +77,7 @@ res.ACM <- createurs_de_contenus_pol |> ACM()
 #> • Toutes les variables sont actives
 #> ℹ Vous pouvez préciser des variables supplémentaires avec l'argument `variables
 #>   supplementaires`.
-#> [53ms]
+#> [54ms]
 #> 
 
 res.ind <- res.ACM |> extraire_individus()

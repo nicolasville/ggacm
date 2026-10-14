@@ -46,7 +46,7 @@ Le résultat d'une ACM.
 resultat <- createurs_de_contenus_pol |>
   ACM(variables_supplementaires = c(titre, personne))
 #> ℹ Réalisation de l'ACM avec `FactoMineR::MCA()`
-#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [40ms]
+#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [41ms]
 #> 
 #> ℹ 
 #> • Sur 56 individus...

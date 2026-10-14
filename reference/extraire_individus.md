@@ -7,7 +7,7 @@ chaque individus leur coordonnées.
 ## Usage
 
 ``` r
-extraire_individus(resultat_acm)
+extraire_individus(resultat_acm, ordre = NULL)
 ```
 
 ## Arguments
@@ -15,6 +15,10 @@ extraire_individus(resultat_acm)
 - resultat_acm:
 
   resultat acm
+
+- ordre:
+
+  ne pas toucher.
 
 ## Value
 
@@ -40,7 +44,7 @@ resultat_acm <- createurs_de_contenus_pol |> ACM()
 #> • Toutes les variables sont actives
 #> ℹ Vous pouvez préciser des variables supplémentaires avec l'argument `variables
 #>   supplementaires`.
-#> [54ms]
+#> [56ms]
 #> 
 
 resultat_individus <- resultat_acm |> extraire_individus()
