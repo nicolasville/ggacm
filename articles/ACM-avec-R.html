@@ -71,8 +71,8 @@
     <p>Ceci est un document qui contient le code utilisé pour réaliser des sorties graphiques d’ACM. Pour les phases préalables, où il faut choisir les variables pertinentes de l’analyse et essayer un grand nombre de combinaison de variable,<br>
 on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’explorer rapidement les différentes analyses possibles à partir d’un même jeu de données. De manière similaire, <code>explor::explor()</code> fonctionne très bien pour rapidement explorer un résultat.</p>
 <p>Le code présenté ici et dans le packages interviennent en général à une phase ultérieure, où l’on cherche à manipuler le résultat de l’analyse pour produire des graphiques, des tableaux, etc.</p>
-<p>Le code ci-dessous utilise un style “tidyverse” qui peut être exotique pour certains, notamment dans l’usage du “pipe” (<code>|&gt;</code>). Pour plus de détails là-dessus, voir <a href="https://juba.github.io/tidyverse/10-dplyr.html#sec-pipe" class="external-link">la section dédiée</a> du guide de Julien Barnier.</p>
-<p>La production de graphique d’analyse des correspondances multiples demande un certain contrôle sur les dimensions des graphiques produits. Pour mieux contrôler cela, il est souvent plus facile de passer par des fichiers Quarto ou R-markdown pour produire les graphiques, en précisant les dimensions des graphiques d’output des cellules de codes. Pour une présentation rapide de ce type de fichier, voir la section de <em>R for Data Science</em> ou la très pédagogique <a href="https://benegarbi.github.io/PremiersPasAvec_quarto.html" class="external-link">introduction</a> d’Elisabeth Morand et Benédicte Garnier de l’INED.</p>
+<p>Le code ci-dessous utilise un style “tidyverse” qui peut être exotique pour certains, notamment dans l’usage du “pipe” (<code>|&gt;</code>). Pour plus de détails là-dessus, voir <a href="https://juba.github.io/tidyverse/10-dplyr.html#sec-pipe" class="external-link">la section dédiée du guide de Julien Barnier</a>.</p>
+<p>La production de graphique d’analyse des correspondances multiples demande un certain contrôle sur les dimensions des graphiques produits. Pour cela, il est souvent plus facile de passer par des fichiers Quarto ou R-markdown pour produire les graphiques, en précisant les dimensions des graphiques d’output des cellules de codes. Pour une présentation rapide de ce type de fichier, voir <a href="https://r4ds.hadley.nz/quarto.html" class="external-link">la section de <em>R for Data Science</em></a> ou la très pédagogique <a href="https://benegarbi.github.io/PremiersPasAvec_quarto.html" class="external-link">introduction d’Elisabeth Morand et Benédicte Garnier de l’INED</a> .</p>
 <p>Si ce n’est pas déjà fait, il va falloir installer les packages qui sont utilisés, dont mon package. N’étant disponible que sur Github, la meilleure manière de l’installer est de faire <code>pak::pak("nicolasville/ggacm)</code> (ce qui nécessite l’installation du package <code>pak</code> auparavant avec <code>install.packages("pak")</code>).</p>
 <p>On commence par charger les packages qui vont être utilisé.</p>
 <div class="cell">
@@ -138,23 +138,23 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
 <code class="sourceCode R"><span><span class="va">hdv2003</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html" class="external-link">tbl_summary</a></span><span class="op">(</span>include <span class="op">=</span> <span class="op">-</span><span class="va">id</span><span class="op">)</span> <span class="co"># toutes les variables sauf l'identifiant</span></span></code></pre></div>
 <div class="cell-output-display">
-<div id="ufkwmbfrrz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ufkwmbfrrz table {
+<div id="kytaxuiuvf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kytaxuiuvf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ufkwmbfrrz thead, #ufkwmbfrrz tbody, #ufkwmbfrrz tfoot, #ufkwmbfrrz tr, #ufkwmbfrrz td, #ufkwmbfrrz th {
+#kytaxuiuvf thead, #kytaxuiuvf tbody, #kytaxuiuvf tfoot, #kytaxuiuvf tr, #kytaxuiuvf td, #kytaxuiuvf th {
   border-style: none;
 }
 
-#ufkwmbfrrz p {
+#kytaxuiuvf p {
   margin: 0;
   padding: 0;
 }
 
-#ufkwmbfrrz .gt_table {
+#kytaxuiuvf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -180,12 +180,12 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-left-color: #D3D3D3;
 }
 
-#ufkwmbfrrz .gt_caption {
+#kytaxuiuvf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ufkwmbfrrz .gt_title {
+#kytaxuiuvf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -197,7 +197,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-bottom-width: 0;
 }
 
-#ufkwmbfrrz .gt_subtitle {
+#kytaxuiuvf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -209,7 +209,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-top-width: 0;
 }
 
-#ufkwmbfrrz .gt_heading {
+#kytaxuiuvf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -221,13 +221,13 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-right-color: #D3D3D3;
 }
 
-#ufkwmbfrrz .gt_bottom_border {
+#kytaxuiuvf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ufkwmbfrrz .gt_col_headings {
+#kytaxuiuvf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -242,7 +242,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-right-color: #D3D3D3;
 }
 
-#ufkwmbfrrz .gt_col_heading {
+#kytaxuiuvf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -262,7 +262,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   overflow-x: hidden;
 }
 
-#ufkwmbfrrz .gt_column_spanner_outer {
+#kytaxuiuvf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -274,15 +274,15 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 4px;
 }
 
-#ufkwmbfrrz .gt_column_spanner_outer:first-child {
+#kytaxuiuvf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ufkwmbfrrz .gt_column_spanner_outer:last-child {
+#kytaxuiuvf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ufkwmbfrrz .gt_column_spanner {
+#kytaxuiuvf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -294,11 +294,11 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   width: 100%;
 }
 
-#ufkwmbfrrz .gt_spanner_row {
+#kytaxuiuvf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ufkwmbfrrz .gt_group_heading {
+#kytaxuiuvf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -324,7 +324,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   text-align: left;
 }
 
-#ufkwmbfrrz .gt_empty_group_heading {
+#kytaxuiuvf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -339,15 +339,15 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   vertical-align: middle;
 }
 
-#ufkwmbfrrz .gt_from_md > :first-child {
+#kytaxuiuvf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ufkwmbfrrz .gt_from_md > :last-child {
+#kytaxuiuvf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ufkwmbfrrz .gt_row {
+#kytaxuiuvf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -366,7 +366,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   overflow-x: hidden;
 }
 
-#ufkwmbfrrz .gt_stub {
+#kytaxuiuvf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -379,7 +379,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 5px;
 }
 
-#ufkwmbfrrz .gt_stub_row_group {
+#kytaxuiuvf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -393,15 +393,15 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   vertical-align: top;
 }
 
-#ufkwmbfrrz .gt_row_group_first td {
+#kytaxuiuvf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ufkwmbfrrz .gt_row_group_first th {
+#kytaxuiuvf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ufkwmbfrrz .gt_summary_row {
+#kytaxuiuvf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -411,16 +411,16 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 5px;
 }
 
-#ufkwmbfrrz .gt_first_summary_row {
+#kytaxuiuvf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ufkwmbfrrz .gt_first_summary_row.thick {
+#kytaxuiuvf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ufkwmbfrrz .gt_last_summary_row {
+#kytaxuiuvf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -430,7 +430,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-bottom-color: #D3D3D3;
 }
 
-#ufkwmbfrrz .gt_grand_summary_row {
+#kytaxuiuvf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -440,7 +440,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 5px;
 }
 
-#ufkwmbfrrz .gt_first_grand_summary_row {
+#kytaxuiuvf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -450,7 +450,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-top-color: #D3D3D3;
 }
 
-#ufkwmbfrrz .gt_last_grand_summary_row_top {
+#kytaxuiuvf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -460,11 +460,11 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-bottom-color: #D3D3D3;
 }
 
-#ufkwmbfrrz .gt_striped {
+#kytaxuiuvf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ufkwmbfrrz .gt_table_body {
+#kytaxuiuvf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -473,7 +473,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-bottom-color: #D3D3D3;
 }
 
-#ufkwmbfrrz .gt_footnotes {
+#kytaxuiuvf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -487,7 +487,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-right-color: #D3D3D3;
 }
 
-#ufkwmbfrrz .gt_footnote {
+#kytaxuiuvf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -496,7 +496,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 5px;
 }
 
-#ufkwmbfrrz .gt_sourcenotes {
+#kytaxuiuvf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -510,7 +510,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-right-color: #D3D3D3;
 }
 
-#ufkwmbfrrz .gt_sourcenote {
+#kytaxuiuvf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -518,72 +518,72 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 5px;
 }
 
-#ufkwmbfrrz .gt_left {
+#kytaxuiuvf .gt_left {
   text-align: left;
 }
 
-#ufkwmbfrrz .gt_center {
+#kytaxuiuvf .gt_center {
   text-align: center;
 }
 
-#ufkwmbfrrz .gt_right {
+#kytaxuiuvf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ufkwmbfrrz .gt_font_normal {
+#kytaxuiuvf .gt_font_normal {
   font-weight: normal;
 }
 
-#ufkwmbfrrz .gt_font_bold {
+#kytaxuiuvf .gt_font_bold {
   font-weight: bold;
 }
 
-#ufkwmbfrrz .gt_font_italic {
+#kytaxuiuvf .gt_font_italic {
   font-style: italic;
 }
 
-#ufkwmbfrrz .gt_super {
+#kytaxuiuvf .gt_super {
   font-size: 65%;
 }
 
-#ufkwmbfrrz .gt_footnote_marks {
+#kytaxuiuvf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ufkwmbfrrz .gt_asterisk {
+#kytaxuiuvf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ufkwmbfrrz .gt_indent_1 {
+#kytaxuiuvf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ufkwmbfrrz .gt_indent_2 {
+#kytaxuiuvf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ufkwmbfrrz .gt_indent_3 {
+#kytaxuiuvf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ufkwmbfrrz .gt_indent_4 {
+#kytaxuiuvf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ufkwmbfrrz .gt_indent_5 {
+#kytaxuiuvf .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ufkwmbfrrz .katex-display {
+#kytaxuiuvf .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ufkwmbfrrz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#kytaxuiuvf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -808,23 +808,23 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
 <span><span class="co">#&gt; ℹ Si toutes les modalités actives contribuaient également à la construction</span></span>
 <span><span class="co">#&gt; d'un axe, chacune aurait une contribution de 7,14 %.</span></span></code></pre></div>
 <div class="cell-output-display">
-<div id="gzflgjjiwv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gzflgjjiwv table {
+<div id="pzcybufhjo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pzcybufhjo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gzflgjjiwv thead, #gzflgjjiwv tbody, #gzflgjjiwv tfoot, #gzflgjjiwv tr, #gzflgjjiwv td, #gzflgjjiwv th {
+#pzcybufhjo thead, #pzcybufhjo tbody, #pzcybufhjo tfoot, #pzcybufhjo tr, #pzcybufhjo td, #pzcybufhjo th {
   border-style: none;
 }
 
-#gzflgjjiwv p {
+#pzcybufhjo p {
   margin: 0;
   padding: 0;
 }
 
-#gzflgjjiwv .gt_table {
+#pzcybufhjo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -850,12 +850,12 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-left-color: #D3D3D3;
 }
 
-#gzflgjjiwv .gt_caption {
+#pzcybufhjo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gzflgjjiwv .gt_title {
+#pzcybufhjo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -867,7 +867,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-bottom-width: 0;
 }
 
-#gzflgjjiwv .gt_subtitle {
+#pzcybufhjo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -879,7 +879,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-top-width: 0;
 }
 
-#gzflgjjiwv .gt_heading {
+#pzcybufhjo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -891,13 +891,13 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-right-color: #D3D3D3;
 }
 
-#gzflgjjiwv .gt_bottom_border {
+#pzcybufhjo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gzflgjjiwv .gt_col_headings {
+#pzcybufhjo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -912,7 +912,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-right-color: #D3D3D3;
 }
 
-#gzflgjjiwv .gt_col_heading {
+#pzcybufhjo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -932,7 +932,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   overflow-x: hidden;
 }
 
-#gzflgjjiwv .gt_column_spanner_outer {
+#pzcybufhjo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -944,15 +944,15 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 4px;
 }
 
-#gzflgjjiwv .gt_column_spanner_outer:first-child {
+#pzcybufhjo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gzflgjjiwv .gt_column_spanner_outer:last-child {
+#pzcybufhjo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gzflgjjiwv .gt_column_spanner {
+#pzcybufhjo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -964,11 +964,11 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   width: 100%;
 }
 
-#gzflgjjiwv .gt_spanner_row {
+#pzcybufhjo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gzflgjjiwv .gt_group_heading {
+#pzcybufhjo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -994,7 +994,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   text-align: left;
 }
 
-#gzflgjjiwv .gt_empty_group_heading {
+#pzcybufhjo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1009,15 +1009,15 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   vertical-align: middle;
 }
 
-#gzflgjjiwv .gt_from_md > :first-child {
+#pzcybufhjo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gzflgjjiwv .gt_from_md > :last-child {
+#pzcybufhjo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gzflgjjiwv .gt_row {
+#pzcybufhjo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1036,7 +1036,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   overflow-x: hidden;
 }
 
-#gzflgjjiwv .gt_stub {
+#pzcybufhjo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1049,7 +1049,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 5px;
 }
 
-#gzflgjjiwv .gt_stub_row_group {
+#pzcybufhjo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1063,15 +1063,15 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   vertical-align: top;
 }
 
-#gzflgjjiwv .gt_row_group_first td {
+#pzcybufhjo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gzflgjjiwv .gt_row_group_first th {
+#pzcybufhjo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gzflgjjiwv .gt_summary_row {
+#pzcybufhjo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1081,16 +1081,16 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 5px;
 }
 
-#gzflgjjiwv .gt_first_summary_row {
+#pzcybufhjo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gzflgjjiwv .gt_first_summary_row.thick {
+#pzcybufhjo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gzflgjjiwv .gt_last_summary_row {
+#pzcybufhjo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1100,7 +1100,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-bottom-color: #D3D3D3;
 }
 
-#gzflgjjiwv .gt_grand_summary_row {
+#pzcybufhjo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1110,7 +1110,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 5px;
 }
 
-#gzflgjjiwv .gt_first_grand_summary_row {
+#pzcybufhjo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1120,7 +1120,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-top-color: #D3D3D3;
 }
 
-#gzflgjjiwv .gt_last_grand_summary_row_top {
+#pzcybufhjo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1130,11 +1130,11 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-bottom-color: #D3D3D3;
 }
 
-#gzflgjjiwv .gt_striped {
+#pzcybufhjo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gzflgjjiwv .gt_table_body {
+#pzcybufhjo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1143,7 +1143,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-bottom-color: #D3D3D3;
 }
 
-#gzflgjjiwv .gt_footnotes {
+#pzcybufhjo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1157,7 +1157,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-right-color: #D3D3D3;
 }
 
-#gzflgjjiwv .gt_footnote {
+#pzcybufhjo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1166,7 +1166,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 5px;
 }
 
-#gzflgjjiwv .gt_sourcenotes {
+#pzcybufhjo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1180,7 +1180,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-right-color: #D3D3D3;
 }
 
-#gzflgjjiwv .gt_sourcenote {
+#pzcybufhjo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1188,72 +1188,72 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 5px;
 }
 
-#gzflgjjiwv .gt_left {
+#pzcybufhjo .gt_left {
   text-align: left;
 }
 
-#gzflgjjiwv .gt_center {
+#pzcybufhjo .gt_center {
   text-align: center;
 }
 
-#gzflgjjiwv .gt_right {
+#pzcybufhjo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gzflgjjiwv .gt_font_normal {
+#pzcybufhjo .gt_font_normal {
   font-weight: normal;
 }
 
-#gzflgjjiwv .gt_font_bold {
+#pzcybufhjo .gt_font_bold {
   font-weight: bold;
 }
 
-#gzflgjjiwv .gt_font_italic {
+#pzcybufhjo .gt_font_italic {
   font-style: italic;
 }
 
-#gzflgjjiwv .gt_super {
+#pzcybufhjo .gt_super {
   font-size: 65%;
 }
 
-#gzflgjjiwv .gt_footnote_marks {
+#pzcybufhjo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gzflgjjiwv .gt_asterisk {
+#pzcybufhjo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gzflgjjiwv .gt_indent_1 {
+#pzcybufhjo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gzflgjjiwv .gt_indent_2 {
+#pzcybufhjo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gzflgjjiwv .gt_indent_3 {
+#pzcybufhjo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gzflgjjiwv .gt_indent_4 {
+#pzcybufhjo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gzflgjjiwv .gt_indent_5 {
+#pzcybufhjo .gt_indent_5 {
   text-indent: 25px;
 }
 
-#gzflgjjiwv .katex-display {
+#pzcybufhjo .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#gzflgjjiwv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#pzcybufhjo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1349,23 +1349,23 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
 <span><span class="co">#&gt; ℹ Si toutes les modalités actives contribuaient également à la construction</span></span>
 <span><span class="co">#&gt; d'un axe, chacune aurait une contribution de 7,14 %.</span></span></code></pre></div>
 <div class="cell-output-display">
-<div id="soetzjlajg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#soetzjlajg table {
+<div id="xxfllqljuh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xxfllqljuh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#soetzjlajg thead, #soetzjlajg tbody, #soetzjlajg tfoot, #soetzjlajg tr, #soetzjlajg td, #soetzjlajg th {
+#xxfllqljuh thead, #xxfllqljuh tbody, #xxfllqljuh tfoot, #xxfllqljuh tr, #xxfllqljuh td, #xxfllqljuh th {
   border-style: none;
 }
 
-#soetzjlajg p {
+#xxfllqljuh p {
   margin: 0;
   padding: 0;
 }
 
-#soetzjlajg .gt_table {
+#xxfllqljuh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1391,12 +1391,12 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-left-color: #D3D3D3;
 }
 
-#soetzjlajg .gt_caption {
+#xxfllqljuh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#soetzjlajg .gt_title {
+#xxfllqljuh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1408,7 +1408,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-bottom-width: 0;
 }
 
-#soetzjlajg .gt_subtitle {
+#xxfllqljuh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1420,7 +1420,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-top-width: 0;
 }
 
-#soetzjlajg .gt_heading {
+#xxfllqljuh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1432,13 +1432,13 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-right-color: #D3D3D3;
 }
 
-#soetzjlajg .gt_bottom_border {
+#xxfllqljuh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#soetzjlajg .gt_col_headings {
+#xxfllqljuh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1453,7 +1453,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-right-color: #D3D3D3;
 }
 
-#soetzjlajg .gt_col_heading {
+#xxfllqljuh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1473,7 +1473,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   overflow-x: hidden;
 }
 
-#soetzjlajg .gt_column_spanner_outer {
+#xxfllqljuh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1485,15 +1485,15 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 4px;
 }
 
-#soetzjlajg .gt_column_spanner_outer:first-child {
+#xxfllqljuh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#soetzjlajg .gt_column_spanner_outer:last-child {
+#xxfllqljuh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#soetzjlajg .gt_column_spanner {
+#xxfllqljuh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1505,11 +1505,11 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   width: 100%;
 }
 
-#soetzjlajg .gt_spanner_row {
+#xxfllqljuh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#soetzjlajg .gt_group_heading {
+#xxfllqljuh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1535,7 +1535,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   text-align: left;
 }
 
-#soetzjlajg .gt_empty_group_heading {
+#xxfllqljuh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1550,15 +1550,15 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   vertical-align: middle;
 }
 
-#soetzjlajg .gt_from_md > :first-child {
+#xxfllqljuh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#soetzjlajg .gt_from_md > :last-child {
+#xxfllqljuh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#soetzjlajg .gt_row {
+#xxfllqljuh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1577,7 +1577,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   overflow-x: hidden;
 }
 
-#soetzjlajg .gt_stub {
+#xxfllqljuh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1590,7 +1590,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 5px;
 }
 
-#soetzjlajg .gt_stub_row_group {
+#xxfllqljuh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1604,15 +1604,15 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   vertical-align: top;
 }
 
-#soetzjlajg .gt_row_group_first td {
+#xxfllqljuh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#soetzjlajg .gt_row_group_first th {
+#xxfllqljuh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#soetzjlajg .gt_summary_row {
+#xxfllqljuh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1622,16 +1622,16 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 5px;
 }
 
-#soetzjlajg .gt_first_summary_row {
+#xxfllqljuh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#soetzjlajg .gt_first_summary_row.thick {
+#xxfllqljuh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#soetzjlajg .gt_last_summary_row {
+#xxfllqljuh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1641,7 +1641,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-bottom-color: #D3D3D3;
 }
 
-#soetzjlajg .gt_grand_summary_row {
+#xxfllqljuh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1651,7 +1651,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 5px;
 }
 
-#soetzjlajg .gt_first_grand_summary_row {
+#xxfllqljuh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1661,7 +1661,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-top-color: #D3D3D3;
 }
 
-#soetzjlajg .gt_last_grand_summary_row_top {
+#xxfllqljuh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1671,11 +1671,11 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-bottom-color: #D3D3D3;
 }
 
-#soetzjlajg .gt_striped {
+#xxfllqljuh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#soetzjlajg .gt_table_body {
+#xxfllqljuh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1684,7 +1684,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-bottom-color: #D3D3D3;
 }
 
-#soetzjlajg .gt_footnotes {
+#xxfllqljuh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1698,7 +1698,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-right-color: #D3D3D3;
 }
 
-#soetzjlajg .gt_footnote {
+#xxfllqljuh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1707,7 +1707,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 5px;
 }
 
-#soetzjlajg .gt_sourcenotes {
+#xxfllqljuh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1721,7 +1721,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-right-color: #D3D3D3;
 }
 
-#soetzjlajg .gt_sourcenote {
+#xxfllqljuh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1729,72 +1729,72 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 5px;
 }
 
-#soetzjlajg .gt_left {
+#xxfllqljuh .gt_left {
   text-align: left;
 }
 
-#soetzjlajg .gt_center {
+#xxfllqljuh .gt_center {
   text-align: center;
 }
 
-#soetzjlajg .gt_right {
+#xxfllqljuh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#soetzjlajg .gt_font_normal {
+#xxfllqljuh .gt_font_normal {
   font-weight: normal;
 }
 
-#soetzjlajg .gt_font_bold {
+#xxfllqljuh .gt_font_bold {
   font-weight: bold;
 }
 
-#soetzjlajg .gt_font_italic {
+#xxfllqljuh .gt_font_italic {
   font-style: italic;
 }
 
-#soetzjlajg .gt_super {
+#xxfllqljuh .gt_super {
   font-size: 65%;
 }
 
-#soetzjlajg .gt_footnote_marks {
+#xxfllqljuh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#soetzjlajg .gt_asterisk {
+#xxfllqljuh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#soetzjlajg .gt_indent_1 {
+#xxfllqljuh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#soetzjlajg .gt_indent_2 {
+#xxfllqljuh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#soetzjlajg .gt_indent_3 {
+#xxfllqljuh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#soetzjlajg .gt_indent_4 {
+#xxfllqljuh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#soetzjlajg .gt_indent_5 {
+#xxfllqljuh .gt_indent_5 {
   text-indent: 25px;
 }
 
-#soetzjlajg .katex-display {
+#xxfllqljuh .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#soetzjlajg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xxfllqljuh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1861,23 +1861,23 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
 <div class="sourceCode cell-code" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/caracteriser_axe.html">caracteriser_axe</a></span><span class="op">(</span><span class="va">res_acm</span>, <span class="fl">3</span>, contribution_minimum <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
-<div id="oykzyyeyop" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#oykzyyeyop table {
+<div id="ngzlzbqlqp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ngzlzbqlqp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#oykzyyeyop thead, #oykzyyeyop tbody, #oykzyyeyop tfoot, #oykzyyeyop tr, #oykzyyeyop td, #oykzyyeyop th {
+#ngzlzbqlqp thead, #ngzlzbqlqp tbody, #ngzlzbqlqp tfoot, #ngzlzbqlqp tr, #ngzlzbqlqp td, #ngzlzbqlqp th {
   border-style: none;
 }
 
-#oykzyyeyop p {
+#ngzlzbqlqp p {
   margin: 0;
   padding: 0;
 }
 
-#oykzyyeyop .gt_table {
+#ngzlzbqlqp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1903,12 +1903,12 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-left-color: #D3D3D3;
 }
 
-#oykzyyeyop .gt_caption {
+#ngzlzbqlqp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#oykzyyeyop .gt_title {
+#ngzlzbqlqp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1920,7 +1920,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-bottom-width: 0;
 }
 
-#oykzyyeyop .gt_subtitle {
+#ngzlzbqlqp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1932,7 +1932,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-top-width: 0;
 }
 
-#oykzyyeyop .gt_heading {
+#ngzlzbqlqp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1944,13 +1944,13 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-right-color: #D3D3D3;
 }
 
-#oykzyyeyop .gt_bottom_border {
+#ngzlzbqlqp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#oykzyyeyop .gt_col_headings {
+#ngzlzbqlqp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1965,7 +1965,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-right-color: #D3D3D3;
 }
 
-#oykzyyeyop .gt_col_heading {
+#ngzlzbqlqp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1985,7 +1985,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   overflow-x: hidden;
 }
 
-#oykzyyeyop .gt_column_spanner_outer {
+#ngzlzbqlqp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1997,15 +1997,15 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 4px;
 }
 
-#oykzyyeyop .gt_column_spanner_outer:first-child {
+#ngzlzbqlqp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#oykzyyeyop .gt_column_spanner_outer:last-child {
+#ngzlzbqlqp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#oykzyyeyop .gt_column_spanner {
+#ngzlzbqlqp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2017,11 +2017,11 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   width: 100%;
 }
 
-#oykzyyeyop .gt_spanner_row {
+#ngzlzbqlqp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#oykzyyeyop .gt_group_heading {
+#ngzlzbqlqp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2047,7 +2047,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   text-align: left;
 }
 
-#oykzyyeyop .gt_empty_group_heading {
+#ngzlzbqlqp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2062,15 +2062,15 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   vertical-align: middle;
 }
 
-#oykzyyeyop .gt_from_md > :first-child {
+#ngzlzbqlqp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#oykzyyeyop .gt_from_md > :last-child {
+#ngzlzbqlqp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#oykzyyeyop .gt_row {
+#ngzlzbqlqp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2089,7 +2089,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   overflow-x: hidden;
 }
 
-#oykzyyeyop .gt_stub {
+#ngzlzbqlqp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2102,7 +2102,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 5px;
 }
 
-#oykzyyeyop .gt_stub_row_group {
+#ngzlzbqlqp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2116,15 +2116,15 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   vertical-align: top;
 }
 
-#oykzyyeyop .gt_row_group_first td {
+#ngzlzbqlqp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#oykzyyeyop .gt_row_group_first th {
+#ngzlzbqlqp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#oykzyyeyop .gt_summary_row {
+#ngzlzbqlqp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2134,16 +2134,16 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 5px;
 }
 
-#oykzyyeyop .gt_first_summary_row {
+#ngzlzbqlqp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#oykzyyeyop .gt_first_summary_row.thick {
+#ngzlzbqlqp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#oykzyyeyop .gt_last_summary_row {
+#ngzlzbqlqp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2153,7 +2153,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-bottom-color: #D3D3D3;
 }
 
-#oykzyyeyop .gt_grand_summary_row {
+#ngzlzbqlqp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2163,7 +2163,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 5px;
 }
 
-#oykzyyeyop .gt_first_grand_summary_row {
+#ngzlzbqlqp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2173,7 +2173,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-top-color: #D3D3D3;
 }
 
-#oykzyyeyop .gt_last_grand_summary_row_top {
+#ngzlzbqlqp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2183,11 +2183,11 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-bottom-color: #D3D3D3;
 }
 
-#oykzyyeyop .gt_striped {
+#ngzlzbqlqp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#oykzyyeyop .gt_table_body {
+#ngzlzbqlqp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2196,7 +2196,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-bottom-color: #D3D3D3;
 }
 
-#oykzyyeyop .gt_footnotes {
+#ngzlzbqlqp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2210,7 +2210,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-right-color: #D3D3D3;
 }
 
-#oykzyyeyop .gt_footnote {
+#ngzlzbqlqp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2219,7 +2219,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 5px;
 }
 
-#oykzyyeyop .gt_sourcenotes {
+#ngzlzbqlqp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2233,7 +2233,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-right-color: #D3D3D3;
 }
 
-#oykzyyeyop .gt_sourcenote {
+#ngzlzbqlqp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2241,72 +2241,72 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 5px;
 }
 
-#oykzyyeyop .gt_left {
+#ngzlzbqlqp .gt_left {
   text-align: left;
 }
 
-#oykzyyeyop .gt_center {
+#ngzlzbqlqp .gt_center {
   text-align: center;
 }
 
-#oykzyyeyop .gt_right {
+#ngzlzbqlqp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#oykzyyeyop .gt_font_normal {
+#ngzlzbqlqp .gt_font_normal {
   font-weight: normal;
 }
 
-#oykzyyeyop .gt_font_bold {
+#ngzlzbqlqp .gt_font_bold {
   font-weight: bold;
 }
 
-#oykzyyeyop .gt_font_italic {
+#ngzlzbqlqp .gt_font_italic {
   font-style: italic;
 }
 
-#oykzyyeyop .gt_super {
+#ngzlzbqlqp .gt_super {
   font-size: 65%;
 }
 
-#oykzyyeyop .gt_footnote_marks {
+#ngzlzbqlqp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#oykzyyeyop .gt_asterisk {
+#ngzlzbqlqp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#oykzyyeyop .gt_indent_1 {
+#ngzlzbqlqp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#oykzyyeyop .gt_indent_2 {
+#ngzlzbqlqp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#oykzyyeyop .gt_indent_3 {
+#ngzlzbqlqp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#oykzyyeyop .gt_indent_4 {
+#ngzlzbqlqp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#oykzyyeyop .gt_indent_5 {
+#ngzlzbqlqp .gt_indent_5 {
   text-indent: 25px;
 }
 
-#oykzyyeyop .katex-display {
+#ngzlzbqlqp .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#oykzyyeyop div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ngzlzbqlqp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2402,23 +2402,23 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
 <span><span class="co">#&gt; ℹ Si toutes les modalités actives contribuaient également à la construction</span></span>
 <span><span class="co">#&gt; d'un axe, chacune aurait une contribution de 7,14 %.</span></span></code></pre></div>
 <div class="cell-output-display">
-<div id="fnaymdcetn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fnaymdcetn table {
+<div id="zpoydcggij" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zpoydcggij table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fnaymdcetn thead, #fnaymdcetn tbody, #fnaymdcetn tfoot, #fnaymdcetn tr, #fnaymdcetn td, #fnaymdcetn th {
+#zpoydcggij thead, #zpoydcggij tbody, #zpoydcggij tfoot, #zpoydcggij tr, #zpoydcggij td, #zpoydcggij th {
   border-style: none;
 }
 
-#fnaymdcetn p {
+#zpoydcggij p {
   margin: 0;
   padding: 0;
 }
 
-#fnaymdcetn .gt_table {
+#zpoydcggij .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2444,12 +2444,12 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-left-color: #D3D3D3;
 }
 
-#fnaymdcetn .gt_caption {
+#zpoydcggij .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fnaymdcetn .gt_title {
+#zpoydcggij .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2461,7 +2461,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-bottom-width: 0;
 }
 
-#fnaymdcetn .gt_subtitle {
+#zpoydcggij .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2473,7 +2473,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-top-width: 0;
 }
 
-#fnaymdcetn .gt_heading {
+#zpoydcggij .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2485,13 +2485,13 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-right-color: #D3D3D3;
 }
 
-#fnaymdcetn .gt_bottom_border {
+#zpoydcggij .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fnaymdcetn .gt_col_headings {
+#zpoydcggij .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2506,7 +2506,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-right-color: #D3D3D3;
 }
 
-#fnaymdcetn .gt_col_heading {
+#zpoydcggij .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2526,7 +2526,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   overflow-x: hidden;
 }
 
-#fnaymdcetn .gt_column_spanner_outer {
+#zpoydcggij .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2538,15 +2538,15 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 4px;
 }
 
-#fnaymdcetn .gt_column_spanner_outer:first-child {
+#zpoydcggij .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fnaymdcetn .gt_column_spanner_outer:last-child {
+#zpoydcggij .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fnaymdcetn .gt_column_spanner {
+#zpoydcggij .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2558,11 +2558,11 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   width: 100%;
 }
 
-#fnaymdcetn .gt_spanner_row {
+#zpoydcggij .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fnaymdcetn .gt_group_heading {
+#zpoydcggij .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2588,7 +2588,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   text-align: left;
 }
 
-#fnaymdcetn .gt_empty_group_heading {
+#zpoydcggij .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2603,15 +2603,15 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   vertical-align: middle;
 }
 
-#fnaymdcetn .gt_from_md > :first-child {
+#zpoydcggij .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fnaymdcetn .gt_from_md > :last-child {
+#zpoydcggij .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fnaymdcetn .gt_row {
+#zpoydcggij .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2630,7 +2630,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   overflow-x: hidden;
 }
 
-#fnaymdcetn .gt_stub {
+#zpoydcggij .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2643,7 +2643,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 5px;
 }
 
-#fnaymdcetn .gt_stub_row_group {
+#zpoydcggij .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2657,15 +2657,15 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   vertical-align: top;
 }
 
-#fnaymdcetn .gt_row_group_first td {
+#zpoydcggij .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fnaymdcetn .gt_row_group_first th {
+#zpoydcggij .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fnaymdcetn .gt_summary_row {
+#zpoydcggij .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2675,16 +2675,16 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 5px;
 }
 
-#fnaymdcetn .gt_first_summary_row {
+#zpoydcggij .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fnaymdcetn .gt_first_summary_row.thick {
+#zpoydcggij .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fnaymdcetn .gt_last_summary_row {
+#zpoydcggij .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2694,7 +2694,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-bottom-color: #D3D3D3;
 }
 
-#fnaymdcetn .gt_grand_summary_row {
+#zpoydcggij .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2704,7 +2704,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 5px;
 }
 
-#fnaymdcetn .gt_first_grand_summary_row {
+#zpoydcggij .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2714,7 +2714,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-top-color: #D3D3D3;
 }
 
-#fnaymdcetn .gt_last_grand_summary_row_top {
+#zpoydcggij .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2724,11 +2724,11 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-bottom-color: #D3D3D3;
 }
 
-#fnaymdcetn .gt_striped {
+#zpoydcggij .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fnaymdcetn .gt_table_body {
+#zpoydcggij .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2737,7 +2737,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-bottom-color: #D3D3D3;
 }
 
-#fnaymdcetn .gt_footnotes {
+#zpoydcggij .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2751,7 +2751,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-right-color: #D3D3D3;
 }
 
-#fnaymdcetn .gt_footnote {
+#zpoydcggij .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2760,7 +2760,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 5px;
 }
 
-#fnaymdcetn .gt_sourcenotes {
+#zpoydcggij .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2774,7 +2774,7 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   border-right-color: #D3D3D3;
 }
 
-#fnaymdcetn .gt_sourcenote {
+#zpoydcggij .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2782,72 +2782,72 @@ on aura plutôt recours à <code>Factoshiny::MCAshiny()</code> qui permet d’ex
   padding-right: 5px;
 }
 
-#fnaymdcetn .gt_left {
+#zpoydcggij .gt_left {
   text-align: left;
 }
 
-#fnaymdcetn .gt_center {
+#zpoydcggij .gt_center {
   text-align: center;
 }
 
-#fnaymdcetn .gt_right {
+#zpoydcggij .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fnaymdcetn .gt_font_normal {
+#zpoydcggij .gt_font_normal {
   font-weight: normal;
 }
 
-#fnaymdcetn .gt_font_bold {
+#zpoydcggij .gt_font_bold {
   font-weight: bold;
 }
 
-#fnaymdcetn .gt_font_italic {
+#zpoydcggij .gt_font_italic {
   font-style: italic;
 }
 
-#fnaymdcetn .gt_super {
+#zpoydcggij .gt_super {
   font-size: 65%;
 }
 
-#fnaymdcetn .gt_footnote_marks {
+#zpoydcggij .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fnaymdcetn .gt_asterisk {
+#zpoydcggij .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fnaymdcetn .gt_indent_1 {
+#zpoydcggij .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fnaymdcetn .gt_indent_2 {
+#zpoydcggij .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fnaymdcetn .gt_indent_3 {
+#zpoydcggij .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fnaymdcetn .gt_indent_4 {
+#zpoydcggij .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fnaymdcetn .gt_indent_5 {
+#zpoydcggij .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fnaymdcetn .katex-display {
+#zpoydcggij .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fnaymdcetn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#zpoydcggij div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3463,23 +3463,23 @@ simplifie la production de graphiques, en plus de représenter les cadrans et de
 <div class="sourceCode cell-code" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/caracteriser_classe.html">caracteriser_classe</a></span><span class="op">(</span><span class="va">res_cah</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
-<div id="smhwfoxskb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#smhwfoxskb table {
+<div id="gghppqwfhz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gghppqwfhz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#smhwfoxskb thead, #smhwfoxskb tbody, #smhwfoxskb tfoot, #smhwfoxskb tr, #smhwfoxskb td, #smhwfoxskb th {
+#gghppqwfhz thead, #gghppqwfhz tbody, #gghppqwfhz tfoot, #gghppqwfhz tr, #gghppqwfhz td, #gghppqwfhz th {
   border-style: none;
 }
 
-#smhwfoxskb p {
+#gghppqwfhz p {
   margin: 0;
   padding: 0;
 }
 
-#smhwfoxskb .gt_table {
+#gghppqwfhz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3505,12 +3505,12 @@ simplifie la production de graphiques, en plus de représenter les cadrans et de
   border-left-color: #D3D3D3;
 }
 
-#smhwfoxskb .gt_caption {
+#gghppqwfhz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#smhwfoxskb .gt_title {
+#gghppqwfhz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3522,7 +3522,7 @@ simplifie la production de graphiques, en plus de représenter les cadrans et de
   border-bottom-width: 0;
 }
 
-#smhwfoxskb .gt_subtitle {
+#gghppqwfhz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3534,7 +3534,7 @@ simplifie la production de graphiques, en plus de représenter les cadrans et de
   border-top-width: 0;
 }
 
-#smhwfoxskb .gt_heading {
+#gghppqwfhz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3546,13 +3546,13 @@ simplifie la production de graphiques, en plus de représenter les cadrans et de
   border-right-color: #D3D3D3;
 }
 
-#smhwfoxskb .gt_bottom_border {
+#gghppqwfhz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#smhwfoxskb .gt_col_headings {
+#gghppqwfhz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3567,7 +3567,7 @@ simplifie la production de graphiques, en plus de représenter les cadrans et de
   border-right-color: #D3D3D3;
 }
 
-#smhwfoxskb .gt_col_heading {
+#gghppqwfhz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3587,7 +3587,7 @@ simplifie la production de graphiques, en plus de représenter les cadrans et de
   overflow-x: hidden;
 }
 
-#smhwfoxskb .gt_column_spanner_outer {
+#gghppqwfhz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3599,15 +3599,15 @@ simplifie la production de graphiques, en plus de représenter les cadrans et de
   padding-right: 4px;
 }
 
-#smhwfoxskb .gt_column_spanner_outer:first-child {
+#gghppqwfhz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#smhwfoxskb .gt_column_spanner_outer:last-child {
+#gghppqwfhz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#smhwfoxskb .gt_column_spanner {
+#gghppqwfhz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3619,11 +3619,11 @@ simplifie la production de graphiques, en plus de représenter les cadrans et de
   width: 100%;
 }
 
-#smhwfoxskb .gt_spanner_row {
+#gghppqwfhz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#smhwfoxskb .gt_group_heading {
+#gghppqwfhz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3649,7 +3649,7 @@ simplifie la production de graphiques, en plus de représenter les cadrans et de
   text-align: left;
 }
 
-#smhwfoxskb .gt_empty_group_heading {
+#gghppqwfhz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3664,15 +3664,15 @@ simplifie la production de graphiques, en plus de représenter les cadrans et de
   vertical-align: middle;
 }
 
-#smhwfoxskb .gt_from_md > :first-child {
+#gghppqwfhz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#smhwfoxskb .gt_from_md > :last-child {
+#gghppqwfhz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#smhwfoxskb .gt_row {
+#gghppqwfhz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3691,7 +3691,7 @@ simplifie la production de graphiques, en plus de représenter les cadrans et de
   overflow-x: hidden;
 }
 
-#smhwfoxskb .gt_stub {
+#gghppqwfhz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3704,7 +3704,7 @@ simplifie la production de graphiques, en plus de représenter les cadrans et de
   padding-right: 5px;
 }
 
-#smhwfoxskb .gt_stub_row_group {
+#gghppqwfhz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3718,15 +3718,15 @@ simplifie la production de graphiques, en plus de représenter les cadrans et de
   vertical-align: top;
 }
 
-#smhwfoxskb .gt_row_group_first td {
+#gghppqwfhz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#smhwfoxskb .gt_row_group_first th {
+#gghppqwfhz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#smhwfoxskb .gt_summary_row {
+#gghppqwfhz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3736,16 +3736,16 @@ simplifie la production de graphiques, en plus de représenter les cadrans et de
   padding-right: 5px;
 }
 
-#smhwfoxskb .gt_first_summary_row {
+#gghppqwfhz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#smhwfoxskb .gt_first_summary_row.thick {
+#gghppqwfhz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#smhwfoxskb .gt_last_summary_row {
+#gghppqwfhz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3755,7 +3755,7 @@ simplifie la production de graphiques, en plus de représenter les cadrans et de
   border-bottom-color: #D3D3D3;
 }
 
-#smhwfoxskb .gt_grand_summary_row {
+#gghppqwfhz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3765,7 +3765,7 @@ simplifie la production de graphiques, en plus de représenter les cadrans et de
   padding-right: 5px;
 }
 
-#smhwfoxskb .gt_first_grand_summary_row {
+#gghppqwfhz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3775,7 +3775,7 @@ simplifie la production de graphiques, en plus de représenter les cadrans et de
   border-top-color: #D3D3D3;
 }
 
-#smhwfoxskb .gt_last_grand_summary_row_top {
+#gghppqwfhz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3785,11 +3785,11 @@ simplifie la production de graphiques, en plus de représenter les cadrans et de
   border-bottom-color: #D3D3D3;
 }
 
-#smhwfoxskb .gt_striped {
+#gghppqwfhz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#smhwfoxskb .gt_table_body {
+#gghppqwfhz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3798,7 +3798,7 @@ simplifie la production de graphiques, en plus de représenter les cadrans et de
   border-bottom-color: #D3D3D3;
 }
 
-#smhwfoxskb .gt_footnotes {
+#gghppqwfhz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3812,7 +3812,7 @@ simplifie la production de graphiques, en plus de représenter les cadrans et de
   border-right-color: #D3D3D3;
 }
 
-#smhwfoxskb .gt_footnote {
+#gghppqwfhz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3821,7 +3821,7 @@ simplifie la production de graphiques, en plus de représenter les cadrans et de
   padding-right: 5px;
 }
 
-#smhwfoxskb .gt_sourcenotes {
+#gghppqwfhz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3835,7 +3835,7 @@ simplifie la production de graphiques, en plus de représenter les cadrans et de
   border-right-color: #D3D3D3;
 }
 
-#smhwfoxskb .gt_sourcenote {
+#gghppqwfhz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3843,72 +3843,72 @@ simplifie la production de graphiques, en plus de représenter les cadrans et de
   padding-right: 5px;
 }
 
-#smhwfoxskb .gt_left {
+#gghppqwfhz .gt_left {
   text-align: left;
 }
 
-#smhwfoxskb .gt_center {
+#gghppqwfhz .gt_center {
   text-align: center;
 }
 
-#smhwfoxskb .gt_right {
+#gghppqwfhz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#smhwfoxskb .gt_font_normal {
+#gghppqwfhz .gt_font_normal {
   font-weight: normal;
 }
 
-#smhwfoxskb .gt_font_bold {
+#gghppqwfhz .gt_font_bold {
   font-weight: bold;
 }
 
-#smhwfoxskb .gt_font_italic {
+#gghppqwfhz .gt_font_italic {
   font-style: italic;
 }
 
-#smhwfoxskb .gt_super {
+#gghppqwfhz .gt_super {
   font-size: 65%;
 }
 
-#smhwfoxskb .gt_footnote_marks {
+#gghppqwfhz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#smhwfoxskb .gt_asterisk {
+#gghppqwfhz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#smhwfoxskb .gt_indent_1 {
+#gghppqwfhz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#smhwfoxskb .gt_indent_2 {
+#gghppqwfhz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#smhwfoxskb .gt_indent_3 {
+#gghppqwfhz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#smhwfoxskb .gt_indent_4 {
+#gghppqwfhz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#smhwfoxskb .gt_indent_5 {
+#gghppqwfhz .gt_indent_5 {
   text-indent: 25px;
 }
 
-#smhwfoxskb .katex-display {
+#gghppqwfhz .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#smhwfoxskb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#gghppqwfhz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4005,23 +4005,23 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
 <div class="sourceCode cell-code" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/caracteriser_classe.html">caracteriser_classe</a></span><span class="op">(</span><span class="va">res_cah</span>, <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
-<div id="mwwypdtvlx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mwwypdtvlx table {
+<div id="jncgjismvg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jncgjismvg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mwwypdtvlx thead, #mwwypdtvlx tbody, #mwwypdtvlx tfoot, #mwwypdtvlx tr, #mwwypdtvlx td, #mwwypdtvlx th {
+#jncgjismvg thead, #jncgjismvg tbody, #jncgjismvg tfoot, #jncgjismvg tr, #jncgjismvg td, #jncgjismvg th {
   border-style: none;
 }
 
-#mwwypdtvlx p {
+#jncgjismvg p {
   margin: 0;
   padding: 0;
 }
 
-#mwwypdtvlx .gt_table {
+#jncgjismvg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4047,12 +4047,12 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-left-color: #D3D3D3;
 }
 
-#mwwypdtvlx .gt_caption {
+#jncgjismvg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mwwypdtvlx .gt_title {
+#jncgjismvg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4064,7 +4064,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-bottom-width: 0;
 }
 
-#mwwypdtvlx .gt_subtitle {
+#jncgjismvg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4076,7 +4076,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-top-width: 0;
 }
 
-#mwwypdtvlx .gt_heading {
+#jncgjismvg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4088,13 +4088,13 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-right-color: #D3D3D3;
 }
 
-#mwwypdtvlx .gt_bottom_border {
+#jncgjismvg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mwwypdtvlx .gt_col_headings {
+#jncgjismvg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4109,7 +4109,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-right-color: #D3D3D3;
 }
 
-#mwwypdtvlx .gt_col_heading {
+#jncgjismvg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4129,7 +4129,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   overflow-x: hidden;
 }
 
-#mwwypdtvlx .gt_column_spanner_outer {
+#jncgjismvg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4141,15 +4141,15 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   padding-right: 4px;
 }
 
-#mwwypdtvlx .gt_column_spanner_outer:first-child {
+#jncgjismvg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mwwypdtvlx .gt_column_spanner_outer:last-child {
+#jncgjismvg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mwwypdtvlx .gt_column_spanner {
+#jncgjismvg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4161,11 +4161,11 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   width: 100%;
 }
 
-#mwwypdtvlx .gt_spanner_row {
+#jncgjismvg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mwwypdtvlx .gt_group_heading {
+#jncgjismvg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4191,7 +4191,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   text-align: left;
 }
 
-#mwwypdtvlx .gt_empty_group_heading {
+#jncgjismvg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4206,15 +4206,15 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   vertical-align: middle;
 }
 
-#mwwypdtvlx .gt_from_md > :first-child {
+#jncgjismvg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mwwypdtvlx .gt_from_md > :last-child {
+#jncgjismvg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mwwypdtvlx .gt_row {
+#jncgjismvg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4233,7 +4233,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   overflow-x: hidden;
 }
 
-#mwwypdtvlx .gt_stub {
+#jncgjismvg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4246,7 +4246,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   padding-right: 5px;
 }
 
-#mwwypdtvlx .gt_stub_row_group {
+#jncgjismvg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4260,15 +4260,15 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   vertical-align: top;
 }
 
-#mwwypdtvlx .gt_row_group_first td {
+#jncgjismvg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mwwypdtvlx .gt_row_group_first th {
+#jncgjismvg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mwwypdtvlx .gt_summary_row {
+#jncgjismvg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4278,16 +4278,16 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   padding-right: 5px;
 }
 
-#mwwypdtvlx .gt_first_summary_row {
+#jncgjismvg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mwwypdtvlx .gt_first_summary_row.thick {
+#jncgjismvg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mwwypdtvlx .gt_last_summary_row {
+#jncgjismvg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4297,7 +4297,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-bottom-color: #D3D3D3;
 }
 
-#mwwypdtvlx .gt_grand_summary_row {
+#jncgjismvg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4307,7 +4307,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   padding-right: 5px;
 }
 
-#mwwypdtvlx .gt_first_grand_summary_row {
+#jncgjismvg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4317,7 +4317,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-top-color: #D3D3D3;
 }
 
-#mwwypdtvlx .gt_last_grand_summary_row_top {
+#jncgjismvg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4327,11 +4327,11 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-bottom-color: #D3D3D3;
 }
 
-#mwwypdtvlx .gt_striped {
+#jncgjismvg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mwwypdtvlx .gt_table_body {
+#jncgjismvg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4340,7 +4340,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-bottom-color: #D3D3D3;
 }
 
-#mwwypdtvlx .gt_footnotes {
+#jncgjismvg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4354,7 +4354,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-right-color: #D3D3D3;
 }
 
-#mwwypdtvlx .gt_footnote {
+#jncgjismvg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4363,7 +4363,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   padding-right: 5px;
 }
 
-#mwwypdtvlx .gt_sourcenotes {
+#jncgjismvg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4377,7 +4377,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-right-color: #D3D3D3;
 }
 
-#mwwypdtvlx .gt_sourcenote {
+#jncgjismvg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4385,72 +4385,72 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   padding-right: 5px;
 }
 
-#mwwypdtvlx .gt_left {
+#jncgjismvg .gt_left {
   text-align: left;
 }
 
-#mwwypdtvlx .gt_center {
+#jncgjismvg .gt_center {
   text-align: center;
 }
 
-#mwwypdtvlx .gt_right {
+#jncgjismvg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mwwypdtvlx .gt_font_normal {
+#jncgjismvg .gt_font_normal {
   font-weight: normal;
 }
 
-#mwwypdtvlx .gt_font_bold {
+#jncgjismvg .gt_font_bold {
   font-weight: bold;
 }
 
-#mwwypdtvlx .gt_font_italic {
+#jncgjismvg .gt_font_italic {
   font-style: italic;
 }
 
-#mwwypdtvlx .gt_super {
+#jncgjismvg .gt_super {
   font-size: 65%;
 }
 
-#mwwypdtvlx .gt_footnote_marks {
+#jncgjismvg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mwwypdtvlx .gt_asterisk {
+#jncgjismvg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mwwypdtvlx .gt_indent_1 {
+#jncgjismvg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mwwypdtvlx .gt_indent_2 {
+#jncgjismvg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mwwypdtvlx .gt_indent_3 {
+#jncgjismvg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mwwypdtvlx .gt_indent_4 {
+#jncgjismvg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mwwypdtvlx .gt_indent_5 {
+#jncgjismvg .gt_indent_5 {
   text-indent: 25px;
 }
 
-#mwwypdtvlx .katex-display {
+#jncgjismvg .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#mwwypdtvlx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jncgjismvg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4571,23 +4571,23 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
 <div class="sourceCode cell-code" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/caracteriser_classe.html">caracteriser_classe</a></span><span class="op">(</span><span class="va">res_cah</span>, <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
-<div id="rxerbyveys" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rxerbyveys table {
+<div id="csewxfmagu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#csewxfmagu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rxerbyveys thead, #rxerbyveys tbody, #rxerbyveys tfoot, #rxerbyveys tr, #rxerbyveys td, #rxerbyveys th {
+#csewxfmagu thead, #csewxfmagu tbody, #csewxfmagu tfoot, #csewxfmagu tr, #csewxfmagu td, #csewxfmagu th {
   border-style: none;
 }
 
-#rxerbyveys p {
+#csewxfmagu p {
   margin: 0;
   padding: 0;
 }
 
-#rxerbyveys .gt_table {
+#csewxfmagu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4613,12 +4613,12 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-left-color: #D3D3D3;
 }
 
-#rxerbyveys .gt_caption {
+#csewxfmagu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rxerbyveys .gt_title {
+#csewxfmagu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4630,7 +4630,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-bottom-width: 0;
 }
 
-#rxerbyveys .gt_subtitle {
+#csewxfmagu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4642,7 +4642,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-top-width: 0;
 }
 
-#rxerbyveys .gt_heading {
+#csewxfmagu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4654,13 +4654,13 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-right-color: #D3D3D3;
 }
 
-#rxerbyveys .gt_bottom_border {
+#csewxfmagu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rxerbyveys .gt_col_headings {
+#csewxfmagu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4675,7 +4675,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-right-color: #D3D3D3;
 }
 
-#rxerbyveys .gt_col_heading {
+#csewxfmagu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4695,7 +4695,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   overflow-x: hidden;
 }
 
-#rxerbyveys .gt_column_spanner_outer {
+#csewxfmagu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4707,15 +4707,15 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   padding-right: 4px;
 }
 
-#rxerbyveys .gt_column_spanner_outer:first-child {
+#csewxfmagu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rxerbyveys .gt_column_spanner_outer:last-child {
+#csewxfmagu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rxerbyveys .gt_column_spanner {
+#csewxfmagu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4727,11 +4727,11 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   width: 100%;
 }
 
-#rxerbyveys .gt_spanner_row {
+#csewxfmagu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rxerbyveys .gt_group_heading {
+#csewxfmagu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4757,7 +4757,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   text-align: left;
 }
 
-#rxerbyveys .gt_empty_group_heading {
+#csewxfmagu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4772,15 +4772,15 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   vertical-align: middle;
 }
 
-#rxerbyveys .gt_from_md > :first-child {
+#csewxfmagu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rxerbyveys .gt_from_md > :last-child {
+#csewxfmagu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rxerbyveys .gt_row {
+#csewxfmagu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4799,7 +4799,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   overflow-x: hidden;
 }
 
-#rxerbyveys .gt_stub {
+#csewxfmagu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4812,7 +4812,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   padding-right: 5px;
 }
 
-#rxerbyveys .gt_stub_row_group {
+#csewxfmagu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4826,15 +4826,15 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   vertical-align: top;
 }
 
-#rxerbyveys .gt_row_group_first td {
+#csewxfmagu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rxerbyveys .gt_row_group_first th {
+#csewxfmagu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rxerbyveys .gt_summary_row {
+#csewxfmagu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4844,16 +4844,16 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   padding-right: 5px;
 }
 
-#rxerbyveys .gt_first_summary_row {
+#csewxfmagu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rxerbyveys .gt_first_summary_row.thick {
+#csewxfmagu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rxerbyveys .gt_last_summary_row {
+#csewxfmagu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4863,7 +4863,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-bottom-color: #D3D3D3;
 }
 
-#rxerbyveys .gt_grand_summary_row {
+#csewxfmagu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4873,7 +4873,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   padding-right: 5px;
 }
 
-#rxerbyveys .gt_first_grand_summary_row {
+#csewxfmagu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4883,7 +4883,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-top-color: #D3D3D3;
 }
 
-#rxerbyveys .gt_last_grand_summary_row_top {
+#csewxfmagu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4893,11 +4893,11 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-bottom-color: #D3D3D3;
 }
 
-#rxerbyveys .gt_striped {
+#csewxfmagu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rxerbyveys .gt_table_body {
+#csewxfmagu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4906,7 +4906,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-bottom-color: #D3D3D3;
 }
 
-#rxerbyveys .gt_footnotes {
+#csewxfmagu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4920,7 +4920,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-right-color: #D3D3D3;
 }
 
-#rxerbyveys .gt_footnote {
+#csewxfmagu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4929,7 +4929,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   padding-right: 5px;
 }
 
-#rxerbyveys .gt_sourcenotes {
+#csewxfmagu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4943,7 +4943,7 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   border-right-color: #D3D3D3;
 }
 
-#rxerbyveys .gt_sourcenote {
+#csewxfmagu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4951,72 +4951,72 @@ N = 2000<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ita
   padding-right: 5px;
 }
 
-#rxerbyveys .gt_left {
+#csewxfmagu .gt_left {
   text-align: left;
 }
 
-#rxerbyveys .gt_center {
+#csewxfmagu .gt_center {
   text-align: center;
 }
 
-#rxerbyveys .gt_right {
+#csewxfmagu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rxerbyveys .gt_font_normal {
+#csewxfmagu .gt_font_normal {
   font-weight: normal;
 }
 
-#rxerbyveys .gt_font_bold {
+#csewxfmagu .gt_font_bold {
   font-weight: bold;
 }
 
-#rxerbyveys .gt_font_italic {
+#csewxfmagu .gt_font_italic {
   font-style: italic;
 }
 
-#rxerbyveys .gt_super {
+#csewxfmagu .gt_super {
   font-size: 65%;
 }
 
-#rxerbyveys .gt_footnote_marks {
+#csewxfmagu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rxerbyveys .gt_asterisk {
+#csewxfmagu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rxerbyveys .gt_indent_1 {
+#csewxfmagu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rxerbyveys .gt_indent_2 {
+#csewxfmagu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rxerbyveys .gt_indent_3 {
+#csewxfmagu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rxerbyveys .gt_indent_4 {
+#csewxfmagu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rxerbyveys .gt_indent_5 {
+#csewxfmagu .gt_indent_5 {
   text-indent: 25px;
 }
 
-#rxerbyveys .katex-display {
+#csewxfmagu .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#rxerbyveys div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#csewxfmagu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>

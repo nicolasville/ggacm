@@ -15,19 +15,18 @@ pour produire des graphiques, des tableaux, etc.
 
 Le code ci-dessous utilise un style “tidyverse” qui peut être exotique
 pour certains, notamment dans l’usage du “pipe” (`|>`). Pour plus de
-détails là-dessus, voir [la section
-dédiée](https://juba.github.io/tidyverse/10-dplyr.html#sec-pipe) du
-guide de Julien Barnier.
+détails là-dessus, voir [la section dédiée du guide de Julien
+Barnier](https://juba.github.io/tidyverse/10-dplyr.html#sec-pipe).
 
 La production de graphique d’analyse des correspondances multiples
 demande un certain contrôle sur les dimensions des graphiques produits.
-Pour mieux contrôler cela, il est souvent plus facile de passer par des
-fichiers Quarto ou R-markdown pour produire les graphiques, en précisant
-les dimensions des graphiques d’output des cellules de codes. Pour une
-présentation rapide de ce type de fichier, voir la section de *R for
-Data Science* ou la très pédagogique
-[introduction](https://benegarbi.github.io/PremiersPasAvec_quarto.html)
-d’Elisabeth Morand et Benédicte Garnier de l’INED.
+Pour cela, il est souvent plus facile de passer par des fichiers Quarto
+ou R-markdown pour produire les graphiques, en précisant les dimensions
+des graphiques d’output des cellules de codes. Pour une présentation
+rapide de ce type de fichier, voir [la section de *R for Data
+Science*](https://r4ds.hadley.nz/quarto.html) ou la très pédagogique
+[introduction d’Elisabeth Morand et Benédicte Garnier de
+l’INED](https://benegarbi.github.io/PremiersPasAvec_quarto.html) .
 
 Si ce n’est pas déjà fait, il va falloir installer les packages qui sont
 utilisés, dont mon package. N’étant disponible que sur Github, la

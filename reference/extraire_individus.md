@@ -34,7 +34,7 @@ contribution à la construction des axes (colonnes `dim1_contrib`,
 ``` r
 resultat_acm <- createurs_de_contenus_pol |> ACM()
 #> ℹ Réalisation de l'ACM avec `FactoMineR::MCA()`
-#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [27ms]
+#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [14ms]
 #> 
 #> ℹ 
 #> • Sur 56 individus...
@@ -44,7 +44,7 @@ resultat_acm <- createurs_de_contenus_pol |> ACM()
 #> • Toutes les variables sont actives
 #> ℹ Vous pouvez préciser des variables supplémentaires avec l'argument `variables
 #>   supplementaires`.
-#> [57ms]
+#> [30ms]
 #> 
 
 resultat_individus <- resultat_acm |> extraire_individus()
