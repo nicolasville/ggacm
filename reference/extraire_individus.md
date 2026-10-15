@@ -44,7 +44,7 @@ resultat_acm <- createurs_de_contenus_pol |> ACM()
 #> • Toutes les variables sont actives
 #> ℹ Vous pouvez préciser des variables supplémentaires avec l'argument `variables
 #>   supplementaires`.
-#> [54ms]
+#> [57ms]
 #> 
 
 resultat_individus <- resultat_acm |> extraire_individus()

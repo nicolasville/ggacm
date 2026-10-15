@@ -2,16 +2,32 @@
 
 Ceci est un document qui contient le code utilisé pour réaliser des
 sorties graphiques d’ACM. Pour les phases préalables, où il faut choisir
-les variables pertinente de l’analyse et essayer un grand nombre de
-combinaison de variable, on aura plutôt recours à
-`Factoshiny::MCAshiny()` qui permet d’explorer rapidement les
-différentes analyses possibles à partir d’un même jeu de données. De
-manière similaire, `explor::explor()` fonctionne très bien pour
-rapidement explorer un résultat.
+les variables pertinentes de l’analyse et essayer un grand nombre de
+combinaison de variable,  
+on aura plutôt recours à `Factoshiny::MCAshiny()` qui permet d’explorer
+rapidement les différentes analyses possibles à partir d’un même jeu de
+données. De manière similaire, `explor::explor()` fonctionne très bien
+pour rapidement explorer un résultat.
 
 Le code présenté ici et dans le packages interviennent en général à une
 phase ultérieure, où l’on cherche à manipuler le résultat de l’analyse
 pour produire des graphiques, des tableaux, etc.
+
+Le code ci-dessous utilise un style “tidyverse” qui peut être exotique
+pour certains, notamment dans l’usage du “pipe” (`|>`). Pour plus de
+détails là-dessus, voir [la section
+dédiée](https://juba.github.io/tidyverse/10-dplyr.html#sec-pipe) du
+guide de Julien Barnier.
+
+La production de graphique d’analyse des correspondances multiples
+demande un certain contrôle sur les dimensions des graphiques produits.
+Pour mieux contrôler cela, il est souvent plus facile de passer par des
+fichiers Quarto ou R-markdown pour produire les graphiques, en précisant
+les dimensions des graphiques d’output des cellules de codes. Pour une
+présentation rapide de ce type de fichier, voir la section de *R for
+Data Science* ou la très pédagogique
+[introduction](https://benegarbi.github.io/PremiersPasAvec_quarto.html)
+d’Elisabeth Morand et Benédicte Garnier de l’INED.
 
 Si ce n’est pas déjà fait, il va falloir installer les packages qui sont
 utilisés, dont mon package. N’étant disponible que sur Github, la
@@ -398,7 +414,16 @@ modalités
 
 Le grand intérêt de ces tableaux est d’être facilement utilisable par
 l’extension `ggplot2` qui permet de générer soi-même ses graphiques
-sur-mesure.
+sur-mesure. Pour une plus de détails, voir [la section
+dédiée](https://juba.github.io/tidyverse/08-ggplot2.html) du guide de
+Julien Barnier,
+[celle](https://larmarange.github.io/guide-R/analyses/ggplot2.html) du
+guide de Larmarange ou encore la très pédagogique présentation qui est
+fait dans [*R for Data
+Science*](https://r4ds.hadley.nz/data-visualize.html).
+
+Pour des détails plus complet, on pourra se référer au [manuel de
+l’extension](https://ggplot2-book.org/).
 
 ## Graphique des modalités
 

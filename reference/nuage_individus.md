@@ -53,7 +53,7 @@ resultat <- createurs_de_contenus_pol |>
 #> ── Variables supplémentaires : 1 
 #> ℹ 
 #> `personne`.
-#> [53ms]
+#> [45ms]
 #> 
 
 # puis on peut sortir le graphique
