@@ -1,4 +1,4 @@
-# Package index
+# Index du paquet
 
 ## Avant de commencer l’analyse
 

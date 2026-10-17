@@ -2,7 +2,7 @@
 
 Visualiser les résultats d'une ACM
 
-## Usage
+## Utilisation
 
 ``` r
 ggacm(data, mapping = aes(dim1_coord, dim2_coord), ...)
@@ -32,11 +32,11 @@ ggacm(data, mapping = aes(dim1_coord, dim2_coord), ...)
   qui seront passé à
   [`ggplot2::coord_fixed()`](https://ggplot2.tidyverse.org/reference/coord_fixed.html).
 
-## Value
+## Valeur de retour
 
 un graphique ggplot
 
-## Examples
+## Exemples
 
 ``` r
 # un exemple pas piqué des annetons

@@ -4,7 +4,7 @@ Caractériser ses axe La fonction suivante permet de sortir un tableau
 résumant pour un axe les modalités les plus contribuantes à sa
 construction.
 
-## Usage
+## Utilisation
 
 ``` r
 caracteriser_axe(resultat_acm, axe, contribution_minimum)
@@ -28,12 +28,12 @@ caracteriser_axe(resultat_acm, axe, contribution_minimum)
   utile de l'augmenter si l'on a beaucoup de modalité et que l'on ne
   souhaite pas qu'elles apparaissent toutes dans le tableau.
 
-## Value
+## Valeur de retour
 
 Un tableau de donnée prêt à être publié. Il s'agit d'une objet venant du
 package gt.
 
-## Examples
+## Exemples
 
 ``` r
 #

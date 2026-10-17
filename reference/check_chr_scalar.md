@@ -2,7 +2,7 @@
 
 Vérifer ce que l'utilisateurs donne
 
-## Usage
+## Utilisation
 
 ``` r
 check_chr_scalar(
@@ -42,11 +42,11 @@ check_chr_scalar(
 
   Le message d'erreur à afficher
 
-## Value
+## Valeur de retour
 
 Rien du tout, mais un message d'erreur si ça foire
 
-## Examples
+## Exemples
 
 ``` r
 

@@ -5,7 +5,7 @@ classification ascendante hiérarchique. Elle produit des tableaux qui
 reprennent pour une classe donnée, les caractéristiques typiques et
 atypiques dans la classe.
 
-## Usage
+## Utilisation
 
 ``` r
 caracteriser_classe(resultat_classification, numero_de_la_classe)
@@ -22,11 +22,11 @@ caracteriser_classe(resultat_classification, numero_de_la_classe)
 
   Le numéro de la classe que l'on souhaite caractériser.
 
-## Value
+## Valeur de retour
 
 Un tableau de présentation de la classe. Il s'agit d'un objet gt.
 
-## Examples
+## Exemples
 
 ``` r
 #

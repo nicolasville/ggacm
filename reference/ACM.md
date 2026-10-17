@@ -4,7 +4,7 @@ Cette fonction permet de réaliser une ACM en se reposant sur le package
 FactoMineR. Elle sera sûrement plus simple à utiliser que
 [`FactoMineR::MCA()`](https://rdrr.io/pkg/FactoMineR/man/MCA.html).
 
-## Usage
+## Utilisation
 
 ``` r
 ACM(donnees, variables_supplementaires, graph = FALSE, ...)
@@ -36,17 +36,17 @@ ACM(donnees, variables_supplementaires, graph = FALSE, ...)
   Arguments supplémentaires qui seront passé à
   [FactoMineR::MCA](https://rdrr.io/pkg/FactoMineR/man/MCA.html).
 
-## Value
+## Valeur de retour
 
 Le résultat d'une ACM.
 
-## Examples
+## Exemples
 
 ``` r
 resultat <- createurs_de_contenus_pol |>
   ACM(variables_supplementaires = c(titre, personne))
 #> ℹ Réalisation de l'ACM avec `FactoMineR::MCA()`
-#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [21ms]
+#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [29ms]
 #> 
 #> ℹ 
 #> • Sur 56 individus...
@@ -66,7 +66,7 @@ resultat <- createurs_de_contenus_pol |>
 #> ── Variables supplémentaires : 2 
 #> ℹ 
 #> `titre` and `personne`.
-#> [23ms]
+#> [35ms]
 #> 
 
 ```

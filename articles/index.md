@@ -1,6 +1,6 @@
 # Articles
 
-### All vignettes
+### Tous les articles
 
 - [ACM avec
   R](https://nicolasville.github.io/ggacm/articles/ACM-avec-R.md):

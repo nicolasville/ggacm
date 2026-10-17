@@ -4,7 +4,7 @@ Lorsque l'on réalise une classification ascendante hiérarchique, et que
 l'on souhaite utiliser les résultats, on a souvent envie d'avoir ces
 résultats acollés à notre tableau d'origine.
 
-## Usage
+## Utilisation
 
 ``` r
 extraire_classes(resultat_classification, ...)
@@ -21,7 +21,7 @@ extraire_classes(resultat_classification, ...)
 
   Colonnes placées en début de tableau. Argument inutile.
 
-## Value
+## Valeur de retour
 
 Le tableau de donnée initial utilisé pour l'ACM auquel a été rajouté une
 colonne `classe` qui renseigne la classe des individus. Les colonnes de
@@ -29,7 +29,7 @@ résultat de l'ACM telle que décrite dans
 [`extraire_individus()`](https://nicolasville.github.io/ggacm/reference/extraire_individus.md)
 sont également incluses.
 
-## Details
+## Détails
 
 Cette fonction permet d'extraire d'un résultat d'une classification
 réalisé avec
@@ -46,14 +46,14 @@ tableau prêt à être utilisé par
 [`ggplot2::ggplot()`](https://ggplot2.tidyverse.org/reference/ggplot.html)
 pour en faire un graphique.
 
-## Examples
+## Exemples
 
 ``` r
 
 # 1. On réalise une ACM avec ACM() ou FactoMineR::MCA()
 resultat_acm <- createurs_de_contenus_pol |> ACM()
 #> ℹ Réalisation de l'ACM avec `FactoMineR::MCA()`
-#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [15ms]
+#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [21ms]
 #> 
 #> ℹ 
 #> • Sur 56 individus...
@@ -63,7 +63,7 @@ resultat_acm <- createurs_de_contenus_pol |> ACM()
 #> • Toutes les variables sont actives
 #> ℹ Vous pouvez préciser des variables supplémentaires avec l'argument `variables
 #>   supplementaires`.
-#> [30ms]
+#> [44ms]
 #> 
 
 # 2. On fait la classification sur le résultat de l'ACM

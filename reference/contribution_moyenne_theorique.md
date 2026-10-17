@@ -6,7 +6,7 @@ les variables à prendre en compte dans l'analyse. Cette fonction permet
 de calculer cette contribution moyenne théorique : elle divise 100 % par
 le nombre de modalité active.
 
-## Usage
+## Utilisation
 
 ``` r
 contribution_moyenne_theorique(resultat_acm)
@@ -18,12 +18,12 @@ contribution_moyenne_theorique(resultat_acm)
 
   Le résultat d'une ACM.
 
-## Value
+## Valeur de retour
 
 Un nombre entre 0 et 100 qui indique le pourcentage de contribution
 moyenne théorique.
 
-## Examples
+## Exemples
 
 ``` r
 resultat_acm <- createurs_de_contenus_pol |>

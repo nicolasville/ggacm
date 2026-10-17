@@ -2,7 +2,7 @@
 
 Tableau classe
 
-## Usage
+## Utilisation
 
 ``` r
 print_classe_axe(classification, numero_axe)

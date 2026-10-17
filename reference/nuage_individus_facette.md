@@ -4,7 +4,7 @@ Cette fonction permet de faire apparaître plusieurs fois le nuage
 d'individu en colorant à chaque fois les individus qui partagent une
 même modalité.
 
-## Usage
+## Utilisation
 
 ``` r
 nuage_individus_facette(
@@ -57,17 +57,17 @@ nuage_individus_facette(
   passés à
   [`ggplot2::facet_wrap()`](https://ggplot2.tidyverse.org/reference/facet_wrap.html)
 
-## Value
+## Valeur de retour
 
 Un objet ggplot2.
 
-## Examples
+## Exemples
 
 ``` r
 
 res.ACM <- createurs_de_contenus_pol |> ACM()
 #> ℹ Réalisation de l'ACM avec `FactoMineR::MCA()`
-#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [14ms]
+#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [19ms]
 #> 
 #> ℹ 
 #> • Sur 56 individus...
@@ -77,7 +77,7 @@ res.ACM <- createurs_de_contenus_pol |> ACM()
 #> • Toutes les variables sont actives
 #> ℹ Vous pouvez préciser des variables supplémentaires avec l'argument `variables
 #>   supplementaires`.
-#> [24ms]
+#> [35ms]
 #> 
 
 res.ind <- res.ACM |> extraire_individus()

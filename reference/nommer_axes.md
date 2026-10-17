@@ -5,7 +5,7 @@ aux axes, ou au moins les pôles de chacun de ces axes. Cette fonction
 permet de générer les labels pour chaque axe à utiliser lorsqu'on génère
 des graphiques axec ggplot
 
-## Usage
+## Utilisation
 
 ``` r
 nommer_axes(
@@ -40,13 +40,13 @@ nommer_axes(
 
   idem mais a droite
 
-## Value
+## Valeur de retour
 
 une couche ggplot à ajouter. Sous le capot cette fonction fait génère
 des annotations pour graphique ggplot avec
 [`ggplot2::labs()`](https://ggplot2.tidyverse.org/reference/labs.html)
 
-## Examples
+## Exemples
 
 ``` r
 #

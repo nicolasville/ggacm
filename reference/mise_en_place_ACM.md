@@ -7,7 +7,7 @@ sociales... Cette fonction permet de modifier ces options d'un seul
 coup. Un nombre qui s'affichait comme 0.456789 s'affichera alors comme
 0,457.
 
-## Usage
+## Utilisation
 
 ``` r
 mise_en_place_ACM(...)
@@ -20,17 +20,17 @@ mise_en_place_ACM(...)
   Il est possible de faire passer d'autres arguments à
   [`base::options()`](https://rdrr.io/r/base/options.html).
 
-## Value
+## Valeur de retour
 
 Une liste d'option
 
-## Details
+## Détails
 
 Concrètement cette fonction modifie les options de la session R et les
 options des objets du package gtsummary en ayant recours à
 [`gtsummary::theme_gtsummary_language()`](https://www.danieldsjoberg.com/gtsummary/reference/theme_gtsummary.html).
 
-## Examples
+## Exemples
 
 ``` r
 

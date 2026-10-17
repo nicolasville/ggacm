@@ -1,12 +1,12 @@
-# Authors and Citation
+# Auteur·rice·s et Citation
 
-## Authors
+## Auteur·rice·s
 
-- **Nicolas Ville**. Maintainer.
+- **Nicolas Ville**. Mainteneur·se.
 
 ## Citation
 
-Source:
+Source :
 [`DESCRIPTION`](https://github.com/nicolasville/ggacm/blob/main/DESCRIPTION)
 
 Ville N (2026). *ggacm: Exporter Et Visualiser Une ACM*. R package

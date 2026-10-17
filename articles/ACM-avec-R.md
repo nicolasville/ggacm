@@ -193,7 +193,7 @@ tard.
 
 res_acm <- hdv2003 |> 
   FactoMineR::MCA(quali.sup = variables_supplémentaires)
-#> Warning in sqrt(Nj * ((N - 1)/(N - Nj))): NaNs produced
+#> Warning in sqrt(Nj * ((N - 1)/(N - Nj))): Production de NaN
 ```
 
 On peut maintenant décrire les axes. Les taux modifiés de Benzécri

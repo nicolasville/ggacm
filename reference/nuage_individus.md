@@ -4,7 +4,7 @@ On veut souvent visualiser rapidement un nuage d'individus sans trop y
 passer du temps. Cette fonction est un raccourci à cela, elle permet de
 faire
 
-## Usage
+## Utilisation
 
 ``` r
 nuage_individus(resultat_individus, couleur)
@@ -21,11 +21,11 @@ nuage_individus(resultat_individus, couleur)
 
   Le résultat d'une acm
 
-## Value
+## Valeur de retour
 
 un objet ggplot
 
-## Examples
+## Exemples
 
 ``` r
 
@@ -33,7 +33,7 @@ un objet ggplot
 resultat <- createurs_de_contenus_pol |>
   ACM(variables_supplementaires = personne)
 #> ℹ Réalisation de l'ACM avec `FactoMineR::MCA()`
-#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [15ms]
+#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [21ms]
 #> 
 #> ℹ 
 #> • Sur 56 individus...
@@ -53,7 +53,7 @@ resultat <- createurs_de_contenus_pol |>
 #> ── Variables supplémentaires : 1 
 #> ℹ 
 #> `personne`.
-#> [24ms]
+#> [35ms]
 #> 
 
 # puis on peut sortir le graphique

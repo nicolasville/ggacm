@@ -2,7 +2,7 @@
 
 Title
 
-## Usage
+## Utilisation
 
 ``` r
 get_res_act(resultat_acm)
@@ -19,12 +19,12 @@ get_res_act(resultat_acm)
   TRUE ou FALSE. TRUE pour extraire les variables actives. FALSE pour
   extraire les variables supplémentaires
 
-## Value
+## Valeur de retour
 
 pour chaque modalité les coordonnées, les contributions, les vtest et
 les cosinus carrés pour les 5 premiers axes.
 
-## Examples
+## Exemples
 
 ``` r
 # une liste d'exemple

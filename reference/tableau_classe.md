@@ -3,7 +3,7 @@
 Cette fonction permet de présenter un tableau caractérisant une
 classification réalisé avec la fonction FactoMineR::HCPC()
 
-## Usage
+## Utilisation
 
 ``` r
 tableau_classe(x, n_classe, data_acm)
@@ -24,11 +24,11 @@ tableau_classe(x, n_classe, data_acm)
 
   Le tableau de donnée qui sur lequel l'ACM a été réalisée.
 
-## Value
+## Valeur de retour
 
 Un tableau prêt à l'exportation décrivant une classe.
 
-## Examples
+## Exemples
 
 ``` r
 # un exemple

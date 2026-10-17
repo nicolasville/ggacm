@@ -2,7 +2,7 @@
 
 Cette fonction permet de renvoyer un
 
-## Usage
+## Utilisation
 
 ``` r
 extraire_modalites(resultat_acm)
@@ -20,7 +20,7 @@ extraire_modalites(resultat_acm)
 
   le tableau de donnée d'origine
 
-## Value
+## Valeur de retour
 
 Un tableau avec pour chaque modalité les coordonnées, les contributions,
 les cos2 et les vtest pour les 5 premières dimensions.
@@ -51,14 +51,14 @@ Dans le détail, le tableau comporte les variables :
 - `dim1_vtest`, `dim2_vtest`, ... : Vtest des coordonnées de la modalité
   sur l'axe 1, 2,...
 
-## Examples
+## Exemples
 
 ``` r
 # on commence par créer un résultat d'ACM :
 resultat <- createurs_de_contenus_pol |>
   ACM(variables_supplementaires = personne)
 #> ℹ Réalisation de l'ACM avec `FactoMineR::MCA()`
-#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [15ms]
+#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [21ms]
 #> 
 #> ℹ 
 #> • Sur 56 individus...
@@ -78,7 +78,7 @@ resultat <- createurs_de_contenus_pol |>
 #> ── Variables supplémentaires : 1 
 #> ℹ 
 #> `personne`.
-#> [24ms]
+#> [34ms]
 #> 
 
 # Puis on peut en extraire le tableau descriptif de chaque modalité :

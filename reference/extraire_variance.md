@@ -2,7 +2,7 @@
 
 Décrire la variance des capturer par chaque axe
 
-## Usage
+## Utilisation
 
 ``` r
 extraire_variance(resultat_acm, maximum = 10)
@@ -18,11 +18,11 @@ extraire_variance(resultat_acm, maximum = 10)
 
   Nombre maximum de dimension à afficher. Par défaut 10.
 
-## Value
+## Valeur de retour
 
 un tableau (data.frame) qui documente la variance des 5 premiers axes.
 
-## Examples
+## Exemples
 
 ``` r
 # une liste d'exemple

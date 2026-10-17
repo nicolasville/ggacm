@@ -4,7 +4,7 @@ Cette fonction permet quadd on lui donne le résultat d'une ACM de sortir
 un tableau qui reprend le tableau de donnée initial en ajoutant pour
 chaque individus leur coordonnées.
 
-## Usage
+## Utilisation
 
 ``` r
 extraire_individus(resultat_acm, ordre = NULL)
@@ -20,7 +20,7 @@ extraire_individus(resultat_acm, ordre = NULL)
 
   ne pas toucher.
 
-## Value
+## Valeur de retour
 
 Le tableau de données surlequel vous avez réalisé l'ACM auquel a été
 ajouté pour chaque individus : leur coordonnées sur chaque axe (stockés
@@ -29,12 +29,12 @@ contribution à la construction des axes (colonnes `dim1_contrib`,
 `dim2_contrib`,...) et enfin leur cosinus carré (colonnes
 `dim1_cos2`,...)
 
-## Examples
+## Exemples
 
 ``` r
 resultat_acm <- createurs_de_contenus_pol |> ACM()
 #> ℹ Réalisation de l'ACM avec `FactoMineR::MCA()`
-#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [14ms]
+#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [20ms]
 #> 
 #> ℹ 
 #> • Sur 56 individus...
@@ -44,7 +44,7 @@ resultat_acm <- createurs_de_contenus_pol |> ACM()
 #> • Toutes les variables sont actives
 #> ℹ Vous pouvez préciser des variables supplémentaires avec l'argument `variables
 #>   supplementaires`.
-#> [30ms]
+#> [44ms]
 #> 
 
 resultat_individus <- resultat_acm |> extraire_individus()

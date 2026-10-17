@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   articles/ACM-avec-R: ACM-avec-R.html
   ggacm: ggacm.html
-last_built: 2026-10-15T09:34Z
+last_built: 2026-10-17T09:38Z
 urls:
   reference: https://nicolasville.github.io/ggacm/reference
   article: https://nicolasville.github.io/ggacm/articles

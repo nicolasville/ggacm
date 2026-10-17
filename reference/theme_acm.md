@@ -4,7 +4,7 @@ Cette fonction permet de générer un thème de graphique adapté aux ACM et
 aux publications : Fond blanc, police Times New Roman, légende en bas du
 graphique et transforme les axes en flèches.
 
-## Usage
+## Utilisation
 
 ``` r
 theme_acm(...)
@@ -18,11 +18,11 @@ theme_acm(...)
   de rajouter des éléments qui seront passé à
   [`ggplot2::theme()`](https://ggplot2.tidyverse.org/reference/theme.html)
 
-## Value
+## Valeur de retour
 
 Un thème ggplot
 
-## Examples
+## Exemples
 
 ``` r
 #

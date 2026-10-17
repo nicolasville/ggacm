@@ -9,7 +9,7 @@ augmenterez de 0.1 en coordonnée sur l'axe des abscisse. Cette fonction
 permet de remédier à cela. Par ailleur, elle trace deux lignes
 symbolisant les axes sur la représentation.
 
-## Usage
+## Utilisation
 
 ``` r
 coord_acm(...)
@@ -30,11 +30,11 @@ coord_acm(...)
   à 2 pour l'axe des abscisse et de -2 à 1 pour l'axe des ordonnées :
   remplacez ... par `xlim = c(-1, 2), ylim = c(-2, 1)`.
 
-## Value
+## Valeur de retour
 
 Un objet ggplot dont les coordonnées ont été fixés.
 
-## Details
+## Détails
 
 Vous n'avez pas besoin d'utiliser cette fonction si vous avez recours à
 [`ggacm()`](https://nicolasville.github.io/ggacm/reference/ggacm.md) qui
@@ -43,7 +43,7 @@ Cette fonction est cependant là dans le cas où vous souhaitiez créer des
 graphiques avancés sans utiliser
 [`ggacm()`](https://nicolasville.github.io/ggacm/reference/ggacm.md).
 
-## Examples
+## Exemples
 
 ``` r
 # une série d'exemples
