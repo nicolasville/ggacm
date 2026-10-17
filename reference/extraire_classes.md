@@ -53,7 +53,7 @@ pour en faire un graphique.
 # 1. On réalise une ACM avec ACM() ou FactoMineR::MCA()
 resultat_acm <- createurs_de_contenus_pol |> ACM()
 #> ℹ Réalisation de l'ACM avec `FactoMineR::MCA()`
-#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [21ms]
+#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [24ms]
 #> 
 #> ℹ 
 #> • Sur 56 individus...
@@ -63,7 +63,7 @@ resultat_acm <- createurs_de_contenus_pol |> ACM()
 #> • Toutes les variables sont actives
 #> ℹ Vous pouvez préciser des variables supplémentaires avec l'argument `variables
 #>   supplementaires`.
-#> [44ms]
+#> [53ms]
 #> 
 
 # 2. On fait la classification sur le résultat de l'ACM
