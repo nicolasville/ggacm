@@ -47,7 +47,7 @@ extraire_modalites <- function(resultat_acm) {
   data_acm <- supprimer_var_(resultat_acm$call$X)
 
   resultats_actives <- resultat_acm |> get_res_act()
-  resultats_sup <- resultat_acm |> get_res_sup()
+  resultats_sup <- if (is.null(resultat_acm$quali.sup)) NULL else get_res_sup(resultat_acm)
   resultats_complet <- bind_rows(resultats_actives, resultats_sup)
 
   # obtenir le tableau de fréquence des modalités depuis les données
