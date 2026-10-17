@@ -28,12 +28,14 @@ extraire_individus <- function(resultat_acm, ordre = NULL) {
 
   check_resultat_acm(resultat_acm)
 
-  # On vient chercher le tableau dde donnée originel
+  # On vient chercher le tableau de donnée originel
   data_acm <- resultat_acm$call$X  |>
     supprimer_var_() |>
     as_tibble()
 
-  # Utilisé pour extraire_classe()
+  # Utilisé pour extraire_classe(). En effet, les tableaux ne sont plus dans
+  # l'ordre une fois passés par HCPC(). Il faut donc trouver une manière
+  # d'extraire les individus selon un ordre particulier
   ids <- if (is.null(ordre)) rownames(data_acm) else ordre
 
   # fonction pour transformer les Dim 1 et autres joyeseté en noms de colonnes valides

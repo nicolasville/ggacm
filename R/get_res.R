@@ -21,40 +21,29 @@ get_res_act <-
 
     frequences <- get_frequence(data_acm)
 
-    # une fonction pour faire en masse ce qu'on va faire pour coord, contrib cos2 et vtest :
-    matrice_a_df <- function(resultat_acm_varSqqchse, quoi){
-      resultat_acm_varSqqchse |> # prend la matrice
-        as.data.frame() |> # la transforme en df
-        rename_all(tolower) %>% # met tout en minuscule
-        rename_all(~ str_replace(., " ", "")) %>% # supprime les espaces des noms de colonnes
-        rename_all(~ str_c(., quoi, sep = "_")) %>% # colle un suffixe en fonction de ce que c'est
-        mutate(modalites = rownames(.)) # transforme les noms de lignes en variable
-    }
-
-    # à appliquer pour les :
-    # coordonnées -------
-    coordonnees <- resultat_acm$var$coord |> matrice_a_df(quoi = "coord")
-
-    # Cosinus carrés ----
-    cos2 <- resultat_acm$var$cos2 |> matrice_a_df(quoi = "cos2")
-
-    # vtest  ----
-    vtest <- resultat_acm$var$v.test |> matrice_a_df(quoi = "vtest")
-
-    contributions <- resultat_acm$var$contrib |> matrice_a_df(quoi = "contrib")
-
-
-    # qu'on combine ensuite dans un tableau
-    output <- coordonnees |>
-      left_join(cos2, by = "modalites") |>
-      left_join(vtest, by = "modalites") |>
-      left_join(contributions, by = "modalites")
+    # extraire les données de ...$var$coord, ..$var$cos2, ..$var$contrib, ...
+    output <- resultat_acm$var |>
+      imap(\(m, nom) {
+        m |>
+          as_tibble(rownames = "modalites") |>
+          rename_with(
+            \(x) {
+              x |> # chaque nom de colonne... :
+                str_to_lower() |> # en minuscule
+                str_c(nom, sep = "_") |> # on colle un suffixe en fonction de l'indicateur
+                str_remove_all(" |\\.") # on enlève les points et les espaces
+            },
+            -modalites # partout sauf ici
+          )
+      }
+      ) |>
+      reduce(left_join, by = "modalites") # on left_join tout ensemble.
 
 
     # on peut ensuite rajouter les fréquences
     output <- output %>%
       left_join(frequences, by = "modalites") |>
-      mutate(type = "variable active") %>%
+      mutate(type = "Variable active") %>%
       # ajout d'une colonne contenant la chaîne de caractères "Variable active"
       # ou "variable supplémentaire en fonction du cas
       select(
@@ -69,16 +58,13 @@ get_res_act <-
         contains("dim4")
       ) # conserver et réorganiser les variables pertinentes axe par axe
 
-    # parfois FactoMineR met en préfixe le nom des variables. Il faut donc les enlever
-    variables.chr <- names(data_acm)
+    # FactoMineR met parfois des préfixes au modalités en fonction des variables
+    # On enlève ça ici. Pour chaque ligne, on supprimer "var1_".
+    # str_escape() sert dans les cas où le nom de la variable contient des
+    # points par exemple
 
-    # on génère une expression regex pour tester cela :
-    # sélectionne les début de chaine qui commence par le nom d'une variable suivi d'un _
-    patterne <- paste0("^(", paste0(variables.chr, collapse = "|"), ")_")
-
-    output$modalites <- gsub(patterne, "", output$modalites)
-
-    output
+    output <- output |>
+      mutate(modalites = modalites |> str_remove(str_c("^", str_escape(variables), "_")))
   }
 
 get_res_sup <- function(resultat_acm) {
@@ -87,36 +73,28 @@ get_res_sup <- function(resultat_acm) {
 
   frequences <- get_frequence(data_acm)
 
-  # une fonction pour faire en masse ce qu'on va faire pour coord, contrib cos2 et vtest :
-  matrice_a_df <- function(resultat_acm_varSqqchse, quoi){
-    resultat_acm_varSqqchse |> # prend la matrice
-      as.data.frame() |> # la transforme en df
-      rename_all(tolower) %>% # met tout en minuscule
-      rename_all(~ str_replace(., " ", "")) %>% # supprime les espaces des noms de colonnes
-      rename_all(~ str_c(., quoi, sep = "_")) %>% # colle un suffixe en fonction de ce que c'est
-      mutate(modalites = rownames(.)) # transforme les noms de lignes en variable
-  }
-
-  # à appliquer pour les :
-  # coordonnées -------
-  coordonnees <- resultat_acm$quali$coord |> matrice_a_df(quoi = "coord")
-
-  # Cosinus carrés ----
-  cos2 <- resultat_acm$quali$cos2 |> matrice_a_df(quoi = "cos2")
-
-  # vtest  ----
-  vtest <- resultat_acm$quali$v.test |> matrice_a_df(quoi = "vtest")
-
-
-  # qu'on combine ensuite dans un tableau
-  output <- coordonnees |>
-    left_join(cos2, by = "modalites") |>
-    left_join(vtest, by = "modalites")
+  # extraire les données de ...$var$coord, ..$var$cos2, ..$var$contrib, ...
+  output <- resultat_acm$var |>
+    imap(\(m, nom) {
+      m |>
+        as_tibble(rownames = "modalites") |>
+        rename_with(
+          \(x) {
+            x |> # chaque nom de colonne... :
+              str_to_lower() |> # en minuscule
+              str_c(nom, sep = "_") |> # on colle un suffixe en fonction de l'indicateur
+              str_remove_all(" |\\.") # on enlève les points et les espaces
+          },
+          -modalites # partout sauf ici
+        )
+    }
+    ) |>
+    reduce(left_join, by = "modalites") # on left_join tout ensemble.
 
   # on peut ensuite rajouter les fréquences
   output <- output %>%
     left_join(frequences, by = "modalites") |>
-    mutate(type = "variable supplémentaire") %>%
+    mutate(type = "Variable supplémentaire") %>%
     # ajout d'une colonne contenant la chaîne de caractères "Variable active"
     # ou "variable supplémentaire en fonction du cas
     select(
@@ -131,14 +109,11 @@ get_res_sup <- function(resultat_acm) {
       contains("dim4")
     ) # conserver et réorganiser les variables pertinentes axe par axe
 
-  # parfois FactoMineR met en préfixe le nom des variables. Il faut donc les enlever
-  variables.chr <- names(data_acm)
+  # FactoMineR met parfois des préfixes au modalités en fonction des variables
+  # On enlève ça ici. Pour chaque ligne, on supprimer "var1_".
+  # str_escape() sert dans les cas où le nom de la variable contient des
+  # points par exemple
 
-  # on génère une expression regex pour tester cela :
-  # sélectionne les début de chaine qui commence par le nom d'une variable suivi d'un _
-  patterne <- paste0("^(", paste0(variables.chr, collapse = "|"), ")_")
-
-  output$modalites <- gsub(patterne, "", output$modalites)
-
-  output
+  output <- output |>
+    mutate(modalites = modalites |> str_remove(str_c("^", str_escape(variables), "_")))
 }
