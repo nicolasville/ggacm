@@ -284,7 +284,7 @@ le graphique)
 #| fig-width: 8
 
 modalités |> 
-  filter(type == "variable active") |> # <- on ne garde que les variables actives
+  filter(type == "Variable active") |> # <- on ne garde que les variables actives
   ggacm() +
   geom_point() +
   geom_text_repel(aes(label = modalites)) 

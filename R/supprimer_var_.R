@@ -8,19 +8,21 @@
 #' @importFrom purrr map2
 #' @keywords internal
 #' @examples #
-supprimer_var_ <- function(df) {
-  noms_colonnes <- names(df)
 
-  purrr::map2(
-    .x = df,
-    .y = noms_colonnes,
-    function(.x, .y) {
-      sub(
-        paste0("^", .y, "_"), # prendre "variable_"
-        "", # le supprimer
-        .x
-      )
-    }
-  ) |>
-    as.data.frame()
+enlever_prefixe <- function(x, prefixe) {
+  if (is.factor(x)) {
+    levels(x) <- enlever_prefixe(levels(x), prefixe)
+    return(x)
+  }
+  if (is.character(x)) {
+    x |>
+      str_remove(str_c("^",
+                       str_escape(prefixe))
+                 )
+  } else x  # numérique, logique, etc. : on ne touche pas
+}
+
+supprimer_var_ <- function(df) {
+  df[] <- purrr::imap(df, \(x, nom) enlever_prefixe(x, paste0(nom, "_")))
+  df
 }
