@@ -34,7 +34,7 @@ contribution à la construction des axes (colonnes `dim1_contrib`,
 ``` r
 resultat_acm <- createurs_de_contenus_pol |> ACM()
 #> ℹ Réalisation de l'ACM avec `FactoMineR::MCA()`
-#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [23ms]
+#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [28ms]
 #> 
 #> ℹ 
 #> • Sur 56 individus...
@@ -44,7 +44,7 @@ resultat_acm <- createurs_de_contenus_pol |> ACM()
 #> • Toutes les variables sont actives
 #> ℹ Vous pouvez préciser des variables supplémentaires avec l'argument `variables
 #>   supplementaires`.
-#> [55ms]
+#> [51ms]
 #> 
 
 resultat_individus <- resultat_acm |> extraire_individus()
@@ -52,7 +52,7 @@ resultat_individus <- resultat_acm |> extraire_individus()
 resultat_individus
 #> # A tibble: 56 × 39
 #>    dim1_coord dim2_coord personne           titre orientation orientation2 debut
-#>         <dbl>      <dbl> <chr>              <chr> <chr>       <chr>        <chr>
+#>         <dbl>      <dbl> <fct>              <fct> <fct>       <fct>        <fct>
 #>  1     -0.278    -0.200  Antoine Goya       Anto… De gauche   Progressiste 2015…
 #>  2     -0.451     0.270  Salomé Saqué       BLAS… De gauche   Progressiste 2020…
 #>  3     -0.119     0.466  Benjamin Patinaud  Bolc… De gauche   Progressiste 2014…
@@ -64,10 +64,10 @@ resultat_individus
 #>  9     -0.602     0.252  Charlélie Jutan    DANY… De gauche   Progressiste 2020…
 #> 10     -0.252     1.00   Julien Goetz       Data… De gauche   Progressiste 2014…
 #> # ℹ 46 more rows
-#> # ℹ 32 more variables: visage_decouvert <chr>, abonnes <chr>, genre <chr>,
-#> #   age <chr>, streamer_plein_temps <chr>, collectif <chr>, livre <chr>,
-#> #   podcast <chr>, twitter <chr>, facebook <chr>, instagram <chr>,
-#> #   tiktok <chr>, discord <chr>, twitch <chr>, site_perso <chr>, CNC <chr>,
-#> #   soutenir <chr>, partenariat_entreprise <chr>, autres_services <chr>,
+#> # ℹ 32 more variables: visage_decouvert <fct>, abonnes <fct>, genre <fct>,
+#> #   age <fct>, streamer_plein_temps <fct>, collectif <fct>, livre <fct>,
+#> #   podcast <fct>, twitter <fct>, facebook <fct>, instagram <fct>,
+#> #   tiktok <fct>, discord <fct>, twitch <fct>, site_perso <fct>, CNC <fct>,
+#> #   soutenir <fct>, partenariat_entreprise <fct>, autres_services <fct>,
 #> #   dim3_coord <dbl>, dim4_coord <dbl>, dim5_coord <dbl>, dim1_contrib <dbl>, …
 ```

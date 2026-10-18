@@ -238,19 +238,15 @@ caracteriser_axe(res_acm, 1)
 #> ── Contribution moyenne théorique 
 #> 
 #> ℹ Si toutes les modalités actives contribuaient également à la construction
-#> d'un axe, chacune aurait une contribution de 7,14 %.
+#> d'un axe, chacune aurait une contribution de Inf %.
 ```
 
+tr
+
 | Modalité¹ | Contribution | Coordonnée² | Cos² | V-test | Effectif |
-|----|----|----|----|----|----|
-| Coordonnées positives |  |  |  |  |  |
-| Pratique un sport | 21,7 % | 0,950 | 0,511 | 32,0 | 723 (36 %) |
-| Va au cinéma | 20,1 % | 0,855 | 0,515 | 32,1 | 826 (41 %) |
-| Bricole | 9,6 % | 0,580 | 0,251 | 22,4 | 853 (43 %) |
-| Coordonnées négatives |  |  |  |  |  |
-| Ne va pas au cinéma | 14,2 % | -0,602 | 0,515 | -32,1 | 1174 (59 %) |
-| Ne pratique pas de sport | 12,3 % | -0,538 | 0,511 | -32,0 | 1277 (64 %) |
-| ¹ Seules les modalités actives dont la contribution est supérieure à 7,14 % sont représentées. |  |  |  |  |  |
+|:--:|:--:|:--:|:--:|:--:|:--:|
+| Table has no data |  |  |  |  |  |
+| ¹ Seules les modalités actives dont la contribution est supérieure à Inf % sont représentées. |  |  |  |  |  |
 | ² Moyenne des coordonnées des individus partageant la modalité |  |  |  |  |  |
 
 #### Axe 2
@@ -270,17 +266,15 @@ caracteriser_axe(res_acm, 2)
 #> ── Contribution moyenne théorique 
 #> 
 #> ℹ Si toutes les modalités actives contribuaient également à la construction
-#> d'un axe, chacune aurait une contribution de 7,14 %.
+#> d'un axe, chacune aurait une contribution de Inf %.
 ```
 
+tr
+
 | Modalité¹ | Contribution | Coordonnée² | Cos² | V-test | Effectif |
-|----|----|----|----|----|----|
-| Coordonnées positives |  |  |  |  |  |
-| Pratiquant occasionnel | 39,6 % | 1,380 | 0,541 | 32,9 | 442 (22 %) |
-| Fait de la cuisine | 21,2 % | 0,715 | 0,403 | 28,4 | 881 (44 %) |
-| Coordonnées négatives |  |  |  |  |  |
-| Ne fait pas de cuisine | 16,7 % | -0,563 | 0,403 | -28,4 | 1119 (56 %) |
-| ¹ Seules les modalités actives dont la contribution est supérieure à 7,14 % sont représentées. |  |  |  |  |  |
+|:--:|:--:|:--:|:--:|:--:|:--:|
+| Table has no data |  |  |  |  |  |
+| ¹ Seules les modalités actives dont la contribution est supérieure à Inf % sont représentées. |  |  |  |  |  |
 | ² Moyenne des coordonnées des individus partageant la modalité |  |  |  |  |  |
 
 #### Axe 3
@@ -319,17 +313,15 @@ caracteriser_axe(res_acm, 4)
 #> ── Contribution moyenne théorique 
 #> 
 #> ℹ Si toutes les modalités actives contribuaient également à la construction
-#> d'un axe, chacune aurait une contribution de 7,14 %.
+#> d'un axe, chacune aurait une contribution de Inf %.
 ```
 
+tr
+
 | Modalité¹ | Contribution | Coordonnée² | Cos² | V-test | Effectif |
-|----|----|----|----|----|----|
-| Coordonnées positives |  |  |  |  |  |
-| Rejet | 48,2 % | 3,225 | 0,507 | 31,8 | 93 (5 %) |
-| NSP ou NVPR | 28,5 % | 3,783 | 0,292 | 24,2 | 40 (2 %) |
-| Coordonnées négatives |  |  |  |  |  |
-| Appartenance sans pratique | 12,3 % | -0,569 | 0,199 | -19,9 | 760 (38 %) |
-| ¹ Seules les modalités actives dont la contribution est supérieure à 7,14 % sont représentées. |  |  |  |  |  |
+|:--:|:--:|:--:|:--:|:--:|:--:|
+| Table has no data |  |  |  |  |  |
+| ¹ Seules les modalités actives dont la contribution est supérieure à Inf % sont représentées. |  |  |  |  |  |
 | ² Moyenne des coordonnées des individus partageant la modalité |  |  |  |  |  |
 
 Pour la suite et pour faire les graphiques, il est intéressant de
@@ -354,18 +346,18 @@ individus <- res_acm |> extraire_individus()
 
 individus
 #> # A tibble: 2.000 × 22
-#>    dim1_coord dim2_coord id    sexe  cuisine           bricol cinema relig sport
-#>         <dbl>      <dbl> <chr> <chr> <chr>             <chr>  <chr>  <chr> <chr>
-#>  1   -0.308       0.152  1     Femme Fait de la cuisi… Ne br… Ne va… Ni c… Ne p…
-#>  2    0.526      -0.576  2     Femme Ne fait pas de c… Ne br… Va au… Ni c… Prat…
-#>  3   -0.00599    -0.446  3     Homme Ne fait pas de c… Ne br… Ne va… Ni c… Prat…
-#>  4    1.06        0.0914 4     Homme Fait de la cuisi… Brico… Va au… Appa… Prat…
-#>  5   -0.932      -0.348  5     Femme Ne fait pas de c… Ne br… Ne va… Prat… Ne p…
-#>  6    0.526      -0.576  6     Femme Ne fait pas de c… Ne br… Va au… Ni c… Prat…
-#>  7   -0.389       0.178  7     Femme Fait de la cuisi… Ne br… Ne va… Appa… Ne p…
-#>  8    0.0619      0.239  8     Homme Fait de la cuisi… Brico… Ne va… Ni c… Ne p…
-#>  9   -0.0985     -0.507  9     Femme Ne fait pas de c… Ne br… Va au… Appa… Ne p…
-#> 10    0.312       0.213  10    Homme Ne fait pas de c… Ne br… Va au… Prat… Prat…
+#>    dim1_coord dim2_coord    id sexe  cuisine           bricol cinema relig sport
+#>         <dbl>      <dbl> <int> <fct> <fct>             <fct>  <fct>  <fct> <fct>
+#>  1   -0.308       0.152      1 Femme Fait de la cuisi… Ne br… Ne va… Ni c… Ne p…
+#>  2    0.526      -0.576      2 Femme Ne fait pas de c… Ne br… Va au… Ni c… Prat…
+#>  3   -0.00599    -0.446      3 Homme Ne fait pas de c… Ne br… Ne va… Ni c… Prat…
+#>  4    1.06        0.0914     4 Homme Fait de la cuisi… Brico… Va au… Appa… Prat…
+#>  5   -0.932      -0.348      5 Femme Ne fait pas de c… Ne br… Ne va… Prat… Ne p…
+#>  6    0.526      -0.576      6 Femme Ne fait pas de c… Ne br… Va au… Ni c… Prat…
+#>  7   -0.389       0.178      7 Femme Fait de la cuisi… Ne br… Ne va… Appa… Ne p…
+#>  8    0.0619      0.239      8 Homme Fait de la cuisi… Brico… Ne va… Ni c… Ne p…
+#>  9   -0.0985     -0.507      9 Femme Ne fait pas de c… Ne br… Va au… Appa… Ne p…
+#> 10    0.312       0.213     10 Homme Ne fait pas de c… Ne br… Va au… Prat… Prat…
 #> # ℹ 1.990 more rows
 #> # ℹ 13 more variables: dim3_coord <dbl>, dim4_coord <dbl>, dim5_coord <dbl>,
 #> #   dim1_contrib <dbl>, dim2_contrib <dbl>, dim3_contrib <dbl>,
@@ -386,29 +378,30 @@ contribution à chaque axe, etc.
 modalités <- res_acm |> extraire_modalites()
 
 modalités
-#> # A tibble: 16 × 21
-#>    type    variables modalites     n pourcentage dim1_coord dim1_cos2 dim1_vtest
-#>    <chr>   <chr>     <chr>     <int>       <dbl>      <dbl>     <dbl>      <dbl>
-#>  1 variab… cuisine   Ne fait …  1119        56      -0.291   0.108       -14.7  
-#>  2 variab… cuisine   Fait de …   881        44       0.370   0.108        14.7  
-#>  3 variab… bricol    Ne brico…  1147        57.4    -0.432   0.251       -22.4  
-#>  4 variab… bricol    Bricole     853        42.6     0.580   0.251        22.4  
-#>  5 variab… cinema    Ne va pa…  1174        58.7    -0.602   0.515       -32.1  
-#>  6 variab… cinema    Va au ci…   826        41.3     0.855   0.515        32.1  
-#>  7 variab… relig     Pratiqua…   266        13.3    -0.689   0.0729      -12.1  
-#>  8 variab… relig     Pratiqua…   442        22.1    -0.227   0.0147       -5.41 
-#>  9 variab… relig     Apparten…   760        38       0.136   0.0113        4.74 
-#> 10 variab… relig     Ni croya…   399        20       0.359   0.0321        8.00 
-#> 11 variab… relig     Rejet        93         4.7     0.436   0.00929       4.31 
-#> 12 variab… relig     NSP ou N…    40         2      -0.0723  0.000107     -0.462
-#> 13 variab… sport     Ne prati…  1277        63.9    -0.538   0.511       -32.0  
-#> 14 variab… sport     Pratique…   723        36.1     0.950   0.511        32.0  
-#> 15 variab… sexe      Homme       899        45       0.106   0.00917       4.28 
-#> 16 variab… sexe      Femme      1101        55      -0.0865  0.00917      -4.28 
-#> # ℹ 13 more variables: dim1_contrib <dbl>, dim2_coord <dbl>, dim2_cos2 <dbl>,
-#> #   dim2_vtest <dbl>, dim2_contrib <dbl>, dim3_coord <dbl>, dim3_cos2 <dbl>,
-#> #   dim3_vtest <dbl>, dim3_contrib <dbl>, dim4_coord <dbl>, dim4_cos2 <dbl>,
-#> #   dim4_vtest <dbl>, dim4_contrib <dbl>
+#> # A tibble: 16 × 25
+#>    type  variables modalites     n pourcentage dim1_coord dim1_contrib dim1_cos2
+#>    <chr> <chr>     <chr>     <int>       <dbl>      <dbl>        <dbl>     <dbl>
+#>  1 Vari… cuisine   Ne fait …  1119        56      -0.291       3.16     0.108   
+#>  2 Vari… cuisine   Fait de …   881        44       0.370       4.02     0.108   
+#>  3 Vari… bricol    Ne brico…  1147        57.4    -0.432       7.12     0.251   
+#>  4 Vari… bricol    Bricole     853        42.6     0.580       9.58     0.251   
+#>  5 Vari… cinema    Ne va pa…  1174        58.7    -0.602      14.2      0.515   
+#>  6 Vari… cinema    Va au ci…   826        41.3     0.855      20.1      0.515   
+#>  7 Vari… relig     Pratiqua…   266        13.3    -0.689       4.21     0.0729  
+#>  8 Vari… relig     Pratiqua…   442        22.1    -0.227       0.761    0.0147  
+#>  9 Vari… relig     Apparten…   760        38       0.136       0.465    0.0113  
+#> 10 Vari… relig     Ni croya…   399        20       0.359       1.71     0.0321  
+#> 11 Vari… relig     Rejet        93         4.7     0.436       0.590    0.00929 
+#> 12 Vari… relig     NSP ou N…    40         2      -0.0723      0.00697  0.000107
+#> 13 Vari… sport     Ne prati…  1277        63.9    -0.538      12.3      0.511   
+#> 14 Vari… sport     Pratique…   723        36.1     0.950      21.7      0.511   
+#> 15 Vari… sexe      Homme       899        45       0.106      NA        0.00917 
+#> 16 Vari… sexe      Femme      1101        55      -0.0865     NA        0.00917 
+#> # ℹ 17 more variables: dim1_vtest <dbl>, dim2_coord <dbl>, dim2_contrib <dbl>,
+#> #   dim2_cos2 <dbl>, dim2_vtest <dbl>, dim3_coord <dbl>, dim3_contrib <dbl>,
+#> #   dim3_cos2 <dbl>, dim3_vtest <dbl>, dim4_coord <dbl>, dim4_contrib <dbl>,
+#> #   dim4_cos2 <dbl>, dim4_vtest <dbl>, dim5_coord <dbl>, dim5_contrib <dbl>,
+#> #   dim5_cos2 <dbl>, dim5_vtest <dbl>
 ```
 
 Le grand intérêt de ces tableaux est d’être facilement utilisable par
@@ -498,7 +491,7 @@ tableau des modalités avant de l’injecter dans le graphique)
 ``` r
 
 modalités |> 
-  filter(type == "variable active") |> # <- on ne garde que les variables actives
+  filter(type == "Variable active") |> # <- on ne garde que les variables actives
   ggacm() +
   geom_point() +
   geom_text_repel(aes(label = modalites)) 
@@ -803,8 +796,8 @@ individus_concernés <- individus |>
   pivot_longer(
     cols = !starts_with("dim"),
     names_to = "variable",
-    values_to = "modalite"
-  ) |> 
+    values_to = "modalite",
+    values_transform = as.character) |> 
   filter(modalite %in% modalites_a_representer) |> 
   mutate(
     modalite = fct(modalite, levels = modalites_a_representer)
@@ -917,18 +910,18 @@ individus_classés <- extraire_classes(res_cah)
 
 individus_classés
 #> # A tibble: 2.000 × 23
-#>    classe dim1_coord dim2_coord id    sexe  cuisine    bricol cinema relig sport
-#>    <fct>       <dbl>      <dbl> <chr> <chr> <chr>      <chr>  <chr>  <chr> <chr>
-#>  1 2        -0.308       0.152  5     Femme Ne fait p… Ne br… Ne va… Prat… Ne p…
-#>  2 2         0.526      -0.576  24    Femme Ne fait p… Ne br… Ne va… Prat… Ne p…
-#>  3 2        -0.00599    -0.446  39    Femme Ne fait p… Ne br… Ne va… Prat… Ne p…
-#>  4 2         1.06        0.0914 45    Femme Ne fait p… Ne br… Ne va… Prat… Ne p…
-#>  5 2        -0.932      -0.348  53    Homme Ne fait p… Ne br… Ne va… Prat… Ne p…
-#>  6 2         0.526      -0.576  78    Femme Ne fait p… Ne br… Ne va… Prat… Ne p…
-#>  7 2        -0.389       0.178  83    Femme Ne fait p… Ne br… Ne va… Prat… Ne p…
-#>  8 2         0.0619      0.239  159   Homme Ne fait p… Ne br… Ne va… Prat… Ne p…
-#>  9 2        -0.0985     -0.507  246   Homme Ne fait p… Ne br… Ne va… Prat… Ne p…
-#> 10 2         0.312       0.213  266   Femme Ne fait p… Ne br… Ne va… Prat… Ne p…
+#>    classe dim1_coord dim2_coord    id sexe  cuisine    bricol cinema relig sport
+#>    <fct>       <dbl>      <dbl> <int> <fct> <fct>      <fct>  <fct>  <fct> <fct>
+#>  1 2        -0.308       0.152      5 Femme Ne fait p… Ne br… Ne va… Prat… Ne p…
+#>  2 2         0.526      -0.576     24 Femme Ne fait p… Ne br… Ne va… Prat… Ne p…
+#>  3 2        -0.00599    -0.446     39 Femme Ne fait p… Ne br… Ne va… Prat… Ne p…
+#>  4 2         1.06        0.0914    45 Femme Ne fait p… Ne br… Ne va… Prat… Ne p…
+#>  5 2        -0.932      -0.348     53 Homme Ne fait p… Ne br… Ne va… Prat… Ne p…
+#>  6 2         0.526      -0.576     78 Femme Ne fait p… Ne br… Ne va… Prat… Ne p…
+#>  7 2        -0.389       0.178     83 Femme Ne fait p… Ne br… Ne va… Prat… Ne p…
+#>  8 2         0.0619      0.239    159 Homme Ne fait p… Ne br… Ne va… Prat… Ne p…
+#>  9 2        -0.0985     -0.507    246 Homme Ne fait p… Ne br… Ne va… Prat… Ne p…
+#> 10 2         0.312       0.213    266 Femme Ne fait p… Ne br… Ne va… Prat… Ne p…
 #> # ℹ 1.990 more rows
 #> # ℹ 13 more variables: dim3_coord <dbl>, dim4_coord <dbl>, dim5_coord <dbl>,
 #> #   dim1_contrib <dbl>, dim2_contrib <dbl>, dim3_contrib <dbl>,
@@ -978,18 +971,18 @@ individus_classés<- individus_classés |>
 
 individus_classés
 #> # A tibble: 2.000 × 23
-#>    classe    dim1_coord dim2_coord id    sexe  cuisine bricol cinema relig sport
-#>    <fct>          <dbl>      <dbl> <chr> <chr> <chr>   <chr>  <chr>  <chr> <chr>
-#>  1 [Autre n…   -0.308       0.152  5     Femme Ne fai… Ne br… Ne va… Prat… Ne p…
-#>  2 [Autre n…    0.526      -0.576  24    Femme Ne fai… Ne br… Ne va… Prat… Ne p…
-#>  3 [Autre n…   -0.00599    -0.446  39    Femme Ne fai… Ne br… Ne va… Prat… Ne p…
-#>  4 [Autre n…    1.06        0.0914 45    Femme Ne fai… Ne br… Ne va… Prat… Ne p…
-#>  5 [Autre n…   -0.932      -0.348  53    Homme Ne fai… Ne br… Ne va… Prat… Ne p…
-#>  6 [Autre n…    0.526      -0.576  78    Femme Ne fai… Ne br… Ne va… Prat… Ne p…
-#>  7 [Autre n…   -0.389       0.178  83    Femme Ne fai… Ne br… Ne va… Prat… Ne p…
-#>  8 [Autre n…    0.0619      0.239  159   Homme Ne fai… Ne br… Ne va… Prat… Ne p…
-#>  9 [Autre n…   -0.0985     -0.507  246   Homme Ne fai… Ne br… Ne va… Prat… Ne p…
-#> 10 [Autre n…    0.312       0.213  266   Femme Ne fai… Ne br… Ne va… Prat… Ne p…
+#>    classe    dim1_coord dim2_coord    id sexe  cuisine bricol cinema relig sport
+#>    <fct>          <dbl>      <dbl> <int> <fct> <fct>   <fct>  <fct>  <fct> <fct>
+#>  1 [Autre n…   -0.308       0.152      5 Femme Ne fai… Ne br… Ne va… Prat… Ne p…
+#>  2 [Autre n…    0.526      -0.576     24 Femme Ne fai… Ne br… Ne va… Prat… Ne p…
+#>  3 [Autre n…   -0.00599    -0.446     39 Femme Ne fai… Ne br… Ne va… Prat… Ne p…
+#>  4 [Autre n…    1.06        0.0914    45 Femme Ne fai… Ne br… Ne va… Prat… Ne p…
+#>  5 [Autre n…   -0.932      -0.348     53 Homme Ne fai… Ne br… Ne va… Prat… Ne p…
+#>  6 [Autre n…    0.526      -0.576     78 Femme Ne fai… Ne br… Ne va… Prat… Ne p…
+#>  7 [Autre n…   -0.389       0.178     83 Femme Ne fai… Ne br… Ne va… Prat… Ne p…
+#>  8 [Autre n…    0.0619      0.239    159 Homme Ne fai… Ne br… Ne va… Prat… Ne p…
+#>  9 [Autre n…   -0.0985     -0.507    246 Homme Ne fai… Ne br… Ne va… Prat… Ne p…
+#> 10 [Autre n…    0.312       0.213    266 Femme Ne fai… Ne br… Ne va… Prat… Ne p…
 #> # ℹ 1.990 more rows
 #> # ℹ 13 more variables: dim3_coord <dbl>, dim4_coord <dbl>, dim5_coord <dbl>,
 #> #   dim1_contrib <dbl>, dim2_contrib <dbl>, dim3_contrib <dbl>,

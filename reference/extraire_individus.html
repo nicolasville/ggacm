@@ -77,7 +77,7 @@ enfin leur cosinus carré (colonnes <code>dim1_cos2</code>,...)</p>
     <h2 id="ref-examples">Exemples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">resultat_acm</span> <span class="op">&lt;-</span> <span class="va">createurs_de_contenus_pol</span> <span class="op">|&gt;</span> <span class="fu"><a href="ACM.html">ACM</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Réalisation de l'ACM avec `FactoMineR::MCA()`</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` <span style="color: #B2B2B2;">[23ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` <span style="color: #B2B2B2;">[28ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Sur 56 individus...</span>
@@ -87,7 +87,7 @@ enfin leur cosinus carré (colonnes <code>dim1_cos2</code>,...)</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Toutes les variables sont actives</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Vous pouvez préciser des variables supplémentaires avec l'argument `variables</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   supplementaires`.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #B2B2B2;">[55ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #B2B2B2;">[51ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">resultat_individus</span> <span class="op">&lt;-</span> <span class="va">resultat_acm</span> <span class="op">|&gt;</span> <span class="fu">extraire_individus</span><span class="op">(</span><span class="op">)</span></span></span>
@@ -95,7 +95,7 @@ enfin leur cosinus carré (colonnes <code>dim1_cos2</code>,...)</p>
 <span class="r-in"><span><span class="va">resultat_individus</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 56 × 39</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    dim1_coord dim2_coord personne           titre orientation orientation2 debut</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     -<span style="color: #BB0000;">0.278</span>    -<span style="color: #BB0000;">0.200</span>  Antoine Goya       Anto… De gauche   Progressiste 2015…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     -<span style="color: #BB0000;">0.451</span>     0.270  Salomé Saqué       BLAS… De gauche   Progressiste 2020…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     -<span style="color: #BB0000;">0.119</span>     0.466  Benjamin Patinaud  Bolc… De gauche   Progressiste 2014…</span>
@@ -107,11 +107,11 @@ enfin leur cosinus carré (colonnes <code>dim1_cos2</code>,...)</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     -<span style="color: #BB0000;">0.602</span>     0.252  Charlélie Jutan    DANY… De gauche   Progressiste 2020…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>     -<span style="color: #BB0000;">0.252</span>     1.00   Julien Goetz       Data… De gauche   Progressiste 2014…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 46 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 32 more variables: visage_decouvert &lt;chr&gt;, abonnes &lt;chr&gt;, genre &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   age &lt;chr&gt;, streamer_plein_temps &lt;chr&gt;, collectif &lt;chr&gt;, livre &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   podcast &lt;chr&gt;, twitter &lt;chr&gt;, facebook &lt;chr&gt;, instagram &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   tiktok &lt;chr&gt;, discord &lt;chr&gt;, twitch &lt;chr&gt;, site_perso &lt;chr&gt;, CNC &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   soutenir &lt;chr&gt;, partenariat_entreprise &lt;chr&gt;, autres_services &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 32 more variables: visage_decouvert &lt;fct&gt;, abonnes &lt;fct&gt;, genre &lt;fct&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   age &lt;fct&gt;, streamer_plein_temps &lt;fct&gt;, collectif &lt;fct&gt;, livre &lt;fct&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   podcast &lt;fct&gt;, twitter &lt;fct&gt;, facebook &lt;fct&gt;, instagram &lt;fct&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   tiktok &lt;fct&gt;, discord &lt;fct&gt;, twitch &lt;fct&gt;, site_perso &lt;fct&gt;, CNC &lt;fct&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   soutenir &lt;fct&gt;, partenariat_entreprise &lt;fct&gt;, autres_services &lt;fct&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   dim3_coord &lt;dbl&gt;, dim4_coord &lt;dbl&gt;, dim5_coord &lt;dbl&gt;, dim1_contrib &lt;dbl&gt;, …</span></span>
 </code></pre></div>
     </div>

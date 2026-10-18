@@ -1,10 +1,5 @@
 # ggacm
 
-``` r
-
-library(ggacm)
-```
-
 Si vous êtes chercheurs en sciences sociales, je vous recommande
 grandement d’utiliser ce package au sein d’un document *Quarto* pour
 permettre de générer un document qui compilera tous vos résultats. Ce
