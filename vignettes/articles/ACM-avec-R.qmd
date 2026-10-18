@@ -554,8 +554,8 @@ individus_concernés <- individus |>
   pivot_longer(
     cols = !starts_with("dim"),
     names_to = "variable",
-    values_to = "modalite"
-  ) |> 
+    values_to = "modalite",
+    values_transform = as.character) |> 
   filter(modalite %in% modalites_a_representer) |> 
   mutate(
     modalite = fct(modalite, levels = modalites_a_representer)

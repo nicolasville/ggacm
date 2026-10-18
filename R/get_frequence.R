@@ -9,10 +9,10 @@
 get_frequence <- function(data_acm) {
   data_acm |>
     mutate(across(everything(), as.character)) |>
-    pivot_longer(everything(), names_to = "variables", values_to = "modalites") %>% # étendre le jeu de données par variable et modalité
-    count(variables, modalites) %>% # compter le nombre de couples "variable/modalité" unique (donc le nombre d'individus par modalité du jeu de données)
-    group_by(variables) %>%
-    mutate(pourcentage = round(100 * n / nrow(data_acm), 1)) %>% # calculer des pourcentages pour chaque groupe de variable
-    ungroup() %>%
+    pivot_longer(everything(), names_to = "variables", values_to = "modalites") |>  # étendre le jeu de données par variable et modalité
+    count(variables, modalites) |>  # compter le nombre de couples "variable/modalité" unique (donc le nombre d'individus par modalité du jeu de données)
+    group_by(variables) |>
+    mutate(pourcentage = round(100 * n / nrow(data_acm), 1)) |>  # calculer des pourcentages pour chaque groupe de variable
+    ungroup() |>
     select(variables, modalites, n, pourcentage)
 }

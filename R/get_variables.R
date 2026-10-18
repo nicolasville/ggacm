@@ -44,59 +44,46 @@ extraire_modalites <- function(resultat_acm) {
   # Checks
   check_resultat_acm(resultat_acm)
 
-  data_acm <- supprimer_var_(resultat_acm$call$X)
+  resultats_actives <- resultat_acm$var |>
+    purrr::discard_at("eta2") |>  # on enlève les "eta2" qui sont sur les variables
+    get_indicateurs("modalites")
 
-  resultats_actives <- resultat_acm |> get_res_act()
-  resultats_sup <- if (is.null(resultat_acm$quali.sup)) NULL else get_res_sup(resultat_acm)
-  resultats_complet <- bind_rows(resultats_actives, resultats_sup)
-
-  # obtenir le tableau de fréquence des modalités depuis les données
-  frequences <- get_frequence(data_acm)
-
-  # un certain nombre de choses ne se sont pas passé comme prévu, notamment la
-  # jonction entre le tableau de fréquence et les autres. C'est du au fait que
-  # certaines modalités sont stockés sous la forme [variable]_[modalité]
-  # et d'autres pas. La suite de la fonction a pour but de traiter les cas
-  # où les modalités ont été stockés sous cette forme. Que l'on détecte
-  # par le fait que la jonction avec le tableau de fréquence a justement échoué
-
-  # deux petites fonctions qui servent à uniformiser les noms et les modalités
-  extraire_modalite <- function(x) {
-    x |>
-      str_replace("\\.NA", "_NA") |> str_extract("_([^_]+)$", group = 1)
-  }
-  extraire_variable <- function(x) {
-    x |>
-      str_replace("\\.", "_") |>
-      str_extract("(.+)_(.+)$", group = 1)
+  resultats_sup     <- if (is.null(resultat_acm$quali.sup)) NULL else {
+    resultat_acm$quali.sup |>
+      purrr::discard_at("eta2") |>
+      get_indicateurs(quoi = "modalites")
   }
 
-  resultats_complet <- resultats_complet |>
-    mutate(
-      # quand la jonction avec le tableau de fréquence a échoué :
-      variables = if_else(is.na(n),
-                          extraire_variable(modalites),
-                          variables),
-      modalites = if_else(is.na(n),
-                          extraire_modalite(modalites),
-                          modalites)
-    ) |>
+  resultat_complet <- bind_rows(
+    `Variable active`         = resultats_actives,
+    `Variable supplémentaire` = resultats_sup,
+    .id = "type")
+
+  frequences <- get_frequence(resultat_acm$call$X)
+
+  resultat_complet |>
     mutate(
       modalites = if_else(modalites == "NA", NA, modalites)
     ) |>
-    left_join(frequences, by = c("variables", "modalites")) |>
-    # on a maintenant deux colonnes de pourcentage.x et .y. Quand l'information
-    # est dans une des colonnes, elle n'est pas dans l'autre.
-    # On uniformise cela :
-    mutate(
-      n = if_else(is.na(n.x), n.y, n.x),
-      pourcentage = if_else(is.na(pourcentage.x), pourcentage.y, pourcentage.x),
-      .keep = "unused",
-      .before = starts_with("dim")
-    ) |>
-    tibble::as_tibble() |>
-    # pour enlever les facteurs qui sont vides
-    dplyr::filter(!(is.na(variables) & is.na(n)))
+    left_join(frequences, by = "modalites") |>
+    dplyr::filter_out(is.na(variables) & is.na(n)) |>
+    select(
+      type,
+      variables,
+      modalites,
+      n,
+      pourcentage,
+      contains("dim1"),
+      contains("dim2"),
+      contains("dim3"),
+      contains("dim4"),
+      contains("dim5")
+    ) |> # conserver et réorganiser les variables pertinentes axe par axe
+  mutate(
+    modalites = modalites |>
+      str_remove(
+        str_c("^", str_escape(variables), "_"))
+            # "^[nom de variable]_" à enlever au début.)
+  )
 
-  return(resultats_complet)
 }

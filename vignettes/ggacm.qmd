@@ -10,11 +10,6 @@ knitr:
     comment: '#>'
 ---
 
-```{r}
-#| label: setup
-library(ggacm)
-```
-
 
 Si vous êtes chercheurs en sciences sociales, je vous recommande grandement d'utiliser ce package au sein d'un document *Quarto* pour permettre de générer un document qui compilera tous vos résultats. Ce type de document permet de faire apparaître du code et son résultat côte-côte, il vous évitera de devoir faire copier-coller et générera à chaque fois que vous le lancerez vos tableaux. Pour vous familiarisez rapidement avec ce type de document vous pouvez consulter [cette page](https://benegarbi.github.io/PremiersPasAvec_quarto.html) de E. Morand et B. Garnier.
 
