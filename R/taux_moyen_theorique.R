@@ -25,7 +25,7 @@ contribution_moyenne_theorique <- function(resultat_acm) {
   resultat_modalites <- extraire_modalites(resultat_acm = resultat_acm)
 
   nb_modalites_actives <- resultat_modalites |>
-    filter(type == "variable active") |>
+    filter(type == "Variable active") |>
     nrow()
 
   cont_moy_theo <- 100 / nb_modalites_actives
