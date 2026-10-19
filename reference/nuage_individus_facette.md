@@ -67,7 +67,7 @@ Un objet ggplot2.
 
 res.ACM <- createurs_de_contenus_pol |> ACM()
 #> ℹ Réalisation de l'ACM avec `FactoMineR::MCA()`
-#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [26ms]
+#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [27ms]
 #> 
 #> ℹ 
 #> • Sur 56 individus...
@@ -77,7 +77,7 @@ res.ACM <- createurs_de_contenus_pol |> ACM()
 #> • Toutes les variables sont actives
 #> ℹ Vous pouvez préciser des variables supplémentaires avec l'argument `variables
 #>   supplementaires`.
-#> [49ms]
+#> [50ms]
 #> 
 
 res.ind <- res.ACM |> extraire_individus()

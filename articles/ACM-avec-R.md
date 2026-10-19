@@ -218,10 +218,11 @@ ggacm::extraire_variance(res_acm)
 
 GDAtools::modif.rate(res_acm)$modif
 #>          mrate cum.mrate
-#> dim 1 98,32789      98,3
-#> dim 2  1,57169      99,9
-#> dim 3  0,09435     100,0
-#> dim 4  0,00607     100,0
+#> dim 1 9,83e+01      98,3
+#> dim 2 1,57e+00      99,9
+#> dim 3 9,44e-02     100,0
+#> dim 4 6,07e-03     100,0
+#> dim 5 1,70e-27     100,0
 ```
 
 ## Description des axes
@@ -248,7 +249,7 @@ caracteriser_axe(res_acm, 1)
 #> d'un axe, chacune aurait une contribution de 7,14 %.
 ```
 
-| Modalité¹ | Contribution | Coordonnée² | Cos² | V-test | Effectif |
+| Modalité¹ | Contribution | Coordonnée | Cos² | V-test | Effectif |
 |----|----|----|----|----|----|
 | Coordonnées positives |  |  |  |  |  |
 | Pratique un sport | 21,7 % | 0,950 | 0,511 | 32,0 | 723 (36 %) |
@@ -258,7 +259,6 @@ caracteriser_axe(res_acm, 1)
 | Ne va pas au cinéma | 14,2 % | -0,602 | 0,515 | -32,1 | 1174 (59 %) |
 | Ne pratique pas de sport | 12,3 % | -0,538 | 0,511 | -32,0 | 1277 (64 %) |
 | ¹ Seules les modalités actives dont la contribution est supérieure à 7,14 % sont représentées. |  |  |  |  |  |
-| ² Moyenne des coordonnées des individus partageant la modalité |  |  |  |  |  |
 
 #### Axe 2
 
@@ -280,7 +280,7 @@ caracteriser_axe(res_acm, 2)
 #> d'un axe, chacune aurait une contribution de 7,14 %.
 ```
 
-| Modalité¹ | Contribution | Coordonnée² | Cos² | V-test | Effectif |
+| Modalité¹ | Contribution | Coordonnée | Cos² | V-test | Effectif |
 |----|----|----|----|----|----|
 | Coordonnées positives |  |  |  |  |  |
 | Pratiquant occasionnel | 39,6 % | 1,380 | 0,541 | 32,9 | 442 (22 %) |
@@ -288,7 +288,6 @@ caracteriser_axe(res_acm, 2)
 | Coordonnées négatives |  |  |  |  |  |
 | Ne fait pas de cuisine | 16,7 % | -0,563 | 0,403 | -28,4 | 1119 (56 %) |
 | ¹ Seules les modalités actives dont la contribution est supérieure à 7,14 % sont représentées. |  |  |  |  |  |
-| ² Moyenne des coordonnées des individus partageant la modalité |  |  |  |  |  |
 
 #### Axe 3
 
@@ -297,7 +296,7 @@ caracteriser_axe(res_acm, 2)
 caracteriser_axe(res_acm, 3, contribution_minimum = 3)
 ```
 
-| Modalité¹ | Contribution | Coordonnée² | Cos² | V-test | Effectif |
+| Modalité¹ | Contribution | Coordonnée | Cos² | V-test | Effectif |
 |----|----|----|----|----|----|
 | Coordonnées positives |  |  |  |  |  |
 | Pratiquant regulier | 13,3 % | 1,007 | 0,156 | 17,6 | 266 (13 %) |
@@ -307,7 +306,6 @@ caracteriser_axe(res_acm, 3, contribution_minimum = 3)
 | Ni croyance ni appartenance | 48,3 % | -1,568 | 0,613 | -35,0 | 399 (20 %) |
 | Bricole | 6,6 % | -0,396 | 0,116 | -15,3 | 853 (43 %) |
 | ¹ Seules les modalités actives dont la contribution est supérieure à 3 % sont représentées. |  |  |  |  |  |
-| ² Moyenne des coordonnées des individus partageant la modalité |  |  |  |  |  |
 
 #### Axe 4
 
@@ -329,7 +327,7 @@ caracteriser_axe(res_acm, 4)
 #> d'un axe, chacune aurait une contribution de 7,14 %.
 ```
 
-| Modalité¹ | Contribution | Coordonnée² | Cos² | V-test | Effectif |
+| Modalité¹ | Contribution | Coordonnée | Cos² | V-test | Effectif |
 |----|----|----|----|----|----|
 | Coordonnées positives |  |  |  |  |  |
 | Rejet | 48,2 % | 3,225 | 0,507 | 31,8 | 93 (5 %) |
@@ -337,7 +335,6 @@ caracteriser_axe(res_acm, 4)
 | Coordonnées négatives |  |  |  |  |  |
 | Appartenance sans pratique | 12,3 % | -0,569 | 0,199 | -19,9 | 760 (38 %) |
 | ¹ Seules les modalités actives dont la contribution est supérieure à 7,14 % sont représentées. |  |  |  |  |  |
-| ² Moyenne des coordonnées des individus partageant la modalité |  |  |  |  |  |
 
 Pour la suite et pour faire les graphiques, il est intéressant de
 disposer des données “augmentées” des résultats de l’ACM. L’analyse a

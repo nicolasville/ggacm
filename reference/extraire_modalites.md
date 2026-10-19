@@ -58,7 +58,7 @@ Dans le détail, le tableau comporte les variables :
 resultat <- createurs_de_contenus_pol |>
   ACM(variables_supplementaires = personne)
 #> ℹ Réalisation de l'ACM avec `FactoMineR::MCA()`
-#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [27ms]
+#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [28ms]
 #> 
 #> ℹ 
 #> • Sur 56 individus...
@@ -78,7 +78,7 @@ resultat <- createurs_de_contenus_pol |>
 #> ── Variables supplémentaires : 1 
 #> ℹ 
 #> `personne`.
-#> [50ms]
+#> [51ms]
 #> 
 
 # Puis on peut en extraire le tableau descriptif de chaque modalité :
