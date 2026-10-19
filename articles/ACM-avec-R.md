@@ -238,15 +238,19 @@ caracteriser_axe(res_acm, 1)
 #> ── Contribution moyenne théorique 
 #> 
 #> ℹ Si toutes les modalités actives contribuaient également à la construction
-#> d'un axe, chacune aurait une contribution de Inf %.
+#> d'un axe, chacune aurait une contribution de 7,14 %.
 ```
 
-tr
-
 | Modalité¹ | Contribution | Coordonnée² | Cos² | V-test | Effectif |
-|:--:|:--:|:--:|:--:|:--:|:--:|
-| Table has no data |  |  |  |  |  |
-| ¹ Seules les modalités actives dont la contribution est supérieure à Inf % sont représentées. |  |  |  |  |  |
+|----|----|----|----|----|----|
+| Coordonnées positives |  |  |  |  |  |
+| Pratique un sport | 21,7 % | 0,950 | 0,511 | 32,0 | 723 (36 %) |
+| Va au cinéma | 20,1 % | 0,855 | 0,515 | 32,1 | 826 (41 %) |
+| Bricole | 9,6 % | 0,580 | 0,251 | 22,4 | 853 (43 %) |
+| Coordonnées négatives |  |  |  |  |  |
+| Ne va pas au cinéma | 14,2 % | -0,602 | 0,515 | -32,1 | 1174 (59 %) |
+| Ne pratique pas de sport | 12,3 % | -0,538 | 0,511 | -32,0 | 1277 (64 %) |
+| ¹ Seules les modalités actives dont la contribution est supérieure à 7,14 % sont représentées. |  |  |  |  |  |
 | ² Moyenne des coordonnées des individus partageant la modalité |  |  |  |  |  |
 
 #### Axe 2
@@ -266,15 +270,17 @@ caracteriser_axe(res_acm, 2)
 #> ── Contribution moyenne théorique 
 #> 
 #> ℹ Si toutes les modalités actives contribuaient également à la construction
-#> d'un axe, chacune aurait une contribution de Inf %.
+#> d'un axe, chacune aurait une contribution de 7,14 %.
 ```
 
-tr
-
 | Modalité¹ | Contribution | Coordonnée² | Cos² | V-test | Effectif |
-|:--:|:--:|:--:|:--:|:--:|:--:|
-| Table has no data |  |  |  |  |  |
-| ¹ Seules les modalités actives dont la contribution est supérieure à Inf % sont représentées. |  |  |  |  |  |
+|----|----|----|----|----|----|
+| Coordonnées positives |  |  |  |  |  |
+| Pratiquant occasionnel | 39,6 % | 1,380 | 0,541 | 32,9 | 442 (22 %) |
+| Fait de la cuisine | 21,2 % | 0,715 | 0,403 | 28,4 | 881 (44 %) |
+| Coordonnées négatives |  |  |  |  |  |
+| Ne fait pas de cuisine | 16,7 % | -0,563 | 0,403 | -28,4 | 1119 (56 %) |
+| ¹ Seules les modalités actives dont la contribution est supérieure à 7,14 % sont représentées. |  |  |  |  |  |
 | ² Moyenne des coordonnées des individus partageant la modalité |  |  |  |  |  |
 
 #### Axe 3
@@ -313,15 +319,17 @@ caracteriser_axe(res_acm, 4)
 #> ── Contribution moyenne théorique 
 #> 
 #> ℹ Si toutes les modalités actives contribuaient également à la construction
-#> d'un axe, chacune aurait une contribution de Inf %.
+#> d'un axe, chacune aurait une contribution de 7,14 %.
 ```
 
-tr
-
 | Modalité¹ | Contribution | Coordonnée² | Cos² | V-test | Effectif |
-|:--:|:--:|:--:|:--:|:--:|:--:|
-| Table has no data |  |  |  |  |  |
-| ¹ Seules les modalités actives dont la contribution est supérieure à Inf % sont représentées. |  |  |  |  |  |
+|----|----|----|----|----|----|
+| Coordonnées positives |  |  |  |  |  |
+| Rejet | 48,2 % | 3,225 | 0,507 | 31,8 | 93 (5 %) |
+| NSP ou NVPR | 28,5 % | 3,783 | 0,292 | 24,2 | 40 (2 %) |
+| Coordonnées négatives |  |  |  |  |  |
+| Appartenance sans pratique | 12,3 % | -0,569 | 0,199 | -19,9 | 760 (38 %) |
+| ¹ Seules les modalités actives dont la contribution est supérieure à 7,14 % sont représentées. |  |  |  |  |  |
 | ² Moyenne des coordonnées des individus partageant la modalité |  |  |  |  |  |
 
 Pour la suite et pour faire les graphiques, il est intéressant de

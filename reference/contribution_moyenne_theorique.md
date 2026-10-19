@@ -31,7 +31,7 @@ resultat_acm <- createurs_de_contenus_pol |>
 
 contribution_moyenne_theorique(resultat_acm)
 #> ℹ Si toutes les modalités actives contribuaient également à la construction
-#> d'un axe, chacune aurait une contribution de Inf %.
-#> [1] Inf
+#> d'un axe, chacune aurait une contribution de 2.04 %.
+#> [1] 2.040816
 
 ```
