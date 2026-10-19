@@ -19,7 +19,7 @@ extraire_variance <- function(resultat_acm, maximum = 10){
   nb_dimension <- max(maximum, nrow(resultat_acm$eig))
 
   resultat_acm$eig  |>
-    as.data.frame() %>%
+    tibble::as_tibble() %>%
     tibble::rownames_to_column() %>% # récupérer les noms de lignes (dim 1, dim 2, etc) dans une colonne distincte
     slice(1:10) %>% # conserver que les infos des 10 premiers axes
     mutate(Axes = str_replace_all(rowname, "dim", "Axe")) %>% # créer une nouvelle variable à partir de rowname, qui prend les valeurs "Axe 1, Axe 2, etc" au lieu de "dim 1, dim 2, etc."
