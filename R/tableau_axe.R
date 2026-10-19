@@ -65,10 +65,6 @@ caracteriser_axe <- function(resultat_acm, axe, contribution_minimum) {
     gtsummary::modify_column_alignment(
       columns = -Modalité,
       align = "right"
-    ) |>
-    gtsummary::modify_footnote_header(
-      footnote = "Moyenne des coordonnées des individus partageant la modalité",
-      columns = Coordonnée
     )
 
   # inclure une note de bas de tableau si ce dernier est filtré
