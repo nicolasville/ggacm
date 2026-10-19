@@ -66,7 +66,7 @@ resultat <- createurs_de_contenus_pol |>
 #> ── Variables supplémentaires : 2 
 #> ℹ 
 #> `titre` and `personne`.
-#> [47ms]
+#> [46ms]
 #> 
 
 ```

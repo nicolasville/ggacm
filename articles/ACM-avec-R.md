@@ -202,12 +202,19 @@ peuvent se calculer avec `modif.rate()` du package `GDAtools`.
 ``` r
 
 ggacm::extraire_variance(res_acm)
-#>    Axes Valeurs propres % de variance % cumulé de variance
-#> 1 Axe 1            0,30        16,7 %               16,7 %
-#> 2 Axe 2            0,21        11,8 %               28,5 %
-#> 3 Axe 3            0,20        11,3 %               39,8 %
-#> 4 Axe 4            0,20        11,2 %               50,9 %
-#> 5 Axe 5            0,20        11,1 %                 62 %
+#> Warning: There was 1 warning in `mutate()`.
+#> ℹ In argument: `Axes = forcats::fct_relevel(Axes, paste("Axe",
+#>   1:nrow(resultat_acm$eig)))`.
+#> Caused by warning:
+#> ! 5 unknown levels in `f`: Axe 1, Axe 2, Axe 3, Axe 4, and Axe 5
+#> # A tibble: 5 × 4
+#>   Axes  `Valeurs propres` `% de variance` `% cumulé de variance`
+#>   <fct>             <dbl> <chr>           <chr>                 
+#> 1 1                  0.3  16,7 %          16,7 %                
+#> 2 2                  0.21 11,8 %          28,5 %                
+#> 3 3                  0.2  11,3 %          39,8 %                
+#> 4 4                  0.2  11,2 %          50,9 %                
+#> 5 5                  0.2  11,1 %          62 %
 
 GDAtools::modif.rate(res_acm)$modif
 #>          mrate cum.mrate
@@ -571,6 +578,16 @@ axes <- nommer_axes(res_acm,
                     a_gauche = "Ne pratique pas",
                     a_droite = "Cumule de pratique", 
                     en_haut = "Chasse/pêche")
+#> Warning: There was 1 warning in `mutate()`.
+#> ℹ In argument: `Axes = forcats::fct_relevel(Axes, paste("Axe",
+#>   1:nrow(resultat_acm$eig)))`.
+#> Caused by warning:
+#> ! 5 unknown levels in `f`: Axe 1, Axe 2, Axe 3, Axe 4, and Axe 5
+#> There was 1 warning in `mutate()`.
+#> ℹ In argument: `Axes = forcats::fct_relevel(Axes, paste("Axe",
+#>   1:nrow(resultat_acm$eig)))`.
+#> Caused by warning:
+#> ! 5 unknown levels in `f`: Axe 1, Axe 2, Axe 3, Axe 4, and Axe 5
 
 
 

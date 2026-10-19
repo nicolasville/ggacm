@@ -53,7 +53,7 @@ pour en faire un graphique.
 # 1. On réalise une ACM avec ACM() ou FactoMineR::MCA()
 resultat_acm <- createurs_de_contenus_pol |> ACM()
 #> ℹ Réalisation de l'ACM avec `FactoMineR::MCA()`
-#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [27ms]
+#> ✔ L'ACM a été réalisé avec succès avec `FactoMineR::MCA()` [26ms]
 #> 
 #> ℹ 
 #> • Sur 56 individus...
